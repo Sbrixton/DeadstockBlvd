@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CARentals</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"/>
+</head>
+
+<body>
+    
+    <section id="header">
+        <a href="#"><img src="/images/Screenshot 2025-03-25 190219.png" class="logo">
+
+        <div>
+            <ul id="navbar">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="shop.html">shop</a></li>
+                <li><a href="Search.html"><i class="fas fa-search"></i></a></li>
+                <li><a  href="about.html">about</a></li>
+                <li><a href="contact.html">contact</a></li>
+                <li><a class="active" href="Cart.html"><i class="fas fa-shopping-bag"></i></a><li>
+                <a href="#" id="close"><i class="fas fa-times"></i></a>
+            </ul>
+        </div>
+        <div id="mobile">
+            <a href="Cart.html"><i class="fas fa-shopping-bag"></i>
+            </i></a><i id="bar" class="fas fa-outdent"></i>
+        </div>
+    </section>
+
+    <section id="page-header" class="about-header">
+
+        <h2>Let's Chat</h2>
+        <p>Tell Us About Your Experiences On The Road</p>
+    </section>
+
+    <!-- Cart Page -->
+    <section id="cart" class="section-p1">
+        <table width="100%">
+            <thead>
+                <tr>
+                    <td>Remove</td>
+                    <td>Images</td>
+                    <td>Product</td>
+                    <td>Price</td>
+                    <td>Quantity</td>
+                    <td>Subtotal</td>
+                </tr>
+            </thead>
+            <tbody id="cart-table-body">
+                <!-- Products will be dynamically added here using JavaScript -->
+            </tbody>
+        </table>
+    </section>
+    
+    <section id="cart-add" class="section-p1">
+        <div id="coupon">
+            <h3>Apply Coupon</h3>
+            <div>
+                <input type="text" placeholder="Enter Your Coupon">
+                <button type="button" class="normal">Apply</button>
+            </div>
+        </div>
+
+        <div id="Subtotal">
+            <h3>Cart Total</h3>
+            <table>
+                <tr>
+                    <td>Cart Subtotal</td>
+                    <td id="CartSubtotal">R0.00</td>
+                </tr>
+                <tr>
+                    <td>Shipping</td>
+                    <td>Free</td>
+                </tr>
+                <tr>
+                    <td><strong>Total</strong></td>
+                    <td><strong id="Total">R0.00</strong></td>
+                </tr>
+            </table>
+            <button type="button" id="checkoutBtn" class="normal">Proceed to Checkout</button>
+        </div>
+    </section>
+    
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+    const cartTableBody = document.getElementById('cart-table-body');
+    const subtotalElem = document.getElementById('CartSubtotal');
+    const totalElem = document.getElementById('Total');
+    const checkoutBtn = document.getElementById('checkoutBtn');
+
+    // Retrieve the cart from localStorage
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+if (cart.length === 0) {
+    cartTableBody.innerHTML = '<tr><td colspan="6">Your cart is empty.</td></tr>';
+    subtotalElem.textContent = 'R0.00';
+    totalElem.textContent = 'R0.00';
+    
+    // Hides the button if cart is empty
+    if (checkoutBtn) {
+        checkoutBtn.style.display = 'none';
+    }
+} else {
+    // Makes sure the button is visible if cart has items
+    if (checkoutBtn) {
+        checkoutBtn.style.display = 'block';
+    }
+}
+
+    // Calculate the subtotal
+    let subtotal = 0;
+
+    // Loop through each product in the cart and add to the table
+    cart.forEach(product => {
+        const row = document.createElement('tr');
+
+        row.innerHTML = `
+            <td><button class="remove-btn" data-product="${product.name}">Remove</button></td>
+            <td><img src="${product.image}" alt="${product.name}" width="100"></td>
+            <td>${product.name}</td>
+            <td>R${product.price}</td>
+            <td>
+                <input type="number" class="quantity" value="${product.quantity}" min="1" data-product="${product.name}">
+            </td>
+            <td class="subtotal">R${(product.price * product.quantity).toFixed(2)}</td>
+        `;
+        cartTableBody.appendChild(row);
+
+        // Update the subtotal
+        subtotal += parseFloat(product.price) * product.quantity;
+    });
+
+    // Display subtotal and total
+    subtotalElem.textContent = `R${subtotal.toFixed(2)}`;
+    totalElem.textContent = `R${subtotal.toFixed(2)}`; // Assuming no shipping cost for now
+
+    // Event listener for removing items from the cart
+    const removeButtons = document.querySelectorAll('.remove-btn');
+    removeButtons.forEach(button => {
+        button.addEventListener('click', function () {
+            const productName = button.getAttribute('data-product');
+            const updatedCart = cart.filter(product => product.name !== productName);
+            localStorage.setItem('cart', JSON.stringify(updatedCart)); // lowercase 'c' to match the original
+            window.location.reload(); // Reload the page to reflect changes
+        });
+    });
+
+    // Event listener for updating quantities
+    const quantityInputs = document.querySelectorAll('.quantity');
+    quantityInputs.forEach(input => {
+        input.addEventListener('input', function () {
+            const productName = input.getAttribute('data-product');
+            const newQuantity = parseInt(input.value, 10);
+
+            // Update the cart in localStorage
+            const updatedCart = cart.map(product => {
+                if (product.name === productName) {
+                    product.quantity = newQuantity;
+                }
+                return product;
+            });
+            
+            const cart = JSON.parse(localStorage.getItem('Cart')) || [];
+            console.log('🛒 Cart contents:', cart);
+
+
+            // Update the subtotal of this row
+            const row = input.closest('tr');
+            const price = parseFloat(row.querySelector('td:nth-child(4)').textContent.replace('R', ''));
+            const subtotalElem = row.querySelector('.subtotal');
+            subtotalElem.textContent = `R${(price * newQuantity).toFixed(2)}`;
+
+            // Recalculate and update the total
+            let newSubtotal = 0;
+            document.querySelectorAll('.subtotal').forEach(sub => {
+                newSubtotal += parseFloat(sub.textContent.replace('R', ''));
+            });
+
+            subtotalElem.textContent = `R${newSubtotal.toFixed(2)}`;
+            totalElem.textContent = `R${newSubtotal.toFixed(2)}`;
+        });
+    });
+
+    // Checkout Button Event Listener
+    checkoutBtn.addEventListener('click', function () {
+        if (cart.length === 0) {
+            alert("Your cart is empty. Please add products before proceeding.");
+            return;
+        }
+
+        // For demonstration: Redirect to a mock checkout page
+        // (this should be replaced with your actual checkout logic)
+        // Pass the cart data via URL (or using other methods like localStorage/sessionStorage)
+        // You might want to use a POST request for real checkout process.
+        
+        // Store cart data in sessionStorage (this is one example method, you could also use other methods)
+        sessionStorage.setItem('checkoutCart', JSON.stringify(cart));
+
+        // Redirect to the checkout page
+        window.location.href = 'checkout.html'; // Replace 'checkout.html' with your actual checkout page URL
+    });
+});
+
+</script>
+
+    <footer class="section-p1">
+        <div class="col">
+            <img class="logo" src="/images/Logo.jpg" alt="">
+            <h4>Contact</h4>
+            <p><strong>Address: </strong> 562 Wellington Road, Street 32,San Francisco</p>
+            <p><strong>Phone: </strong> +01 2222 365 /(+91) 01 2345 6789</p>
+            <p><strong>Hours: </strong> 10:00 - 18:00,Mon - Sat</p>
+            <div class="follow">
+                <h4>Follow us</h4>
+                <div class="icon">
+                    <i class="fab fa-facebook-f"></i>
+                    <i class="fab fa-twitter"></i>
+                    <i class="fab fa-instagram"></i>
+                    <i class="fab fa-pinterest-p"></i>
+                    <i class="fab fa-youtube"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="col">
+            <h4>About</h4>
+            <a href="#">About us</a>
+            <a href="#">Delivery information</a>
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms & Conditions</a>
+            <a href="#">Contact Us</a>
+        </div>
+
+        <div class="col">
+            <h4>My Account</h4>
+            <a href="#">Sign In</a>
+            <a href="#">View Cart</a>
+            <a href="#">My Wishlist</a>
+            <a href="#">Track My Order</a>
+            <a href="#">Help</a>
+        </div>
+
+        <div class="col install">
+            <h4>Install App</h4>
+            <p>From App Store or Google Play</p>
+            <div class="row">
+                <img src="/images/Screenshot 2025-04-09 193144.png" alt="">
+            </div>
+            <p>Secured Payment Gateways</p>
+            <img src="/images/payments.png" alt="">
+        </div>
+
+        <div class="copyright">
+            <p>© 2025, Cape Town Rentals</p>
+        </div>
+    </footer>
+
+    <script src="/script.js"></script>
+</body>
+</html>
