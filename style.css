@@ -140,9 +140,9 @@ p {
 
 .pro-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  grid-template-columns: repeat(4, 1fr); /* 4 items per row on larger screens */
   gap: 20px;
-  justify-content: center;
+  padding: 20px;
 }
 
 .pro {
@@ -192,7 +192,7 @@ p {
   bottom: 10px;
   right: 10px;
   background: #088178;
-  color: #fff;
+  colour: #fff ;
   padding: 8px;
   border-radius: 50%;
   cursor: pointer;
@@ -317,7 +317,7 @@ footer .socials i {
   }
 
   .pro-container {
-    grid-template-columns: repeat(2, 1fr); /* ✅ Two per row on mobile */
+    grid-template-columns: repeat(2, 1fr); /* 2 items per row for tablets/mobiles */
   }
 
   .pro-container {
@@ -331,21 +331,21 @@ footer .socials i {
   }
 
   .navbar {
-  flex-direction: column;
-  align-items: flex-start;
-  padding: 15px 20px;
-}
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 15px 20px;
+  }
 
-.nav-left, .nav-right {
-  flex-direction: row;
-  justify-content: space-between;
-  width: 100%;
-}
+  .nav-left, .nav-right {
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+  }
 
-.nav-left nav {
-  flex-wrap: wrap;
-  gap: 15px;
-}
+  .nav-left nav {
+    flex-wrap: wrap;
+    gap: 15px;
+  }
 
 }
 
