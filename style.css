@@ -264,6 +264,17 @@ footer .socials i {
   .pro-container {
     grid-template-columns: repeat(2, 1fr); /* ✅ Two per row on mobile */
   }
+
+  .pro-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+  .pro {
+    width: 100%;
+  }
+
 }
 
 @media (max-width: 477px) {
@@ -280,5 +291,21 @@ footer .socials i {
   #header {
     flex-direction: column;
     align-items: flex-start;
+    padding: 10px 20px;
+  }
+
+  #navbar {
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px 0;
+  }
+
+  .nav-icons {
+    margin-top: 10px;
+  }
+
+  .pro-container {
+    grid-template-columns: 1fr 1fr; /* 2 items per row even on small screens */
+    padding: 0 10px;
   }
 }
