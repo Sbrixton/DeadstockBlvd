@@ -133,10 +133,10 @@ p {
 }
 
 #bar, #close {
-  display: none;
   font-size: 24px;
-  cursor: pointer;
   color: white;
+  cursor: pointer;
+  display: none; /* hide both by default */
 }
 
 /* === NAVBAR ACTIVE LINK === */
@@ -416,8 +416,8 @@ footer .socials i {
     gap: 15px;
   }
 
-  #bar, #close {
-    display: block;
+  #bar {
+    display: block; /* show hamburger icon on small screens */
   }
 
   #close {
