@@ -132,6 +132,13 @@ p {
   font-size: 18px;
 }
 
+#bar, #close {
+  display: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: white;
+}
+
 /* === NAVBAR ACTIVE LINK === */
 nav a.active {
   color: #46bd89;
@@ -407,6 +414,18 @@ footer .socials i {
   .nav-left nav {
     flex-wrap: wrap;
     gap: 15px;
+  }
+
+  #bar, #close {
+    display: block;
+  }
+
+  #close {
+    display: none; /* Show this only when menu is open via JS */
+  }
+
+  #navbar.active + #close {
+    display: block;
   }
 
 }
