@@ -11,385 +11,97 @@
 </head>
 
 <body>
-    
-    <section id="header">
-        <a href="#"><img src="images/Screenshot 2025-03-25 190219.png" class="logo" alt="Logo">
 
-        <div>
-            <ul id="navbar">
-                <li><a href="index.html">Home</a></li>
-                <li><a class="active" href="shop.html">shop</a></li>
-                <li><a href="Search.html"><i class="fas fa-search"></i></a></li>
-                <li><a href="about.html">about</a></li>
-                <li><a href="contact.html">contact</a></li>
-                <li><a href="Cart.html"><i class="fas fa-shopping-bag"></i></a></li>
-                <a href="#" id="close"><i class="fas fa-times"></i></a>
-            </ul>
-        </div>
-        <div id="mobile">
-            <a href="Cart.html"><i class="fas fa-shopping-bag"></i>
-            </i></a><i id="bar" class="fas fa-outdent"></i>
-        </div>
-    </section>
+  <!-- ========== NAVBAR ========== -->
+  <header class="navbar">
+    <div class="nav-left">
+      <a href="index.html" class="logo">
+        <img src="/images/deadstock-logo.png" alt="DeadstockBlvd Logo" height="40" />
+      </a>
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="shop.html" class="active">Shop</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+    </div>
 
-    <section id="page-header">
-        <h2>Vehicles</h2>
-        <p>Check our specials & compare</p>
-    </section>
+    <div class="nav-right">
+      <button id="searchIcon"><i class="fas fa-search"></i></button>
+      <a href="cart.html" id="cartIcon"><i class="fas fa-shopping-bag"></i></a>
+    </div>
+  </header>
 
-<section id="product1" class="section-p1">
+  <!-- ========== SHOP PRODUCT GRID ========== -->
+  <section id="products">
+    <h2>Shop All</h2>
     <div class="pro-container">
-        <div class="pro">
-            <a href="Lambo.html">
-                <img src="/images/Lamb (1).jpeg" alt="" />
-            </a>
-            <div class="des">
-                <span>Lamboghini Evo</span>
-                <h5></h5>
-                <div class="star">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                </div>
-                <h4>R10000 per day</h4>
-
-            </div>
+      <!-- Product Card -->
+      <div class="pro">
+        <div class="product-img">
+          <img src="images/item1.jpg" alt="Main Image" class="main-img" />
+          <img src="images/item1-hover.jpg" alt="Hover Image" class="hover-img" />
         </div>
-
-        <div class="pro">
-            <a href="Rolls.html">
-                <img src="/images/Rolls1.jpg" alt="" />
-            </a>
-            <div class="des">
-                <span>Rolls Royce</span>
-                <h5>Vintage</h5>
-                <div class="star">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                </div>
-                <h4>R7400 per day</h4>
-            </div>
+        <div class="des">
+          <span>Streetwear</span>
+          <h5>Graphic Hoodie</h5>
+          <h4>R600.00</h4>
         </div>
-
-        <div class="pro">
-            <a href="Volvo.html">
-                <img src="/images/Volvo (1).jpeg" alt="Volvo" />
-            </a>
-            <div class="des">
-                <span>Volvo</span>
-                <div class="star">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                </div>
-                <h4>R4700 per day</h4>
-                
-            </div>
-        </div>
+        <div class="cart"><i class="fas fa-shopping-bag"></i></div>
+      </div>
         
-
-        <div class="pro">
-            <a href="Aston.html">
-                    <img src="/images/Aston martin (1).jpeg" alt="" />
-            </a>
-            <div class="des">
-                <span>Ashton Martin</span>
-                <h5></h5>
-                <div class="star">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                </div>
-                <h4>R6400 per day</h4>
-                <button class="normal" onclick="redirectToCart('Aston Martin', 6400)">Checkout</button>
-            </div>
+      <!-- Add more .pro blocks as needed -->
+      <div class="pro">
+        <div class="product-img">
+            <img src="images/item1.jpg" alt="Main Image" class="main-img" />
+            <img src="images/item1-hover.jpg" alt="Hover Image" class="hover-img" />
         </div>
-
-        <div class="pro">
-            <a href="Boxster.html">
-                <img src="/images/Boxster_(1)_upscaled.jpg" alt="" />
-            </a>
-            <div class="des">
-                <span>Porsche Boxster</span>
-                <div class="star">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                </div>
-                <h4>R4800 per day</h4>
-                <button class="normal" onclick="redirectToCart('Porsche Boxster', 4800)">Checkout</button>
-            </div>
+        <div class="des">
+          <span>Streetwear</span>
+          <h5>Graphic Hoodie</h5>
+          <h4>R600.00</h4>
         </div>
-
-        <div class="pro">
-            <a href="G.html">
-                <img src="/images/Mercedes-Benz G-Class G350d (5).jpeg" alt="Mercedes-Benz G-Class G350d" />
-            </a>
-            <div class="des">
-                <span>Mercedes-Benz G-Class G350d</span>
-                <div class="star">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                </div>
-                <h4>R7000 per day</h4>
-            </div>
+        <div class="cart"><i class="fas fa-shopping-bag"></i></div>
+      </div>
+      
+      <div class="pro">
+        <div class="product-img">
+            <img src="images/item1.jpg" alt="Main Image" class="main-img" />
+            <img src="images/item1-hover.jpg" alt="Hover Image" class="hover-img" />
         </div>
-
-        <div class="pro">
-            <a href="V-class.html">
-                <img src="/images/V class.jpeg" alt="Mercedes V300 Maybach" />
-            </a>
-            <div class="des">
-                <span>Mercedes V300 Maybach</span>
-                <h5></h5>
-                <div class="star">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                </div>
-                <h4>7500 per day</h4>
-                <button class="normal" class="order-btn" onclick="redirectToCart('Mercedes V300 Maybach', 7500)">Checkout</button>
-            </div>
+        <div class="des">
+          <span>Streetwear</span>
+          <h5>Graphic Hoodie</h5>
+          <h4>R600.00</h4>
         </div>
+        <div class="cart"><i class="fas fa-shopping-bag"></i></div>
+      </div>
 
-        <div class="pro">
-            <a href="Range.html">
-                <img src="/images/Range Rover (4).jpeg" alt="Range Rover Evoquer" />
-            </a>
-            <div class="des">
-                <span>Range Rover Evoque</span>
-                <h5></h5>
-                <div class="star">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                </div>
-                <h4>R5200 per day</h4>
-            </div>
+      <div class="pro">
+        <div class="product-img">
+            <img src="images/item1.jpg" alt="Main Image" class="main-img" />
+            <img src="images/item1-hover.jpg" alt="Hover Image" class="hover-img" />
         </div>
-
-        <div class="pro">
-            <a href="kia.html">
-                <img src="/images/KIA (3).jpeg" alt="KIA Picanto" />
-            </a>
-            <div class="des">
-                <span>Kia</span>
-                <h5></h5>
-                <div class="star">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                </div>
-                <h4>R2400 per day</h4>
-            </div>
+        <div class="des">
+          <span>Streetwear</span>
+          <h5>Graphic Hoodie</h5>
+          <h4>R600.00</h4>
         </div>
-
-        <div class="pro">
-            <a href="Hyndui.html">
-                    <img src="/images/Hyndui (2).jpeg" alt="Hyndui" />
-            </a>
-            <div class="des">
-                <span>Hyndui</span>
-                <h5></h5>
-                <div class="star">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                </div>
-                <h4>R2400 per day</h4>
-            </div>
-        </div>
-
-        <div class="pro">
-            <a href="polo.html">
-                <img src="/images/Polo (3).jpeg" alt="Volkswagan Polo" />
-            </a>
-            <div class="des">
-                <span>Volkswagan Polo</span>
-                <h5></h5>
-                <div class="star">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                </div>
-                <h4>R1900 per day</h4>
-            </div>
-        </div>
-
-        <div class="pro">
-            <a href="S-class.html">
-                <img src="/images/Mercedes (3).jpeg" alt="Mercedes Benz S-class" />
-            </a>
-            <div class="des">
-                <span>Mercedes Benz S-class</span>
-                <h5></h5>
-                <div class="star">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                </div>
-                <h4>R5400 per day</h4>
-            </div>
-        </div>
-
-        <div class="pro">
-            <a href="Porsche.html">
-                <img src="/images/Porsche (3).png" alt="Porsche 911 Gt3" />
-            </a>
-            <div class="des">
-                <span>Porsche 911 Gt3</span>
-                <h5></h5>
-                <div class="star">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                </div>
-                <h4>R4800 per day</h4>
-            </div>
-        </div>
-        <div class="pro">
-            <a href="Discovery.html">
-                <img src="/images/Discovery (1).png" alt="Land Rover Discovery" />
-            </a>
-            <div class="des">
-                <span>Land Rover Discovery</span>
-                <div class="star">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                </div>
-                <h4>R7000 per day</h4>
-            </div>
-        </div>
-
-        <div class="pro">
-            <a href="BMW-X1.html">
-                <img src="/images/BMW X1 (6).jpeg" alt="BMW X1" />
-            </a>
-            <div class="des">
-                <span>BMW X1</span>
-                <div class="star">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                </div>
-                <h4>R4500 per day</h4>
-            </div>
-        </div>
-
-        <div class="pro">
-            <a href="Toyota Yaris.html">
-                <img src="/images/Toyota Yaris 1.5 XS (3).jpeg" alt="Toyota Yaris 1.5 XS"/>
-            </a>
-            <div class="des">
-                <span>Toyota Yaris 1.5 XS</span>
-                <div class="star">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                </div>
-                <h4>R2900 per day</h4>
-            </div>
-        </div>
-
+        <div class="cart"><i class="fas fa-shopping-bag"></i></div>
+      </div>
     </div>
-</section>
+  </section>
 
-<section id="pagination" class="section-p1">
-    <a href="#">1</a>
-    <a href="#">2</a>
-    <a href="#"><i class="fas fa-long-arrow-alt-right"></i></a>
-</section>
-
-<section id="newsletter" class="section-p1 section-m1" >
-    <div class="newstext">
-        <h4>Sign up for promotions</h4>
-        <p>Get E-mail updates about our latest Rentals & <span>Specials</span></p>
-    </div>
-    <div class="form">
-        <input type="text" placeholder="Your E-mail Address">
-        <button>Sign up</button>
-    </div>
-</section>
-
-<footer class="section-p1">
-    <div class="col">
-        <img class="logo" src="images/Logo.jpg" alt="">
-        <h4>Contact</h4>
-        <p><strong>Address: </strong> 562 Wellington Road, Street 32,San Francisco</p>
-        <p><strong>Phone: </strong> +01 2222 365 /(+91) 01 2345 6789</p>
-        <p><strong>Hours: </strong> 10:00 - 18:00,Mon - Sat</p>
-        <div class="follow">
-            <h4>Follow us</h4>
-            <div class="icon">
-                <i class="fab fa-facebook-f"></i>
-                <i class="fab fa-twitter"></i>
-                <i class="fab fa-instagram"></i>
-                <i class="fab fa-pinterest-p"></i>
-                <i class="fab fa-youtube"></i>
-            </div>
-        </div>
-    </div>
-
-    <div class="col">
-        <h4>About</h4>
-        <a href="#">About us</a>
-        <a href="#">Delivery information</a>
-        <a href="#">Privacy Policy</a>
-        <a href="#">Terms & Conditions</a>
-        <a href="#">Contact Us</a>
-    </div>
-
-    <div class="col">
-        <h4>My Account</h4>
-        <a href="#">Sign In</a>
-        <a href="#">View Cart</a>
-        <a href="#">My Wishlist</a>
-        <a href="#">Track My Order</a>
-        <a href="#">Help</a>
-    </div>
-
+  <footer class="section-p1">
     <div class="col install">
-        <h4>Install App</h4>
-        <p>From App Store or Google Play</p>
-        <div class="row">
-            <img src="images/Screenshot 2025-04-09 193144.png" alt="">
-        </div>
-        <p>Secured Payment Gateways</p>
-        <img src="images/payments.png" alt="">
+      <p>Secured Payment Gateways</p>
+      <img src="images/payments.png" alt="">
     </div>
-
     <div class="copyright">
-        <p>© 2025, Cape Town Rentals</p>
+      <p>© 2025, DeadstockBlvd</p>
     </div>
-</footer>
+  </footer>
 
-<script>
-    function redirectToCart(productName, productPrice) {
-      const url = `cart.html?product=${encodeURIComponent(productName)}&price=${encodeURIComponent(productPrice)}`;
-      window.location.href = url;
-    }
-</script>
-    
-    <script src="/script.js"></script>
-
+  <script src="script.js"></script>
 </body>
+
 </html>
