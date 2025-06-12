@@ -1,122 +1,98 @@
+// ====== MOBILE NAV TOGGLE ======
 const bar = document.getElementById('bar');
 const close = document.getElementById('close');
 const nav = document.getElementById('navbar');
 
 if (bar) {
-    bar.addEventListener('click', ()=>{
-        nav.classList.add('active'); 
-    } )
+    bar.addEventListener('click', () => {
+        nav.classList.add('active');
+    });
 }
 
 if (close) {
-    close.addEventListener('click', ()=>{
-        nav.classList.remove('active'); 
-    } )
+    close.addEventListener('click', () => {
+        nav.classList.remove('active');
+    });
 }
 
-
+// ====== ADD TO CART FUNCTIONALITY FROM SHOP PAGE ======
 document.addEventListener("DOMContentLoaded", () => {
-    const buttons = document.querySelectorAll('.order-btn');
-  
-    buttons.forEach(button => {
-      button.addEventListener('click', () => {
-  
-          
-  
-        const productName = button.getAttribute('data-product');
-        const subtotalElem = document.getElementById('cartSubtotal');
-        const productImage = button.getAttribute('data-image');
-        
-        const product = {
-          name: productName,
-          price: productPrice,
-          image: productImage,
-          quantity: 1
-        };
-  
-        let cart = JSON.parse(localStorage.getItem('cart')) || [];
-        cart.push(product);
-        localStorage.setItem('cart', JSON.stringify(cart));
-  
-        window.location.href = "Cart.html";
-      });
+    const addToCartBtns = document.querySelectorAll('.cart');
+
+    addToCartBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const name = btn.dataset.name;
+            const price = btn.dataset.price;
+            const image = btn.dataset.image;
+
+            const product = {
+                name: name,
+                price: price,
+                image: image,
+                quantity: 1
+            };
+
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+            // Check if already in cart
+            const existing = cart.find(item => item.name === name);
+            if (existing) {
+                existing.quantity += 1;
+            } else {
+                cart.push(product);
+            }
+
+            localStorage.setItem('cart', JSON.stringify(cart));
+            alert(`${name} added to cart.`);
+        });
     });
 });
 
-
+// ====== DISPLAY CART ITEMS ON CART PAGE ======
 document.addEventListener("DOMContentLoaded", () => {
-    const cartItemsContainer = document.getElementById("cart-table-body"); // ✅ match your HTML
-    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    const cartItemsContainer = document.getElementById("cart-table-body");
     const subtotalElement = document.getElementById("cartSubtotal");
     const totalElement = document.getElementById("Total");
 
+    if (!cartItemsContainer) return;
 
-
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
     let subtotal = 0;
 
-    // Function to update the cart display
     function updateCartDisplay() {
-        cartItemsContainer.innerHTML = ''; // Clear current cart display
+        cartItemsContainer.innerHTML = '';
         subtotal = 0;
 
         cart.forEach((item, index) => {
-    const row = document.createElement("tr");
+            const price = parseFloat(item.price.replace("R", "").replace(",", ""));
+            const itemSubtotal = price * item.quantity;
+            subtotal += itemSubtotal;
 
-    // Parse price correctly if it's a string
-    const itemPrice = typeof item.price === "string"
-        ? parseFloat(item.price.replace("R", "").replace(",", ""))
-        : parseFloat(item.price);
+            const row = document.createElement("tr");
+            row.innerHTML = `
+                <td><i class="far fa-times-circle remove-btn" data-index="${index}" style="cursor: pointer;"></i></td>
+                <td><img src="${item.image}" style="width: 70px;" alt="${item.name}"></td>
+                <td>${item.name}</td>
+                <td>R${price.toFixed(2)}</td>
+                <td><input type="number" value="${item.quantity}" min="1" class="quantity-input" data-index="${index}"></td>
+                <td>R${itemSubtotal.toFixed(2)}</td>
+            `;
+            cartItemsContainer.appendChild(row);
+        });
 
-    // Calculate item subtotal
-    const itemSubtotal = itemPrice * item.quantity;
-
-    // Add the item row to the cart table
-    row.innerHTML = `
-        <td><i class="far fa-times-circle remove-btn" style="cursor: pointer;" data-index="${index}"></i></td>
-        <td><img src="${item.image}" alt="${item.name}" style="width: 70px;"></td>
-        <td>${item.name}</td>
-        <td>R${itemPrice.toFixed(2)}</td>
-        <td><input type="number" value="${item.quantity}" min="1" class="quantity-input" data-index="${index}"></td>
-        <td class="item-subtotal">R${itemSubtotal.toFixed(2)}</td>
-    `;
-
-    cartItemsContainer.appendChild(row);
-
-    // Update subtotal
-    subtotal += itemSubtotal;
-});
-
-// After looping through all items, update subtotal and total elements
         subtotalElement.textContent = `R${subtotal.toFixed(2)}`;
         totalElement.textContent = `R${subtotal.toFixed(2)}`;
-
-
-        // Update totals
-        // Update totals only if the elements exist
-        if (subtotalElement) {
-            subtotalElement.textContent = `R${subtotal.toFixed(2)}`;
-        }
-        if (totalElement) {
-            totalElement.textContent = `R${subtotal.toFixed(2)}`;
-        }
-
     }
 
-    // Event listener for quantity change
     cartItemsContainer.addEventListener("input", (e) => {
         if (e.target.classList.contains("quantity-input")) {
             const index = e.target.dataset.index;
-            const newQuantity = parseInt(e.target.value, 10);
-
-            if (newQuantity > 0) {
-                cart[index].quantity = newQuantity;
-                localStorage.setItem("cart", JSON.stringify(cart));
-                updateCartDisplay();
-            }
+            cart[index].quantity = parseInt(e.target.value);
+            localStorage.setItem("cart", JSON.stringify(cart));
+            updateCartDisplay();
         }
     });
 
-    // Event listener for item removal
     cartItemsContainer.addEventListener("click", (e) => {
         if (e.target.classList.contains("remove-btn")) {
             const index = e.target.dataset.index;
@@ -126,45 +102,16 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // Initial cart display
     updateCartDisplay();
-
-    // Checkout button functionality
-    document.getElementById("checkoutBtn").addEventListener("click", () => {
-        document.getElementById("myForm").style.display = "block";
-        document.getElementById("myForm").scrollIntoView({ behavior: "smooth" });
-    });
 });
 
-document.getElementById('searchBtn').addEventListener('click', performSearch);
-function performSearch() {
-  const query = document.getElementById('searchInput').value.toLowerCase();
-  const resultsContainer = document.getElementById('searchResults');
-  resultsContainer.innerHTML = '';
-
-  // You can update this with however you're storing products
-  const allProducts = JSON.parse(localStorage.getItem('products')) || [];
-
-  const filtered = allProducts.filter(product =>
-    product.name.toLowerCase().includes(query)
-  );
-
-  if (filtered.length === 0) {
-    resultsContainer.innerHTML = '<p>No results found.</p>';
-    return;
-  }
-
-  filtered.forEach(product => {
-    const item = document.createElement('div');
-    item.classList.add('search-result');
-
-    item.innerHTML = `
-      <h3>${product.name}</h3>
-      <img src="${product.image}" alt="${product.name}" width="200">
-      <p>Price: R${product.price}</p>
-    `;
-
-    resultsContainer.appendChild(item);
-  });
-}
-
+// ====== CHECKOUT FORM DISPLAY ======
+document.addEventListener("DOMContentLoaded", () => {
+    const checkoutBtn = document.getElementById("checkoutBtn");
+    if (checkoutBtn) {
+        checkoutBtn.addEventListener("click", () => {
+            document.getElementById("myForm").style.display = "block";
+            document.getElementById("myForm").scrollIntoView({ behavior: "smooth" });
+        });
+    }
+});
