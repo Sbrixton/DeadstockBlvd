@@ -388,9 +388,10 @@ footer .socials i {
     width: 60%;
     height: 100vh;
     background: #000;
-    padding: 80px 30px; /* 👈 pushes links inward from left edge */
+    padding: 80px 30px;
+    display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
     gap: 30px;
     transition: 0.3s ease;
     z-index: 998;
@@ -398,6 +399,14 @@ footer .socials i {
 
   nav.active {
     left: 0;
+  }
+
+  nav a {
+    font-size: 18px;
+    text-align: center;
+    width: 100%;
+    padding: 10px 0;
+    border-bottom: 1px solid #222;
   }
 
   #bar {
@@ -408,9 +417,11 @@ footer .socials i {
     display: none;
     position: fixed;
     top: 20px;
-    left: 60%;
+    right: 20px;
     font-size: 30px;
-    z-index: 999;
+    color: white;
+    cursor: pointer;
+    z-index: 1000;
   }
 
   nav.active ~ #close {
