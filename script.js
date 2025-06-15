@@ -18,6 +18,15 @@ document.addEventListener("DOMContentLoaded", () => {
       close.style.display = "none";
       bar.style.display = "block";
     });
+
+    // Remove active class on window resize
+    window.addEventListener("resize", () => {
+      if (window.innerWidth > 768) {
+        nav.classList.remove("active");
+        close.style.display = "none";
+        bar.style.display = "block";
+      }
+    });
   }
 });
 
