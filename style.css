@@ -55,6 +55,7 @@ p {
   display: flex;
   align-items: center;
   gap: 20px;
+  position: relative;
 }
 
 .nav-left .logo {
@@ -363,22 +364,12 @@ footer .socials i {
     width: 100%;
   }
 
-  .navbar {
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px 20px;
-    position: relative;
+  .nav-left nav {
+    display: none;
   }
 
-  .nav-left .logo {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-  }
-
-  .nav-right {
-    gap: 15px;
+  #bar {
+    display: block;
   }
 
   nav {
@@ -401,20 +392,8 @@ footer .socials i {
     left: 0;
   }
 
-  nav a {
-    font-size: 18px;
-    text-align: center;
-    width: 100%;
-    padding: 10px 0;
-    border-bottom: 1px solid #222;
-  }
-
-  #bar {
-    display: block;
-  }
-
   #close {
-    display: none;
+    display: block;
     position: fixed;
     top: 20px;
     right: 20px;
@@ -422,10 +401,6 @@ footer .socials i {
     color: white;
     cursor: pointer;
     z-index: 1000;
-  }
-
-  nav.active ~ #close {
-    display: block;
   }
 
   .nav-left nav a {
