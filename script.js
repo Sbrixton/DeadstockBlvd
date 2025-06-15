@@ -5,12 +5,14 @@ document.addEventListener("DOMContentLoaded", () => {
   const nav = document.getElementById("navbar");
 
   if (bar && close && nav) {
+    // Open nav
     bar.addEventListener("click", () => {
       nav.classList.add("active");
       bar.style.display = "none";
       close.style.display = "block";
     });
 
+    // Close nav
     close.addEventListener("click", () => {
       nav.classList.remove("active");
       close.style.display = "none";
