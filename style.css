@@ -398,10 +398,10 @@ footer .socials i {
     left: 0;
   }
 
-  /* Close button only shows when navbar is active */
+  /* Close button */
   #close {
     display: none;
-    position: fixed;
+    position: absolute;
     top: 20px;
     right: 20px;
     font-size: 30px;
@@ -410,6 +410,7 @@ footer .socials i {
     z-index: 999;
   }
 
+  /* Show close button when navbar is active */
   #navbar.active ~ #close {
     display: block;
   }
