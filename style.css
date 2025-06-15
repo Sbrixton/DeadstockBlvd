@@ -266,6 +266,11 @@ nav a.active::after {
   color: #000;
 }
 
+/* ==== MAIN CONTENT SPACING ==== */
+.main-content {
+  padding-top: 80px; /* Adjust based on your navbar height */
+}
+
 /* ==== NAV ICONS ==== */
 .nav-icons {
   display: flex;
