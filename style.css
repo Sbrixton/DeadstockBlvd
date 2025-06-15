@@ -342,7 +342,7 @@ footer .socials i {
 
 /* ========== RESPONSIVE DESIGN ========== */
 @media (max-width: 768px) {
-  #header {
+ #header {
     padding: 20px;
   }
 
@@ -351,11 +351,6 @@ footer .socials i {
   }
 
   .pro-container {
-    grid-template-columns: repeat(2, 1fr); /* 2 items per row for tablets/mobiles */
-  }
-
-  .pro-container {
-    display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 20px;
   }
@@ -364,6 +359,7 @@ footer .socials i {
     width: 100%;
   }
 
+  /* Hide nav by default on mobile */
   .nav-left nav {
     display: none;
   }
@@ -372,7 +368,8 @@ footer .socials i {
     display: block;
   }
 
-  nav {
+  /* MOBILE NAV STYLES */
+  #navbar {
     position: fixed;
     top: 0;
     left: -60%;
@@ -382,33 +379,39 @@ footer .socials i {
     padding: 80px 30px;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: 30px;
-    transition: 0.3s ease;
+    align-items: flex-start;
+    gap: 25px;
+    transition: left 0.3s ease;
     z-index: 998;
   }
 
-  nav.active {
+  #navbar a {
+    color: white;
+    font-size: 18px;
+    text-decoration: none;
+    padding: 10px 0;
+    width: 100%;
+    border-bottom: 1px solid #222;
+  }
+
+  #navbar.active {
     left: 0;
   }
 
+  /* Close button only shows when navbar is active */
   #close {
-    display: block;
+    display: none;
     position: fixed;
     top: 20px;
     right: 20px;
     font-size: 30px;
     color: white;
     cursor: pointer;
-    z-index: 1000;
+    z-index: 999;
   }
 
-  .nav-left nav a {
-    font-size: 18px;
-    text-align: left;
-    width: 100%;
-    padding: 10px 0;
-    border-bottom: 1px solid #222;
+  #navbar.active ~ #close {
+    display: block;
   }
 }
 
@@ -417,22 +420,10 @@ footer .socials i {
     grid-template-columns: repeat(2, 1fr); /* Still keep 2 per row even on small screens */
   }
 
-  #navbar {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 15px;
-  }
-
   #header {
     flex-direction: column;
     align-items: flex-start;
     padding: 10px 20px;
-  }
-
-  #navbar {
-    flex-direction: column;
-    gap: 10px;
-    padding: 10px 0;
   }
 
   .nav-icons {
