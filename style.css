@@ -395,19 +395,14 @@ footer .socials i {
   }
 
   #close {
-    display: none;
-    position: absolute;
-    top: 20px;
-    right: 20px; /* 👈 right edge of mobile menu now */
-    font-size: 30px;
-    cursor: pointer;
-    z-index: 1000;
-  }
-
-  /* Show close only when nav is active */
-  #navbar.active ~ #close {
-    display: block;
-  }
+  display: block;
+  position: absolute;
+  top: 20px;
+  right: 20px; /* stays inside the mobile nav width */
+  font-size: 30px;
+  cursor: pointer;
+  z-index: 1001;
+}
 
   /* Hide desktop nav inside nav-left (nav links are in #navbar) */
   #navbar {
