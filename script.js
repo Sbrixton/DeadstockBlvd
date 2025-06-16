@@ -1,34 +1,26 @@
-// ====== MOBILE NAV TOGGLE ======
 document.addEventListener("DOMContentLoaded", () => {
   const bar = document.getElementById("bar");
   const close = document.getElementById("close");
   const nav = document.getElementById("navbar");
 
   if (bar && close && nav) {
-    // Open nav
     bar.addEventListener("click", () => {
       nav.classList.add("active");
-      bar.style.display = "none";
-      close.style.display = "block";
     });
 
-    // Close nav
     close.addEventListener("click", () => {
       nav.classList.remove("active");
-      close.style.display = "none";
-      bar.style.display = "block";
     });
 
-    // Remove active class on window resize
+    // IMPORTANT: Close nav if resizing to large screen (without refresh)
     window.addEventListener("resize", () => {
       if (window.innerWidth > 768) {
         nav.classList.remove("active");
-        close.style.display = "none";
-        bar.style.display = "block";
       }
     });
   }
 });
+
 
 // ====== ADD TO CART FUNCTIONALITY FROM SHOP PAGE ======
 document.addEventListener("DOMContentLoaded", () => {
