@@ -390,12 +390,11 @@ footer .socials i {
     left: 0;
   }
 
-  /* Close button hidden by default */
   #close {
     display: none;
-    position: fixed;
+    position: absolute;
     top: 20px;
-    right: 20px;
+    left: 20px; /* 👈 This makes it appear inside the nav panel on the left */
     font-size: 30px;
     cursor: pointer;
     z-index: 999;
