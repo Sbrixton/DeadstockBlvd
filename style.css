@@ -38,11 +38,11 @@ p {
   margin: 40px 0;
 }
 
-/* ========== DEFAULT NAVBAR STYLES ========== */
+/* ====== BASE STYLES (desktop first) ====== */
 .navbar {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
   background: #000;
   color: #fff;
   padding: 20px 80px;
@@ -51,40 +51,39 @@ p {
   z-index: 999;
 }
 
+/* nav-left contains hamburger + logo */
 .nav-left {
   display: flex;
   align-items: center;
   gap: 20px;
-  position: relative;
 }
 
-.nav-left .logo {
-  display: flex;
-  justify-content: center;
-  flex: 1;
+/* Hamburger and close icons hidden by default on desktop */
+#bar,
+#close {
+  font-size: 24px;
+  color: white;
+  cursor: pointer;
+  display: none;
 }
 
-.nav-left nav {
+/* Desktop nav: show nav inline, horizontal */
+#navbar {
   display: flex;
   gap: 25px;
 }
 
-.nav-left nav a {
+#navbar a {
   color: white;
   text-decoration: none;
   font-weight: 600;
-  transition: 0.3s ease;
 }
 
-.nav-left nav a:hover,
-.nav-left nav a.active {
-  color: #46bd89;
-}
-
+/* Nav right icons */
 .nav-right {
   display: flex;
-  align-items: center;
   gap: 15px;
+  align-items: center;
 }
 
 .nav-right i,
@@ -94,14 +93,6 @@ p {
   background: none;
   border: none;
   cursor: pointer;
-}
-
-#bar,
-#close {
-  font-size: 24px;
-  color: white;
-  cursor: pointer;
-  display: none;
 }
 
 /* ========== ACTIVE NAV LINK ========== */
@@ -232,6 +223,7 @@ nav a.active::after {
 .pro:hover .main-img {
   opacity: 0;
 }
+
 /* ==== HERO ==== */
 #hero {
   background-image: url('images/hero-bg.jpg');
@@ -264,24 +256,6 @@ nav a.active::after {
   cursor: pointer;
   border-radius: 5px;
   color: #000;
-}
-
-/* ==== MAIN CONTENT SPACING ==== */
-.main-content {
-  padding-top: 80px; /* Adjust based on your navbar height */
-}
-
-/* ==== NAV ICONS ==== */
-.nav-icons {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-}
-
-.nav-icons i {
-  color: #fff;
-  font-size: 18px;
-  cursor: pointer;
 }
 
 /* ==== NEWSLETTER ==== */
@@ -347,7 +321,7 @@ footer .socials i {
 
 /* ========== RESPONSIVE DESIGN ========== */
 @media (max-width: 768px) {
- #header {
+  #header {
     padding: 20px;
   }
 
@@ -364,60 +338,97 @@ footer .socials i {
     width: 100%;
   }
 
-  /* Hide nav by default on mobile */
-  .nav-left nav {
-    display: none;
+  .navbar {
+    padding: 20px 30px;
   }
 
+  /* Hamburger visible */
   #bar {
     display: block;
   }
 
-  /* MOBILE NAV STYLES */
+  /* Logo centered horizontally */
+  .nav-left {
+    flex: 1;
+    justify-content: center;
+    position: relative;
+  }
+
+  /* We want hamburger on the left, so position it absolute */
+  #bar {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  
+  /* Nav hidden by default */
   #navbar {
     position: fixed;
     top: 0;
-    left: -60%;
+    left: -60%; /* Hide offscreen to left */
     width: 60%;
     height: 100vh;
     background: #000;
-    padding: 80px 30px;
-    display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    gap: 25px;
+    padding: 80px 30px;
+    gap: 30px;
     transition: left 0.3s ease;
     z-index: 998;
   }
 
+  /* Nav links vertical */
   #navbar a {
-    color: white;
     font-size: 18px;
-    text-decoration: none;
-    padding: 10px 0;
     width: 100%;
     border-bottom: 1px solid #222;
+    padding: 10px 0;
   }
 
+  /* When active, slide in */
   #navbar.active {
     left: 0;
   }
 
-  /* Close button */
+  /* Close button hidden by default */
   #close {
     display: none;
-    position: absolute;
+    position: fixed;
     top: 20px;
     right: 20px;
     font-size: 30px;
-    color: white;
     cursor: pointer;
     z-index: 999;
   }
 
-  /* Show close button when navbar is active */
+  /* Show close only when nav is active */
   #navbar.active ~ #close {
     display: block;
+  }
+
+  /* Hide desktop nav inside nav-left (nav links are in #navbar) */
+  #navbar {
+    display: flex; /* keep flex for mobile */
+  }
+
+  /* Keep nav-right icons aligned right */
+  .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  .nav-right i,
+  .nav-right button {
+    font-size: 18px;
+    color: white;
+    background: none;
+    border: none;
+    cursor: pointer;
   }
 }
 
