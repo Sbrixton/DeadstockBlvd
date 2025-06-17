@@ -1,21 +1,21 @@
 document.addEventListener("DOMContentLoaded", () => {
   const bar = document.getElementById("bar");
   const close = document.getElementById("close");
-  const nav = document.getElementById("navbar");
+  const navWrapper = document.querySelector(".nav-wrapper");
 
-  if (bar && close && nav) {
+  if (bar && close && navWrapper) {
     bar.addEventListener("click", () => {
-      nav.classList.add("active");
+      navWrapper.classList.add("active");
     });
 
     close.addEventListener("click", () => {
-      nav.classList.remove("active");
+      navWrapper.classList.remove("active");
     });
 
-    // IMPORTANT: Close nav if resizing to large screen (without refresh)
+    // Close nav menu if window is resized to desktop size
     window.addEventListener("resize", () => {
       if (window.innerWidth > 768) {
-        nav.classList.remove("active");
+        navWrapper.classList.remove("active");
       }
     });
   }
