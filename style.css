@@ -38,24 +38,29 @@ p {
   margin: 40px 0;
 }
 
-/* ====== BASE STYLES (desktop first) ====== */
+/* === DESKTOP NAVBAR LAYOUT === */
 .navbar {
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  background: #000;
-  color: #fff;
+  align-items: center;
   padding: 20px 80px;
+  background: #000;
   position: sticky;
   top: 0;
   z-index: 999;
 }
 
-/* nav-left contains hamburger + logo */
+/* LEFT SIDE: Logo + nav links */
 .nav-left {
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 30px; /* spacing between logo and links */
+}
+
+/* Move logo to the far left */
+.logo {
+  position: static;
+  transform: none;
 }
 
 /* Hamburger and close icons hidden by default on desktop */
@@ -67,7 +72,7 @@ p {
   display: none;
 }
 
-/* Desktop nav: show nav inline, horizontal */
+/* Nav links inline (visible on desktop) */
 #navbar {
   display: flex;
   gap: 25px;
@@ -79,11 +84,11 @@ p {
   font-weight: 600;
 }
 
-/* Nav right icons */
+/* RIGHT SIDE: search + cart */
 .nav-right {
   display: flex;
-  gap: 15px;
   align-items: center;
+  gap: 20px;
 }
 
 .nav-right i,
