@@ -398,7 +398,7 @@ footer .socials i {
     display: block;
     position: absolute;
     top: 20px;
-    right: 20px; /* stays inside the 60% width mobile nav */
+    right: 20px; /* ✅ this is now 20px from the right of the nav menu */
     font-size: 30px;
     cursor: pointer;
     z-index: 1001;
