@@ -377,9 +377,9 @@ footer .socials i {
     gap: 25px;
     transition: left 0.3s ease;
     z-index: 998;
-  
-    position: relative; /* so #close is relative to this */
+    position: relative; /* This makes #close positioned relative to this */
   }
+
 
   /* Nav links vertical */
   #navbar a {
@@ -395,14 +395,14 @@ footer .socials i {
   }
 
   #close {
-  display: block;
-  position: absolute;
-  top: 20px;
-  right: 20px; /* stays inside the mobile nav width */
-  font-size: 30px;
-  cursor: pointer;
-  z-index: 1001;
-}
+    display: block;
+    position: absolute;
+    top: 20px;
+    right: 20px; /* stays inside the 60% width mobile nav */
+    font-size: 30px;
+    cursor: pointer;
+    z-index: 1001;
+  }
 
   /* Hide desktop nav inside nav-left (nav links are in #navbar) */
   #navbar {
