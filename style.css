@@ -339,7 +339,11 @@ footer .socials i {
   }
 
   .navbar {
+    position: relative;
     padding: 20px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
 
   /* Show hamburger */
@@ -351,19 +355,30 @@ footer .socials i {
     transform: translateY(-50%);
   }
 
-  /* Center logo on mobile */
+  /* Hamburger stays left */
   .nav-left {
-    flex: 1;
-    justify-content: center;
-    position: relative;
+    flex: 0 0 auto;
   }
 
-  /* ===== NAV WRAPPER for sliding menu ===== */
+  /* Logo stays center */
+  .logo {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  
+  /* Icons stay right */
+  .nav-right {
+    flex: 0 0 auto;
+  }
+
+  /* ============ SLIDE-IN NAV ============ */
   .nav-wrapper {
     position: fixed;
     top: 0;
     left: -60%;
-    width: 60%;
+    width: 60%; /* takes 60% of screen width */
     height: 100vh;
     background: #000;
     z-index: 998;
@@ -374,7 +389,7 @@ footer .socials i {
     left: 0;
   }
 
-  /* ===== NAVBAR INSIDE THE WRAPPER ===== */
+  /* Nav inside the wrapper */
   #navbar {
     display: flex;
     flex-direction: column;
@@ -391,7 +406,7 @@ footer .socials i {
     text-decoration: none;
   }
 
-  /* ===== CLOSE BUTTON ===== */
+  /* Close icon */
   #close {
     display: block;
     position: absolute;
