@@ -39,65 +39,63 @@ p {
 }
 
 /* === DESKTOP NAVBAR LAYOUT === */
-.navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px 80px;
-  background: #000;
-  position: sticky;
-  top: 0;
-  z-index: 999;
-}
+@media (min-width: 769px) {
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 80px;
+    background: #000;
+    position: sticky;
+    top: 0;
+    z-index: 999;
+  }
 
-/* LEFT SIDE: Logo + nav links */
-.nav-left {
-  display: flex;
-  align-items: center;
-  gap: 30px; /* spacing between logo and links */
-}
+  /* LEFT SIDE: Logo + nav links */
+  .nav-left {
+    display: flex;
+    align-items: center;
+    gap: 40px; /* spacing between logo and links */
+  }
 
-/* Move logo to the far left */
-.logo {
-  position: static;
-  transform: none;
-}
+  .logo {
+    display: block;
+  }
 
-/* Hamburger and close icons hidden by default on desktop */
-#bar,
-#close {
-  font-size: 24px;
-  color: white;
-  cursor: pointer;
-  display: none;
-}
+  #bar {
+    display: none; /* hide hamburger on desktop */
+  }
 
-/* Nav links inline (visible on desktop) */
-#navbar {
-  display: flex;
-  gap: 25px;
-}
+  #navbar {
+    display: flex;
+    gap: 30px;
+  }
 
-#navbar a {
-  color: white;
-  text-decoration: none;
-  font-weight: 600;
-}
+  #navbar a {
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+  }
 
-/* RIGHT SIDE: search + cart */
-.nav-right {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-}
+  /* RIGHT SIDE: search + cart */
+  .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
 
-.nav-right i,
-.nav-right button {
-  font-size: 18px;
-  color: white;
-  background: none;
-  border: none;
-  cursor: pointer;
+  .nav-right i,
+  .nav-right button {
+    font-size: 18px;
+    color: white;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+
+  .nav-wrapper {
+    display: none !important; /* hide mobile menu entirely */
+  }
 }
 
 /* ========== ACTIVE NAV LINK ========== */
