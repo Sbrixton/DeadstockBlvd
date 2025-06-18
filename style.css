@@ -356,6 +356,8 @@ footer .socials i {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    background: #000; /* ✅ FIXED: Background so it's visible */
+    z-index: 999;      /* ✅ FIXED: Always on top of nav-wrapper */
   }
 
   /* Show hamburger */
@@ -365,73 +367,21 @@ footer .socials i {
     left: 0;
     top: 50%;
     transform: translateY(-50%);
+    color: white; /* Optional: ensure it's visible */
   }
 
-  /* Hamburger stays left */
   .nav-left {
     flex: 0 0 auto;
   }
 
-  /* Logo stays center */
   .logo {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
   }
 
-  
-  /* Icons stay right */
   .nav-right {
     flex: 0 0 auto;
-  }
-
-  /* ============ SLIDE-IN NAV ============ */
-  .nav-wrapper {
-    position: fixed;
-    top: 0;
-    left: -60%;
-    width: 60%; /* takes 60% of screen width */
-    height: 100vh;
-    background: #000;
-    z-index: 998;
-    transition: left 0.3s ease;
-  }
-
-  .nav-wrapper.active {
-    left: 0;
-  }
-
-  /* Nav inside the wrapper */
-  #navbar {
-    display: flex;
-    flex-direction: column;
-    padding: 80px 30px 30px 30px;
-    gap: 25px;
-  }
-
-  #navbar a {
-    font-size: 18px;
-    width: 100%;
-    border-bottom: 1px solid #222;
-    padding: 10px 0;
-    color: white;
-    text-decoration: none;
-  }
-
-  /* Close icon */
-  #close {
-    display: block;
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    font-size: 30px;
-    color: white;
-    cursor: pointer;
-    z-index: 1001;
-  }
-
-  /* ===== NAV-RIGHT ICONS ===== */
-  .nav-right {
     display: flex;
     align-items: center;
     gap: 15px;
@@ -448,6 +398,49 @@ footer .socials i {
     background: none;
     border: none;
     cursor: pointer;
+  }
+
+  /* ============ SLIDE-IN NAV ============ */
+  .nav-wrapper {
+    position: fixed;
+    top: 0;
+    left: -60%;
+    width: 60%;
+    height: 100vh;
+    background: #000;
+    z-index: 998;
+    transition: left 0.3s ease;
+  }
+
+  .nav-wrapper.active {
+    left: 0;
+  }
+
+  #navbar {
+    display: flex;
+    flex-direction: column;
+    padding: 80px 30px 30px 20px; /* ✅ Slight padding-left from edge */
+    gap: 25px;
+  }
+
+  #navbar a {
+    font-size: 18px;
+    width: 100%;
+    border-bottom: 1px solid #222;
+    padding: 10px 0;
+    color: white;
+    text-decoration: none;
+  }
+
+  #close {
+    display: block;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 30px;
+    color: white;
+    cursor: pointer;
+    z-index: 1001;
   }
 }
 
