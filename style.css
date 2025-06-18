@@ -51,22 +51,19 @@ p {
     z-index: 999;
   }
 
-  /* LEFT SIDE: Logo + nav links */
   .nav-left {
     display: flex;
     align-items: center;
-    gap: 40px; /* space between logo and nav links */
+    gap: 40px;
   }
 
+  /* Position logo on the far left */
   .logo {
     display: block;
+    order: 0;
   }
 
-  #bar,
-  #close {
-    display: none; /* hide hamburger and close on desktop */
-  }
-
+  /* Show nav links inline for desktop */
   #navbar {
     display: flex;
     gap: 30px;
@@ -78,7 +75,22 @@ p {
     font-weight: 600;
   }
 
-  /* RIGHT SIDE: search + cart */
+  /* Make sure nav-wrapper is visible on desktop */
+  .nav-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    flex: 1;
+    justify-content: flex-start;
+  }
+
+  /* Hide hamburger and close icons */
+  #bar,
+  #close {
+    display: none;
+  }
+
+  /* Search and cart on right */
   .nav-right {
     display: flex;
     align-items: center;
@@ -92,11 +104,6 @@ p {
     background: none;
     border: none;
     cursor: pointer;
-  }
-
-  /* Remove slide-in nav wrapper on desktop */
-  .nav-wrapper {
-    display: none !important;
   }
 }
 
