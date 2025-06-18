@@ -55,15 +55,16 @@ p {
   .nav-left {
     display: flex;
     align-items: center;
-    gap: 40px; /* spacing between logo and links */
+    gap: 40px; /* space between logo and nav links */
   }
 
   .logo {
     display: block;
   }
 
-  #bar {
-    display: none; /* hide hamburger on desktop */
+  #bar,
+  #close {
+    display: none; /* hide hamburger and close on desktop */
   }
 
   #navbar {
@@ -93,8 +94,9 @@ p {
     cursor: pointer;
   }
 
+  /* Remove slide-in nav wrapper on desktop */
   .nav-wrapper {
-    display: none !important; /* hide mobile menu entirely */
+    display: none !important;
   }
 }
 
