@@ -41,14 +41,14 @@ p {
 /* === DESKTOP NAVBAR LAYOUT === */
 @media (min-width: 769px) {
   .navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px 80px;
-    background: #000;
     position: sticky;
     top: 0;
     z-index: 999;
+    background: #000;
+    padding: 25px 30px; /* Slightly taller than before */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
 
   .nav-left {
@@ -351,13 +351,14 @@ footer .socials i {
   }
 
   .navbar {
-    position: relative;
-    padding: 20px 30px;
+    position: sticky;
+    top: 0;
+    z-index: 999;
+    background: #000;
+    padding: 25px 30px; /* Slightly taller than before */
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: #000; /* ✅ FIXED: Background so it's visible */
-    z-index: 999;      /* ✅ FIXED: Always on top of nav-wrapper */
   }
 
   /* Show hamburger */
