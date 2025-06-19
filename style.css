@@ -44,13 +44,12 @@ p {
     position: sticky;
     top: 0;
     z-index: 999;
-    background: rgba(255, 255, 255, 0.95); /* light tint */
-    backdrop-filter: blur(6px); /* optional: frosted glass effect */
+    background: rgba(255, 255, 255, 0.95); /* subtle light tint */
     padding: 25px 30px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); /* subtle shadow */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); /* faint shadow */
   }
 
   .nav-left {
@@ -72,11 +71,11 @@ p {
   }
 
   #navbar a {
-    color: white;
+    color: #111; /* dark links for light background */
     text-decoration: none;
     font-weight: 600;
   }
-
+  
   /* Make sure nav-wrapper is visible on desktop */
   .nav-wrapper {
     display: flex;
@@ -85,21 +84,21 @@ p {
     flex: 1;
     justify-content: flex-start;
   }
-
+  
   /* Show hamburger and close icons only on mobile */
   #bar,
   #close {
     display: none;
     color: #222; /* Dark color for visibility on white navbar */
   }
-
+  
   /* Search and cart on right */
   .nav-right {
     display: flex;
     align-items: center;
     gap: 20px;
   }
-
+  
   .nav-right i,
   .nav-right button {
     font-size: 18px;
@@ -109,7 +108,11 @@ p {
     cursor: pointer;
     transition: color 0.2s ease;
   }
-
+  
+  #navbar a:hover {
+    color: #333;
+  }
+  
   .nav-right i:hover,
   .nav-right button:hover {
     color: #555; /* Optional: subtle hover color */
