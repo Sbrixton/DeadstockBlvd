@@ -44,12 +44,13 @@ p {
     position: sticky;
     top: 0;
     z-index: 999;
-    background: #fff; /* White navbar background */
+    background: rgba(255, 255, 255, 0.95); /* light tint */
+    backdrop-filter: blur(6px); /* optional: frosted glass effect */
     padding: 25px 30px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05); /* Soft subtle shadow */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); /* subtle shadow */
   }
 
   .nav-left {
@@ -85,10 +86,11 @@ p {
     justify-content: flex-start;
   }
 
-  /* Hide hamburger and close icons */
+  /* Show hamburger and close icons only on mobile */
   #bar,
   #close {
     display: none;
+    color: #222; /* Dark color for visibility on white navbar */
   }
 
   /* Search and cart on right */
@@ -101,10 +103,16 @@ p {
   .nav-right i,
   .nav-right button {
     font-size: 18px;
-    color: white;
+    color: #222; /* Updated: dark icon color for white background */
     background: none;
     border: none;
     cursor: pointer;
+    transition: color 0.2s ease;
+  }
+
+  .nav-right i:hover,
+  .nav-right button:hover {
+    color: #555; /* Optional: subtle hover color */
   }
 }
 
