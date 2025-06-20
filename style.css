@@ -348,20 +348,20 @@ footer .socials i {
   #header {
     padding: 20px;
   }
-
+  
   .section-p1 {
     padding: 20px;
   }
-
+  
   .pro-container {
     grid-template-columns: repeat(2, 1fr);
     gap: 20px;
   }
-
+  
   .pro {
     width: 100%;
   }
-
+  
   .navbar {
     position: sticky;
     top: 0;
@@ -372,28 +372,28 @@ footer .socials i {
     justify-content: space-between;
     align-items: center;
   }
-
+  
   /* Show hamburger */
   #bar {
     position: absolute;
-    left: 15px; /* 👈 add spacing from the edge */
+    left: 15px;
     top: 50%;
     transform: translateY(-50%);
     color: white;
     font-size: 24px;
     cursor: pointer;
   }
-
+  
   .nav-left {
     flex: 0 0 auto;
   }
-
+  
   .logo {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
   }
-
+  
   .nav-right {
     flex: 0 0 auto;
     display: flex;
@@ -404,7 +404,7 @@ footer .socials i {
     top: 50%;
     transform: translateY(-50%);
   }
-
+  
   .nav-right i,
   .nav-right button {
     font-size: 18px;
@@ -413,7 +413,7 @@ footer .socials i {
     border: none;
     cursor: pointer;
   }
-
+  
   /* ============ SLIDE-IN NAV ============ */
   .nav-wrapper {
     position: fixed;
@@ -421,11 +421,12 @@ footer .socials i {
     left: -60%;
     width: 60%;
     height: 100vh;
-    background: #000;
+    background: rgba(255, 255, 255, 0.95);
     z-index: 998;
     transition: left 0.3s ease;
+    box-shadow: 4px 0 10px rgba(0, 0, 0, 0.05);
   }
-
+  
   .nav-wrapper.active {
     left: 0;
   }
@@ -438,12 +439,7 @@ footer .socials i {
   }
 
   #navbar a {
-    font-size: 18px;
-    width: 100%;
-    border-bottom: 1px solid #222;
-    padding: 10px 0;
-    color: white;
-    text-decoration: none;
+    border-bottom: 1px solid #eee;
   }
 
   #close {
