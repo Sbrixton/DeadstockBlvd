@@ -413,6 +413,14 @@ footer .socials i {
     color: #222; /* ✅ dark for white background */
   }
   
+  .nav-right button {
+    background: none;
+    border: none;
+    padding: 0;
+    outline: none;
+    cursor: pointer;
+  }
+  
   /* ============ SLIDE-IN NAV ============ */
   .nav-wrapper {
     position: fixed;
@@ -443,12 +451,10 @@ footer .socials i {
     font-weight: 600;
     transition: color 0.3s ease;
   }
-
+  
   #navbar a:hover {
     color: #46bd89; /* Or whatever accent color you're using */
   }
-
-  
   
   #close {
     display: block;
@@ -456,7 +462,7 @@ footer .socials i {
     top: 20px;
     right: 20px;
     font-size: 30px;
-    color: white;
+    color: #222; /* or black */
     cursor: pointer;
     z-index: 1001;
   }
