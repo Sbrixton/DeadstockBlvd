@@ -360,6 +360,31 @@ footer .socials i {
   
   .pro {
     width: 100%;
+    max-width: 100%; /* Ensure it doesn't stretch wider */
+    padding: 10px; /* Slightly less padding */
+    border-radius: 8px;
+    background: #f9f9f9;
+  }
+  
+  .product-img {
+    height: 160px; /* Reduce height for mobile screens */
+  }
+  
+  .product-img img {
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
+    border-radius: 8px;
+  }
+  
+  .pro .des h5 {
+    font-size: 13px;
+    margin: 5px 0 2px;
+  }
+  
+  .pro .des h4 {
+    font-size: 15px;
+    margin-top: 2px;
   }
   
   .navbar {
