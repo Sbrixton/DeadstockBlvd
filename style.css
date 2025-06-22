@@ -121,17 +121,21 @@ p {
   /* ===== SEARCH OVERLAY ===== */
   #searchOverlay {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh;
+    top: 80px; /* sits under sticky nav */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90vw;            /* ✅ Wider: fills 90% of viewport */
+    max-width: 1400px;      /* ✅ But never exceeds this */
+    height: 60vh;           /* Moderate height, not full screen */
     background: rgba(255, 255, 255, 0.97);
     display: none;
     flex-direction: column;
     align-items: center;
-    padding-top: 120px;
+    padding: 40px 30px;
     z-index: 1000;
     overflow-y: auto;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
   }
   
   .search-box {
@@ -147,34 +151,33 @@ p {
     border: 1px solid #ccc;
     border-radius: 8px;
     outline: none;
-    margin-bottom: 40px;
+    margin-bottom: 30px;
   }
   
   #searchResults {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 30px;
-    width: 90%;
-    max-width: 1200px;
-    padding: 0 30px 60px;
+    gap: 25px;
+    width: 100%;
+    padding-bottom: 20px;
   }
   
   .search-item {
     display: flex;
     flex-direction: column;
-    background: #f7f7f7;
+    background: #f9f9f9;
     border-radius: 8px;
     padding: 16px;
     transition: box-shadow 0.2s ease;
   }
   
   .search-item:hover {
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   }
   
   .search-item img {
     width: 100%;
-    height: 200px;
+    height: 180px;
     object-fit: cover;
     border-radius: 6px;
     margin-bottom: 10px;
