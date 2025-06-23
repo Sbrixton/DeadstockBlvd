@@ -42,22 +42,38 @@ document.addEventListener("DOMContentLoaded", () => {
       searchResults.innerHTML = `<p style="color:#555;">No matching products found.</p>`;
       return;
     }
+    
+    searchResults.addEventListener('click', e => {
+      const link = e.target.closest('.search-item-link');
+      if (!link) return;
+      
+      e.preventDefault();
+      const url = link.getAttribute('href');
+      
+      // Play overlay fade-out
+      searchOverlay.style.transition = 'opacity 0.3s ease';
+      searchOverlay.style.opacity = '0';
+      
+      // Redirect after animation
+      setTimeout(() => {
+        window.location.href = url;
+      }, 300);
+    });
 
     searchResults.innerHTML = results
-      .map((product) => {
+      .map(product => {
+        const href = `product.html?id=${product.id}`;
         const imgSrc = product.image.startsWith("/") ? product.image : "images/" + product.image;
-        const pageHref = product.page || "product.html";
-
         return `
-          <div class="search-item">
-            <a href="${pageHref}">
+          <a href="${href}" class="search-item-link">
+            <div class="search-item">
               <img src="${imgSrc}" alt="${product.name}">
-            </a>
-            <div class="search-info">
-              <a href="${pageHref}"><h4>${product.name}</h4></a>
-              <p>R${product.price}</p>
+              <div class="search-info">
+                <h4>${product.name}</h4>
+                <p>R${product.price}</p>
+              </div>
             </div>
-          </div>
+          </a>
         `;
       })
       .join("");
