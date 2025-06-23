@@ -3,25 +3,30 @@ document.addEventListener("DOMContentLoaded", () => {
   const searchOverlay = document.getElementById("searchOverlay");
   const searchInput = document.getElementById("searchInput");
   const searchResults = document.getElementById("searchResults");
-
+  
   const products = JSON.parse(localStorage.getItem("products")) || [];
-
+  
   const showOverlay = () => {
     searchOverlay.style.display = "flex";
     searchInput.focus();
   };
-
+  
   const hideOverlay = () => {
     searchOverlay.style.display = "none";
     searchInput.value = "";
     searchResults.innerHTML = "";
   };
-
+  
+  const closeSearch = document.getElementById("closeSearch");
+  if (closeSearch) {
+    closeSearch.addEventListener("click", hideOverlay);
+  }
+  
   searchIcon.addEventListener("click", (e) => {
     e.stopPropagation();
     showOverlay();
   });
-
+  
   searchOverlay.addEventListener("click", (e) => {
     if (e.target === searchOverlay) {
       hideOverlay();
