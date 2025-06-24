@@ -33,29 +33,27 @@
     </section>
 
     <section id="page-header" class="about-header">
-
         <h2>Let's Chat</h2>
         <p>Tell Us About Your Experiences On The Road</p>
     </section>
-
+    
     <!-- Cart Page -->
     <section id="cart" class="section-p1">
-        <table width="100%">
-            <thead>
-                <tr>
-                    <td>Remove</td>
-                    <td>Images</td>
-                    <td>Product</td>
-                    <td>Price</td>
-                    <td>Quantity</td>
-                    <td>Subtotal</td>
-                </tr>
-            </thead>
-            <tbody id="cart-table-body">
-                <!-- Products will be dynamically added here using JavaScript -->
-            </tbody>
-        </table>
+        <div id="emptyCart" style="display: none;">
+            <h2>Your cart is empty 🛒</h2>
+            <a href="shop.html" class="thrift-btn">Proceed Thrifting</a>
+        </div>
+        
+        <div id="cartContent" style="display: none;">
+            <div id="cartItems"></div>
+        
+            <div class="cart-summary">
+                <p><strong>Subtotal:</strong> <span id="CartSubtotal">R0.00</span></p>
+                <button class="normal" id="checkoutBtn">Proceed to Checkout</button>
+            </div>
+        </div>
     </section>
+
     
     <section id="cart-add" class="section-p1">
         <div id="coupon">
