@@ -38,8 +38,9 @@ p {
   margin: 40px 0;
 }
 
-/* === DESKTOP NAVBAR LAYOUT === */
+
 @media (min-width: 769px) {
+  /* === DESKTOP NAVBAR LAYOUT === */
   .navbar {
     position: sticky;
     top: 0;
@@ -363,17 +364,17 @@ p {
     background-color: #005fa3;
   }
   /* Sticky footer fix - assuming footer has class "footer" or adjust selector */
-body, html {
-  height: 100%;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-}
-
-main, #cart, #cartSection, #emptyCart {
-  flex: 1 0 auto; /* Take available space */
-}
-
+  body, html {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  main, #cart, #cartSection, #emptyCart {
+    flex: 1 0 auto; /* Take available space */
+  }
+  
   footer {
     flex-shrink: 0; /* Prevent footer from shrinking */
     background: #222; /* example bg */
