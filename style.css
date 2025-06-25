@@ -720,32 +720,6 @@ footer .socials i {
   color: #222;
 }
 
-/* Toast styling */
-.toast {
-  visibility: hidden;
-  min-width: 200px;
-  background-color: #333;
-  color: #fff;
-  text-align: center;
-  border-radius: 4px;
-  padding: 12px 24px;
-  position: fixed;
-  bottom: 80px;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 16px;
-  opacity: 0;
-  transition: opacity 0.4s ease, visibility 0.4s ease;
-  z-index: 9999;
-  pointer-events: none;
-}
-
-.toast.show {
-  visibility: visible;
-  opacity: 1;
-  pointer-events: auto;
-}
-
 .btn-proceed {
   display: inline-block;
   padding: 12px 24px;
