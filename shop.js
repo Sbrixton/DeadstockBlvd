@@ -44,3 +44,18 @@ document.addEventListener("DOMContentLoaded", () => {
     }, 3000);
   }
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+  const updateCartCount = () => {
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    const total = cart.reduce((sum, item) => sum + item.quantity, 0);
+    const cartCount = document.getElementById("cart-count");
+    if (cartCount) cartCount.textContent = total;
+  };
+
+  updateCartCount(); // Call it once when the page loads
+
+  // Optional: make it globally accessible to call from other pages
+  window.updateCartCount = updateCartCount;
+});
+
