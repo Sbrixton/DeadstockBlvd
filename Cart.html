@@ -9,7 +9,6 @@
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"/>
     </head>
     
-<body>    
     <!-- ========== NAVBAR ========== -->
     <header class="navbar">
             <div class="nav-left">
@@ -38,14 +37,20 @@
                 <a href="Cart.html" class="active" id="cartIcon"><i class="fas fa-shopping-bag"></i></a>
             </div>
     </header>
-    
-    <!-- ====== CART SECTION ====== -->
-    <section id="cart" class="section-p1">
-        <div class="cart-container" id="cartContainer">
-            <!-- JS will inject cart content here -->
-        </div>
-    </section>
-    
+
+<body class="sticky-footer">
+    <main>
+        <!-- Empty Cart Message -->
+        <section id="emptyCart" style="display:none;">
+            <h2>Your Cart is Empty</h2>
+            <a href="shop.html" class="btn-proceed">Proceed Thrifting</a>
+        </section>
+        
+        <!-- Cart Items Container -->
+        <section id="cartSection" style="display:none;">
+            <div id="cartItems"></div>
+        </section>
+    </main>
     <!-- ====== FOOTER (optional) ====== -->
     <footer class="section-p1">
         <div class="col install">
