@@ -1,0 +1,106 @@
+document.addEventListener('DOMContentLoaded', () => {
+  const cartTableBody = document.getElementById('cart-table-body');
+  const subtotalElem = document.getElementById('CartSubtotal');
+  const totalElem = document.getElementById('Total');
+  const emptyCartSection = document.getElementById('emptyCart');
+  const cartSection = document.getElementById('cartSection');
+  const checkoutBtn = document.getElementById('checkoutBtn');
+  const toast = document.getElementById('toast');
+
+  let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+  // Show toast helper
+  function showToast(message) {
+    toast.textContent = message;
+    toast.classList.add('show');
+    setTimeout(() => {
+      toast.classList.remove('show');
+    }, 2500);
+  }
+
+  function updateCartUI() {
+    cartTableBody.innerHTML = ''; // Clear table rows
+    let subtotal = 0;
+
+    if (cart.length === 0) {
+      emptyCartSection.style.display = 'block';
+      cartSection.style.display = 'none';
+      checkoutBtn.style.display = 'none';
+      subtotalElem.textContent = 'R0.00';
+      totalElem.textContent = 'R0.00';
+      return;
+    }
+
+    emptyCartSection.style.display = 'none';
+    cartSection.style.display = 'block';
+    checkoutBtn.style.display = 'block';
+
+    cart.forEach(product => {
+      const row = document.createElement('tr');
+
+      row.innerHTML = `
+        <td>
+          <button class="remove-btn" data-name="${product.name}" aria-label="Remove ${product.name}">&times;</button>
+        </td>
+        <td><img src="${product.image}" alt="${product.name}" width="70" loading="lazy"></td>
+        <td>${product.name}</td>
+        <td>R${product.price.toFixed(2)}</td>
+        <td>
+          <input type="number" class="quantity" min="1" value="${product.quantity}" data-name="${product.name}" aria-label="Quantity for ${product.name}">
+        </td>
+        <td class="item-subtotal">R${(product.price * product.quantity).toFixed(2)}</td>
+      `;
+
+      cartTableBody.appendChild(row);
+      subtotal += product.price * product.quantity;
+    });
+
+    subtotalElem.textContent = `R${subtotal.toFixed(2)}`;
+    totalElem.textContent = `R${subtotal.toFixed(2)}`;
+  }
+
+  updateCartUI();
+
+  cartTableBody.addEventListener('click', (e) => {
+    if (e.target.classList.contains('remove-btn')) {
+      const name = e.target.dataset.name;
+      cart = cart.filter(product => product.name !== name);
+      localStorage.setItem('cart', JSON.stringify(cart));
+      updateCartUI();
+      showToast('Item removed from cart');
+    }
+  });
+
+  cartTableBody.addEventListener('input', (e) => {
+    if (e.target.classList.contains('quantity')) {
+      const name = e.target.dataset.name;
+      const newQty = parseInt(e.target.value, 10);
+
+      if (isNaN(newQty) || newQty < 1) {
+        e.target.value = 1;
+        return;
+      }
+
+      cart = cart.map(product => {
+        if (product.name === name) {
+          product.quantity = newQty;
+        }
+        return product;
+      });
+
+      localStorage.setItem('cart', JSON.stringify(cart));
+      updateCartUI();
+      showToast('Cart updated');
+    }
+  });
+
+  checkoutBtn.addEventListener('click', () => {
+    if (cart.length === 0) {
+      alert("Your cart is empty.");
+      return;
+    }
+
+    sessionStorage.setItem('checkoutCart', JSON.stringify(cart));
+    window.location.href = 'checkout.html';
+  });
+});
