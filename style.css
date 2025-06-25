@@ -320,6 +320,73 @@ p {
   .cart-summary button {
     margin-top: 10px;
   }
+  
+  /* Toast styling */
+  .toast {
+    visibility: hidden;
+    min-width: 200px;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    border-radius: 4px;
+    padding: 12px 24px;
+    position: fixed;
+    bottom: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 16px;
+    opacity: 0;
+    transition: opacity 0.4s ease, visibility 0.4s ease;
+    z-index: 9999;
+    pointer-events: none;
+  }
+  
+  .toast.show {
+    visibility: visible;
+    opacity: 1;
+    pointer-events: auto;
+  }
+  
+  .btn-proceed {
+    display: inline-block;
+    padding: 12px 24px;
+    background-color: #0077cc;
+    color: white;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 600;
+    margin-top: 15px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .btn-proceed:hover {
+    background-color: #005fa3;
+  }
+  /* Sticky footer fix - assuming footer has class "footer" or adjust selector */
+body, html {
+  height: 100%;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+main, #cart, #cartSection, #emptyCart {
+  flex: 1 0 auto; /* Take available space */
+}
+
+  footer {
+    flex-shrink: 0; /* Prevent footer from shrinking */
+    background: #222; /* example bg */
+    color: #eee;
+    padding: 20px;
+    text-align: center;
+    bottom: 0;
+    position: relative;/* normal flow */
+    /* if you want truly sticky:
+    position: sticky;
+    bottom: 0;
+    */
+  }
 }
 
 /* ========== ACTIVE NAV LINK ========== */
@@ -641,6 +708,72 @@ footer .socials i {
   color: #222;
 }
 
+/* Toast styling */
+.toast {
+  visibility: hidden;
+  min-width: 200px;
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  border-radius: 4px;
+  padding: 12px 24px;
+  position: fixed;
+  bottom: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 16px;
+  opacity: 0;
+  transition: opacity 0.4s ease, visibility 0.4s ease;
+  z-index: 9999;
+  pointer-events: none;
+}
+
+.toast.show {
+  visibility: visible;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.btn-proceed {
+  display: inline-block;
+  padding: 12px 24px;
+  background-color: #0077cc;
+  color: white;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 600;
+  margin-top: 15px;
+  transition: background-color 0.3s ease;
+}
+
+.btn-proceed:hover {
+  background-color: #005fa3;
+}
+
+/* Sticky footer fix - assuming footer has class "footer" or adjust selector */
+body, html {
+  height: 100%;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+main, #cart, #cartSection, #emptyCart {
+  flex: 1 0 auto; /* Take available space */
+}
+
+footer {
+  flex-shrink: 0; /* Prevent footer from shrinking */
+  background: #222; /* example bg */
+  color: #eee;
+  padding: 20px;
+  text-align: center;
+  position: relative; /* normal flow */
+  /* if you want truly sticky:
+  position: sticky;
+  bottom: 0;
+  */
+}
 /* ========== RESPONSIVE DESIGN ========== */
 @media (max-width: 768px) {
   #header {
