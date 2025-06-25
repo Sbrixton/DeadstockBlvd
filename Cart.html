@@ -1,26 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-        <title>Your Cart</title>
-        <link rel="stylesheet" href="cart.css" />
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>DEADSTOCKBLVD-Shop</title>
+        <link rel="stylesheet" href="style.css">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"/>
     </head>
     
 <body>    
-    <!-- ====== NAVBAR (you can replace with your own navbar code) ====== -->
+    <!-- ========== NAVBAR ========== -->
     <header class="navbar">
-        <div class="nav-left">
-            <a href="index.html" class="logo">
-                <img src="/images/deadstock-logo.png" alt="Logo" height="40"/>
-            </a>
-        </div>
-        <div class="nav-right">
-            <a href="shop.html">Shop</a>
-            <a href="contact.html">Contact</a>
-            <a href="Cart.html" class="active"><i class="fas fa-shopping-bag"></i></a>
-        </div>
+            <div class="nav-left">
+                <!-- LOGO -->
+                <a href="index.html" class="logo">
+                    <img src="/images/deadstock-logo.png" alt="DeadstockBlvd Logo" height="40" />
+                </a>
+                
+                <!-- NAV LINKS (VISIBLE ON DESKTOP) -->
+                <div class="nav-wrapper" id="navWrapper">
+                    <nav id="navbar">
+                        <i id="close" class="fas fa-times"></i>
+                        <a href="index.html">Home</a>
+                        <a href="shop.html" >Shop</a>
+                        <a href="contact.html">Contact</a>
+                    </nav>
+                </div>
+                
+                <!-- Hamburger icon (mobile only) -->
+                <i id="bar" class="fas fa-bars"></i>
+            </div>
+            
+            <!-- RIGHT SIDE ICONS -->
+            <div class="nav-right">
+                <button id="searchIcon"><i class="fas fa-search"></i></button>
+                <a href="Cart.html" class="active" id="cartIcon"><i class="fas fa-shopping-bag"></i></a>
+            </div>
     </header>
     
     <!-- ====== CART SECTION ====== -->
@@ -32,7 +48,13 @@
     
     <!-- ====== FOOTER (optional) ====== -->
     <footer class="section-p1">
-        <p>© 2025 Deadstock Blvd</p>
+        <div class="col install">
+            <p>Secured Payment Gateways</p>
+            <img src="images/payments.png" alt="">
+        </div>
+        <div class="copyright">
+            <p>© 2025, DeadstockBlvd</p>
+        </div>
     </footer>
     
     <!-- ====== JS ====== -->
