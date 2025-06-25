@@ -390,6 +390,24 @@ p {
     background-color: #005fa3;
   }
   
+  #cart-count {
+    position: absolute;
+    top: -8px;
+    right: -10px;
+    background: crimson;
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 2px 6px;
+    border-radius: 50%;
+    line-height: 1;
+  }
+  
+  .cart-link {
+    position: relative;
+    display: inline-block;
+  }
+  
   body.sticky-footer, html.sticky-footer {
     display: flex;
     flex-direction: column;
