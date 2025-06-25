@@ -322,6 +322,32 @@ p {
     margin-top: 10px;
   }
   
+  /* EMPTY CART */
+  #emptyCart {
+    text-align: center;
+    margin-top: 60px;
+  }
+  
+  #emptyCart h2 {
+    font-size: 28px;
+    margin-bottom: 12px;
+  }
+  
+  #emptyCart a {
+    display: inline-block;
+    padding: 12px 24px;
+    background-color: #0077cc;
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+  }
+  
+  #emptyCart a:hover {
+    background-color: #005fa3;
+  }
+  
   /* Toast styling */
   .toast {
     visibility: hidden;
@@ -363,30 +389,15 @@ p {
   .btn-proceed:hover {
     background-color: #005fa3;
   }
-  /* Sticky footer fix - assuming footer has class "footer" or adjust selector */
-  body, html {
-    height: 100%;
-    margin: 0;
+  
+  body.sticky-footer, html.sticky-footer {
     display: flex;
     flex-direction: column;
+    min-height: 100vh;
   }
   
-  main, #cart, #cartSection, #emptyCart {
-    flex: 1 0 auto; /* Take available space */
-  }
-  
-  footer {
-    flex-shrink: 0; /* Prevent footer from shrinking */
-    background: #222; /* example bg */
-    color: #eee;
-    padding: 20px;
-    text-align: center;
-    bottom: 0;
-    position: relative;/* normal flow */
-    /* if you want truly sticky:
-    position: sticky;
-    bottom: 0;
-    */
+  body.sticky-footer main {
+    flex-grow: 1;
   }
 }
 
@@ -751,30 +762,16 @@ footer .socials i {
   background-color: #005fa3;
 }
 
-/* Sticky footer fix - assuming footer has class "footer" or adjust selector */
-body, html {
-  height: 100%;
-  margin: 0;
+body.sticky-footer, html.sticky-footer {
   display: flex;
   flex-direction: column;
+  min-height: 100vh;
 }
 
-main, #cart, #cartSection, #emptyCart {
-  flex: 1 0 auto; /* Take available space */
+body.sticky-footer main {
+  flex-grow: 1;
 }
 
-footer {
-  flex-shrink: 0; /* Prevent footer from shrinking */
-  background: #222; /* example bg */
-  color: #eee;
-  padding: 20px;
-  text-align: center;
-  position: relative; /* normal flow */
-  /* if you want truly sticky:
-  position: sticky;
-  bottom: 0;
-  */
-}
 /* ========== RESPONSIVE DESIGN ========== */
 @media (max-width: 768px) {
   #header {
