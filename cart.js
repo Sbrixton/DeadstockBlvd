@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (cart.length === 0) {
       emptyCartSection.style.display = 'block';
       cartSection.style.display = 'none';
-      checkoutBtn.style.display = 'none';
+      if (checkoutBtn) checkoutBtn.style.display = 'none';
       subtotalElem.textContent = 'R0.00';
       totalElem.textContent = 'R0.00';
       return;
@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     emptyCartSection.style.display = 'none';
     cartSection.style.display = 'block';
-    checkoutBtn.style.display = 'block';
+    if (checkoutBtn) checkoutBtn.style.display = 'block';
 
     cart.forEach(product => {
       const row = document.createElement('tr');
@@ -59,8 +59,9 @@ document.addEventListener('DOMContentLoaded', () => {
     totalElem.textContent = `R${subtotal.toFixed(2)}`;
   }
 
-  updateCartUI();
+  updateCartUI(); // Initial render
 
+  // Remove item handler
   cartTableBody.addEventListener('click', (e) => {
     if (e.target.classList.contains('remove-btn')) {
       const name = e.target.dataset.name;
@@ -71,6 +72,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
+  // Quantity update handler
   cartTableBody.addEventListener('input', (e) => {
     if (e.target.classList.contains('quantity')) {
       const name = e.target.dataset.name;
@@ -94,13 +96,16 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  checkoutBtn.addEventListener('click', () => {
-    if (cart.length === 0) {
-      alert("Your cart is empty.");
-      return;
-    }
+  // Checkout button logic
+  if (checkoutBtn) {
+    checkoutBtn.addEventListener('click', () => {
+      if (cart.length === 0) {
+        alert("Your cart is empty.");
+        return;
+      }
 
-    sessionStorage.setItem('checkoutCart', JSON.stringify(cart));
-    window.location.href = 'checkout.html';
-  });
+      sessionStorage.setItem('checkoutCart', JSON.stringify(cart));
+      window.location.href = 'checkout.html';
+    });
+  }
 });
