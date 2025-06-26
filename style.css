@@ -124,21 +124,6 @@ p {
     display: inline-block;
   }
   
-  #cart-count {
-    position: absolute;
-    top: -8px;
-    right: -10px;
-    background-color: crimson;
-    color: white;
-    font-size: 11px;
-    font-weight: bold;
-    border-radius: 50%;
-    padding: 3px 6px;
-    line-height: 1;
-    z-index: 1;
-  }
-  
-  
   /* ===== SEARCH OVERLAY ===== */
   #searchOverlay {
     position: fixed;
@@ -246,111 +231,10 @@ p {
     font-size: 15px;
     color: #555;
   }
-  
-  /* ==== CART BASE STYLES ==== */
-  
-  #cart {
-    padding: 40px 20px;
-    text-align: center;
-  }
-  
-  #emptyCart h2 {
-    font-size: 24px;
-    margin-bottom: 20px;
-    color: #333;
-  }
-  
-  .thrift-btn {
-    display: inline-block;
-    padding: 12px 22px;
-    background: #222;
-    color: #fff;
-    text-decoration: none;
-    border-radius: 5px;
-    transition: background 0.3s ease;
-  }
-  
-  .thrift-btn:hover {
-    background: #444;
-  }
-  
-  #cartItems {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    max-width: 800px;
-    margin: auto;
-    margin-bottom: 30px;
-  }
-  
-  .cart-item {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background: #f9f9f9;
-    padding: 16px;
-    border-radius: 6px;
-    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.05);
-  }
-  
-  .cart-item img {
-    width: 80px;
-    height: 80px;
-    object-fit: cover;
-    border-radius: 4px;
-  }
-  
-  .cart-item-info {
-    flex: 1;
-    padding: 0 20px;
-    text-align: left;
-  }
-  
-  .cart-item-info h4 {
-    margin: 0;
-    font-size: 16px;
-    color: #111;
-  }
-  
-  .cart-item-info p {
-    margin: 6px 0 0;
-    font-size: 14px;
-    color: #555;
-  }
-  
-  .cart-remove {
-    font-size: 20px;
-    cursor: pointer;
-    background: none;
-    border: none;
-    color: #999;
-    transition: color 0.2s ease;
-  }
-  
-  .cart-remove:hover {
-    color: #f44336;
-  }
-  
-  .cart-summary {
-    max-width: 800px;
-    margin: auto;
-    text-align: right;
-    font-size: 18px;
-  }
-  
-  .cart-summary button {
-    margin-top: 10px;
-  }
-  
   /* EMPTY CART */
   #emptyCart {
     text-align: center;
     margin-top: 60px;
-  }
-  
-  #emptyCart h2 {
-    font-size: 28px;
-    margin-bottom: 12px;
   }
   
   #emptyCart a {
@@ -365,48 +249,6 @@ p {
   }
   
   #emptyCart a:hover {
-    background-color: #005fa3;
-  }
-  
-  /* Toast styling */
-  .toast {
-    visibility: hidden;
-    min-width: 200px;
-    background-color: #333;
-    color: #fff;
-    text-align: center;
-    border-radius: 4px;
-    padding: 12px 24px;
-    position: fixed;
-    bottom: 80px;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 16px;
-    opacity: 0;
-    transition: opacity 0.4s ease, visibility 0.4s ease;
-    z-index: 9999;
-    pointer-events: none;
-  }
-  
-  .toast.show {
-    visibility: visible;
-    opacity: 1;
-    pointer-events: auto;
-  }
-  
-  .btn-proceed {
-    display: inline-block;
-    padding: 12px 24px;
-    background-color: #0077cc;
-    color: white;
-    border-radius: 6px;
-    text-decoration: none;
-    font-weight: 600;
-    margin-top: 15px;
-    transition: background-color 0.3s ease;
-  }
-  
-  .btn-proceed:hover {
     background-color: #005fa3;
   }
   
@@ -602,101 +444,6 @@ nav a.active::after {
   color: #000;
 }
 
-/* ==== CART BASE STYLES ==== */
-
-#cart {
-  padding: 40px 20px;
-  text-align: center;
-}
-
-#emptyCart h2 {
-  font-size: 24px;
-  margin-bottom: 20px;
-  color: #333;
-}
-
-.thrift-btn {
-  display: inline-block;
-  padding: 12px 22px;
-  background: #222;
-  color: #fff;
-  text-decoration: none;
-  border-radius: 5px;
-  transition: background 0.3s ease;
-}
-
-.thrift-btn:hover {
-  background: #444;
-}
-
-#cartItems {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  max-width: 800px;
-  margin: auto;
-  margin-bottom: 30px;
-}
-
-.cart-item {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background: #f9f9f9;
-  padding: 16px;
-  border-radius: 6px;
-  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.05);
-}
-
-.cart-item img {
-  width: 80px;
-  height: 80px;
-  object-fit: cover;
-  border-radius: 4px;
-}
-
-.cart-item-info {
-  flex: 1;
-  padding: 0 20px;
-  text-align: left;
-}
-
-.cart-item-info h4 {
-  margin: 0;
-  font-size: 16px;
-  color: #111;
-}
-
-.cart-item-info p {
-  margin: 6px 0 0;
-  font-size: 14px;
-  color: #555;
-}
-
-.cart-remove {
-  font-size: 20px;
-  cursor: pointer;
-  background: none;
-  border: none;
-  color: #999;
-  transition: color 0.2s ease;
-}
-
-.cart-remove:hover {
-  color: #f44336;
-}
-
-.cart-summary {
-  max-width: 800px;
-  margin: auto;
-  text-align: right;
-  font-size: 18px;
-}
-
-.cart-summary button {
-  margin-top: 10px;
-}
-
 /* ==== NEWSLETTER ==== */
 #newsletter {
   background: #000;
@@ -756,22 +503,6 @@ footer .socials i {
   margin-right: 10px;
   font-size: 18px;
   color: #222;
-}
-
-.btn-proceed {
-  display: inline-block;
-  padding: 12px 24px;
-  background-color: #0077cc;
-  color: white;
-  border-radius: 6px;
-  text-decoration: none;
-  font-weight: 600;
-  margin-top: 15px;
-  transition: background-color 0.3s ease;
-}
-
-.btn-proceed:hover {
-  background-color: #005fa3;
 }
 
 body.sticky-footer, html.sticky-footer {
@@ -1001,55 +732,6 @@ body.sticky-footer main {
     margin: 4px 0 0;
     font-size: 14px;
     color: #555;
-  }
-  
-  #cartItems {
-    padding: 0 10px;
-  }
-  
-  .cart-item {
-    flex-direction: column;
-    align-items: flex-start;
-    text-align: left;
-    padding: 16px;
-  }
-  
-  .cart-item img {
-    width: 100%;
-    max-width: 100%;
-    height: auto;
-    margin-bottom: 12px;
-  }
-  
-  .cart-item-info {
-    padding: 0;
-    width: 100%;
-  }
-  
-  .cart-item-info h4 {
-    font-size: 18px;
-  }
-  
-  .cart-item-info p {
-    font-size: 15px;
-  }
-  
-  .cart-remove {
-    align-self: flex-end;
-    margin-top: 8px;
-    font-size: 22px;
-  }
-  
-  .cart-summary {
-    text-align: center;
-    font-size: 16px;
-    padding: 0 10px;
-  }
-  
-  .cart-summary button {
-    width: 100%;
-    font-size: 16px;
-    padding: 12px;
   }
   
   .thrift-btn {
