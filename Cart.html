@@ -42,16 +42,36 @@
 <body class="sticky-footer">
     <main>
         <!-- Empty Cart Message -->
-        <section id="emptyCart" style="display:none;  text-align:center; padding:50px 20px;">
+        <section id="emptyCart" style="display:none;">
             <h2>Your Cart is Empty</h2>
             <a href="shop.html" class="btn-proceed">Proceed Thrifting</a>
         </section>
         
-        <!-- Cart Items Container -->
+        <!-- Cart Section -->
         <section id="cartSection" style="display:none;">
-            <div id="cartItems"></div>
+            <div class="cart-wrapper">
+                <table class="cart-table">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Item</th>
+                            <th>Name</th>
+                            <th>Price</th>
+                            <th>Qty</th>
+                            <th>Subtotal</th>
+                        </tr>
+                    </thead>
+                    <tbody id="cart-table-body"></tbody>
+                </table>
+                
+                <div class="cart-total">Subtotal: <span id="CartSubtotal">R0.00</span></div>
+                <div class="cart-total">Total: <span id="Total">R0.00</span></div>
+            
+                <button id="checkoutBtn" class="checkout-btn">Proceed to Checkout</button>
+            </div>
         </section>
     </main>
+
     <!-- ====== FOOTER (optional) ====== -->
     <footer class="section-p1">
         <div class="col install">
