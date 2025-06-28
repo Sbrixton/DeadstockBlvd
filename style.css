@@ -357,7 +357,7 @@ nav a.active::after {
   bottom: 10px;
   right: 10px;
   background: #088178;
-  colour: #fff ;
+  color: #fff ;
   padding: 8px;
   border-radius: 50%;
   cursor: pointer;
