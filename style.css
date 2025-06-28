@@ -249,6 +249,26 @@ p {
     position: relative;
     display: inline-block;
   }
+
+  .toast {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #333;
+    color: white;
+    padding: 12px 24px;
+    border-radius: 6px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    z-index: 9999;
+  }
+  
+  .toast.show {
+    opacity: 1;
+    pointer-events: auto;
+  }
   
   body.sticky-footer, html.sticky-footer {
     display: flex;
