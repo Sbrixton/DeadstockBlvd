@@ -1,21 +1,24 @@
 /* ===== CART WRAPPER ===== */
 .cart-wrapper {
-  max-width: 1200px;
-  margin: 40px auto;
-  padding: 20px;
+  width: 100%;
+  max-width: 900px;
+  background: #fff;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
 }
 
 /* ===== CART TABLE ===== */
 .cart-table {
   width: 100%;
   border-collapse: collapse;
-  margin-bottom: 40px;
+  margin-bottom: 20px;
 }
 
 .cart-table th,
 .cart-table td {
-  padding: 16px;
-  text-align: left;
+  padding: 12px;
+  text-align: center;
   border-bottom: 1px solid #eee;
 }
 
@@ -50,6 +53,21 @@
   cursor: pointer;
 }
 
+.cart-summary {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+}
+
+.cart-centered {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 60px 20px;
+  min-height: 70vh;
+}
+
 /* ===== QUANTITY INPUTS ===== */
 .qty-box input {
   width: 50px;
@@ -62,25 +80,19 @@
 
 /* ===== CART TOTAL ===== */
 .cart-total {
-  text-align: right;
   font-size: 18px;
-  font-weight: bold;
-  margin-top: 20px;
-  color: #222;
+  font-weight: 600;
 }
 
 /* ===== CHECKOUT BUTTON ===== */
 .checkout-btn {
-  display: inline-block;
-  margin-top: 20px;
-  padding: 12px 24px;
-  background: #46bd89;
+  background-color: #46bd89;
   color: white;
+  padding: 12px 24px;
+  font-size: 16px;
   border: none;
-  border-radius: 5px;
-  font-weight: bold;
-  text-decoration: none;
-  transition: background 0.3s ease;
+  border-radius: 4px;
+  cursor: pointer;
 }
 
 .checkout-btn:hover {
