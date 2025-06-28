@@ -1,50 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>DEADSTOCKBLVD-Cart</title>
-        <link rel="stylesheet" href="style.css">
-        <link rel="stylesheet" href="cart.css">
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"/>
-    </head>
-    
-    <!-- ========== NAVBAR ========== -->
-    <header class="navbar">
-            <div class="nav-left">
-                <!-- LOGO -->
-                <a href="index.html" class="logo">
-                    <img src="/images/deadstock-logo.png" alt="DeadstockBlvd Logo" height="40" />
-                </a>
-                
-                <!-- NAV LINKS (VISIBLE ON DESKTOP) -->
-                <div class="nav-wrapper" id="navWrapper">
-                    <nav id="navbar">
-                        <i id="close" class="fas fa-times"></i>
-                        <a href="index.html">Home</a>
-                        <a href="shop.html" class="btn-proceed" >Shop</a>
-                        <a href="contact.html">Contact</a>
-                    </nav>
-                </div>
-                
-                <!-- Hamburger icon (mobile only) -->
-                <i id="bar" class="fas fa-bars"></i>
-            </div>
-            
-            <!-- RIGHT SIDE ICONS -->
-            <div class="nav-right">
-                <button id="searchIcon"><i class="fas fa-search"></i></button>
-                <a href="Cart.html" class="cart-link active" id="cartIcon">
-                    <i class="fas fa-shopping-bag"></i>
-                    <span id="cart-count">0</span>
-                </a>
-            </div>
-    </header>
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DEADSTOCKBLVD - Cart</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="cart.css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" />
+</head>
 
 <body class="sticky-footer">
+    <!-- ========== NAVBAR ========== -->
+    <header class="navbar">
+        <div class="nav-left">
+            <a href="index.html" class="logo">
+                <img src="/images/deadstock-logo.png" alt="DeadstockBlvd Logo" height="40" />
+            </a>
+            
+            <div class="nav-wrapper" id="navWrapper">
+                <nav id="navbar">
+                    <i id="close" class="fas fa-times"></i>
+                    <a href="index.html">Home</a>
+                    <a href="shop.html" class="btn-proceed">Shop</a>
+                    <a href="contact.html">Contact</a>
+                </nav>
+            </div>
+            <i id="bar" class="fas fa-bars"></i>
+        </div>
+        
+        <div class="nav-right">
+            <button id="searchIcon"><i class="fas fa-search"></i></button>
+            <a href="Cart.html" class="cart-link active" id="cartIcon">
+                <i class="fas fa-shopping-bag"></i>
+                <span id="cart-count">0</span>
+            </a>
+        </div>
+    </header>
+    
     <main>
-        <!-- Empty Cart Message -->
+        <!-- Empty Cart View -->
         <section id="emptyCart" style="display: none; text-align: center; padding: 80px 20px;">
             <h2>Your cart is empty 🛒</h2>
             <button class="btn-proceed" style="margin-top: 20px; padding: 12px 24px; font-size: 16px; background-color: #46bd89; color: white; border: none; border-radius: 4px; cursor: pointer;">
@@ -52,8 +47,8 @@
             </button>
         </section>
         
-        <!-- Cart Section -->
-        <section id="cartSection" style="display:none;">
+        <!-- Populated Cart View -->
+        <section id="cartSection" class="cart-centered" style="display: none;">
             <div class="cart-wrapper">
                 <table class="cart-table">
                     <thead>
@@ -68,14 +63,17 @@
                     </thead>
                     <tbody id="cart-table-body"></tbody>
                 </table>
-                <div class="cart-total">Subtotal: <span id="CartSubtotal">R0.00</span></div>
-                <div class="cart-total">Total: <span id="Total">R0.00</span></div>
-                <button id="checkoutBtn" class="checkout-btn">Proceed to Checkout</button>
+        
+                <div class="cart-summary">
+                    <div class="cart-total">Subtotal: <span id="CartSubtotal">R0.00</span></div>
+                    <div class="cart-total">Total: <span id="Total">R0.00</span></div>
+                    <button id="checkoutBtn" class="checkout-btn">Proceed to Checkout</button>
+                </div>
             </div>
         </section>
     </main>
-
-    <!-- ====== FOOTER (optional) ====== -->
+    
+    <!-- Footer -->
     <footer class="section-p1">
         <div class="col install">
             <p>Secured Payment Gateways</p>
@@ -85,10 +83,10 @@
             <p>© 2025, DeadstockBlvd</p>
         </div>
     </footer>
-    <!-- Toast Notifications -->
+    
     <div id="toast" class="toast"></div>
     
-    <!-- ====== JS ====== -->
+    <!-- Scripts -->
     <script type="module" src="cart-utils.js"></script>
     <script src="shop.js"></script>
     <script src="cart.js"></script>
