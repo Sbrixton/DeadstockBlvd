@@ -20,9 +20,11 @@ document.addEventListener("DOMContentLoaded", () => {
     let subtotal = 0;
 
     if (cart.length === 0) {
-      empty.style.display = "flex";
-      section.style.display = "none";
-      checkoutBtn?.style.display = "none";
+      empty.style.display = "flex";         // show empty message
+      section.style.display = "none";       // hide cart table
+      checkoutBtn?.style.display = "none";  // hide checkout
+      subEl.textContent = "R0.00";
+      totalEl.textContent = "R0.00";
       updateCartCountInDOM();
       return;
     }
@@ -51,6 +53,7 @@ document.addEventListener("DOMContentLoaded", () => {
     updateCartCountInDOM();
   }
 
+  // Remove item from cart
   tbody.addEventListener("click", (e) => {
     if (e.target.matches(".remove-btn")) {
       const name = e.target.dataset.name;
@@ -64,6 +67,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
+  // Update quantity
   tbody.addEventListener("input", (e) => {
     if (e.target.matches(".quantity")) {
       const name = e.target.dataset.name;
@@ -77,6 +81,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
+  // Checkout button logic
   checkoutBtn?.addEventListener("click", () => {
     if (cart.length > 0) {
       window.location.href = "checkout.html";
@@ -85,6 +90,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
+  // "Proceed to Shop" button in empty cart view
   document
     .querySelector("#emptyCart .btn-proceed")
     ?.addEventListener("click", () => {
