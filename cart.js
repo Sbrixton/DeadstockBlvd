@@ -81,12 +81,12 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // Checkout button logic
   checkoutBtn?.addEventListener("click", () => {
     if (cart.length > 0) {
       window.location.href = "checkout.html";
     } else {
-      showToast("Cart is empty!");
+      // Redirect to shop page instead of showing toast
+      window.location.href = "shop.html";
     }
   });
 
