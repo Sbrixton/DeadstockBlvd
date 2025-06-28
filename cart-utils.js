@@ -14,7 +14,7 @@ export function updateCartCountInDOM() {
   const cartCount = document.getElementById("cart-count");
   if (cartCount) {
     cartCount.textContent = total;
-    cartCount.style.display = total > 0 ? "inline-block" : "none";
+      cartCount.style.display = "inline-block";
   }
 }
 
