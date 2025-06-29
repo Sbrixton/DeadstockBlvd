@@ -5,12 +5,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>DEADSTOCKBLVD - Cart</title>
-    <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="cart.css" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" />
 </head>
 
-<body class="sticky-footer">
+<body>
     <!-- ========== NAVBAR ========== -->
     <header class="navbar">
         <div class="nav-left">
@@ -40,34 +39,31 @@
     
     <main>
         <!-- Empty Cart View -->
-        <div id="emptyCart" style="display: none; flex-direction: column; align-items: center;">
-            <p>Your cart is empty</p>
-            <button id="proceedBtn" class="btn-proceed">Continue Shopping</button>
-        </div>
+        <section id="emptyCart" class="empty-cart">
+            <p>Your cart is empty.</p>
+            <button id="proceedBtn" class="btn-proceed">Proceed to Shop</button>
+        </section>
         
         <!-- Populated Cart View -->
-        <section id="cartSection" class="cart-centered" style="display: none;">
-            <div class="cart-wrapper">
-                <table class="cart-table">
-                    <thead>
-                        <tr>
-                            <th></th>
-                            <th>Item</th>
-                            <th>Name</th>
-                            <th>Price</th>
-                            <th>Qty</th>
-                            <th>Subtotal</th>
-                        </tr>
-                    </thead>
-                    <tbody id="cart-table-body"></tbody>
-                </table>
-        
-                <div class="cart-summary">
-                    <div class="cart-total">Subtotal: <span id="CartSubtotal">R0.00</span></div>
-                    <div class="cart-total">Total: <span id="Total">R0.00</span></div>
-                    <button id="checkoutBtn" class="checkout-btn">Proceed to Checkout</button>
-                </div>
+        <section id="cartSection">
+            <table>
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Image</th>
+                        <th>Name</th>
+                        <th>Price</th>
+                        <th>Qty</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody id="cart-table-body"></tbody>
+            </table>
+            <div class="totals">
+                <p>Subtotal: <span id="CartSubtotal">R0.00</span></p>
+                <p>Total: <span id="Total">R0.00</span></p>
             </div>
+            <button id="checkoutBtn">Checkout</button>
         </section>
     </main>
     
@@ -82,12 +78,7 @@
         </div>
     </footer>
     
-    <div id="toast" class="toast"></div>
-    
     <!-- Scripts -->
-    <script type="module" src="cart-utils.js"></script>
-    <script src="shop.js"></script>
-    <script src="cart.js"></script>
-    <script src="script.js"></script>
+    <script type="module" src="cart.js"></script>
 </body>
 </html>
