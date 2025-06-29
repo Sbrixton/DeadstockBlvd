@@ -1,4 +1,3 @@
-// cart.js
 import {
   getCart,
   saveCart,
@@ -14,9 +13,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const subEl = document.getElementById("CartSubtotal");
   const totalEl = document.getElementById("Total");
   const checkoutBtn = document.getElementById("checkoutBtn");
-  const proceedBtn = document.getElementById("proceedBtn"); // ✅ Moved outside render()
+  const proceedBtn = document.getElementById("proceedBtn");
 
-  // ✅ Handle proceed button click globally
+  // Make proceed button redirect to shop
   proceedBtn?.addEventListener("click", () => {
     window.location.href = "shop.html";
   });
@@ -26,10 +25,10 @@ document.addEventListener("DOMContentLoaded", () => {
     let subtotal = 0;
 
     if (cart.length === 0) {
-      empty.style.display = "flex";         // show empty message
-      section.style.display = "none";       // hide cart table
-      checkoutBtn?.style.display = "none";  // hide checkout
-      proceedBtn.style.display = "inline-block"; // ✅ show proceed button
+      empty.style.display = "flex";
+      section.style.display = "none";
+      checkoutBtn.style.display = "none";
+      proceedBtn.style.display = "inline-block";
       subEl.textContent = "R0.00";
       totalEl.textContent = "R0.00";
       updateCartCountInDOM();
@@ -38,12 +37,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
     empty.style.display = "none";
     section.style.display = "block";
-    checkoutBtn?.style.display = "block";
-    proceedBtn.style.display = "none"; // ✅ hide proceed button when cart has items
+    checkoutBtn.style.display = "block";
+    proceedBtn.style.display = "none";
 
     cart.forEach((item) => {
       subtotal += item.price * item.quantity;
-
       const tr = document.createElement("tr");
       tr.innerHTML = `
         <td><button class="remove-btn" data-name="${item.name}">&times;</button></td>
@@ -61,7 +59,7 @@ document.addEventListener("DOMContentLoaded", () => {
     updateCartCountInDOM();
   }
 
-  // Remove item from cart
+  // Remove item
   tbody.addEventListener("click", (e) => {
     if (e.target.matches(".remove-btn")) {
       const name = e.target.dataset.name;
@@ -89,7 +87,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // Checkout logic
   checkoutBtn?.addEventListener("click", () => {
     if (cart.length > 0) {
       window.location.href = "checkout.html";
@@ -98,13 +95,5 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // Also handle click from emptyCart section
-  document
-    .querySelector("#emptyCart .btn-proceed")
-    ?.addEventListener("click", () => {
-      window.location.href = "shop.html";
-    });
-
   render();
 });
-
