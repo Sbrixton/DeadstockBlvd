@@ -40,12 +40,10 @@
     
     <main>
         <!-- Empty Cart View -->
-        <section id="emptyCart" style="display: none; text-align: center; padding: 80px 20px;">
-            <p>Your cart is empty 🛒<p>
-            <button class="btn-proceed" style="margin-top: 20px; padding: 12px 24px; font-size: 16px; background-color: #46bd89; color: white; border: none; border-radius: 4px; cursor: pointer;">
-                Proceed to Shop</p>
-            </button>
-        </section>
+        <div id="emptyCart" style="display: none; flex-direction: column; align-items: center;">
+            <p>Your cart is empty</p>
+            <button id="proceedBtn" class="btn-proceed">Continue Shopping</button>
+        </div>
         
         <!-- Populated Cart View -->
         <section id="cartSection" class="cart-centered" style="display: none;">
