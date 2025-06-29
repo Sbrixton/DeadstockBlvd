@@ -42,7 +42,10 @@ document.addEventListener("DOMContentLoaded", () => {
     proceedBtn.style.display = "none";
 
     cart.forEach((item) => {
+      if (!item || typeof item.price !== "number") return; // ← skip broken item
+    
       subtotal += item.price * item.quantity;
+      
       const tr = document.createElement("tr");
       tr.innerHTML = `
         <td><button class="remove-btn" data-name="${item.name}">&times;</button></td>
@@ -54,7 +57,7 @@ document.addEventListener("DOMContentLoaded", () => {
       `;
       tbody.appendChild(tr);
     });
-
+    
     subEl.textContent = `R${subtotal.toFixed(2)}`;
     totalEl.textContent = `R${subtotal.toFixed(2)}`;
     updateCartCountInDOM();
