@@ -29,6 +29,7 @@ document.addEventListener("DOMContentLoaded", () => {
       section.style.display = "none";
       checkoutBtn.style.display = "none";
       proceedBtn.style.display = "inline-block";
+      console.log("Showing proceedBtn");
       subEl.textContent = "R0.00";
       totalEl.textContent = "R0.00";
       updateCartCountInDOM();
