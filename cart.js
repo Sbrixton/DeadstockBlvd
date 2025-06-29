@@ -14,6 +14,12 @@ document.addEventListener("DOMContentLoaded", () => {
   const subEl = document.getElementById("CartSubtotal");
   const totalEl = document.getElementById("Total");
   const checkoutBtn = document.getElementById("checkoutBtn");
+  const proceedBtn = document.getElementById("proceedBtn"); // ✅ Moved outside render()
+
+  // ✅ Handle proceed button click globally
+  proceedBtn?.addEventListener("click", () => {
+    window.location.href = "shop.html";
+  });
 
   function render() {
     tbody.innerHTML = "";
@@ -23,6 +29,7 @@ document.addEventListener("DOMContentLoaded", () => {
       empty.style.display = "flex";         // show empty message
       section.style.display = "none";       // hide cart table
       checkoutBtn?.style.display = "none";  // hide checkout
+      proceedBtn.style.display = "inline-block"; // ✅ show proceed button
       subEl.textContent = "R0.00";
       totalEl.textContent = "R0.00";
       updateCartCountInDOM();
@@ -32,6 +39,7 @@ document.addEventListener("DOMContentLoaded", () => {
     empty.style.display = "none";
     section.style.display = "block";
     checkoutBtn?.style.display = "block";
+    proceedBtn.style.display = "none"; // ✅ hide proceed button when cart has items
 
     cart.forEach((item) => {
       subtotal += item.price * item.quantity;
@@ -81,16 +89,16 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
+  // Checkout logic
   checkoutBtn?.addEventListener("click", () => {
     if (cart.length > 0) {
       window.location.href = "checkout.html";
     } else {
-      // Redirect to shop page instead of showing toast
       window.location.href = "shop.html";
     }
   });
 
-  // "Proceed to Shop" button in empty cart view
+  // Also handle click from emptyCart section
   document
     .querySelector("#emptyCart .btn-proceed")
     ?.addEventListener("click", () => {
@@ -99,3 +107,4 @@ document.addEventListener("DOMContentLoaded", () => {
 
   render();
 });
+
