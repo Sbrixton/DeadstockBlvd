@@ -15,18 +15,32 @@ main {
 }
 
 .empty-cart {
-  display: none;
-  text-align: center;
+  display: none; /* gets toggled in JS */
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   margin-top: 50px;
+  padding: 20px;
+}
+
+.empty-cart p {
+  font-size: 1.3rem;
+  margin-bottom: 15px;
 }
 
 .btn-proceed {
-  padding: 10px 20px;
-  background-color: #3c7cff;
-  color: white;
+  padding: 12px 24px;
+  background-color: #007bff;
+  color: #fff;
+  font-size: 1rem;
   border: none;
-  border-radius: 4px;
+  border-radius: 6px;
   cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-proceed:hover {
+  background-color: #0056b3;
 }
 
 table {
