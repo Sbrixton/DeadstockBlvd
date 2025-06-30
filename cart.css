@@ -347,16 +347,27 @@ body.sticky-footer main {
   
   #bar {
     position: absolute;
-    left: 20px;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
     font-size: 24px;
     color: #222;
     cursor: pointer;
+    z-index: 1000;
   }
   
   .logo {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
+  }
+
+  .nav-left {
+    position: relative;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center; /* center the logo */
   }
   
   .nav-right {
