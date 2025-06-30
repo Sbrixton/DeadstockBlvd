@@ -208,7 +208,7 @@ button:hover {
   display: inline-block;
 }
 
-#cart-count {
+#cartCount {
   position: absolute;
   top: -8px;
   right: -10px;
@@ -324,9 +324,27 @@ body.sticky-footer main {
   
   /* Navbar */
   .navbar {
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 20px;
+    padding: 20px 30px;
+    position: sticky;
+    top: 0;
+    background: #fff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  #bar {
+    display: block;
+    font-size: 24px;
+    cursor: pointer;
+    color: #222;
+  }
+  
+  .logo {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
   }
   
   .nav-left, .nav-wrapper, .nav-right {
@@ -341,7 +359,104 @@ body.sticky-footer main {
   }
   
   .nav-right {
-    justify-content: flex-start;
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    gap: 15px;
+  }
+
+  .nav-wrapper {
+    position: fixed;
+    top: 0;
+    left: -60%;
+    width: 60%;
+    height: 100vh;
+    background: rgba(255, 255, 255, 0.95);
+    transition: left 0.3s ease;
+    z-index: 999;
+    box-shadow: 4px 0 10px rgba(0, 0, 0, 0.05);
+  }
+
+  .nav-wrapper.active {
+    left: 0;
+  }
+
+  #navbar {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    padding: 80px 30px 30px 20px;
+  }
+
+  #navbar a {
+    color: #222;
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  #close {
+    display: block;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 30px;
+    color: #222;
+    cursor: pointer;
+  }
+
+  #searchOverlay {
+    position: fixed;
+    top: 80px;
+    left: 0;
+    width: 100%;
+    height: calc(100vh - 80px);
+    background: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(6px);
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px 20px;
+    overflow-y: auto;
+    z-index: 998;
+  }
+
+  .search-box {
+    width: 100%;
+    max-width: 500px;
+  }
+
+  #searchInput {
+    width: 100%;
+    padding: 14px 16px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 20px;
+  }
+
+  .search-item {
+    display: flex;
+    gap: 15px;
+    background: #f9f9f9;
+    padding: 10px;
+    border-radius: 6px;
+  }
+
+  .search-item img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+  }
+
+  .search-info h4 {
+    font-size: 16px;
+  }
+
+  .search-info p {
+    font-size: 14px;
+    color: #555;
   }
   
   /* Footer */
