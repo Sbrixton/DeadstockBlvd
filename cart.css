@@ -300,6 +300,17 @@ body.sticky-footer main {
   .cart-totals p {
     font-size: 16px;
   }
+
+  #cartCount {
+    position: absolute;
+    top: -6px;
+    right: -10px;
+    font-size: 11px;
+    padding: 2px 5px;
+    border-radius: 50%;
+    background: crimson;
+    color: white;
+  }
   
   button, #proceedBtn {
     width: 100%;
@@ -324,21 +335,22 @@ body.sticky-footer main {
   
   /* Navbar */
   .navbar {
-    padding: 20px 30px;
     position: sticky;
     top: 0;
+    z-index: 999;
     background: #fff;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    padding: 20px 15px;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
   }
   
   #bar {
-    display: block;
+    position: absolute;
+    left: 20px;
     font-size: 24px;
-    cursor: pointer;
     color: #222;
+    cursor: pointer;
   }
   
   .logo {
@@ -347,24 +359,22 @@ body.sticky-footer main {
     transform: translateX(-50%);
   }
   
-  .nav-left, .nav-wrapper, .nav-right {
-    flex-direction: column;
-    gap: 20px;
-    width: 100%;
-  }
-  
-  #navbar {
-    flex-direction: column;
-    gap: 15px;
-  }
-  
   .nav-right {
     position: absolute;
-    right: 20px;
-    top: 50%;
-    transform: translateY(-50%);
+    right: 15px;
     display: flex;
     gap: 15px;
+    align-items: center;
+    z-index: 1;
+  }
+
+  .nav-right i,
+  .nav-right button {
+    font-size: 18px;
+    color: #222;
+    background: none;
+    border: none;
+    cursor: pointer;
   }
 
   .nav-wrapper {
@@ -373,10 +383,10 @@ body.sticky-footer main {
     left: -60%;
     width: 60%;
     height: 100vh;
-    background: rgba(255, 255, 255, 0.95);
-    transition: left 0.3s ease;
-    z-index: 999;
+    background: #fff;
     box-shadow: 4px 0 10px rgba(0, 0, 0, 0.05);
+    transition: left 0.3s ease;
+    z-index: 998;
   }
 
   .nav-wrapper.active {
@@ -386,13 +396,13 @@ body.sticky-footer main {
   #navbar {
     display: flex;
     flex-direction: column;
+    padding: 80px 20px 30px;
     gap: 25px;
-    padding: 80px 30px 30px 20px;
   }
 
   #navbar a {
     color: #222;
-    font-weight: 600;
+    font-weight: bold;
     text-decoration: none;
   }
 
