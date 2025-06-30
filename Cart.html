@@ -12,30 +12,42 @@
 <body>
     <!-- ========== NAVBAR ========== -->
     <header class="navbar">
-        <div class="nav-left">
-            <a href="index.html" class="logo">
-                <img src="/images/deadstock-logo.png" alt="DeadstockBlvd Logo" height="40" />
-            </a>
-            
-            <div class="nav-wrapper" id="navWrapper">
-                <nav id="navbar">
-                    <i id="close" class="fas fa-times"></i>
-                    <a href="index.html">Home</a>
-                    <a href="shop.html" class="btn-proceed">Shop</a>
-                    <a href="contact.html">Contact</a>
-                </nav>
-            </div>
-            <i id="bar" class="fas fa-bars"></i>
+        <!-- Hamburger menu icon for mobile -->
+        <i id="bar" class="fas fa-bars"></i>
+        
+        <!-- Logo centered (mobile), left (desktop) -->
+        <a href="index.html" class="logo">
+            <img src="/images/deadstock-logo.png" alt="DeadstockBlvd Logo" height="40" />
+        </a>
+        
+        <!-- Navigation links -->
+        <div class="nav-wrapper" id="navWrapper">
+            <i id="close" class="fas fa-times"></i>
+            <nav id="navbar">
+                <a href="index.html">Home</a>
+                <a href="shop.html" class="btn-proceed">Shop</a>
+                <a href="contact.html">Contact</a>
+            </nav>
         </div>
         
+        <!-- Right icons: Search and Cart -->
         <div class="nav-right">
             <button id="searchIcon"><i class="fas fa-search"></i></button>
             <a href="Cart.html" class="cart-link active" id="cartIcon">
                 <i class="fas fa-shopping-bag"></i>
-                <span id="cartCount">0</span>
+                <span id="cart-count">0</span>
             </a>
         </div>
     </header>
+    
+    <!-- ========== SEARCH OVERLAY ========== -->
+    <div id="searchOverlay">
+        <div class="search-box">
+            <button id="closeSearch">&times;</button>
+            <input type="text" id="searchInput" placeholder="Search products..." />
+            <div id="searchResults"></div>
+        </div>
+    </div>
     
     <main>
         <!-- Empty Cart View -->
