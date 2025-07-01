@@ -10,90 +10,92 @@
 </head>
 
 <body>
-    <!-- ========== NAVBAR ========== -->
-    <header class="navbar">
-        <div class="nav-left">
-            <!-- Hamburger Menu for Mobile -->
-            <i id="bar" class="fas fa-bars"></i>
+    <div class="page-wrapper">
+        <!-- ========== NAVBAR ========== -->
+        <header class="navbar">
+            <div class="nav-left">
+                <!-- Hamburger Menu for Mobile -->
+                <i id="bar" class="fas fa-bars"></i>
+                
+                <!-- Logo Centered -->
+                <a href="index.html" class="logo">
+                    <img src="/images/deadstock-logo.png" alt="DeadstockBlvd Logo" height="40" />
+                </a>
+                
+                <!-- Slide-in Nav Links -->
+                <div class="nav-wrapper" id="navWrapper">
+                    <nav id="navbar">
+                        <i id="close" class="fas fa-times"></i>
+                        <a href="index.html">Home</a>
+                        <a href="shop.html">Shop</a>
+                        <a href="contact.html">Contact</a>
+                    </nav>
+                </div>
+            </div>
             
-            <!-- Logo Centered -->
-            <a href="index.html" class="logo">
-                <img src="/images/deadstock-logo.png" alt="DeadstockBlvd Logo" height="40" />
-            </a>
-            
-            <!-- Slide-in Nav Links -->
-            <div class="nav-wrapper" id="navWrapper">
-                <nav id="navbar">
-                    <i id="close" class="fas fa-times"></i>
-                    <a href="index.html">Home</a>
-                    <a href="shop.html">Shop</a>
-                    <a href="contact.html">Contact</a>
-                </nav>
+            <!-- Right-side Icons (Search & Cart) -->
+            <div class="nav-right">
+                <button id="searchIcon"><i class="fas fa-search"></i></button>
+                <a href="Cart.html" class="cart-link active" id="cartIcon">
+                    <i class="fas fa-shopping-bag"></i>
+                    <span id="cartCount">0</span>
+                </a>
+            </div>
+        </header>
+        
+        <!-- ========== SEARCH OVERLAY ========== -->
+        <div id="searchOverlay">
+            <div class="search-box">
+                <button id="closeSearch">&times;</button>
+                <input type="text" id="searchInput" placeholder="Search products..." />
+                <div id="searchResults"></div>
             </div>
         </div>
         
-        <!-- Right-side Icons (Search & Cart) -->
-        <div class="nav-right">
-            <button id="searchIcon"><i class="fas fa-search"></i></button>
-            <a href="Cart.html" class="cart-link active" id="cartIcon">
-                <i class="fas fa-shopping-bag"></i>
-                <span id="cartCount">0</span>
-            </a>
-        </div>
-    </header>
-    
-    <!-- ========== SEARCH OVERLAY ========== -->
-    <div id="searchOverlay">
-        <div class="search-box">
-            <button id="closeSearch">&times;</button>
-            <input type="text" id="searchInput" placeholder="Search products..." />
-            <div id="searchResults"></div>
-        </div>
+        <main>
+            <!-- Empty Cart View -->
+            <section id="emptyCart" class="empty-cart">
+                <p>Your cart is empty.</p>
+                <button id="proceedBtn" class="btn-proceed">Proceed to Shop</button>
+            </section>
+            
+            <!-- Populated Cart View -->
+            <section id="cartSection">
+                <table>
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Image</th>
+                            <th>Name</th>
+                            <th>Price</th>
+                            <th>Qty</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody id="cart-table-body"></tbody>
+                </table>
+                <div class="totals">
+                    <p>Subtotal: <span id="CartSubtotal">R0.00</span></p>
+                    <p>Total: <span id="Total">R0.00</span></p>
+                </div>
+                <button id="checkoutBtn">Checkout</button>
+            </section>
+        </main>
+        
+        <!-- Footer -->
+        <footer class="section-p1">
+            <div class="col install">
+                <p>Secured Payment Gateways</p>
+                <img src="images/payments.png" alt="">
+            </div>
+            <div class="copyright">
+                <p>© 2025, DeadstockBlvd</p>
+            </div>
+        </footer>
+        
+        <!-- Scripts -->
+        <script src="navbar.js"></script>
+        <script type="module" src="cart.js"></script>
     </div>
-    
-    <main>
-        <!-- Empty Cart View -->
-        <section id="emptyCart" class="empty-cart">
-            <p>Your cart is empty.</p>
-            <button id="proceedBtn" class="btn-proceed">Proceed to Shop</button>
-        </section>
-        
-        <!-- Populated Cart View -->
-        <section id="cartSection">
-            <table>
-                <thead>
-                    <tr>
-                        <th></th>
-                        <th>Image</th>
-                        <th>Name</th>
-                        <th>Price</th>
-                        <th>Qty</th>
-                        <th>Total</th>
-                    </tr>
-                </thead>
-                <tbody id="cart-table-body"></tbody>
-            </table>
-            <div class="totals">
-                <p>Subtotal: <span id="CartSubtotal">R0.00</span></p>
-                <p>Total: <span id="Total">R0.00</span></p>
-            </div>
-            <button id="checkoutBtn">Checkout</button>
-        </section>
-    </main>
-    
-    <!-- Footer -->
-    <footer class="section-p1">
-        <div class="col install">
-            <p>Secured Payment Gateways</p>
-            <img src="images/payments.png" alt="">
-        </div>
-        <div class="copyright">
-            <p>© 2025, DeadstockBlvd</p>
-        </div>
-    </footer>
-    
-    <!-- Scripts -->
-    <script src="navbar.js"></script>
-    <script type="module" src="cart.js"></script>
 </body>
 </html>
