@@ -319,17 +319,15 @@ input.quantity {
 /* ========== CART COUNT ========== */
 #cartCount {
   position: absolute;
-  top: -5px; /* Less extreme */
-  right: -5px;
+  top: -8px;
+  right: -10px;
   background: crimson;
   color: white;
-  font-size: 11px;
+  font-size: 12px;
   font-weight: bold;
   padding: 2px 6px;
   border-radius: 50%;
   line-height: 1;
-  min-width: 18px;
-  text-align: center;
 }
 
 .cart-link {
