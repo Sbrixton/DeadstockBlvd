@@ -2,16 +2,23 @@
 @import url('https://fonts.googleapis.com/css2?family=Spartan:wght@300;400;600;700&display=swap');
 
 /* ========== BASE STYLES ========== */
-body {
-  font-family: 'Spartan', sans-serif;
+html, body {
+  height: 100%;
   margin: 0;
   padding: 0;
+  font-family: 'Spartan', sans-serif;
   background: #fff;
   color: #000;
 }
 
+.page-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
 main {
-  padding: 40px 80px;
+  flex: 1;
 }
 
 h1 {
@@ -36,39 +43,80 @@ button:hover,
   background: #3aa077;
 }
 
-/* ========== NAVBAR (MOBILE + DESKTOP) ========== */
+/* ========== NAVBAR STYLES (MATCH SHOP PAGE) ========== */
 .navbar {
   position: sticky;
   top: 0;
   z-index: 999;
-  background: #ffffff;
-  padding: 20px 30px;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 25px 30px;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
-.logo {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-}
-
-#bar {
-  position: absolute;
-  left: 20px;
-  font-size: 24px;
-  color: #222;
-  cursor: pointer;
-}
-
-.nav-right {
-  position: absolute;
-  right: 20px;
+.nav-left {
   display: flex;
-  gap: 15px;
   align-items: center;
+  gap: 40px;
+}
+
+.logo {
+  display: block;
+  order: 0;
+  transform: none;
+  position: static;
+}
+
+/* Nav links layout */
+.nav-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  flex: 1;
+  justify-content: flex-start;
+  position: static;
+  width: auto;
+  height: auto;
+  background: none;
+  box-shadow: none;
+}
+
+#navbar {
+  display: flex;
+  gap: 30px;
+  flex-direction: row;
+  padding: 0;
+}
+
+#navbar a {
+  color: #111;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+#navbar a:hover {
+  color: #46bd89;
+}
+
+#navbar a.active,
+.cart-link.active {
+  color: #46bd89;
+}
+
+/* Hide hamburger and mobile close icon on desktop */
+#bar,
+#close {
+  display: none;
+}
+
+/* Right icons (cart, search) */
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  position: static;
   z-index: 1;
 }
 
@@ -79,50 +127,40 @@ button:hover,
   background: none;
   border: none;
   cursor: pointer;
+  transition: color 0.2s ease;
 }
 
-/* Nav Slide-In */
-.nav-wrapper {
-  position: fixed;
-  top: 0;
-  left: -60%;
-  width: 60%;
-  height: 100vh;
-  background: rgba(255, 255, 255, 0.95);
-  z-index: 998;
-  transition: left 0.3s ease;
-  box-shadow: 4px 0 10px rgba(0, 0, 0, 0.05);
+.nav-right i:hover,
+.nav-right button:hover {
+  color: #555;
 }
 
-.nav-wrapper.active {
-  left: 0;
-}
-
-#navbar {
+/* ========== EMPTY CART ========== */
+#emptyCart {
+  padding: 80px 20px;
+  text-align: center;
   display: flex;
   flex-direction: column;
-  padding: 80px 30px 30px 20px;
-  gap: 25px;
+  align-items: center;
+  justify-content: center;
+  min-height: 50vh;
 }
 
-#navbar a {
-  color: #222;
-  text-decoration: none;
-  font-weight: 600;
+#emptyCart h2 {
+  font-size: 28px;
+  margin-bottom: 20px;
 }
 
-#navbar a:hover {
-  color: #46bd89;
-}
-
-#close {
-  display: block;
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  font-size: 30px;
-  color: #222;
+#emptyCart .btn-proceed {
+  margin-top: 30px;
+  font-size: 16px;
+  background: #46bd89;
+  color: #000;
+  padding: 12px 30px;
+  border: none;
+  border-radius: 4px;
   cursor: pointer;
+  transition: background 0.3s ease;
 }
 
 /* ========== CART TABLE ========== */
@@ -156,7 +194,7 @@ input.quantity {
   padding: 6px;
 }
 
-/* ========== TOTALS & BUTTON ========== */
+/* ========== TOTALS & CHECKOUT BUTTON ========== */
 .cart-totals {
   text-align: right;
   padding: 20px 0;
@@ -164,31 +202,10 @@ input.quantity {
   font-weight: bold;
 }
 
-#proceedBtn {
+#proceedBtn,
+#checkoutBtn {
   float: right;
   margin-top: 10px;
-}
-
-/* ========== EMPTY CART ========== */
-#emptyCart {
-  padding: 80px 20px;
-  text-align: center;
-}
-
-#emptyCart h2 {
-  font-size: 28px;
-  margin-bottom: 20px;
-}
-
-#emptyCart .btn-proceed {
-  margin-top: 20px;
-  font-size: 16px;
-  background: #46bd89;
-  color: #000;
-  padding: 12px 30px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
 }
 
 /* ========== CART COUNT ========== */
@@ -205,13 +222,12 @@ input.quantity {
   line-height: 1;
 }
 
-/* ========== FOOTER ========== */
+/* ========== FOOTER (STICKY) ========== */
 footer {
-  display: flex;
-  justify-content: space-around;
   background: #eee;
   padding: 40px 20px;
-  flex-wrap: wrap;
+  text-align: center;
+  margin-top: auto;
 }
 
 footer .col {
@@ -235,7 +251,6 @@ footer .socials i {
   font-size: 18px;
   color: #222;
 }
-
 /* ========== RESPONSIVE ========== */
 @media (max-width: 768px) {
   #cartSection {
