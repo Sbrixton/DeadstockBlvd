@@ -373,13 +373,48 @@ footer .socials i {
     padding: 20px 30px;
     flex-wrap: nowrap;
   }
-
+  
+  #navbar {
+    flex-direction: column;
+    padding: 80px 30px 30px 20px;
+    gap: 25px;
+  }
+  
+  /* Nav links */
+  #navbar a {
+    color: #222;
+    font-weight: 600;
+    text-decoration: none;
+    font-size: 18px;
+  }
+  
+  /* Override nav to behave like slide-in mobile nav ONLY on mobile */
+  .nav-wrapper {
+    position: fixed;
+    top: 0;
+    left: -60%;
+    width: 60%;
+    height: 100vh;
+    background: rgba(255, 255, 255, 0.95);
+    z-index: 998;
+    transition: left 0.3s ease;
+    box-shadow: 4px 0 10px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .nav-wrapper.active {
+    left: 0;
+  }
+  
+  /* Logo centered */
   .logo {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
   }
-
+  
+  /* Hamburger visible only on mobile */
   #bar {
     display: block;
     position: absolute;
@@ -390,7 +425,21 @@ footer .socials i {
     color: #222;
     cursor: pointer;
   }
+  
+  /* Close icon for mobile menu */
+  #close {
+    display: block;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 30px;
+    color: #222;
+    cursor: pointer;
+    z-index: 1001;
+  }
 
+  
+  /* Right icons still aligned right */
   .nav-right {
     position: absolute;
     right: 20px;
