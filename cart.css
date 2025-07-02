@@ -48,12 +48,10 @@ h1 {
 .nav-right {
   display: flex;
   align-items: center;
-  gap: 8px; /* Tighten further if 10px still feels wide */
-  position: absolute;
-  right: 20px;
-  top: 50%;
-  transform: translateY(-50%);
+  gap: 8px;
+  margin-left: auto;    /* Pushes icons to far right of navbar */
   z-index: 1;
+  position: relative;    /* Remove the need for absolute positioning */
 }
 
 .nav-right i,
@@ -437,18 +435,6 @@ footer .socials i {
     color: #222;
     cursor: pointer;
     z-index: 1001;
-  }
-  
-  /* === Right icons - Mobile === */
-  .nav-right {
-    display: flex;
-    align-items: center;
-    gap: 8px; /* Tighten further if 10px still feels wide */
-    position: absolute;
-    right: 20px;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 1;
   }
   
   /* === Cart Table Section === */
