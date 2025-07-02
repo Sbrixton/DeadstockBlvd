@@ -120,14 +120,6 @@ button:hover,
 }
 
 /* Right icons (cart, search) */
-.nav-right {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  position: static;
-  z-index: 1;
-}
-
 .nav-right i,
 .nav-right button {
   font-size: 20px;
