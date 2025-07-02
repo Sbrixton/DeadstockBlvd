@@ -498,50 +498,70 @@ footer .socials i {
 
   /* === Search Overlay === */
   #searchOverlay {
-    position: fixed;
-    top: 80px;
-    left: 0;
-    width: 100%;
-    height: calc(100vh - 80px);
-    background: rgba(255, 255, 255, 0.98);
-    backdrop-filter: blur(6px);
-    display: none;
-    flex-direction: column;
-    align-items: center;
-    padding: 30px 20px;
-    overflow-y: auto;
-    z-index: 998;
+    top: 70px;
+    width: 94%;
+    max-width: 94%;
+    border-radius: 8px;
+    padding: 25px 18px;
   }
-
+  
+  #searchOverlay.active {
+    display: flex;
+    opacity: 1;
+    transform: translateX(-50%) scale(1);
+  }
+  
   .search-box {
     width: 100%;
-    max-width: 500px;
+    max-width: 100%;
   }
-
+  
   #searchInput {
     width: 100%;
     padding: 14px 16px;
     font-size: 16px;
     border: 1px solid #ccc;
-    border-radius: 4px;
+    border-radius: 6px;
     margin-bottom: 20px;
   }
-
+  
   .search-item {
     display: flex;
     gap: 15px;
+    align-items: center;
     background: #f9f9f9;
     padding: 10px;
     border-radius: 6px;
+    transition: 0.2s ease;
   }
-
+  
+  .search-item:hover {
+    background: #f1f1f1;
+  }
+  
   .search-item img {
     width: 60px;
     height: 60px;
     object-fit: cover;
     border-radius: 4px;
   }
-
+  
+  #closeSearch {
+    position: absolute;
+    top: 12px;
+    right: 16px;
+    font-size: 28px;
+    background: none;
+    border: none;
+    color: #333;
+    cursor: pointer;
+    transition: color 0.3s ease;
+  }
+  
+  #closeSearch:hover {
+    color: #000;
+  }
+  
   /* === Footer === */
   footer {
     flex-direction: column;
