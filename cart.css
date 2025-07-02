@@ -368,41 +368,77 @@ footer .socials i {
 }
 /* ========== RESPONSIVE ========== */
 @media (max-width: 768px) {
+  /* === Navbar === */
+  .navbar {
+    padding: 20px 30px;
+    flex-wrap: nowrap;
+  }
+
+  .logo {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  #bar {
+    display: block;
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 24px;
+    color: #222;
+    cursor: pointer;
+  }
+
+  .nav-right {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    gap: 15px;
+  }
+
+  /* === Cart Table Section === */
   #cartSection {
     padding: 20px;
+    overflow-x: auto;
   }
 
   table {
     font-size: 14px;
+    min-width: 600px;
   }
 
   table th,
   table td {
-    padding: 8px 10px;
+    padding: 10px;
   }
 
   table img {
-    width: 50px;
-    height: 50px;
+    width: 60px;
+    height: 60px;
   }
 
   input.quantity {
     width: 50px;
   }
 
+  /* === Totals & Buttons === */
   .cart-totals {
     text-align: left;
-  }
-
-  .cart-totals p {
     font-size: 16px;
+    padding-top: 20px;
   }
 
   #proceedBtn {
     width: 100%;
+    margin-top: 20px;
     float: none;
   }
 
+  /* === Empty Cart === */
   #emptyCart h2 {
     font-size: 22px;
   }
@@ -411,23 +447,7 @@ footer .socials i {
     width: 100%;
   }
 
-  .navbar {
-    padding: 20px 15px;
-  }
-
-  #bar {
-    display: block;
-  }
-
-  .logo {
-    left: 50%;
-    transform: translateX(-50%);
-  }
-
-  .nav-right {
-    right: 15px;
-  }
-
+  /* === Search Overlay === */
   #searchOverlay {
     position: fixed;
     top: 80px;
@@ -435,6 +455,7 @@ footer .socials i {
     width: 100%;
     height: calc(100vh - 80px);
     background: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(6px);
     display: none;
     flex-direction: column;
     align-items: center;
@@ -468,8 +489,11 @@ footer .socials i {
   .search-item img {
     width: 60px;
     height: 60px;
+    object-fit: cover;
+    border-radius: 4px;
   }
 
+  /* === Footer === */
   footer {
     flex-direction: column;
     align-items: center;
