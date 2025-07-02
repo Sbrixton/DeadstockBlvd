@@ -26,23 +26,6 @@ h1 {
   margin-bottom: 20px;
 }
 
-button,
-#proceedBtn {
-  padding: 12px 24px;
-  background: #46bd89;
-  color: #000;
-  border: none;
-  font-weight: bold;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background 0.3s ease;
-}
-
-button:hover,
-#proceedBtn:hover {
-  background: #3aa077;
-}
-
 /* ========== NAVBAR STYLES (MATCH SHOP PAGE) ========== */
 .navbar {
   position: sticky;
@@ -61,7 +44,7 @@ button:hover,
   align-items: center;
   gap: 40px;
 }
-
+/* Right icons (cart, search) */
 .nav-right {
   display: flex;
   align-items: center;
@@ -70,25 +53,19 @@ button:hover,
   z-index: 1;
 }
 
-.logo {
-  display: block;
-  order: 0;
-  transform: none;
-  position: static;
+.nav-right i,
+.nav-right button {
+  font-size: 20px;
+  color: #222;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: color 0.2s ease;
 }
 
-/* Nav links layout */
-.nav-wrapper {
-  display: flex;
-  align-items: center;
-  gap: 30px;
-  flex: 1;
-  justify-content: flex-start;
-  position: static;
-  width: auto;
-  height: auto;
-  background: none;
-  box-shadow: none;
+.nav-right i:hover,
+.nav-right button:hover {
+  color: #555;
 }
 
 #navbar {
@@ -113,26 +90,48 @@ button:hover,
   color: #46bd89;
 }
 
+/* Nav links layout */
+.nav-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  flex: 1;
+  justify-content: flex-start;
+  position: static;
+  width: auto;
+  height: auto;
+  background: none;
+  box-shadow: none;
+}
+
 /* Hide hamburger and mobile close icon on desktop */
 #bar,
 #close {
   display: none;
 }
 
-/* Right icons (cart, search) */
-.nav-right i,
-.nav-right button {
-  font-size: 20px;
-  color: #222;
-  background: none;
-  border: none;
-  cursor: pointer;
-  transition: color 0.2s ease;
+.logo {
+  display: block;
+  order: 0;
+  transform: none;
+  position: static;
 }
 
-.nav-right i:hover,
-.nav-right button:hover {
-  color: #555;
+button,
+#proceedBtn {
+  padding: 12px 24px;
+  background: #46bd89;
+  color: #000;
+  border: none;
+  font-weight: bold;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+button:hover,
+#proceedBtn:hover {
+  background: #3aa077;
 }
 
 /* ===== SEARCH OVERLAY ===== */
@@ -437,62 +436,63 @@ footer .socials i {
     z-index: 1001;
   }
   
-  /* Right icons still aligned right */
+  /* === Right icons - Mobile === */
   .nav-right {
     position: absolute;
     right: 20px;
     top: 50%;
     transform: translateY(-50%);
     display: flex;
+    gap: 10px; /* Match desktop tighter spacing */
   }
-
+  
   /* === Cart Table Section === */
   #cartSection {
     padding: 20px;
     overflow-x: auto;
   }
-
+  
   table {
     font-size: 14px;
     min-width: 600px;
   }
-
+  
   table th,
   table td {
     padding: 10px;
   }
-
+  
   table img {
     width: 60px;
     height: 60px;
   }
-
+  
   input.quantity {
     width: 50px;
   }
-
+  
   /* === Totals & Buttons === */
   .cart-totals {
     text-align: left;
     font-size: 16px;
     padding-top: 20px;
   }
-
+  
   #proceedBtn {
     width: 100%;
     margin-top: 20px;
     float: none;
   }
-
+  
   /* === Empty Cart === */
   #emptyCart h2 {
     font-size: 22px;
   }
-
+  
   #emptyCart .btn-proceed {
     width: 100%;
   }
-
+  
   /* === Search Overlay === */
   #searchOverlay {
     position: fixed;
@@ -559,13 +559,13 @@ footer .socials i {
     object-fit: cover;
     border-radius: 4px;
   }
-
+  
   .search-info h4 {
     font-size: 14px;
     margin: 0;
     color: #111;
   }
-
+  
   .search-info p {
     font-size: 12.5px;
     color: #555;
@@ -595,7 +595,7 @@ footer .socials i {
     padding: 30px 15px;
     text-align: center;
   }
-
+  
   footer .col {
     width: 100%;
     margin: 20px 0;
