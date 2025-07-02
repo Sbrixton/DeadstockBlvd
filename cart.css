@@ -62,6 +62,14 @@ button:hover,
   gap: 40px;
 }
 
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* reduced from 20px */
+  position: static;
+  z-index: 1;
+}
+
 .logo {
   display: block;
   order: 0;
@@ -444,7 +452,6 @@ footer .socials i {
     top: 50%;
     transform: translateY(-50%);
     display: flex;
-    gap: 15px;
   }
 
   /* === Cart Table Section === */
