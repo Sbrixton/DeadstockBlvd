@@ -48,8 +48,11 @@ h1 {
 .nav-right {
   display: flex;
   align-items: center;
-  gap: 10px; /* reduced from 20px */
-  position: static;
+  gap: 8px; /* Tighten further if 10px still feels wide */
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
   z-index: 1;
 }
 
@@ -438,12 +441,14 @@ footer .socials i {
   
   /* === Right icons - Mobile === */
   .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 8px; /* Tighten further if 10px still feels wide */
     position: absolute;
     right: 20px;
     top: 50%;
     transform: translateY(-50%);
-    display: flex;
-    gap: 10px; /* Match desktop tighter spacing */
+    z-index: 1;
   }
   
   /* === Cart Table Section === */
