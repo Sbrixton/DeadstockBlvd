@@ -410,8 +410,19 @@ footer .socials i {
     left: 0;
   }
   
+  .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1;
+  }
+  
   #searchIcon {
-    margin-right: -4px; /* Tightens spacing to the cart icon */
+    margin-right: -4px; /* 👈 This pulls it in closer */
   }
   
   /* Logo centered */
