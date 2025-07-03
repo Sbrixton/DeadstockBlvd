@@ -11,18 +11,14 @@
 
 <body>
     <div class="page-wrapper">
-        <!-- ========== NAVBAR ========== -->
         <header class="navbar">
             <div class="nav-left">
-                <!-- Hamburger Menu for Mobile -->
                 <i id="bar" class="fas fa-bars"></i>
                 
-                <!-- Logo Centered -->
                 <a href="index.html" class="logo">
                     <img src="/images/deadstock-logo.png" alt="DeadstockBlvd Logo" height="40" />
                 </a>
                 
-                <!-- Slide-in Nav Links -->
                 <div class="nav-wrapper" id="navWrapper">
                     <nav id="navbar">
                         <i id="close" class="fas fa-times"></i>
@@ -33,7 +29,6 @@
                 </div>
             </div>
             
-            <!-- Right-side Icons (Search & Cart) -->
             <div class="nav-right">
                 <button id="searchIcon"><i class="fas fa-search"></i></button>
                 <a href="Cart.html" id="cartIcon" class="cart-wrapper">
@@ -43,7 +38,6 @@
             </div>
         </header>
         
-        <!-- ========== SEARCH OVERLAY ========== -->
         <div id="searchOverlay">
             <div class="search-box">
                 <button id="closeSearch">&times;</button>
@@ -53,13 +47,11 @@
         </div>
         
         <main>
-            <!-- Empty Cart View -->
             <section id="emptyCart" class="empty-cart">
                 <p>Your cart is empty.</p>
                 <button id="proceedBtn" class="btn-proceed">Proceed to Shop</button>
             </section>
             
-            <!-- Populated Cart View -->
             <section id="cartSection">
                 <table>
                     <thead>
@@ -82,7 +74,6 @@
             </section>
         </main>
         
-        <!-- Footer -->
         <footer class="section-p1">
             <div class="col install">
                 <p>Secured Payment Gateways</p>
@@ -93,7 +84,6 @@
             </div>
         </footer>
         
-        <!-- Scripts -->
         <script src="navbar.js"></script>
         <script type="module" src="cart.js"></script>
     </div>
