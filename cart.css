@@ -598,16 +598,19 @@ footer .socials i {
     color: #000;
   }
   
-  /* === Footer === */
   footer {
     flex-direction: column;
     align-items: center;
-    padding: 30px 15px;
+    padding: 20px 12px; /* reduced vertical padding */
     text-align: center;
   }
   
   footer .col {
     width: 100%;
-    margin: 20px 0;
+    margin: 10px 0; /* less vertical spacing between cols */
+  }
+  
+  footer .col h4 {
+    margin-bottom: 8px; /* tighten heading spacing */
   }
 }
