@@ -601,16 +601,16 @@ footer .socials i {
   footer {
     flex-direction: column;
     align-items: center;
-    padding: 20px 12px; /* reduced vertical padding */
+    padding: 10px 12px; /* reduced vertical padding */
     text-align: center;
   }
   
   footer .col {
     width: 100%;
-    margin: 10px 0; /* less vertical spacing between cols */
+    margin: 6px 0; /* less vertical spacing between cols */
   }
   
   footer .col h4 {
-    margin-bottom: 8px; /* tighten heading spacing */
+    margin-bottom: 7px; /* tighten heading spacing */
   }
 }
