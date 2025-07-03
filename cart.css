@@ -373,7 +373,7 @@ footer .socials i {
 @media (max-width: 768px) {
   /* === Navbar === */
   .navbar {
-    padding: 20px 30px;
+    padding: 30px 30px;
     flex-wrap: nowrap;
   }
   
