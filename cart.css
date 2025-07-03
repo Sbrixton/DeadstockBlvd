@@ -125,7 +125,6 @@ h1 {
 button,
 #proceedBtn {
   padding: 12px 24px;
-  background: #46bd89;
   color: #000;
   border: none;
   font-weight: bold;
@@ -265,9 +264,9 @@ button:hover,
 
 #emptyCart .btn-proceed {
   margin-top: 30px;
-  font-size: 16px;
-  background: #46bd89;
-  color: #000;
+  font-size: 18px;
+  background: #f1f1f1;
+  color: #222;
   padding: 12px 30px;
   border: none;
   border-radius: 4px;
@@ -373,7 +372,7 @@ footer .socials i {
 @media (max-width: 768px) {
   /* === Navbar === */
   .navbar {
-    padding: 30px 30px;
+    padding: 40px 0px;
     flex-wrap: nowrap;
   }
   
