@@ -69,6 +69,10 @@ h1 {
   color: #555;
 }
 
+#searchIcon {
+  margin-right: -4px; /* Pulls search icon slightly closer to the bag icon */
+}
+
 #navbar {
   display: flex;
   gap: 30px;
@@ -404,6 +408,10 @@ footer .socials i {
   
   .nav-wrapper.active {
     left: 0;
+  }
+  
+  #searchIcon {
+    margin-right: -4px; /* Tightens spacing to the cart icon */
   }
   
   /* Logo centered */
