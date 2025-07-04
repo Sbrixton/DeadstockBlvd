@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Product Page</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script src="https://kit.fontawesome.com/YOUR_KIT_CODE.js" crossorigin="anonymous"></script> <!-- Replace with your FontAwesome Kit -->
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="navbar">
+    <div class="nav-left">
+      <!-- LOGO -->
+      <a href="index.html" class="logo">
+        <img src="/images/deadstock-logo.png" alt="DeadstockBlvd Logo" height="40" />
+      </a>
+      
+      <!-- NAV LINKS (VISIBLE ON DESKTOP) -->
+      <div class="nav-wrapper" id="navWrapper">
+        <nav id="navbar">
+          <i id="close" class="fas fa-times"></i>
+          <a href="index.html">Home</a>
+          <a href="shop.html" class="active">Shop</a>
+          <a href="contact.html">Contact</a>
+        </nav>
+      </div>
+      
+      <!-- Hamburger icon (mobile only) -->
+      <i id="bar" class="fas fa-bars"></i>
+    </div>
+    
+    <!-- RIGHT SIDE ICONS -->
+    <div class="nav-right">
+      <a href="Cart.html" id="cartIcon" class="cart-wrapper">
+        <i class="fas fa-shopping-bag"></i>
+        <span id="cart-count">0</span>
+      </a>
+    </div>
+  </header>
+
+  <!-- ========== SEARCH OVERLAY ========== -->
+  <div id="searchOverlay">
+    <div class="search-inner">
+      <button id="closeSearch" aria-label="Close Search">&times;</button>
+      <div class="search-box">
+        <input type="text" id="searchInput" placeholder="Search products..." />
+        <div id="searchResults"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PRODUCT SECTION -->
+  <main class="product-page">
+    <div class="product-gallery">
+      <div class="main-image">
+        <img id="mainProductImage" src="images/product1.jpg" alt="Main Product" />
+      </div>
+      <div class="thumbnails">
+        <img class="thumbnail" src="images/product1.jpg" alt="Product 1" />
+        <img class="thumbnail" src="images/product2.jpg" alt="Product 2" />
+        <img class="thumbnail" src="images/product3.jpg" alt="Product 3" />
+      </div>
+    </div>
+
+    <div class="product-details">
+      <h1>Product Name</h1>
+      <p class="description">Short product description goes here. Include features or selling points.</p>
+      <p class="price">$49.99</p>
+      <button id="addToCartBtn" class="add-to-cart">Add to Cart 🛒</button>
+    </div>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
