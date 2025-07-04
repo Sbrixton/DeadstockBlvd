@@ -6,24 +6,23 @@
   <title>Checkout | DEADSTOCK BLVD</title>
 
   <!-- CSS Stylesheets -->
-  <link rel="stylesheet" href="cart.css" />        <!-- Navbar, search, global styles -->
-  <link rel="stylesheet" href="checkout.css" />    <!-- Checkout-specific styles -->
+  <link rel="stylesheet" href="cart.css" />
+  <link rel="stylesheet" href="checkout.css" />
 
-  <!-- PayPal SDK (Insert your actual client ID) -->
+  <!-- PayPal SDK -->
   <script src="https://www.paypal.com/sdk/js?client-id=YOUR_CLIENT_ID&currency=USD"></script>
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
   <div class="page-wrapper">
-    <!-- ✅ YOUR NAVBAR -->
+    <!-- ✅ NAVBAR -->
     <header class="navbar">
       <div class="nav-left">
         <i id="bar" class="fas fa-bars"></i>
-
         <a href="index.html" class="logo">
           <img src="/images/deadstock-logo.png" alt="DeadstockBlvd Logo" height="40" />
         </a>
-
         <div class="nav-wrapper" id="navWrapper">
           <nav id="navbar">
             <i id="close" class="fas fa-times"></i>
@@ -66,23 +65,35 @@
             </tr>
           </thead>
           <tbody id="cart-body">
+            <!-- Filled by JS -->
           </tbody>
         </table>
       </section>
 
       <section class="terms-pay">
         <h3>Total: <span id="cart-total">$0.00</span></h3>
-
         <label>
-          <input type="checkbox" id="agree-check" />
-          I agree to the <a href="terms.html" target="_blank">Terms & Conditions</a>.
+          <input type="checkbox" id="agree-check" disabled />
+          I agree to the <a href="#" id="view-terms-link">Terms & Conditions</a>.
         </label>
-
-        <div id="paypal-button-container"></div>
+        <div id="paypal-button-container" class="disabled"></div>
       </section>
     </main>
   </div>
-  <script src="script.js"></script>
-  <script src="checkout.js"></script>
+
+  <!-- 🔒 Terms Modal -->
+  <div id="termsModal" class="modal-overlay">
+    <div class="modal-content">
+      <h2>Terms & Conditions</h2>
+      <p>
+        You must be 18 years or older to place an order. All sales are final. No refunds unless the item is defective or incorrect. Shipping may take 2–5 business days. DEADSTOCK BLVD is not responsible for lost or stolen packages once marked as delivered.
+      </p>
+      <button id="agreeBtn">Close & Agree</button>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="script.js"></script>       <!-- Handles nav, search -->
+  <script src="checkout.js"></script>     <!-- Handles cart + modal logic -->
 </body>
 </html>
