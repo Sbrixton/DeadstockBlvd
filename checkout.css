@@ -1,36 +1,77 @@
+
 body {
   font-family: 'Helvetica Neue', sans-serif;
-  background-color: #f8f8f8;
+  background-color: #f4f4f4;
   color: #111;
-  padding: 40px;
+  margin: 0;
+  padding: 2rem;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 2rem;
 }
 
 .checkout-container {
   max-width: 800px;
   margin: auto;
   background: white;
-  padding: 2em;
+  padding: 2rem;
   border-radius: 8px;
-  box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+}
+
+.order-summary h2,
+.terms-pay h3 {
+  margin-bottom: 1rem;
 }
 
 table {
   width: 100%;
   border-collapse: collapse;
-  margin-bottom: 1em;
+  margin-bottom: 1.5rem;
 }
 
 th, td {
-  text-align: left;
-  padding: 0.75em;
+  padding: 0.75rem;
   border-bottom: 1px solid #ddd;
+  text-align: left;
+  font-size: 0.95rem;
 }
 
-h2, h3 {
-  margin-top: 0;
+th {
+  background-color: #f1f1f1;
+  font-weight: 600;
+}
+
+h3 span#cart-total {
+  font-weight: bold;
+}
+
+label {
+  display: flex;
+  align-items: center;
+  font-size: 0.9rem;
+}
+
+label input[type="checkbox"] {
+  margin-right: 0.5rem;
 }
 
 a {
-  color: #000;
+  color: #111;
   text-decoration: underline;
 }
+
+#paypal-button-container {
+  margin-top: 1rem;
+  opacity: 0.5;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+#paypal-button-container.enabled {
+  opacity: 1;
+  pointer-events: auto;
+}
+
