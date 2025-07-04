@@ -1,191 +1,133 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" content="IE=edge" />
+  <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Checkout</title>
+  <title>Checkout | DEADSTOCK BLVD</title>
   <link rel="stylesheet" href="style.css" />
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"/>
-  <script src="https://www.paypal.com/sdk/js?client-id=sb&currency=USD"></script>
+  <script src="https://www.paypal.com/sdk/js?client-id=YOUR_CLIENT_ID&currency=USD"></script>
 </head>
 
 <body>
-
-    <section id="header">
-        <a href="#"><img src="/images/Screenshot 2025-03-25 190219.png" class="logo">
-
-        <div>
-            <ul id="navbar">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="shop.html">shop</a></li>
-                <li><a href="Search.html"><i class="fas fa-search"></i></a></li>
-                <li><a  href="about.html">about</a></li>
-                <li><a href="contact.html">contact</a></li>
-                <li><a class="active" href="Cart.html"><i class="fas fa-shopping-bag"></i></a><li>
-                <a href="#" id="close"><i class="fas fa-times"></i></a>
-            </ul>
-        </div>
-        <div id="mobile">
-            <a href="Cart.html"><i class="fas fa-shopping-bag"></i>
-            </i></a><i id="bar" class="fas fa-outdent"></i>
-        </div>
-    </section>
-    
-    <section id="checkout" class="section-p1">
-        <h2>Your Order Summary</h2>
-        <table width="100%">
-            <thead>
-                <tr>
-                    <th>Product</th>
-                    <th>Image</th>
-                    <th>Price</th>
-                    <th>Quantity</th>
-                    <th>Subtotal</th>
-                </tr>
-            </thead>
-            <tbody id="cart-table-body">
-                <!-- Items will be loaded here via JavaScript -->
-            </tbody>
-        </table>
-    </section>
-
-    <!-- Total and PayPal Button -->
-    <section id="checkout-summary" class="section-p1">
-        <!-- Terms & Conditions Link -->
-        <p>
-            By proceeding, you agree to our 
-            <a href="#" id="termsLink">Terms & Conditions</a>.
-        </p>
   
-        <!-- Agree Checkbox -->
-        <label>
-            <input type="checkbox" id="agreeCheckbox"> I agree to the Terms & Conditions
-        </label>
+  <header class="navbar">
+    <div class="nav-left">
+      <i id="bar" class="fas fa-bars"></i>
+                
+      <a href="index.html" class="logo">
+        <img src="/images/deadstock-logo.png" alt="DeadstockBlvd Logo" height="40" />
+      </a>          
+      <div class="nav-wrapper" id="navWrapper">
+        <nav id="navbar">
+          <i id="close" class="fas fa-times"></i>
+          <a href="index.html">Home</a>
+          <a href="shop.html">Shop</a>
+          <a href="contact.html">Contact</a>
+        </nav>
+      </div>
+    </div>
+            
+    <div class="nav-right">
+      <button id="searchIcon"><i class="fas fa-search"></i></button>
+      <a href="Cart.html" id="cartIcon" class="cart-wrapper">
+          <i class="fas fa-shopping-bag"></i>
+          <span id="cart-count">0</span>
+      </a>
+    </div>
+  </header>
+        
+  <div id="searchOverlay">
+    <div class="search-box">
+      <button id="closeSearch">&times;</button>
+      <input type="text" id="searchInput" placeholder="Search products..." />
+      <div id="searchResults"></div>
+    </div>
+  </div>
   
-        <!-- Your PayPal button container -->
-        <div id="paypal-button-container"></div>
-  
-        <!-- Terms Modal -->
-        <div id="termsModal" class="modal">
-            <div class="modal-content">
-                <span class="close">&times;</span>
-                <h2>Terms & Conditions</h2>
-                <p>
-                    <!-- You can paste the full terms from the earlier sample here -->
-                    You must be 21 years or older to rent a vehicle. Rental cancellations within 48 hours are refundable...
-                </p>
-            </div>
-        </div>
-  
-        <h3>Total: <span id="checkout-total">R0.00</span></h3>
-        <div id="paypal-button-container"></div>
+  <main class="checkout-container">
+    <section class="order-summary">
+      <h2>Your Cart</h2>
+      <table id="cart-table" width="100%">
+        <thead>
+          <tr>
+            <th>Product</th>
+            <th>Price</th>
+            <th>Qty</th>
+            <th>Subtotal</th>
+          </tr>
+        </thead>
+        <tbody id="cart-body">
+          <!-- JavaScript fills this -->
+        </tbody>
+      </table>
+      <h3>Total: <span id="cart-total">$0.00</span></h3>
     </section>
 
-    <script>
-        // Step 1: Retrieve cart data from localStorage
-        const cart = JSON.parse(sessionStorage.getItem('checkoutCart')) || [];
-        console.log("🛒 Checkout Cart:", cart);
+    <section class="terms-pay">
+      <label style="display:block; margin-top:20px;">
+        <input type="checkbox" id="agree-check" />
+        I agree to the <a href="/terms.html" target="_blank">Terms & Conditions</a>
+      </label>
 
-        const cartTableBody = document.getElementById('cart-table-body');
-        const totalDisplay = document.getElementById('checkout-total');
+      <div id="paypal-button-container" style="margin-top: 20px;"></div>
+    </section>
+  </main>
 
-        let totalAmount = 0;
+  <script>
+    // Get cart from local/session storage
+    const cart = JSON.parse(sessionStorage.getItem('checkoutCart')) || [];
+    const cartBody = document.getElementById('cart-body');
+    const totalDisplay = document.getElementById('cart-total');
+    let total = 0;
 
-        // Step 2: Populate table and calculate total
-        cart.forEach(product => {
-            const price = typeof product.price === "string" 
-                ? parseFloat(product.price.replace("R", "").replace(",", ""))
-                : product.price;
+    cart.forEach(item => {
+      const price = parseFloat(item.price);
+      const subtotal = price * item.quantity;
+      total += subtotal;
 
-            const subtotal = price * product.quantity;
-            totalAmount += subtotal;
+      const row = document.createElement('tr');
+      row.innerHTML = `
+        <td>${item.name}</td>
+        <td>$${price.toFixed(2)}</td>
+        <td>${item.quantity}</td>
+        <td>$${subtotal.toFixed(2)}</td>
+      `;
+      cartBody.appendChild(row);
+    });
 
-            const row = document.createElement('tr');
-            row.innerHTML = `
-                <td>${product.name}</td>
-                <td><img src="${product.image}" width="80" alt="${product.name}"></td>
-                <td>R${price.toFixed(2)}</td>
-                <td>${product.quantity}</td>
-                <td>R${subtotal.toFixed(2)}</td>
-            `;
+    totalDisplay.textContent = `$${total.toFixed(2)}`;
 
+    // Disable PayPal until terms agreed
+    paypal.Buttons({
+      onInit: function (data, actions) {
+        actions.disable(); // disable by default
 
-            cartTableBody.appendChild(row);
+        document.getElementById('agree-check').addEventListener('change', function () {
+          if (this.checked) {
+            actions.enable();
+          } else {
+            actions.disable();
+          }
         });
-
-        totalDisplay.textContent = `R${totalAmount.toFixed(2)}`;
-
-        // Step 3: Initialize PayPal Button
-        paypal.Buttons({
-            createOrder: function(data, actions) {
-                return actions.order.create({
-                    purchase_units: [{
-                        amount: {
-                            value: totalAmount.toFixed(2)
-                        }
-                    }]
-
-                });
-            },
-            onApprove: function(data, actions) {
-                return actions.order.capture().then(function(details) {
-                    alert('✅ Payment successful! Thank you, ' + details.payer.name.given_name + '.');
-                    localStorage.removeItem('cart');
-                    window.location.href = 'thankyou.html'; // You can create this page later
-                });
+      },
+      createOrder: function (data, actions) {
+        return actions.order.create({
+          purchase_units: [{
+            amount: {
+              value: total.toFixed(2)
             }
-        }).render('#paypal-button-container');
-    </script>
-
-<script src="https://www.paypal.com/sdk/js?client-id=YOUR_CLIENT_ID&currency=ZAR"></script>
-
-
-<script>
-    const modal = document.getElementById("termsModal");
-    const termsLink = document.getElementById("termsLink");
-    const closeBtn = document.querySelector(".close");
-    const checkbox = document.getElementById("agreeCheckbox");
-  
-    // Show modal when link is clicked
-    termsLink.addEventListener("click", function (e) {
-      e.preventDefault();
-      modal.style.display = "block";
-    });
-  
-    // Close modal
-    closeBtn.onclick = function () {
-      modal.style.display = "none";
-    };
-  
-    // Close modal when clicking outside content
-    window.onclick = function (e) {
-      if (e.target == modal) {
-        modal.style.display = "none";
-      }
-    };
-  
-    // Disable PayPal until checkbox is checked
-    const paypalContainer = document.getElementById("paypal-button-container");
-  
-    const observer = new MutationObserver(() => {
-      const paypalButton = paypalContainer.querySelector('iframe');
-  
-      if (paypalButton) {
-        paypalButton.style.pointerEvents = checkbox.checked ? 'auto' : 'none';
-        paypalButton.style.opacity = checkbox.checked ? '1' : '0.5';
-  
-        checkbox.addEventListener('change', () => {
-          paypalButton.style.pointerEvents = checkbox.checked ? 'auto' : 'none';
-          paypalButton.style.opacity = checkbox.checked ? '1' : '0.5';
+          }]
+        });
+      },
+      onApprove: function (data, actions) {
+        return actions.order.capture().then(function (details) {
+          alert(`✅ Thanks, ${details.payer.name.given_name}. Your order is confirmed.`);
+          sessionStorage.removeItem('checkoutCart');
+          window.location.href = "thankyou.html";
         });
       }
-    });
-  
-    observer.observe(paypalContainer, { childList: true, subtree: true });
-</script>
-  
-  
+    }).render('#paypal-button-container');
+  </script>
 
-<script src="script.js"></script>
 </body>
 </html>
