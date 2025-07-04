@@ -4,19 +4,14 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Checkout | DEADSTOCK BLVD</title>
-
-  <!-- CSS Stylesheets -->
   <link rel="stylesheet" href="cart.css" />
   <link rel="stylesheet" href="checkout.css" />
-
-  <!-- PayPal SDK -->
   <script src="https://www.paypal.com/sdk/js?client-id=YOUR_CLIENT_ID&currency=USD"></script>
   <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
   <div class="page-wrapper">
-    <!-- ✅ NAVBAR -->
     <header class="navbar">
       <div class="nav-left">
         <i id="bar" class="fas fa-bars"></i>
@@ -42,7 +37,6 @@
       </div>
     </header>
 
-    <!-- 🔍 Search Overlay -->
     <div id="searchOverlay">
       <div class="search-box">
         <button id="closeSearch">&times;</button>
@@ -51,7 +45,6 @@
       </div>
     </div>
 
-    <!-- 🧾 Checkout Section -->
     <main class="checkout-container">
       <section class="order-summary">
         <h2>Order Summary</h2>
@@ -65,7 +58,7 @@
             </tr>
           </thead>
           <tbody id="cart-body">
-            <!-- Filled by JS -->
+            
           </tbody>
         </table>
       </section>
@@ -81,7 +74,6 @@
     </main>
   </div>
 
-  <!-- 🔒 Terms Modal -->
   <div id="termsModal" class="modal-overlay">
     <div class="modal-content">
       <h2>Terms & Conditions</h2>
@@ -91,9 +83,8 @@
       <button id="agreeBtn">Close & Agree</button>
     </div>
   </div>
-
-  <!-- Scripts -->
-  <script src="script.js"></script>       <!-- Handles nav, search -->
-  <script src="checkout.js"></script>     <!-- Handles cart + modal logic -->
+  <script src="data.js"></script>
+  <script src="script.js"></script>
+  <script src="checkout.js"></script>
 </body>
 </html>
