@@ -66,3 +66,28 @@ paypal.Buttons({
     });
   }
 }).render('#paypal-button-container');
+
+// ===== Terms Modal Logic =====
+const termsModal = document.getElementById('termsModal');
+const agreeBtn = document.getElementById('agreeBtn');
+const agreeCheckbox = document.getElementById('agree-check');
+const pageWrapper = document.querySelector('.page-wrapper');
+
+// Lock the page until terms are accepted
+document.addEventListener('DOMContentLoaded', () => {
+  termsModal.style.display = 'flex';
+  pageWrapper.style.pointerEvents = 'none';
+  pageWrapper.style.filter = 'blur(4px)';
+});
+
+// Close modal and allow interaction
+agreeBtn.addEventListener('click', () => {
+  termsModal.style.display = 'none';
+  pageWrapper.style.pointerEvents = 'auto';
+  pageWrapper.style.filter = 'none';
+  agreeCheckbox.checked = true;
+
+  // Enable PayPal button once agreed
+  document.getElementById('paypal-button-container').classList.add('enabled');
+});
+
