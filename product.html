@@ -4,14 +4,18 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Product Page</title>
-  <link rel="stylesheet" href="styles.css" /> <!-- global styles (navbar, footer, etc.) -->
-  <link rel="stylesheet" href="product.css" /> <!-- product page-specific styles -->
-  <script src="data.js"></script>
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="product.css" />
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" />
+  
+  <!-- Data -->
+  <script src="data.js"></script>
 </head>
 <body>
 
-  <!-- ========== HEADER ========== -->
+  <!-- ========== HEADER / NAVBAR ========== -->
   <header class="navbar">
     <div class="nav-left">
       <a href="index.html" class="logo">
@@ -26,7 +30,6 @@
           <a href="contact.html">Contact</a>
         </nav>
       </div>
-
       <i id="bar" class="fas fa-bars"></i>
     </div>
 
@@ -52,27 +55,71 @@
     </div>
   </div>
 
-  <!-- ========== PRODUCT SECTION ========== -->
+  <!-- ========== PRODUCT MAIN ========== -->
   <main class="product-page">
-    <div class="product-gallery">
-      <div class="main-image">
-        <img id="mainProductImage" src="images/product1.jpg" alt="Main Product" />
-      </div>
-      <div class="thumbnails">
-        <img class="thumbnail" src="images/product1.jpg" alt="Product 1" />
-        <img class="thumbnail" src="images/product2.jpg" alt="Product 2" />
-        <img class="thumbnail" src="images/product3.jpg" alt="Product 3" />
-      </div>
-    </div>
+    <div class="product-container">
+      
+      <!-- LEFT: IMAGE GALLERY -->
+      <div class="product-gallery">
+        <div class="slider">
+          <i class="fas fa-chevron-left nav-arrow" id="prevSlide"></i>
+          
+          <img id="mainImage" src="images/product1.jpg" alt="Product Image" class="main-img" />
+          
+          <i class="fas fa-chevron-right nav-arrow" id="nextSlide"></i>
+        </div>
 
-    <div class="product-details">
-      <h1>Product Name</h1>
-      <p class="description">Short product description goes here. Include features or selling points.</p>
-      <p class="price">$49.99</p>
-      <button id="addToCartBtn" class="add-to-cart">Add to Cart 🛒</button>
+        <div class="thumbnails">
+          <img src="images/product1.jpg" class="thumb" />
+          <img src="images/product2.jpg" class="thumb" />
+          <img src="images/product3.jpg" class="thumb" />
+        </div>
+      </div>
+
+      <!-- RIGHT: DESCRIPTION -->
+      <div class="product-info">
+        <h1>Product Name</h1>
+        <p class="description">This is a short product description that highlights key features and style.</p>
+        <p class="price">R600.00</p>
+        <button id="addToCartBtn" class="add-to-cart">Add to Cart 🛒</button>
+
+        <h3 class="recommendation-title">YOU MAY ALSO LIKE</h3>
+        <div class="recommendations">
+          <div class="recommend-box">
+            <img src="images/item2.jpg" alt="Suggestion 1" />
+            <p>Denim Jacket</p>
+            <span>R750.00</span>
+          </div>
+          <div class="recommend-box">
+            <img src="images/item3.jpg" alt="Suggestion 2" />
+            <p>Cargo Pants</p>
+            <span>R500.00</span>
+          </div>
+        </div>
+      </div>
     </div>
   </main>
 
+  <footer>
+    <div class="col">
+      <h4>DeadstockBlvd</h4>
+      <a href="#">About</a>
+      <a href="#">Careers</a>
+      <a href="#">Stores</a>
+    </div>
+    <div class="col">
+      <h4>Support</h4>
+      <a href="#">Help</a>
+      <a href="#">Returns</a>
+      <a href="#">Order Status</a>
+    </div>
+    <div class="col socials">
+      <h4>Connect</h4>
+      <i class="fab fa-instagram"></i>
+      <i class="fab fa-twitter"></i>
+      <i class="fab fa-facebook-f"></i>
+    </div>
+  </footer>
   <script src="navbar.js"></script>
   <script src="search.js"></script>
   <script src="product.js"></script>
