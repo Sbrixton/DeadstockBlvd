@@ -8,7 +8,7 @@ export function saveCart(cart) {
 
 export function updateCartCountInDOM() {
   const cart = getCart();
-  const cartCount = document.getElementById("cartCount");
+  const cartCount = document.getElementById("cart-count");
   const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
   cartCount.textContent = `Cart (${totalItems})`;
 }
