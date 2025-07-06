@@ -1,37 +1,23 @@
 import {
   getCart,
   saveCart,
-  updateCartCountInDOM,
-  showToast
+  updateCartCountInDOM
 } from "./cart-utils.js";
 
 document.addEventListener("DOMContentLoaded", () => {
-  // MAIN IMAGE LOGIC
-  const thumbnails = document.querySelectorAll(".thumbnail");
-  const mainImage = document.getElementById("mainProductImage");
-
-  thumbnails.forEach((thumb) => {
-    thumb.addEventListener("click", () => {
-      mainImage.src = thumb.src;
-    });
-  });
-
-  // ADD TO CART LOGIC
   const addToCartBtn = document.getElementById("addToCartBtn");
 
-  addToCartBtn.addEventListener("click", () => {
+  addToCartBtn?.addEventListener("click", () => {
     const cart = getCart();
 
-    // This is your example product — make sure to pull from real product data if needed
     const product = {
-      id: 1,
-      name: "GitHub T-Shirt",
-      price: 25.99,
+      id: parseInt(addToCartBtn.dataset.id),
+      name: addToCartBtn.dataset.name,
+      price: parseFloat(addToCartBtn.dataset.price),
       quantity: 1,
-      image: "assets/github-shirt.png", // adjust path
+      image: addToCartBtn.dataset.image,
     };
 
-    // Check if item already in cart
     const index = cart.findIndex((item) => item.id === product.id);
     if (index !== -1) {
       cart[index].quantity += 1;
@@ -40,10 +26,9 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     saveCart(cart);
-    updateCartCountInDOM();
-    showToast("✅ GitHub says it added to cart.");
+    updateCartCountInDOM(); // ✅ THIS updates the header/cartCount
   });
 
-  // Optional: Update cart count immediately on load
+  // Run once on load in case the cart already has items
   updateCartCountInDOM();
 });
