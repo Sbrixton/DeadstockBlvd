@@ -583,7 +583,7 @@ footer img {
   
   .recommend-box {
     flex: 0 0 auto;
-    min-width: 180px;
+    min-width: 130px;
     max-width: 220px;
   }
   
