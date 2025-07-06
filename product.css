@@ -165,27 +165,7 @@ main.product-page {
   margin-bottom: 8px;
 }
 
-/* ========== RESPONSIVE DESIGN ========== */
-@media (max-width: 768px) {
-  .product-container {
-    flex-direction: column;
-  }
-
-  .thumbnails {
-    justify-content: flex-start;
-    overflow-x: auto;
-  }
-
-  .product-info {
-    padding-right: 0;
-  }
-
-  .recommendations {
-    flex-direction: column;
-  }
-}
-
-/* ========== NAVBAR / SEARCH / FOOTER (from shop) ========== */
+/* ========== NAVBAR / SEARCH / FOOTER ========== */
 .navbar {
   position: sticky;
   top: 0;
@@ -228,7 +208,7 @@ main.product-page {
   color: #555;
 }
 
-/* ========== Cart Count Fix ========== */
+/* Cart Count */
 #cart-count {
   position: absolute;
   top: -7px;
@@ -279,7 +259,7 @@ main.product-page {
   display: block;
 }
 
-/* ========== SEARCH OVERLAY FIX ========== */
+/* Search Overlay */
 #searchOverlay {
   position: fixed;
   top: 80px;
@@ -317,8 +297,8 @@ main.product-page {
 
 #closeSearch {
   position: absolute;
-  top: -10px;
-  right: -10px;
+  top: 36px;
+  right: 100px;
   font-size: 28px;
   color: #333;
   background: none;
@@ -408,4 +388,46 @@ footer img {
   margin-top: 20px;
   font-size: 14px;
   color: #444;
+}
+
+/* ========== RESPONSIVE DESIGN ========== */
+@media (max-width: 768px) {
+  .product-container {
+    flex-direction: column;
+  }
+  
+  .thumbnails {
+    justify-content: flex-start;
+    overflow-x: auto;
+  }
+  
+  .product-info {
+    padding-right: 0;
+  }
+  
+  .recommendations {
+    flex-direction: column;
+  }
+  
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+  
+  .nav-left,
+  .nav-right {
+    flex-direction: row;
+    gap: 20px;
+    width: 100%;
+  }
+  
+  .search-box {
+    max-width: 100%;
+  }
+  
+  #closeSearch {
+    top: 20px;
+    right: 20px;
+  }
 }
