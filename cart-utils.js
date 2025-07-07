@@ -10,9 +10,14 @@ export function updateCartCountInDOM() {
   const cart = getCart();
   const cartCount = document.getElementById("cart-count");
   const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
-  cartCount.textContent = `Cart (${totalItems})`;
+
+  if (cartCount) {
+    cartCount.textContent = totalItems; // ✅ just show the number
+  } else {
+    console.warn("[cart-utils] #cart-count element not found");
+  }
 }
 
 export function showToast(message) {
-  alert(message); // Simple fallback, replace with toast UI if needed
+  alert(message); // Optional
 }
