@@ -4,18 +4,13 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Product Page</title>
-
-  <!-- Styles -->
   <link rel="stylesheet" href="styles.css" />
   <link rel="stylesheet" href="product.css" />
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" />
-  
-  <!-- Data -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" />  
   <script src="data.js"></script>
 </head>
 <body>
 
-  <!-- ========== HEADER / NAVBAR ========== -->
   <header class="navbar">
     <div class="nav-left">
       <a href="index.html" class="logo">
@@ -44,7 +39,6 @@
     </div>
   </header>
 
-  <!-- ========== SEARCH OVERLAY ========== -->
   <div id="searchOverlay">
     <div class="search-inner">
       <button id="closeSearch" aria-label="Close Search">&times;</button>
@@ -55,20 +49,15 @@
     </div>
   </div>
 
-  <!-- ========== PRODUCT MAIN ========== -->
   <main class="product-page">
     <div class="product-container">
       
-      <!-- LEFT: IMAGE GALLERY -->
       <div class="product-gallery">
         <div class="slider">
           <i class="fas fa-chevron-left nav-arrow" id="prevSlide"></i>
-          
           <img id="mainImage" src="images/product1.jpg" alt="Product Image" class="main-img" />
-          
           <i class="fas fa-chevron-right nav-arrow" id="nextSlide"></i>
         </div>
-
         <div class="thumbnails">
           <img src="images/product1.jpg" class="thumb" />
           <img src="images/product2.jpg" class="thumb" />
@@ -76,7 +65,6 @@
         </div>
       </div>
 
-      <!-- RIGHT: DESCRIPTION -->
       <div class="product-info">
         <h1>
           Graphic Hoodie
@@ -93,9 +81,9 @@
           id="addToCartBtn"
           class="add-to-cart"
           data-id="1"
-          data-name="GitHub T-Shirt"
-          data-price="25.99"
-          data-image="assets/github-shirt.png">
+          data-name="Graphic Hoodie"
+          data-price="600.00"
+          data-image="Graphic Hoodie.png">
           Add to Cart 🛒
         </button>
 
