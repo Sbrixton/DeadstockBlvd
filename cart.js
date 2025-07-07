@@ -9,19 +9,18 @@ document.addEventListener("DOMContentLoaded", () => {
   const cart = getCart();
   const empty = document.getElementById("emptyCart");
   const section = document.getElementById("cartSection");
-  const tbody = document.getElementById("cart-table-body");
+  const cartWrapper = document.getElementById("cart-items-wrapper");
   const subEl = document.getElementById("CartSubtotal");
   const totalEl = document.getElementById("Total");
   const checkoutBtn = document.getElementById("checkoutBtn");
   const proceedBtn = document.getElementById("proceedBtn");
 
-  // Make proceed button redirect to shop
   proceedBtn?.addEventListener("click", () => {
     window.location.href = "shop.html";
   });
 
   function render() {
-    tbody.innerHTML = "";
+    cartWrapper.innerHTML = "";
     let subtotal = 0;
 
     if (cart.length === 0) {
@@ -29,7 +28,6 @@ document.addEventListener("DOMContentLoaded", () => {
       section.style.display = "none";
       checkoutBtn.style.display = "none";
       proceedBtn.style.display = "inline-block";
-      console.log("Showing proceedBtn");
       subEl.textContent = "R0.00";
       totalEl.textContent = "R0.00";
       updateCartCountInDOM();
@@ -42,51 +40,66 @@ document.addEventListener("DOMContentLoaded", () => {
     proceedBtn.style.display = "none";
 
     cart.forEach((item) => {
-      if (!item || typeof item.price !== "number") return; // ← skip broken item
-    
+      if (!item || typeof item.price !== "number") return;
+
       subtotal += item.price * item.quantity;
-      
-      const tr = document.createElement("tr");
-      tr.innerHTML = `
-        <td><button class="remove-btn" data-name="${item.name}">&times;</button></td>
-        <td><img src="${item.image}" width="70" alt="${item.name}"></td>
-        <td>${item.name}</td>
-        <td>R${item.price.toFixed(2)}</td>
-        <td><input type="number" class="quantity" min="1" data-name="${item.name}" value="${item.quantity}"></td>
-        <td>R${(item.price * item.quantity).toFixed(2)}</td>
+
+      const itemDiv = document.createElement("div");
+      itemDiv.className = "cart-item";
+      itemDiv.innerHTML = `
+        <img src="${item.image}" alt="${item.name}" class="cart-img">
+        <div class="cart-details">
+          <p class="cart-name">${item.name}</p>
+          <p class="cart-price">Price: R${item.price.toFixed(2)}</p>
+          
+          <div class="quantity-controls">
+            <button class="qty-btn minus" data-name="${item.name}">-</button>
+            <span class="qty-num">${item.quantity}</span>
+            <button class="qty-btn plus" data-name="${item.name}">+</button>
+          </div>
+
+          <p class="cart-total">Total: R${(item.price * item.quantity).toFixed(2)}</p>
+          <button class="remove-item" data-name="${item.name}">Remove</button>
+        </div>
       `;
-      tbody.appendChild(tr);
+
+      cartWrapper.appendChild(itemDiv);
     });
-    
+
     subEl.textContent = `R${subtotal.toFixed(2)}`;
     totalEl.textContent = `R${subtotal.toFixed(2)}`;
     updateCartCountInDOM();
   }
 
-  // Remove item
-  tbody.addEventListener("click", (e) => {
-    if (e.target.matches(".remove-btn")) {
-      const name = e.target.dataset.name;
+  // Quantity buttons
+  document.addEventListener("click", (e) => {
+    const target = e.target;
+
+    if (target.classList.contains("qty-btn")) {
+      const name = target.dataset.name;
+      const item = cart.find((i) => i.name === name);
+      if (!item) return;
+
+      if (target.classList.contains("plus")) {
+        item.quantity += 1;
+      } else if (target.classList.contains("minus")) {
+        item.quantity = Math.max(1, item.quantity - 1);
+      }
+
+      saveCart(cart);
+      render();
+      showToast("🛒 Cart updated");
+    }
+
+    // Remove item
+    if (target.classList.contains("remove-item")) {
+      const name = target.dataset.name;
       const index = cart.findIndex((i) => i.name === name);
       if (index > -1) {
         cart.splice(index, 1);
         saveCart(cart);
         render();
         showToast("❌ Item removed");
-      }
-    }
-  });
-
-  // Update quantity
-  tbody.addEventListener("input", (e) => {
-    if (e.target.matches(".quantity")) {
-      const name = e.target.dataset.name;
-      const item = cart.find((i) => i.name === name);
-      if (item) {
-        item.quantity = Math.max(1, parseInt(e.target.value));
-        saveCart(cart);
-        render();
-        showToast("🛍️ Quantity updated");
       }
     }
   });
