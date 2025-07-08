@@ -541,50 +541,9 @@ footer .socials i {
     border-top: 1px solid #ddd;
   }
   
-  /* Totals section (boxes) */
-  .totals-boxes {
-    display: flex;
-    justify-content: space-between;
-    gap: 10px;
-    padding: 10px 16px;
-    background-color: #fff;
-  }
-  
-  .totals-card {
-    flex: 1;
-    border: 1px solid #ccc;
-    padding: 10px 12px;
-    border-radius: 6px;
-    font-size: 15px;
-    font-weight: 500;
-    color: #222;
-    text-align: center;
-    background-color: #f9f9f9;
-    transition: background-color 0.3s ease;
-  }
-  
   .totals-card:hover {
     background-color: #efefef;
     cursor: pointer;
-  }
-  
-  /* Checkout button */
-  .checkout-bar {
-    width: 100%;
-    padding: 14px 16px;
-    border: none;
-    font-size: 16px;
-    font-weight: 600;
-    background-color: black;
-    color: white;
-    cursor: pointer;
-    border-top: 1px solid #ddd;
-    border-radius: 0;
-    transition: background-color 0.3s ease;
-  }
-  
-  .checkout-bar:hover {
-    background-color: #333;
   }
   
   .cart-action-wrapper {
