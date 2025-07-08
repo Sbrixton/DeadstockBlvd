@@ -579,8 +579,8 @@ footer .socials i {
     background-color: #333;
   }
   
-  main {
-    padding-bottom: 100px; /* or whatever height your sticky bar is */
+  #cartSection {
+    padding-bottom: 100px;
   }
   
   #proceedBtn {
