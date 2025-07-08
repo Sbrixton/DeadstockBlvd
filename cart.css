@@ -532,6 +532,7 @@ footer .socials i {
   }
   
   .cart-action-wrapper {
+    position: -webkit-sticky;
     position: sticky;
     bottom: 0;
     background-color: #fff;
