@@ -305,7 +305,6 @@ input.quantity {
   padding: 6px;
 }
 
-/* ========== TOTALS & CHECKOUT BUTTON ========== */
 .cart-totals {
   text-align: right;
   padding: 20px 0;
@@ -532,67 +531,47 @@ footer .socials i {
     color: #222;
   }
   
-  .cart-sticky-action-bar {
-    position: sticky;
-    bottom: 0;
-    background-color: #fff;
-    z-index: 100;
-    padding: 0;
-    border-top: 1px solid #ddd;
-  }
-  
-  .totals-card:hover {
-    background-color: #efefef;
-    cursor: pointer;
-  }
-  
   .cart-action-wrapper {
     position: sticky;
     bottom: 0;
     background-color: #fff;
-    z-index: 50;
-    padding: 0;
+    z-index: 100;
+    padding: 12px 16px;
     border-top: 1px solid #ddd;
-    box-shadow: 0 -2px 5px rgba(0,0,0,0.04);
+    box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.05);
   }
   
-  .totals-boxes {
+  .cart-bottom-bar {
     display: flex;
     justify-content: space-between;
-    gap: 10px;
-    padding: 12px 16px;
-    background-color: #fff;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    gap: 12px;
   }
   
-  .totals-card {
+  .totals-side {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
     flex: 1;
-    border: 1px solid #ccc;
-    padding: 10px 12px;
-    border-radius: 6px;
+  }
+  
+  .subtotal,
+  .total {
     font-size: 15px;
     font-weight: 500;
     color: #222;
-    text-align: center;
-    background-color: #f9f9f9;
-    transition: background-color 0.3s ease;
   }
   
-  .totals-card:hover {
-    background-color: #efefef;
-    cursor: pointer;
-  }
-  
-  /* Checkout button */
   .checkout-bar {
-    width: 100%;
-    padding: 14px 16px;
-    border: none;
-    font-size: 16px;
+    padding: 12px 20px;
+    font-size: 15px;
     font-weight: 600;
     background-color: black;
     color: white;
+    border: none;
+    border-radius: 6px;
     cursor: pointer;
-    border-top: 1px solid #ddd;
     transition: background-color 0.3s ease;
   }
   
