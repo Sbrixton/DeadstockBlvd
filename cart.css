@@ -532,37 +532,59 @@ footer .socials i {
     color: #222;
   }
   
-  .cart-bottom-bar {
+  .cart-sticky-action-bar {
     position: sticky;
     bottom: 0;
     background-color: #fff;
+    z-index: 100;
+    padding: 0;
+    border-top: 1px solid #ddd;
+  }
+  
+  /* Totals section (boxes) */
+  .totals-boxes {
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    gap: 12px;
-    padding: 12px 16px;
-    border-top: 1px solid #eee;
-    z-index: 100;
-    flex-wrap: wrap;
+    gap: 10px;
+    padding: 10px 16px;
+    background-color: #fff;
   }
   
-  .totals-label {
-    font-size: 16px;
+  .totals-card {
+    flex: 1;
+    border: 1px solid #ccc;
+    padding: 10px 12px;
+    border-radius: 6px;
+    font-size: 15px;
     font-weight: 500;
     color: #222;
-    flex: 1;
-    min-width: 100px;
+    text-align: center;
+    background-color: #f9f9f9;
+    transition: background-color 0.3s ease;
   }
   
-  #checkoutBtn {
-    padding: 10px 16px;
+  .totals-card:hover {
+    background-color: #efefef;
+    cursor: pointer;
+  }
+  
+  /* Checkout button */
+  .checkout-bar {
+    width: 100%;
+    padding: 14px 16px;
+    border: none;
+    font-size: 16px;
+    font-weight: 600;
     background-color: black;
     color: white;
-    border: none;
-    border-radius: 4px;
-    font-size: 15px;
     cursor: pointer;
-    white-space: nowrap;
+    border-top: 1px solid #ddd;
+    border-radius: 0;
+    transition: background-color 0.3s ease;
+  }
+  
+  .checkout-bar:hover {
+    background-color: #333;
   }
   
   #proceedBtn {
