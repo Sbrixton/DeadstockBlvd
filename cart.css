@@ -389,7 +389,6 @@ footer .socials i {
     font-size: 18px;
   }
   
-  /* Override nav to behave like slide-in mobile nav ONLY on mobile */
   .nav-wrapper {
     position: fixed;
     top: 0;
@@ -420,7 +419,7 @@ footer .socials i {
   }
   
   #searchIcon {
-    margin-right: -10px; /* 👈 This pulls it in closer */
+    margin-right: -10px;
   }
   
   /* Logo centered */
@@ -430,7 +429,6 @@ footer .socials i {
     transform: translateX(-50%);
   }
   
-  /* Hamburger visible only on mobile */
   #bar {
     display: block;
     position: absolute;
@@ -442,7 +440,6 @@ footer .socials i {
     cursor: pointer;
   }
   
-  /* Close icon for mobile menu */
   #close {
     display: block;
     position: absolute;
@@ -588,7 +585,6 @@ footer .socials i {
     float: none;
   }
   
-  /* === Empty Cart === */
   #emptyCart h2 {
     font-size: 22px;
   }
@@ -597,7 +593,6 @@ footer .socials i {
     width: 100%;
   }
   
-  /* === Search Overlay === */
   #searchOverlay {
     position: fixed;
     top: 70px;
