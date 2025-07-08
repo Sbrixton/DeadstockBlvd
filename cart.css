@@ -458,25 +458,21 @@ footer .socials i {
   #cart-items-wrapper {
     display: flex;
     flex-direction: column;
-    gap: 20px;
-    padding: 16px;
+    gap: 30px;
+    padding: 20px 16px;
   }
   
   .cart-item {
     display: flex;
     align-items: flex-start;
-    padding: 16px;
-    background-color: #fff;
-    border: 1px solid #ddd;
-    border-radius: 8px;
+    gap: 16px;
   }
   
   .cart-img {
-    width: 90px;
-    height: 90px;
+    width: 100px;
+    height: 100px;
     object-fit: cover;
-    border-radius: 8px;
-    margin-right: 16px;
+    border-radius: 6px;
   }
   
   .cart-details {
@@ -487,21 +483,22 @@ footer .socials i {
   
   .cart-name {
     font-size: 16px;
-    font-weight: bold;
-    margin: 0 0 4px;
+    font-weight: 600;
+    margin-bottom: 4px;
   }
   
   .cart-price,
   .cart-total {
     font-size: 14px;
-    color: #555;
-    margin-bottom: 8px;
+    color: #444;
+    margin-bottom: 6px;
   }
   
   .quantity-controls {
     display: flex;
     align-items: center;
-    margin-bottom: 6px;
+    gap: 10px;
+    margin-bottom: 8px;
   }
   
   .qty-btn {
@@ -509,22 +506,21 @@ footer .socials i {
     height: 28px;
     font-size: 18px;
     border: none;
-    background-color: #f0f0f0;
+    background-color: #eee;
     cursor: pointer;
     border-radius: 4px;
   }
   
   .qty-num {
-    margin: 0 10px;
     font-size: 16px;
   }
   
   .remove-item {
+    font-size: 13px;
+    color: #c00;
     background: none;
     border: none;
-    color: #c00;
     text-decoration: underline;
-    font-size: 12px;
     padding: 0;
     cursor: pointer;
     align-self: flex-start;
