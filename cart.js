@@ -51,7 +51,7 @@ document.addEventListener("DOMContentLoaded", () => {
         <div class="cart-details">
           <p class="cart-name">${item.name}</p>
           <p class="cart-price">Price: R${item.price.toFixed(2)}</p>
-          
+
           <div class="quantity-controls">
             <button class="qty-btn minus" data-name="${item.name}">-</button>
             <span class="qty-num">${item.quantity}</span>
@@ -71,29 +71,25 @@ document.addEventListener("DOMContentLoaded", () => {
     updateCartCountInDOM();
   }
 
-  // Quantity buttons
+  // Quantity & Remove buttons
   document.addEventListener("click", (e) => {
     const target = e.target;
+    const name = target.dataset.name;
+    const item = cart.find((i) => i.name === name);
+    if (!item) return;
 
     if (target.classList.contains("qty-btn")) {
-      const name = target.dataset.name;
-      const item = cart.find((i) => i.name === name);
-      if (!item) return;
-
       if (target.classList.contains("plus")) {
         item.quantity += 1;
       } else if (target.classList.contains("minus")) {
         item.quantity = Math.max(1, item.quantity - 1);
       }
-
       saveCart(cart);
       render();
-      showToast("🛒 Cart updated");
+      showToast("🛒 Quantity updated");
     }
 
-    // Remove item
     if (target.classList.contains("remove-item")) {
-      const name = target.dataset.name;
       const index = cart.findIndex((i) => i.name === name);
       if (index > -1) {
         cart.splice(index, 1);
