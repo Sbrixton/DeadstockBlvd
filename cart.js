@@ -13,6 +13,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const totalEl = document.getElementById("Total");
   const checkoutBtn = document.getElementById("checkoutBtn");
   const proceedBtn = document.getElementById("proceedBtn");
+  
+  const hasDesktopCart = cartWrapper && subEl && totalEl;
 
   // Mobile drawer elements
   const cartIcon = document.getElementById("cartIcon");
@@ -28,9 +30,11 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   function render() {
+    if (!hasDesktopCart) return; // Don't run desktop render logic if cartWrapper is missing
+  
     cartWrapper.innerHTML = "";
     let subtotal = 0;
-
+  
     if (cart.length === 0) {
       empty.style.display = "flex";
       section.style.display = "none";
@@ -41,17 +45,17 @@ document.addEventListener("DOMContentLoaded", () => {
       updateCartCountInDOM();
       return;
     }
-
+  
     empty.style.display = "none";
     section.style.display = "block";
     checkoutBtn.style.display = "block";
     proceedBtn.style.display = "none";
-
+    
     cart.forEach((item) => {
       if (!item || typeof item.price !== "number") return;
-
+  
       subtotal += item.price * item.quantity;
-
+  
       const itemDiv = document.createElement("div");
       itemDiv.className = "cart-item";
       itemDiv.innerHTML = `
@@ -59,26 +63,26 @@ document.addEventListener("DOMContentLoaded", () => {
         <div class="cart-details">
           <p class="cart-name">${item.name}</p>
           <p class="cart-price">Price: R${item.price.toFixed(2)}</p>
-
+  
           <div class="quantity-controls">
             <button class="qty-btn minus" data-name="${item.name}">-</button>
             <span class="qty-num">${item.quantity}</span>
             <button class="qty-btn plus" data-name="${item.name}">+</button>
           </div>
-
+  
           <p class="cart-total">Total: R${(item.price * item.quantity).toFixed(2)}</p>
           <button class="remove-item" data-name="${item.name}">Remove</button>
         </div>
-      `;
-
+    `;
+  
       cartWrapper.appendChild(itemDiv);
-    });
-
+    });  
+  
     subEl.textContent = `R${subtotal.toFixed(2)}`;
     totalEl.textContent = `R${subtotal.toFixed(2)}`;
     updateCartCountInDOM();
   }
-
+  
   function renderMobileDrawer() {
     mobileCartItems.innerHTML = "";
     let subtotal = 0;
