@@ -4,7 +4,7 @@ import {
   updateCartCountInDOM
 } from "./cart-utils.js";
 
-document.addEventListener("DOMContentLoaded", () => {
+window.addEventListener("load", () => {
   const cart = getCart();
   const empty = document.getElementById("emptyCart");
   const section = document.getElementById("cartSection");
