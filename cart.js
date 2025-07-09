@@ -148,14 +148,17 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // Mobile drawer behavior
-  cartIcon.addEventListener("click", (e) => {
-    if (window.innerWidth <= 768) {
-      e.preventDefault();
-      renderMobileDrawer();
-      mobileDrawer.classList.add("open");
-    }
-  });
+  if (cartIcon && mobileDrawer) {
+    cartIcon.addEventListener("click", (e) => {
+      if (window.innerWidth <= 768) {
+        e.preventDefault();
+        renderMobileDrawer();
+        mobileDrawer.classList.add("open");
+      }
+    });
+  } else {
+    console.warn("Cart icon or mobile drawer not found.");
+  }
 
   closeCartDrawer?.addEventListener("click", () => {
     mobileDrawer.classList.remove("open");
