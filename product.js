@@ -7,7 +7,7 @@ import {
 document.addEventListener("DOMContentLoaded", () => {
   const addToCartBtn = document.getElementById("addToCartBtn");
 
-  addToCartBtn?.addEventListener("click", () => {
+  addToCartBtn?.addEventListener("click", async () => {
     const cart = getCart();
 
     const product = {
@@ -26,9 +26,14 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     saveCart(cart);
-    updateCartCountInDOM(); // ✅ THIS updates the header/cartCount
+    updateCartCountInDOM();
+
+    const drawer = document.getElementById("mobileCartDrawer");
+    if (drawer?.classList.contains("open")) {
+      const module = await import("./cart.js");
+      module.renderMobileDrawer();
+    }
   });
 
-  // Run once on load in case the cart already has items
   updateCartCountInDOM();
 });
