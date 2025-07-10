@@ -92,7 +92,7 @@ window.addEventListener("load", () => {
       mobileCartItems.innerHTML = `
         <div class="empty-cart-message">
           <p>Your cart is empty.</p>
-          <button id="drawerProceedBtn" class="proceed-empty">Proceed to Shop</button>
+          <button id="drawerProceedBtn" class="proceed-to-shop-btn">Proceed to Shop</button>
         </div>`;
       drawerSubtotal.textContent = "R0.00";
       document.getElementById("drawerProceedBtn")
