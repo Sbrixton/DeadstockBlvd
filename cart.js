@@ -86,13 +86,24 @@ window.addEventListener("load", () => {
   function renderMobileDrawer() {
     mobileCartItems.innerHTML = "";
     let subtotal = 0;
-
+    
     if (cart.length === 0) {
-      mobileCartItems.innerHTML = `<p>Your cart is empty.</p>`;
+      mobileCartItems.innerHTML = `
+        <div class="empty-cart-mobile">
+          <p>Your cart is empty.</p>
+          <button id="mobileProceedBtn" class="proceed-to-shop-btn">Proceed to Shop</button>
+        </div>
+      `;
       drawerSubtotal.textContent = "R0.00";
+      
+      const proceedBtn = document.getElementById("mobileProceedBtn");
+      proceedBtn?.addEventListener("click", () => {
+        window.location.href = "shop.html";
+      });
+      
       return;
     }
-
+    
     cart.forEach(item => {
       subtotal += item.price * item.quantity;
 
