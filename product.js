@@ -28,6 +28,7 @@ document.addEventListener("DOMContentLoaded", () => {
     saveCart(cart);
     updateCartCountInDOM();
 
+    // 👇 Re-render drawer if it's open
     const drawer = document.getElementById("mobileCartDrawer");
     if (drawer?.classList.contains("open")) {
       const module = await import("./cart.js");
