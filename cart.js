@@ -106,7 +106,7 @@ window.addEventListener("load", () => {
     
     cart.forEach(item => {
       subtotal += item.price * item.quantity;
-
+  
       const itemDiv = document.createElement("div");
       itemDiv.className = "cart-item";
       itemDiv.innerHTML = `
@@ -119,10 +119,11 @@ window.addEventListener("load", () => {
       `;
       mobileCartItems.appendChild(itemDiv);
     });
-
+  
     drawerSubtotal.textContent = `R${subtotal.toFixed(2)}`;
   }
-
+  export { renderMobileDrawer };
+  
   // Quantity & Remove buttons (desktop logic)
   document.addEventListener("click", (e) => {
     const target = e.target;
