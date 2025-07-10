@@ -184,3 +184,4 @@ window.addEventListener("load", () => {
 
   render();
 });
+export { renderMobileDrawer };
