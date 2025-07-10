@@ -82,12 +82,12 @@ window.addEventListener("load", () => {
     totalEl.textContent = `R${subtotal.toFixed(2)}`;
     updateCartCountInDOM();
   }
-
+  
   function renderMobileDrawer() {
-    const cart = getCart(); // re-fetch to ensure latest data
+    const cart = getCart();
     mobileCartItems.innerHTML = "";
     let subtotal = 0;
-
+    
     if (cart.length === 0) {
       mobileCartItems.innerHTML = `
         <div class="empty-cart-message">
@@ -95,31 +95,60 @@ window.addEventListener("load", () => {
           <button id="drawerProceedBtn" class="proceed-empty">Proceed to Shop</button>
         </div>`;
       drawerSubtotal.textContent = "R0.00";
-
-      const proceedBtn = document.getElementById("drawerProceedBtn");
-      proceedBtn?.addEventListener("click", () => {
-        window.location.href = "shop.html";
-      });
+      document.getElementById("drawerProceedBtn")
+        ?.addEventListener("click", () => window.location.href = "shop.html");
       return;
     }
-
+    
     cart.forEach(item => {
       subtotal += item.price * item.quantity;
-
       const itemDiv = document.createElement("div");
       itemDiv.className = "cart-item";
+      itemDiv.style.position = 'relative';
       itemDiv.innerHTML = `
-        <img src="${item.image}" alt="${item.name}" class="cart-img">
+        <img src="${item.image}" alt="${item.name}" class="cart-img" />
         <div class="cart-details">
           <p class="cart-name">${item.name}</p>
-          <p class="cart-price">Price: R${item.price.toFixed(2)}</p>
-          <p class="cart-total">Total: R${(item.price * item.quantity).toFixed(2)}</p>
+          <p class="cart-price">R${item.price.toFixed(2)}</p>
+          <div class="quantity-controls">
+            <button class="qty-btn minus" data-id="${item.id}">−</button>
+            <span class="qty-num">${item.quantity}</span>
+            <button class="qty-btn plus" data-id="${item.id}">＋</button>
+          </div>
         </div>
+        <button class="remove-item-mobile" data-id="${item.id}">✕</button>
       `;
       mobileCartItems.appendChild(itemDiv);
     });
-
+    
     drawerSubtotal.textContent = `R${subtotal.toFixed(2)}`;
+    
+    // Quantity buttons
+    mobileCartItems.querySelectorAll('.qty-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const id = parseInt(btn.dataset.id);
+        const cart = getCart();
+        const prod = cart.find(i => i.id === id);
+        if (!prod) return;
+        if (btn.classList.contains('plus')) prod.quantity++;
+        if (btn.classList.contains('minus')) prod.quantity = Math.max(1, prod.quantity - 1);
+        saveCart(cart);
+        updateCartCountInDOM();
+        renderMobileDrawer();
+      });
+    });
+    
+    // Remove button
+    mobileCartItems.querySelectorAll('.remove-item-mobile').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const id = parseInt(btn.dataset.id);
+        let cart = getCart();
+        cart = cart.filter(i => i.id !== id);
+        saveCart(cart);
+        updateCartCountInDOM();
+        renderMobileDrawer();
+      });
+    });
   }
 
   // Quantity & Remove (desktop)
