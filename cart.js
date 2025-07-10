@@ -13,7 +13,7 @@ window.addEventListener("load", () => {
   const totalEl = document.getElementById("Total");
   const checkoutBtn = document.getElementById("checkoutBtn");
   const proceedBtn = document.getElementById("proceedBtn");
-  
+
   const hasDesktopCart = cartWrapper && subEl && totalEl;
 
   // Mobile drawer elements
@@ -30,11 +30,11 @@ window.addEventListener("load", () => {
   });
 
   function render() {
-    if (!hasDesktopCart) return; // Don't run desktop render logic if cartWrapper is missing
-  
+    if (!hasDesktopCart) return;
+
     cartWrapper.innerHTML = "";
     let subtotal = 0;
-  
+
     if (cart.length === 0) {
       empty.style.display = "flex";
       section.style.display = "none";
@@ -45,17 +45,17 @@ window.addEventListener("load", () => {
       updateCartCountInDOM();
       return;
     }
-  
+
     empty.style.display = "none";
     section.style.display = "block";
     checkoutBtn.style.display = "block";
     proceedBtn.style.display = "none";
-    
+
     cart.forEach((item) => {
       if (!item || typeof item.price !== "number") return;
-  
+
       subtotal += item.price * item.quantity;
-  
+
       const itemDiv = document.createElement("div");
       itemDiv.className = "cart-item";
       itemDiv.innerHTML = `
@@ -63,50 +63,49 @@ window.addEventListener("load", () => {
         <div class="cart-details">
           <p class="cart-name">${item.name}</p>
           <p class="cart-price">Price: R${item.price.toFixed(2)}</p>
-  
+
           <div class="quantity-controls">
             <button class="qty-btn minus" data-name="${item.name}">-</button>
             <span class="qty-num">${item.quantity}</span>
             <button class="qty-btn plus" data-name="${item.name}">+</button>
           </div>
-  
+
           <p class="cart-total">Total: R${(item.price * item.quantity).toFixed(2)}</p>
           <button class="remove-item" data-name="${item.name}">Remove</button>
         </div>
-    `;
-  
+      `;
+
       cartWrapper.appendChild(itemDiv);
-    });  
-  
+    });
+
     subEl.textContent = `R${subtotal.toFixed(2)}`;
     totalEl.textContent = `R${subtotal.toFixed(2)}`;
     updateCartCountInDOM();
   }
-  
+
   function renderMobileDrawer() {
+    const cart = getCart(); // re-fetch to ensure latest data
     mobileCartItems.innerHTML = "";
     let subtotal = 0;
-    
+
     if (cart.length === 0) {
       mobileCartItems.innerHTML = `
-        <div class="empty-cart-mobile">
+        <div class="empty-cart-message">
           <p>Your cart is empty.</p>
-          <button id="mobileProceedBtn" class="proceed-to-shop-btn">Proceed to Shop</button>
-        </div>
-      `;
+          <button id="drawerProceedBtn" class="proceed-empty">Proceed to Shop</button>
+        </div>`;
       drawerSubtotal.textContent = "R0.00";
-      
-      const proceedBtn = document.getElementById("mobileProceedBtn");
+
+      const proceedBtn = document.getElementById("drawerProceedBtn");
       proceedBtn?.addEventListener("click", () => {
         window.location.href = "shop.html";
       });
-      
       return;
     }
-    
+
     cart.forEach(item => {
       subtotal += item.price * item.quantity;
-  
+
       const itemDiv = document.createElement("div");
       itemDiv.className = "cart-item";
       itemDiv.innerHTML = `
@@ -119,12 +118,11 @@ window.addEventListener("load", () => {
       `;
       mobileCartItems.appendChild(itemDiv);
     });
-  
+
     drawerSubtotal.textContent = `R${subtotal.toFixed(2)}`;
   }
-  export { renderMobileDrawer };
-  
-  // Quantity & Remove buttons (desktop logic)
+
+  // Quantity & Remove (desktop)
   document.addEventListener("click", (e) => {
     const target = e.target;
     const name = target.dataset.name;
@@ -151,13 +149,9 @@ window.addEventListener("load", () => {
     }
   });
 
-  // Desktop checkout
+  // Checkout
   checkoutBtn?.addEventListener("click", () => {
-    if (cart.length > 0) {
-      window.location.href = "checkout.html";
-    } else {
-      window.location.href = "shop.html";
-    }
+    window.location.href = cart.length > 0 ? "checkout.html" : "shop.html";
   });
 
   if (cartIcon && mobileDrawer) {
@@ -168,8 +162,6 @@ window.addEventListener("load", () => {
         mobileDrawer.classList.add("open");
       }
     });
-  } else {
-    console.warn("Cart icon or mobile drawer not found.");
   }
 
   closeCartDrawer?.addEventListener("click", () => {
@@ -184,4 +176,6 @@ window.addEventListener("load", () => {
 
   render();
 });
-export { renderMobileDrawer };
+
+// 👇 Export this function so product.js can call it when cart is open
+export function renderMobileDrawer() {}
