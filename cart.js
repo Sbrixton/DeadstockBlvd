@@ -16,15 +16,11 @@ window.addEventListener("load", () => {
 
   const hasDesktopCart = cartWrapper && subEl && totalEl;
 
-  // Mobile drawer elements
   const cartIcon = document.getElementById("cartIcon");
   const mobileDrawer = document.getElementById("mobileCartDrawer");
-  const mobileCartItems = document.getElementById("mobileCartItems");
-  const drawerSubtotal = document.getElementById("drawerCartSubtotal");
-  const drawerCheckoutBtn = document.getElementById("drawerCheckoutBtn");
   const closeCartDrawer = document.getElementById("closeCartDrawer");
+  const drawerCheckoutBtn = document.getElementById("drawerCheckoutBtn");
 
-  // Proceed to Shop button (for empty cart)
   proceedBtn?.addEventListener("click", () => {
     window.location.href = "shop.html";
   });
@@ -82,76 +78,27 @@ window.addEventListener("load", () => {
     totalEl.textContent = `R${subtotal.toFixed(2)}`;
     updateCartCountInDOM();
   }
-  
-  function renderMobileDrawer() {
-    const cart = getCart();
-    mobileCartItems.innerHTML = "";
-    let subtotal = 0;
-    
-    if (cart.length === 0) {
-      mobileCartItems.innerHTML = `
-        <div class="empty-cart-message">
-          <p>Your cart is empty.</p>
-          <button id="drawerProceedBtn" class="proceed-to-shop-btn">Proceed to Shop</button>
-        </div>`;
-      drawerSubtotal.textContent = "R0.00";
-      document.getElementById("drawerProceedBtn")
-        ?.addEventListener("click", () => window.location.href = "shop.html");
-      return;
-    }
-    
-    cart.forEach(item => {
-      subtotal += item.price * item.quantity;
-      const itemDiv = document.createElement("div");
-      itemDiv.className = "cart-item";
-      itemDiv.style.position = 'relative';
-      itemDiv.innerHTML = `
-        <img src="${item.image}" alt="${item.name}" class="cart-img" />
-        <div class="cart-details">
-          <p class="cart-name">${item.name}</p>
-          <p class="cart-price">R${item.price.toFixed(2)}</p>
-          <div class="quantity-controls">
-            <button class="qty-btn minus" data-id="${item.id}">−</button>
-            <span class="qty-num">${item.quantity}</span>
-            <button class="qty-btn plus" data-id="${item.id}">＋</button>
-          </div>
-        </div>
-        <button class="remove-item-mobile" data-id="${item.id}">✕</button>
-      `;
-      mobileCartItems.appendChild(itemDiv);
-    });
-    
-    drawerSubtotal.textContent = `R${subtotal.toFixed(2)}`;
-    
-    // Quantity buttons
-    mobileCartItems.querySelectorAll('.qty-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const id = parseInt(btn.dataset.id);
-        const cart = getCart();
-        const prod = cart.find(i => i.id === id);
-        if (!prod) return;
-        if (btn.classList.contains('plus')) prod.quantity++;
-        if (btn.classList.contains('minus')) prod.quantity = Math.max(1, prod.quantity - 1);
-        saveCart(cart);
-        updateCartCountInDOM();
-        renderMobileDrawer();
-      });
-    });
-    
-    // Remove button
-    mobileCartItems.querySelectorAll('.remove-item-mobile').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const id = parseInt(btn.dataset.id);
-        let cart = getCart();
-        cart = cart.filter(i => i.id !== id);
-        saveCart(cart);
-        updateCartCountInDOM();
-        renderMobileDrawer();
-      });
+
+  // 👉 Open cart drawer on all screen sizes
+  if (cartIcon && mobileDrawer) {
+    cartIcon.addEventListener("click", (e) => {
+      e.preventDefault();
+      renderMobileDrawer();
+      mobileDrawer.classList.add("open");
     });
   }
 
-  // Quantity & Remove (desktop)
+  closeCartDrawer?.addEventListener("click", () => {
+    mobileDrawer.classList.remove("open");
+  });
+
+  drawerCheckoutBtn?.addEventListener("click", () => {
+    if (cart.length > 0) {
+      window.location.href = "checkout.html";
+    }
+  });
+
+  // Desktop cart quantity & remove
   document.addEventListener("click", (e) => {
     const target = e.target;
     const name = target.dataset.name;
@@ -178,33 +125,79 @@ window.addEventListener("load", () => {
     }
   });
 
-  // Checkout
   checkoutBtn?.addEventListener("click", () => {
     window.location.href = cart.length > 0 ? "checkout.html" : "shop.html";
-  });
-
-  if (cartIcon && mobileDrawer) {
-    cartIcon.addEventListener("click", (e) => {
-      if (window.innerWidth <= 768) {
-        e.preventDefault();
-        renderMobileDrawer();
-        mobileDrawer.classList.add("open");
-      }
-    });
-  }
-
-  closeCartDrawer?.addEventListener("click", () => {
-    mobileDrawer.classList.remove("open");
-  });
-
-  drawerCheckoutBtn?.addEventListener("click", () => {
-    if (cart.length > 0) {
-      window.location.href = "checkout.html";
-    }
   });
 
   render();
 });
 
-// 👇 Export this function so product.js can call it when cart is open
-export function renderMobileDrawer() {}
+// ✅ Exported so product.js can dynamically import & call it
+export function renderMobileDrawer() {
+  const cart = getCart();
+  const mobileCartItems = document.getElementById("mobileCartItems");
+  const drawerSubtotal = document.getElementById("drawerCartSubtotal");
+
+  mobileCartItems.innerHTML = "";
+  let subtotal = 0;
+
+  if (cart.length === 0) {
+    mobileCartItems.innerHTML = `
+      <div class="empty-cart-message">
+        <p>Your cart is empty.</p>
+        <button id="drawerProceedBtn" class="proceed-to-shop-btn">Proceed to Shop</button>
+      </div>`;
+    drawerSubtotal.textContent = "R0.00";
+    document.getElementById("drawerProceedBtn")
+      ?.addEventListener("click", () => window.location.href = "shop.html");
+    return;
+  }
+
+  cart.forEach(item => {
+    subtotal += item.price * item.quantity;
+    const itemDiv = document.createElement("div");
+    itemDiv.className = "cart-item";
+    itemDiv.style.position = 'relative';
+    itemDiv.innerHTML = `
+      <img src="${item.image}" alt="${item.name}" class="cart-img" />
+      <div class="cart-details">
+        <p class="cart-name">${item.name}</p>
+        <p class="cart-price">R${item.price.toFixed(2)}</p>
+        <div class="quantity-controls">
+          <button class="qty-btn minus" data-id="${item.id}">−</button>
+          <span class="qty-num">${item.quantity}</span>
+          <button class="qty-btn plus" data-id="${item.id}">＋</button>
+        </div>
+      </div>
+      <button class="remove-item-mobile" data-id="${item.id}">✕</button>
+    `;
+    mobileCartItems.appendChild(itemDiv);
+  });
+
+  drawerSubtotal.textContent = `R${subtotal.toFixed(2)}`;
+
+  mobileCartItems.querySelectorAll('.qty-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const id = parseInt(btn.dataset.id);
+      const cart = getCart();
+      const prod = cart.find(i => i.id === id);
+      if (!prod) return;
+      if (btn.classList.contains('plus')) prod.quantity++;
+      if (btn.classList.contains('minus')) prod.quantity = Math.max(1, prod.quantity - 1);
+      saveCart(cart);
+      updateCartCountInDOM();
+      renderMobileDrawer();
+    });
+  });
+
+  mobileCartItems.querySelectorAll('.remove-item-mobile').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const id = parseInt(btn.dataset.id);
+      let cart = getCart();
+      cart = cart.filter(i => i.id !== id);
+      saveCart(cart);
+      updateCartCountInDOM();
+      renderMobileDrawer();
+    });
+  });
+}
