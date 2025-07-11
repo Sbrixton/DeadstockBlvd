@@ -652,8 +652,8 @@ footer img {
   .proceed-to-shop-btn {
     margin-top: 12px;
     padding: 10px 18px;
-    background: #111;
-    color: #fff;
+    background: #f1f1f1;
+    color: #222;
     border: none;
     border-radius: 4px;
     font-weight: 600;
