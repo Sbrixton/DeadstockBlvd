@@ -399,6 +399,90 @@ main.product-page {
   cursor: pointer;
 }
 
+/* === Cart Item Structure (Mobile + Desktop) === */
+#mobileCartItems .cart-item {
+  display: flex;
+  align-items: flex-start;
+  padding: 12px 0;
+  border-bottom: 1px solid #eee;
+  position: relative;
+}
+
+/* Product Image */
+#mobileCartItems .cart-img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 6px;
+  flex-shrink: 0;
+}
+
+/* Product Info Container */
+#mobileCartItems .cart-details {
+  flex: 1;
+  margin-left: 12px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Product Name */
+#mobileCartItems .cart-name {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+/* Product Price */
+#mobileCartItems .cart-price {
+  font-size: 14px;
+  color: #444;
+  margin-bottom: 8px;
+}
+
+/* Quantity Controls */
+#mobileCartItems .quantity-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+/* Quantity Buttons */
+#mobileCartItems .qty-btn {
+  width: 30px;
+  height: 30px;
+  border: none;
+  background: #f0f0f0;
+  font-size: 18px;
+  border-radius: 6px;
+  cursor: pointer;
+  color: #222;
+  transition: background 0.2s;
+}
+
+#mobileCartItems .qty-btn:hover {
+  background: #ddd;
+}
+
+/* Quantity Number */
+#mobileCartItems .qty-num {
+  font-size: 16px;
+  min-width: 20px;
+  text-align: center;
+}
+
+/* Remove Button (Top Right of Item) */
+#mobileCartItems .remove-item-mobile {
+  position: absolute;
+  top: 8px;
+  right: 0;
+  background: none;
+  border: none;
+  font-size: 18px;
+  color: #c00;
+  cursor: pointer;
+}
+
 /* Cart Items Scrollable Area */
 #mobileCartItems {
   flex: 1;
