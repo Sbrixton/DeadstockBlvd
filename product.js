@@ -28,6 +28,7 @@ document.addEventListener("DOMContentLoaded", () => {
     saveCart(cart);
     updateCartCountInDOM();
 
+    // Update drawer if it's open
     const drawer = document.getElementById("mobileCartDrawer");
     if (drawer?.classList.contains("open")) {
       const module = await import("./cart.js");
@@ -37,12 +38,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
   updateCartCountInDOM();
 
-  // ✅ Initialize PayPal Button
+  // Initialize PayPal Button
+  console.log("Initializing PayPal buttons...");
+
   if (window.paypal) {
     paypal.Buttons({
-      createOrder: function (data, actions) {
+      createOrder(data, actions) {
         const cart = getCart();
         const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+        console.log("Creating PayPal order, total:", total);
+
         return actions.order.create({
           purchase_units: [{
             amount: {
@@ -51,17 +56,19 @@ document.addEventListener("DOMContentLoaded", () => {
           }],
         });
       },
-      onApprove: function (data, actions) {
-        return actions.order.capture().then(function (details) {
-          console.log("Transaction completed by " + details.payer.name.given_name);
-          // ✅ Redirect silently to checkout
+      onApprove(data, actions) {
+        return actions.order.capture().then(details => {
+          console.log("PayPal approval complete:", details);
+          // Redirect to checkout page
           window.location.href = "checkout.html";
         });
       },
-      onError: function (err) {
+      onError(err) {
         console.error("PayPal error:", err);
         alert("There was a problem processing your payment.");
-      },
+      }
     }).render("#paypal-button-container");
+  } else {
+    console.error("window.paypal is undefined — PayPal SDK may not be loaded.");
   }
 });
