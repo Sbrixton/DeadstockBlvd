@@ -12,38 +12,34 @@
 </head>
 
 <body>
-
-  <!-- ========== NAVBAR ========== -->
     <header class="navbar">
-            <div class="nav-left">
-                <!-- LOGO -->
-                <a href="index.html" class="logo">
-                    <img src="/images/deadstock-logo.png" alt="DeadstockBlvd Logo" height="40" />
-                </a>
-                
-                <!-- NAV LINKS (VISIBLE ON DESKTOP) -->
-                <div class="nav-wrapper" id="navWrapper">
-                    <nav id="navbar">
-                        <i id="close" class="fas fa-times"></i>
-                        <a href="index.html">Home</a>
-                        <a href="shop.html" class="active">Shop</a>
-                        <a href="contact.html">Contact</a>
-                    </nav>
-                </div>
-                
-                <!-- Hamburger icon (mobile only) -->
-                <i id="bar" class="fas fa-bars"></i>
-            </div>
+        <div class="nav-left">
+            <a href="index.html" class="logo">
+                <img src="/images/deadstock-logo.png" alt="DeadstockBlvd Logo" height="40" />
+            </a>
             
-            <!-- RIGHT SIDE ICONS -->
-            <div class="nav-right">
-                <a href="Cart.html" id="cartIcon" class="cart-wrapper">
-                    <i class="fas fa-shopping-bag"></i>
-                    <span id="cart-count">0</span>
-                </a>
+            <div class="nav-wrapper" id="navWrapper">
+                <nav id="navbar">
+                    <i id="close" class="fas fa-times"></i>
+                    <a href="index.html">Home</a>
+                    <a href="shop.html" class="active">Shop</a>
+                    <a href="contact.html">Contact</a>
+                </nav>
             </div>
+            <i id="bar" class="fas fa-bars"></i>
+        </div>
+        
+        <div class="nav-right">
+            <button id="searchIcon">
+                <i class="fas fa-search"></i>
+            </button>
+            <div id="cartIcon" class="cart-wrapper" role="button" tabindex="0">
+                <i class="fas fa-shopping-bag"></i>
+                <span id="cart-count">0</span>
+            </div>
+        </div>
     </header>
-
+    
     <!-- ========== SEARCH OVERLAY ========== -->
     <div id="searchOverlay">
         <div class="search-inner">
