@@ -87,6 +87,32 @@ nav a.active::after {
   color: #555;
 }
 
+#hero {
+  background-image: url("images/your-wallpaper.jpg"); /* ← use your actual image path */
+  background-size: cover;
+  background-position: center;
+  height: 90vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+#hero button {
+  padding: 1rem 2rem;
+  font-size: 1.2rem;
+  background-color: black;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: 0.3s ease;
+  z-index: 2;
+}
+
+#hero button:hover {
+  background-color: #333;
+}
+
 .cart-wrapper {
   position: relative;
   display: inline-block;
