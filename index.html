@@ -13,24 +13,43 @@
 <body>
     
     <header class="navbar">
+        
         <div class="nav-left">
             <a href="index.html" class="logo">
-                <img src="/images/deadstock-logo.png" alt="DeadstockBlvd Logo" height="40">
+                <img src="/images/deadstock-logo.png" alt="DeadstockBlvd Logo" height="40" />
             </a>
-            <nav>
-                <a href="index.html" class="active" >Home</a>
-                <a href="shop.html">Shop</a>
-                <a href="contact.html">Contact</a>
-            </nav>
+            <div class="nav-wrapper" id="navWrapper">
+                <nav id="navbar">
+                    <i id="close" class="fas fa-times"></i>
+                    <a href="index.html">Home</a>
+                    <a href="shop.html" class="active">Shop</a>
+                    <a href="contact.html">Contact</a>
+                </nav>
+            </div>
+            <i id="bar" class="fas fa-bars"></i>
         </div>
-
+        
         <div class="nav-right">
-            <button id="searchIcon"><i class="fas fa-search"></i></button>
-            <a href="Cart.html" id="cartIcon"><i class="fas fa-shopping-bag"></i></a>
+            <button id="searchIcon">
+                <i class="fas fa-search"></i>
+            </button>
+            <div id="cartIcon" class="cart-wrapper" role="button" tabindex="0">
+                <i class="fas fa-shopping-bag"></i>
+                <span id="cart-count">0</span>
+            </div>
         </div>
     </header>
 
-
+    <div id="searchOverlay">
+        <div class="search-inner">
+            <button id="closeSearch" aria-label="Close Search">&times;</button>
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="Search products..." />
+                <div id="searchResults"></div>
+            </div>
+        </div>
+    </div>
+    
     <!-- ========== HERO ========== -->
     <section id="hero">
         <h1>Deadstock Drip Only</h1>
@@ -108,7 +127,24 @@
         </div>
     </footer>
     
+    <div id="mobileCartDrawer">
+        <div id="mobileCartHeader">
+            <h3>Your Cart</h3>
+            <button id="closeCartDrawer">&times;</button>
+        </div>
+        <div id="mobileCartItems"></div>
+        <div id="mobileCartFooter">
+            <div class="footer-totals">
+            <p>Subtotal: <span id="drawerCartSubtotal">R0.00</span></p>
+        </div>
+            <button id="drawerCheckoutBtn" class="checkout-bar">Checkout</button>
+        </div>
+    </div>
+    <script src="navbar.js"></script>
+    <script src="search.js"></script>
+    <script type="module" src="cart-utils.js"></script>
+    <script type="module" src="product.js"></script>
+    <script type="module" src="cart.js"></script>
+    <script src="script.js"></script>
 </body>
-<script src="script.js"></script>
-
 </html>
