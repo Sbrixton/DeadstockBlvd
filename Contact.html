@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact</title>
+  <link rel="stylesheet" href="product.css" />
+  <script type="module" src="cart-utils.js"></script>
+</head>
+<body>
+    <!-- ========== NAVBAR ========== -->
+    <header class="navbar">
+      <div class="nav-left">
+        <a href="index.html" class="logo">
+          <img src="/images/deadstock-logo.png" alt="DeadstockBlvd Logo" height="40" />
+        </a>
+        <div class="nav-wrapper" id="navWrapper">
+          <nav id="navbar">
+            <i id="close" class="fas fa-times"></i>
+            <a href="index.html">Home</a>
+            <a href="shop.html">Shop</a>
+            <a href="contact.html" class="active">Contact</a>
+          </nav>
+        </div>
+        <i id="bar" class="fas fa-bars"></i>
+      </div>
+      <div class="nav-right">
+        <button id="searchIcon">
+          <i class="fas fa-search"></i>
+        </button>
+        <div id="cartIcon" class="cart-wrapper" role="button" tabindex="0">
+          <i class="fas fa-shopping-bag"></i>
+          <span id="cart-count">0</span>
+        </div>
+      </div>
+    </header>
+    
+    <!-- ========== SEARCH OVERLAY ========== -->
+    <div id="searchOverlay">
+      <div class="search-inner">
+        <button id="closeSearch" aria-label="Close Search">&times;</button>
+        <div class="search-box">
+          <input type="text" id="searchInput" placeholder="Search products..." />
+          <div id="searchResults"></div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- ========== MAIN CONTACT CONTENT (placeholder) ========== -->
+    <main style="padding: 40px; text-align: center;">
+      <h1>Contact Us</h1>
+      <p>If you have any questions or inquiries, please reach out to us via email or through our social media platforms.</p>
+      <!-- Add your contact form or info here -->
+    </main>
+    
+    <!-- ========== FOOTER ========== -->
+    <footer class="section-p1">
+      <div class="col install">
+        <p>Secured Payment Gateways</p>
+        <img src="Downloads/payments.PNG" alt="Payment Methods">
+      </div>
+      <div class="copyright">
+        <p>© 2025, DeadstockBlvd</p>
+      </div>
+    </footer>
+    
+    <!-- ========== CART DRAWER (Mobile/Desktop) ========== -->
+    <div id="mobileCartDrawer">
+      <div id="mobileCartHeader">
+        <h3>Your Cart</h3>
+        <button id="closeCartDrawer">&times;</button>
+      </div>
+      <div id="mobileCartItems"></div>
+      <div id="mobileCartFooter">
+        <div class="footer-totals">
+          <p>Subtotal: <span id="drawerCartSubtotal">R0.00</span></p>
+        </div>
+        <button id="drawerCheckoutBtn" class="checkout-bar">Checkout</button>
+      </div>
+    </div>
+    
+    <!-- ========== SCRIPTS ========== -->
+    <script src="https://kit.fontawesome.com/yourkitid.js" crossorigin="anonymous"></script>
+    <script type="module" src="navbar.js"></script>
+    <script type="module" src="search.js"></script>
+    <script type="module" src="cart.js"></script>
+</body>
+</html>
