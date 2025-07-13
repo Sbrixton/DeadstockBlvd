@@ -1,3 +1,5 @@
+import { updateCartCountInDOM } from "./cart-utils.js";
+
 document.addEventListener("DOMContentLoaded", () => {
   const bar = document.getElementById("bar");
   const navWrapper = document.getElementById("navWrapper");
@@ -9,4 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
   window.addEventListener("resize", () => {
     if (window.innerWidth > 768) navWrapper.classList.remove("active");
   });
+
+  // ✅ Show cart count on page load
+  updateCartCountInDOM();
 });
