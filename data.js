@@ -18,7 +18,7 @@ const products = [
   { id: 4, 
    name: "Denim Jeans", 
    price: 780.00, 
-   image: "images/item2.jpg", 
+   image: "images/item4.jpg", 
    page: "product4.html" },
 ];
 
