@@ -410,6 +410,12 @@ nav a.active::after {
   opacity: 0;
 }
 
+.pro-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
 /* ==== HERO ==== */
 #hero {
   background-image: url('IMAGE (5).jpg');
