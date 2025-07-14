@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Product Page</title>
+  <link rel="stylesheet" href="product.css" />
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" />  
+  <script src="data.js"></script>
+  <script src="https://www.paypal.com/sdk/js?client-id=YOUR_SANDBOX_CLIENT_ID&currency=USD"></script>
+</head>
+<body>
+
+  <header class="navbar">
+    <div class="nav-left">
+      <a href="index.html" class="logo">
+        <img src="/images/deadstock-logo.png" alt="DeadstockBlvd Logo" height="40" />
+      </a>
+
+      <div class="nav-wrapper" id="navWrapper">
+        <nav id="navbar">
+          <i id="close" class="fas fa-times"></i>
+          <a href="index.html">Home</a>
+          <a href="shop.html" class="active">Shop</a>
+          <a href="Contact.html">Contact</a>
+        </nav>
+      </div>
+      <i id="bar" class="fas fa-bars"></i>
+    </div>
+
+    <div class="nav-right">
+      <button id="searchIcon">
+        <i class="fas fa-search"></i>
+      </button>
+      <div id="cartIcon" class="cart-wrapper" role="button" tabindex="0">
+        <i class="fas fa-shopping-bag"></i>
+        <span id="cart-count">0</span>
+      </div>
+    </div>
+  </header>
+
+  <div id="searchOverlay">
+    <div class="search-inner">
+      <button id="closeSearch" aria-label="Close Search">&times;</button>
+      <div class="search-box">
+        <input type="text" id="searchInput" placeholder="Search products..." />
+        <div id="searchResults"></div>
+      </div>
+    </div>
+  </div>
+
+  <main class="product-page">
+    <div class="product-container">
+      
+      <div class="product-gallery">
+        <div class="slider">
+          <i class="fas fa-chevron-left nav-arrow" id="prevSlide"></i>
+          <img id="mainImage" src="images/product1.jpg" alt="Product Image" class="main-img" />
+          <i class="fas fa-chevron-right nav-arrow" id="nextSlide"></i>
+        </div>
+        <div class="thumbnails">
+          <img src="images/product1.jpg" class="thumb" />
+          <img src="images/product2.jpg" class="thumb" />
+          <img src="images/product3.jpg" class="thumb" />
+        </div>
+      </div>
+
+      <div class="product-info">
+        <h1>
+          Cargo Pants
+        </h1>
+        
+        <p class="description">
+          This is a short product description that highlights key features and style.
+        </p>
+        
+        <p class="price">
+          R500.00
+        </p>
+        <button
+          id="addToCartBtn"
+          class="add-to-cart"
+          data-id="3"
+          data-name="Cargo Pants"
+          data-price="500.00"
+          data-image="images/item3.jpg">
+          Add to Cart 🛒
+        </button>
+        <div id="paypal-button-container" style="margin-top: 20px;"></div>
+        <h3 class="recommendation-title">YOU MAY ALSO LIKE</h3>
+        <div class="recommendations">
+          <div class="recommend-box">
+            <img src="images/item2.jpg" alt="Suggestion 1" />
+            <p>Graphic Hoodie</p>
+            <span>R600.00</span>
+          </div>
+          <div class="recommend-box">
+            <img src="images/item4.jpg" alt="Suggestion 4" />
+            <p>Denim Jeans</p>
+            <span>R780.00</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="section-p1">
+      <div class="col install">
+          <p>Secured Payment Gateways</p>
+          <img src="Downloads/payments.PNG" alt="">
+      </div>
+            
+      <div class="copyright">
+          <p>© 2025, DeadstockBlvd</p>
+      </div>
+  </footer>
+  
+    <!-- Mobile Slide-in Cart Drawer -->
+  <div id="mobileCartDrawer">
+    <div id="mobileCartHeader">
+      <h3>Your Cart</h3>
+      <button id="closeCartDrawer">&times;</button>
+    </div>
+    <div id="mobileCartItems"></div>
+    <div id="mobileCartFooter">
+      <div class="footer-totals">
+        <p>Subtotal: <span id="drawerCartSubtotal">R0.00</span></p>
+      </div>
+      <button id="drawerCheckoutBtn" class="checkout-bar">Checkout</button>
+    </div>
+  </div>
+  
+  <script src="navbar.js"></script>
+  <script src="search.js"></script>
+  <script type="module" src="product.js"></script>
+  <script type="module" src="cart.js"></script>
+</body>
+</html>
