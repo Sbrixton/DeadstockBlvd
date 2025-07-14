@@ -88,7 +88,7 @@ nav a.active::after {
 }
 
 #hero {
-  background-image: url("images/your-wallpaper.jpg"); /* ← use your actual image path */
+  background-image: url("IMAGE (5).JPG"); /* ← use your actual image path */
   background-size: cover;
   background-position: center;
   height: 90vh;
