@@ -383,10 +383,9 @@ nav a.active::after {
 .contact-form {
   max-width: 800px;
   margin: 0 auto;
-  padding: 30px;
+  padding: 40px;
   background: #f9f9f9;
   border-radius: 10px;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
 }
 
 .contact-form .form-row {
@@ -420,7 +419,7 @@ nav a.active::after {
 .contact-form input,
 .contact-form textarea {
   width: 100%;
-  padding: 12px 14px;
+  padding: 14px 15px;
   font-size: 16px;
   border: 1px solid #ccc;
   border-radius: 6px;
