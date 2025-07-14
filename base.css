@@ -381,7 +381,7 @@ nav a.active::after {
 }
 
 .contact-form {
-  max-width: 700px;
+  max-width: 800px;
   margin: 0 auto;
   padding: 30px;
   background: #f9f9f9;
@@ -389,8 +389,21 @@ nav a.active::after {
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
 }
 
+.contact-form .form-row {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
 .contact-form .form-group {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
   margin-bottom: 20px;
+}
+
+.contact-form .full-width {
+  width: 100%;
 }
 
 .contact-form label {
@@ -435,6 +448,7 @@ nav a.active::after {
 .btn-submit:hover {
   background-color: #333;
 }
+
 
 
 /* ========== STICKY FOOTER ========== */
