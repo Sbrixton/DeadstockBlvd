@@ -4,7 +4,7 @@ const products = [
    name: "Graphic Hoodie", 
    price: 600.00, 
    image: "images/item1.jpg", 
-   page: "product.html" },
+   page: "product1.html" },
   { id: 2, 
    name: "Denim Jacket", 
    price: 750.00, 
