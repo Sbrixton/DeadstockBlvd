@@ -108,6 +108,40 @@
     
     <div id="toast" class="toast"></div>
     
+    <script>
+      const form = document.getElementById('contactForm');
+      const toast = document.getElementById('toast');
+      
+      function showToast(message) {
+        toast.textContent = message;
+        toast.classList.add("show");
+        
+        setTimeout(() => {
+          toast.classList.remove("show");
+        }, 2000);
+      }
+      
+      form.addEventListener('submit', async function (e) {
+        e.preventDefault();
+        
+        const formData = new FormData(form);
+        
+        const response = await fetch(form.action, {
+          method: form.method,
+          body: formData,
+          headers: { 'Accept': 'application/json' }
+        });
+        
+        if (response.ok) {
+          form.reset(); // Clear the form
+          showToast("Thank you for contacting us. We'll get back to you as soon as possible.");
+        } else {
+          showToast("Something went wrong. Please try again.");
+        }
+      });
+    </script>
+
+    
     <!-- ========== SCRIPTS ========== -->
     <script type="module" src="navbar.js"></script>
     <script type="module" src="search.js"></script>
