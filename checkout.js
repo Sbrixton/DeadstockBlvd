@@ -1,6 +1,6 @@
 // checkout.js
 
-// Retrieve and render cart
+// ===== Render Cart from Session =====
 const cart = JSON.parse(sessionStorage.getItem('checkoutCart')) || [];
 const cartBody = document.getElementById('cart-body');
 const totalDisplay = document.getElementById('cart-total');
@@ -23,25 +23,52 @@ cart.forEach(item => {
 
 totalDisplay.textContent = `$${total.toFixed(2)}`;
 
-// Terms checkbox logic
-const checkbox = document.getElementById('agree-check');
-const paypalContainer = document.getElementById('paypal-button-container');
+// ===== Modal Logic =====
+const termsModal = document.getElementById('termsModal');
+const modalCheckbox = document.getElementById('modalCheck'); // This checkbox lives inside the modal
+const agreeBtn = document.getElementById('agreeBtn');
+const agreeCheckbox = document.getElementById('agree-check'); // This is the one under PayPal
+const pageWrapper = document.querySelector('.page-wrapper');
 
-// Watch checkbox state and toggle PayPal
-checkbox.addEventListener('change', () => {
-  if (checkbox.checked) {
-    paypalContainer.classList.add('enabled');
+// Lock page until terms accepted
+document.addEventListener('DOMContentLoaded', () => {
+  termsModal.style.display = 'flex';
+  pageWrapper.style.pointerEvents = 'none';
+  pageWrapper.style.filter = 'blur(4px)';
+  agreeBtn.disabled = true; // Disable the button until checkbox is checked
+});
+
+// Enable "Agree" button once checkbox checked
+modalCheckbox.addEventListener('change', () => {
+  agreeBtn.disabled = !modalCheckbox.checked;
+});
+
+// When user agrees
+agreeBtn.addEventListener('click', () => {
+  termsModal.style.display = 'none';
+  pageWrapper.style.pointerEvents = 'auto';
+  pageWrapper.style.filter = 'none';
+  agreeCheckbox.checked = true;
+
+  // Enable PayPal container styling
+  document.getElementById('paypal-button-container').classList.add('enabled');
+});
+
+// ===== Checkbox Logic (below payment) =====
+agreeCheckbox.addEventListener('change', () => {
+  if (agreeCheckbox.checked) {
+    document.getElementById('paypal-button-container').classList.add('enabled');
   } else {
-    paypalContainer.classList.remove('enabled');
+    document.getElementById('paypal-button-container').classList.remove('enabled');
   }
 });
 
-// PayPal integration
+// ===== PayPal Button Logic =====
 paypal.Buttons({
   onInit: function (data, actions) {
     actions.disable();
 
-    checkbox.addEventListener('change', function () {
+    agreeCheckbox.addEventListener('change', function () {
       if (this.checked) {
         actions.enable();
       } else {
@@ -62,32 +89,7 @@ paypal.Buttons({
     return actions.order.capture().then(function (details) {
       alert(`✅ Thanks, ${details.payer.name.given_name}. Your order is confirmed.`);
       sessionStorage.removeItem('checkoutCart');
-      window.location.href = "thankyou.html";
+      // Stay on page – no redirect
     });
   }
 }).render('#paypal-button-container');
-
-// ===== Terms Modal Logic =====
-const termsModal = document.getElementById('termsModal');
-const agreeBtn = document.getElementById('agreeBtn');
-const agreeCheckbox = document.getElementById('agree-check');
-const pageWrapper = document.querySelector('.page-wrapper');
-
-// Lock the page until terms are accepted
-document.addEventListener('DOMContentLoaded', () => {
-  termsModal.style.display = 'flex';
-  pageWrapper.style.pointerEvents = 'none';
-  pageWrapper.style.filter = 'blur(4px)';
-});
-
-// Close modal and allow interaction
-agreeBtn.addEventListener('click', () => {
-  termsModal.style.display = 'none';
-  pageWrapper.style.pointerEvents = 'auto';
-  pageWrapper.style.filter = 'none';
-  agreeCheckbox.checked = true;
-
-  // Enable PayPal button once agreed
-  document.getElementById('paypal-button-container').classList.add('enabled');
-});
-
