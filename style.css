@@ -250,29 +250,33 @@ p {
     display: inline-block;
   }
   
-  .toast {
-    position: fixed;
-    top: 30px;
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: #46bd89;
-    color: #fff;
-    padding: 12px 24px;
+  .form-success {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #e6f9ed;
+    color: #2b7a4b;
+    padding: 12px 18px;
+    border: 1px solid #b4e2c3;
     border-radius: 6px;
+    margin-bottom: 20px;
     font-size: 16px;
-    opacity: 0;
-    pointer-events: none;
-    z-index: 9999;
-    transition: opacity 0.4s ease;
-    max-width: 320px;    /* limit width */
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-    text-align: center;  /* center the text inside */
-    white-space: nowrap; /* prevent text from wrapping */
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
   }
   
-  .toast.show {
-    opacity: 1;
-    pointer-events: auto;
+  .form-success .check-icon {
+    background-color: #2b7a4b;
+    color: white;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    font-size: 14px;
+    margin-right: 10px;
   }
   
   body.sticky-footer, html.sticky-footer {
