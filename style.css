@@ -438,14 +438,34 @@ nav a.active::after {
   border-color: rgba(255, 255, 255, 0.5);
 }
 
-#formSuccessMessage.fade-out {
-  animation: fadeOut 3s ease forwards;
+#formSuccessMessage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #2b7a4b;
+  font-weight: 600;
+  font-size: 16px;
+  margin-bottom: 20px;
+  gap: 10px;
+  opacity: 1;
+  transition: opacity 0.5s ease;
 }
-  
-@keyframes fadeOut {
-  0% { opacity: 1; }
-  80% { opacity: 1; }
-  100% { opacity: 0; visibility: hidden; }
+
+#formSuccessMessage .icon {
+  background-color: #2b7a4b;
+  color: white;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  font-size: 14px;
+}
+
+#formSuccessMessage.fade-out {
+  opacity: 0;
+  transition: opacity 2s ease;
 }
 
 /* ==== NEWSLETTER ==== */
