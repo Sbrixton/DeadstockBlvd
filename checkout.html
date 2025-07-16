@@ -65,28 +65,19 @@
 
       <section class="terms-pay">
         <h3>Total: <span id="cart-total">$0.00</span></h3>
-        <label>
-          <input type="checkbox" id="agree-check" disabled />
-          I agree to the <a href="#" id="view-terms-link">Terms & Conditions</a>.
+        
+        <label id="termsWrapper">
+          <input type="checkbox" id="agree-check" />
+          I agree to the 
+          <a href="#" id="view-terms-link">Terms & Conditions</a>.
         </label>
+        
         <div id="paypal-button-container" class="disabled"></div>
+        
       </section>
     </main>
   </div>
-  
-  <div id="termsModal" class="modal-overlay active">
-    <div class="modal-content">
-      <h2>Terms & Conditions</h2>
-      <p>
-        You must be 18 years or older to place an order. All sales are final. No refunds unless the item is defective or incorrect. Shipping may take 2–5 business days. DEADSTOCK BLVD is not responsible for lost or stolen packages once marked as delivered.
-      </p>
-      <div class="modal-agree">
-        <input type="checkbox" id="modalCheck" />
-        <label for="modalCheck">I agree to the Terms & Conditions</label>
-      </div>
-      <button id="agreeBtn" disabled>Close & Agree</button>
-    </div>
-  </div>
+
   <script src="data.js"></script>
   <script src="script.js"></script>
   <script src="checkout.js"></script>
