@@ -442,9 +442,10 @@ nav a.active::after {
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #2b7a4b;
+  color: #1d1e20;
   font-weight: 600;
   font-size: 16px;
+  margin-top: 20px;
   margin-bottom: 20px;
   gap: 10px;
   opacity: 1;
