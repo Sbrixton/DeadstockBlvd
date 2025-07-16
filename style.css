@@ -250,16 +250,6 @@ p {
     display: inline-block;
   }
   
-  #formSuccessMessage.fade-out {
-    animation: fadeOut 3s ease forwards;
-  }
-  
-  @keyframes fadeOut {
-    0% { opacity: 1; }
-    80% { opacity: 1; }
-    100% { opacity: 0; visibility: hidden; }
-  }
-  
   body.sticky-footer, html.sticky-footer {
     display: flex;
     flex-direction: column;
@@ -446,6 +436,16 @@ nav a.active::after {
 #hero button:hover {
   background: rgba(255, 255, 255, 0.2);
   border-color: rgba(255, 255, 255, 0.5);
+}
+
+#formSuccessMessage.fade-out {
+  animation: fadeOut 3s ease forwards;
+}
+  
+@keyframes fadeOut {
+  0% { opacity: 1; }
+  80% { opacity: 1; }
+  100% { opacity: 0; visibility: hidden; }
 }
 
 /* ==== NEWSLETTER ==== */
