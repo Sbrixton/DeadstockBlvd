@@ -50,6 +50,10 @@
     <!-- ========== MAIN CONTACT CONTENT (placeholder) ========== -->
     <main style="padding: 40px; text-align: center;">
       <h1>Contact Us</h1>
+      <div id="formSuccessMessage" class="form-success" style="display: none;">
+        <span class="check-icon">✔</span>
+        <span>Thanks for contacting us. We'll get back to you as soon as possible.</span>
+      </div>
       <!-- Add your contact form or info here -->
       <section id="contact-form-section" class="section-p1">
         <form 
@@ -105,42 +109,36 @@
         <button id="drawerCheckoutBtn" class="checkout-bar">Checkout</button>
       </div>
     </div>
-    
-    <div id="toast" class="toast"></div>
-    
-    <script>
-      const form = document.getElementById('contactForm');
-      const toast = document.getElementById('toast');
-      
-      function showToast(message) {
-        toast.textContent = message;
-        toast.classList.add("show");
         
-        setTimeout(() => {
-          toast.classList.remove("show");
-        }, 2000);
-      }
+    <script>
+      const form = document.getElementById("contactForm");
+      const messageBox = document.getElementById("formSuccessMessage");
       
-      form.addEventListener('submit', async function (e) {
-        e.preventDefault();
+      form.addEventListener("submit", async function (e) {
+        e.preventDefault(); // Prevent redirect
         
         const formData = new FormData(form);
         
-        const response = await fetch(form.action, {
-          method: form.method,
-          body: formData,
-          headers: { 'Accept': 'application/json' }
-        });
-        
-        if (response.ok) {
-          form.reset(); // Clear the form
-          showToast("Thank you for contacting us. We'll get back to you as soon as possible.");
-        } else {
-          showToast("Something went wrong. Please try again.");
+        try {
+          const response = await fetch(form.action, {
+            method: form.method,
+            body: formData,
+            headers: {
+              Accept: "application/json",
+            },
+          });
+          
+          if (response.ok) {
+            messageBox.style.display = "flex"; // Show success message
+            form.reset(); // Clear form inputs
+          } else {
+            alert("There was a problem submitting the form.");
+          }
+        } catch (error) {
+          alert("Error submitting form. Please try again later.");
         }
       });
     </script>
-
     
     <!-- ========== SCRIPTS ========== -->
     <script type="module" src="navbar.js"></script>
