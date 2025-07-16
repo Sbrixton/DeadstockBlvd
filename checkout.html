@@ -13,37 +13,8 @@
 <body>
   <div class="page-wrapper">
     <header class="navbar">
-      <div class="nav-left">
-        <i id="bar" class="fas fa-bars"></i>
-        <a href="index.html" class="logo">
-          <img src="/images/deadstock-logo.png" alt="DeadstockBlvd Logo" height="40" />
-        </a>
-        <div class="nav-wrapper" id="navWrapper">
-          <nav id="navbar">
-            <i id="close" class="fas fa-times"></i>
-            <a href="index.html">Home</a>
-            <a href="shop.html">Shop</a>
-            <a href="Contact.html">Contact</a>
-          </nav>
-        </div>
-      </div>
-
-      <div class="nav-right">
-        <button id="searchIcon"><i class="fas fa-search"></i></button>
-        <a href="Cart.html" id="cartIcon" class="cart-wrapper">
-          <i class="fas fa-shopping-bag"></i>
-          <span id="cart-count">0</span>
-        </a>
-      </div>
+      <!-- NAV CONTENT... -->
     </header>
-
-    <div id="searchOverlay">
-      <div class="search-box">
-        <button id="closeSearch">&times;</button>
-        <input type="text" id="searchInput" placeholder="Search products..." />
-        <div id="searchResults"></div>
-      </div>
-    </div>
 
     <main class="checkout-container">
       <section class="order-summary">
@@ -57,25 +28,40 @@
               <th>Subtotal</th>
             </tr>
           </thead>
-          <tbody id="cart-body">
-            
-          </tbody>
+          <tbody id="cart-body"></tbody>
         </table>
       </section>
 
       <section class="terms-pay">
         <h3>Total: <span id="cart-total">$0.00</span></h3>
-        
         <label id="termsWrapper">
           <input type="checkbox" id="agree-check" />
-          I agree to the 
+          I agree and understand the 
           <a href="#" id="view-terms-link">Terms & Conditions</a>.
         </label>
-        
         <div id="paypal-button-container" class="disabled"></div>
-        
       </section>
     </main>
+  </div>
+
+  <!-- OVERLAY (initially shown) -->
+  <div id="pageOverlay"></div>
+
+  <!-- TERMS MODAL -->
+  <div id="termsModal" class="terms-modal hidden">
+    <div class="terms-modal-content">
+      <h2>Terms & Conditions</h2>
+      <div class="terms-scroll">
+        <p>
+          You must be 18 years or older to place an order. All sales are final.
+          No refunds unless the item is defective or incorrect. Shipping may
+          take 2–5 business days. DEADSTOCK BLVD is not responsible for lost or
+          stolen packages once marked as delivered.
+        </p>
+        <!-- Add more content as needed -->
+      </div>
+      <button id="closeTermsBtn">Close</button>
+    </div>
   </div>
 
   <script src="data.js"></script>
