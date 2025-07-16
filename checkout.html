@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Checkout | DEADSTOCK BLVD</title>
+  <title>Checkout</title>
   <link rel="stylesheet" href="cart.css" />
   <link rel="stylesheet" href="checkout.css" />
   <script src="https://www.paypal.com/sdk/js?client-id=YOUR_CLIENT_ID&currency=USD"></script>
@@ -23,7 +23,7 @@
             <i id="close" class="fas fa-times"></i>
             <a href="index.html">Home</a>
             <a href="shop.html">Shop</a>
-            <a href="contact.html">Contact</a>
+            <a href="Contact.html">Contact</a>
           </nav>
         </div>
       </div>
@@ -73,14 +73,18 @@
       </section>
     </main>
   </div>
-
-  <div id="termsModal" class="modal-overlay">
+  
+  <div id="termsModal" class="modal-overlay active">
     <div class="modal-content">
       <h2>Terms & Conditions</h2>
       <p>
         You must be 18 years or older to place an order. All sales are final. No refunds unless the item is defective or incorrect. Shipping may take 2–5 business days. DEADSTOCK BLVD is not responsible for lost or stolen packages once marked as delivered.
       </p>
-      <button id="agreeBtn">Close & Agree</button>
+      <div class="modal-agree">
+        <input type="checkbox" id="modalCheck" />
+        <label for="modalCheck">I agree to the Terms & Conditions</label>
+      </div>
+      <button id="agreeBtn" disabled>Close & Agree</button>
     </div>
   </div>
   <script src="data.js"></script>
