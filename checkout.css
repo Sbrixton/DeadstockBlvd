@@ -43,6 +43,8 @@ h3 span#cart-total {
 }
 
 #termsWrapper {
+  position: relative; /* ADD this */
+  z-index: 1001;       /* ADD this — higher than overlay */
   font-size: 0.9rem;
   margin-top: 1rem;
 }
