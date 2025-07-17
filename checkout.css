@@ -1,4 +1,3 @@
-/* ===== Base Layout ===== */
 body {
   font-family: 'Helvetica Neue', sans-serif;
   background-color: #f4f4f4;
@@ -7,18 +6,13 @@ body {
   padding: 2rem;
 }
 
-header {
-  text-align: center;
-  margin-bottom: 2rem;
-}
-
 .checkout-container {
   max-width: 800px;
   margin: auto;
   background: white;
   padding: 2rem;
   border-radius: 8px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
 }
 
 .order-summary h2,
@@ -48,25 +42,25 @@ h3 span#cart-total {
   font-weight: bold;
 }
 
-label {
-  display: flex;
-  align-items: center;
+#termsWrapper {
   font-size: 0.9rem;
-}
-
-label input[type="checkbox"] {
-  margin-right: 0.5rem;
-}
-
-/* ===== Link Styling ===== */
-a {
-  color: #111;
-  text-decoration: underline;
-}
-
-/* ===== PayPal ===== */
-#paypal-button-container {
   margin-top: 1rem;
+}
+
+#termsWrapper input[type="checkbox"] {
+  margin-right: 8px;
+  transform: scale(1.2);
+}
+
+#termsWrapper a {
+  color: #000;
+  text-decoration: underline;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+#paypal-button-container {
+  margin-top: 1.5rem;
   opacity: 0.5;
   pointer-events: none;
   transition: opacity 0.3s ease;
@@ -77,51 +71,30 @@ a {
   pointer-events: auto;
 }
 
-/* ===== Blur Page Until Checkbox is Checked ===== */
-.page-wrapper.blurred {
-  filter: blur(5px);
-  pointer-events: none;
-}
-
-/* ===== Checkbox Agreement Overlay ===== */
-#termsWrapper {
+/* Light overlay on page until checkbox is checked */
+#pageOverlay {
   position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: #fff;
-  padding: 25px 30px;
-  border-radius: 10px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(2px);
   z-index: 999;
-  text-align: center;
-  font-size: 15px;
-  line-height: 1.5;
-  max-width: 90%;
-  width: 400px;
 }
 
-#termsWrapper input[type="checkbox"] {
-  margin-right: 8px;
-  transform: scale(1.2);
-}
-
-#termsWrapper.hidden {
-  display: none;
-}
-
-/* ===== Scrollable Terms Modal ===== */
+/* Modal styles for terms */
 .terms-modal {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(30, 30, 30, 0.6);
+  background: rgba(20, 20, 20, 0.6);
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 2000;
+  z-index: 1000;
 }
 
 .terms-modal.hidden {
@@ -129,32 +102,38 @@ a {
 }
 
 .terms-modal-content {
-  background: white;
-  padding: 30px;
-  border-radius: 8px;
-  width: 90%;
+  background: #fff;
   max-width: 600px;
-  max-height: 80vh;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  box-shadow: 0 12px 30px rgba(0,0,0,0.25);
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+  text-align: left;
+}
+
+.terms-modal-content h2 {
+  margin-top: 0;
+  font-size: 24px;
 }
 
 .terms-scroll {
-  overflow-y: auto;
   max-height: 300px;
-  margin: 20px 0;
-  line-height: 1.6;
+  overflow-y: auto;
+  margin: 15px 0;
   color: #333;
+  line-height: 1.6;
 }
 
 .terms-modal-content button {
-  padding: 10px 18px;
-  background: black;
+  padding: 10px 20px;
+  background: #000;
   color: white;
   border: none;
-  border-radius: 6px;
-  font-weight: bold;
+  border-radius: 5px;
   cursor: pointer;
+  font-weight: bold;
+  transition: background 0.3s ease;
+}
+
+.terms-modal-content button:hover {
+  background: #222;
 }
