@@ -13,7 +13,7 @@
 <body>
   <div class="page-wrapper">
     <header class="navbar">
-      <!-- NAV CONTENT... -->
+      <!-- your nav content here -->
     </header>
 
     <main class="checkout-container">
@@ -34,20 +34,24 @@
 
       <section class="terms-pay">
         <h3>Total: <span id="cart-total">$0.00</span></h3>
-        <label id="termsWrapper">
-          <input type="checkbox" id="agree-check" />
-          I agree and understand the 
-          <a href="#" id="view-terms-link">Terms & Conditions</a>.
-        </label>
+
+        <div id="termsWrapper">
+          <label>
+            <input type="checkbox" id="agree-check" />
+            I agree and understand the 
+            <a href="#" id="view-terms-link">Terms & Conditions</a>.
+          </label>
+        </div>
+
         <div id="paypal-button-container" class="disabled"></div>
       </section>
     </main>
   </div>
 
-  <!-- OVERLAY (initially shown) -->
+  <!-- Overlay on initial load -->
   <div id="pageOverlay"></div>
 
-  <!-- TERMS MODAL -->
+  <!-- Terms Modal (Only shows when clicked) -->
   <div id="termsModal" class="terms-modal hidden">
     <div class="terms-modal-content">
       <h2>Terms & Conditions</h2>
