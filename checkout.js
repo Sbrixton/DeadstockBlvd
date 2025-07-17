@@ -1,87 +1,88 @@
-const checkbox = document.getElementById('agree-check');
-const paypalContainer = document.getElementById('paypal-button-container');
-const pageOverlay = document.getElementById('pageOverlay');
-const termsModal = document.getElementById('termsModal');
-const closeTermsBtn = document.getElementById('closeTermsBtn');
-const viewTermsLink = document.getElementById('view-terms-link');
+import { getCart, updateCartCountInDOM } from "./cart-utils.js";
 
-// === Load and render cart ===
-const cart = JSON.parse(sessionStorage.getItem('checkoutCart')) || [];
-const cartBody = document.getElementById('cart-body');
-const totalDisplay = document.getElementById('cart-total');
-let total = 0;
+document.addEventListener("DOMContentLoaded", () => {
+  const cart = getCart();
+  const cartItemsContainer = document.getElementById("checkoutCartItems");
+  const subtotalElement = document.getElementById("checkoutSubtotal");
+  const shippingSelect = document.getElementById("shippingOption");
+  const freeShippingText = document.getElementById("freeShippingText");
+  const subtotalValue = calculateSubtotal(cart);
 
-cart.forEach(item => {
-  const price = parseFloat(item.price);
-  const subtotal = price * item.quantity;
-  total += subtotal;
+  updateCartCountInDOM();
+  renderCartItems(cart);
+  subtotalElement.textContent = `R${subtotalValue.toFixed(2)}`;
 
-  const row = document.createElement('tr');
-  row.innerHTML = `
-    <td>${item.name}</td>
-    <td>$${price.toFixed(2)}</td>
-    <td>${item.quantity}</td>
-    <td>$${subtotal.toFixed(2)}</td>
-  `;
-  cartBody.appendChild(row);
-});
+  // Show free shipping text on option select
+  shippingSelect?.addEventListener("change", () => {
+    if (shippingSelect.value === "standard") {
+      freeShippingText.style.display = "block";
+    }
+  });
 
-totalDisplay.textContent = `$${total.toFixed(2)}`;
-
-// === Overlay lock ===
-document.addEventListener('DOMContentLoaded', () => {
-  pageOverlay.style.display = 'block';
-  paypalContainer.classList.remove('enabled');
-});
-
-// === Checkbox control to unlock page ===
-checkbox.addEventListener('change', () => {
-  if (checkbox.checked) {
-    pageOverlay.style.display = 'none';
-    paypalContainer.classList.add('enabled');
-  } else {
-    pageOverlay.style.display = 'block';
-    paypalContainer.classList.remove('enabled');
-  }
-});
-
-// === Show/hide Terms Modal ===
-viewTermsLink.addEventListener('click', (e) => {
-  e.preventDefault();
-  termsModal.classList.remove('hidden');
-});
-
-closeTermsBtn.addEventListener('click', () => {
-  termsModal.classList.add('hidden');
-});
-
-// === PayPal Integration ===
-paypal.Buttons({
-  onInit: function (data, actions) {
-    actions.disable();
-
-    checkbox.addEventListener('change', function () {
-      if (this.checked) {
-        actions.enable();
-      } else {
-        actions.disable();
+  // Setup PayPal button
+  if (typeof paypal !== "undefined") {
+    paypal.Buttons({
+      style: {
+        layout: "vertical",
+        color: "black",
+        shape: "rect",
+        label: "paypal"
+      },
+      createOrder: (data, actions) => {
+        return actions.order.create({
+          purchase_units: [{
+            amount: {
+              value: subtotalValue.toFixed(2),
+              currency_code: "USD"
+            }
+          }]
+        });
+      },
+      onApprove: (data, actions) => {
+        return actions.order.capture().then(details => {
+          alert(`✅ Payment completed by ${details.payer.name.given_name}`);
+          localStorage.removeItem("cart");
+          window.location.href = "thankyou.html";
+        });
+      },
+      onError: (err) => {
+        console.error("PayPal Checkout error", err);
+        alert("There was an issue processing your payment.");
       }
-    });
-  },
-  createOrder: function (data, actions) {
-    return actions.order.create({
-      purchase_units: [{
-        amount: {
-          value: total.toFixed(2)
-        }
-      }]
-    });
-  },
-  onApprove: function (data, actions) {
-    return actions.order.capture().then(function (details) {
-      alert(`✅ Thanks, ${details.payer.name.given_name}. Order confirmed.`);
-      sessionStorage.removeItem('checkoutCart');
-      // Optional: show acknowledgment later here
-    });
+    }).render("#paypal-button-container");
   }
-}).render('#paypal-button-container');
+});
+
+function calculateSubtotal(cart) {
+  return cart.reduce((total, item) => total + item.price * item.quantity, 0);
+}
+
+function renderCartItems(cart) {
+  const container = document.getElementById("checkoutCartItems");
+
+  if (!container || cart.length === 0) {
+    container.innerHTML = "<p>Your cart is empty.</p>";
+    return;
+  }
+
+  container.innerHTML = `
+    <table class="cart-table">
+      <thead>
+        <tr>
+          <th>Item</th>
+          <th>Qty</th>
+          <th>Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        ${cart.map(item => `
+          <tr>
+            <td>${item.name}</td>
+            <td>${item.quantity}</td>
+            <td>R${(item.price * item.quantity).toFixed(2)}</td>
+          </tr>
+        `).join("")}
+      </tbody>
+    </table>
+  `;
+}
