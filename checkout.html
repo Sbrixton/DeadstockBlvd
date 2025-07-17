@@ -2,73 +2,96 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Checkout</title>
-  <link rel="stylesheet" href="cart.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Checkout | DeadstockBlvd</title>
+  <link rel="stylesheet" href="base.css" />
+  <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="checkout.css" />
-  <script src="https://www.paypal.com/sdk/js?client-id=YOUR_CLIENT_ID&currency=USD"></script>
-  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  <script src="data.js"></script>
+  <script src="https://www.paypal.com/sdk/js?client-id=sb&currency=USD"></script>
 </head>
 
-<body>
-  <div class="page-wrapper">
-    <header class="navbar">
-      <!-- your nav content here -->
-    </header>
-
-    <main class="checkout-container">
-      <section class="order-summary">
-        <h2>Order Summary</h2>
-        <table>
-          <thead>
-            <tr>
-              <th>Product</th>
-              <th>Price</th>
-              <th>Quantity</th>
-              <th>Subtotal</th>
-            </tr>
-          </thead>
-          <tbody id="cart-body"></tbody>
-        </table>
-      </section>
-
-      <section class="terms-pay">
-        <h3>Total: <span id="cart-total">$0.00</span></h3>
-
-        <div id="termsWrapper">
-          <label>
-            <input type="checkbox" id="agree-check" />
-            I agree and understand the 
-            <a href="#" id="view-terms-link">Terms & Conditions</a>.
-          </label>
-        </div>
-
-        <div id="paypal-button-container" class="disabled"></div>
-      </section>
-    </main>
-  </div>
-
-  <!-- Overlay on initial load -->
-  <div id="pageOverlay"></div>
-
-  <!-- Terms Modal (Only shows when clicked) -->
-  <div id="termsModal" class="terms-modal hidden">
-    <div class="terms-modal-content">
-      <h2>Terms & Conditions</h2>
-      <div class="terms-scroll">
-        <p>
-          You must be 18 years or older to place an order. All sales are final.
-          No refunds unless the item is defective or incorrect. Shipping may
-          take 2–5 business days. DEADSTOCK BLVD is not responsible for lost or
-          stolen packages once marked as delivered.
-        </p>
-        <!-- Add more content as needed -->
+<body class="sticky-footer">
+  <!-- ✅ Shared Header -->
+  <header class="navbar">
+    <div class="nav-left">
+      <a href="index.html" class="logo">
+        <img src="/images/deadstock-logo.png" alt="DeadstockBlvd Logo" height="40"/>
+      </a>
+      <div class="nav-wrapper" id="navWrapper">
+        <nav id="navbar">
+          <i id="close" class="fas fa-times"></i>
+          <a href="index.html">Home</a>
+          <a href="shop.html">Shop</a>
+          <a href="Contact.html">Contact</a>
+        </nav>
       </div>
-      <button id="closeTermsBtn">Close</button>
+      <i id="bar" class="fas fa-bars"></i>
+    </div>
+    <div class="nav-right">
+      <button id="searchIcon"><i class="fas fa-search"></i></button>
+      <div id="cartIcon" class="cart-wrapper" role="button" tabindex="0">
+        <i class="fas fa-shopping-bag"></i>
+        <span id="cart-count">0</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- ✅ Search Overlay -->
+  <div id="searchOverlay">
+    <div class="search-inner">
+      <button id="closeSearch" aria-label="Close Search">&times;</button>
+      <div class="search-box">
+        <input type="text" id="searchInput" placeholder="Search products..." />
+        <div id="searchResults"></div>
+      </div>
     </div>
   </div>
 
-  <script src="data.js"></script>
+  <!-- ✅ Main Checkout Layout -->
+  <main id="checkoutWrapper">
+    <section class="checkout-left">
+      <h2>Payment</h2>
+
+      <div class="shipping-section">
+        <label for="shippingOption">Shipping Method:</label>
+        <select id="shippingOption">
+          <option value="standard">Standard Shipping</option>
+        </select>
+        <p id="shippingNote" style="margin-top: 10px; color: green; display: none;">✅ Free shipping applied!</p>
+      </div>
+
+      <div class="summary">
+        <p>Subtotal: <strong id="checkoutSubtotal">R0.00</strong></p>
+      </div>
+
+      <div id="paypal-button-container" style="margin-top: 20px;"></div>
+    </section>
+
+    <section class="checkout-right">
+      <h2>Your Items</h2>
+      <div id="checkoutProducts" class="checkout-products-list"></div>
+    </section>
+  </main>
+
+  <!-- ✅ Cart Drawer -->
+  <div id="mobileCartDrawer">
+    <div id="mobileCartHeader">
+      <h3>Your Cart</h3>
+      <button id="closeCartDrawer">&times;</button>
+    </div>
+    <div id="mobileCartItems"></div>
+    <div id="mobileCartFooter">
+      <div class="footer-totals">
+        <p>Subtotal: <span id="drawerCartSubtotal">R0.00</span></p>
+      </div>
+      <button id="drawerCheckoutBtn" class="checkout-bar">Checkout</button>
+    </div>
+  </div>
+
+  <script type="module" src="cart-utils.js"></script>
+  <script src="navbar.js"></script>
+  <script src="search.js"></script>
   <script src="script.js"></script>
   <script src="checkout.js"></script>
 </body>
