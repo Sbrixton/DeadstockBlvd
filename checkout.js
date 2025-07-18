@@ -1,44 +1,34 @@
 import { getCart, updateCartCountInDOM } from "./cart-utils.js";
 
 document.addEventListener("DOMContentLoaded", () => {
-  console.log("[checkout.js] DOM fully loaded ✅");
+  console.log("[checkout.js] Page loaded");
 
   const cart = getCart();
-  console.log("[checkout.js] Cart contents:", cart);
+  updateCartCountInDOM();
 
-  const cartCountEl = document.getElementById("cart-count");
-  if (cartCountEl) {
-    console.log("[checkout.js] Found #cart-count element ✅");
-  } else {
-    console.warn("[checkout.js] #cart-count element NOT FOUND ❌");
-  }
-
-  // Slight delay to ensure DOM stability
-  setTimeout(() => {
-    updateCartCountInDOM();
-    console.log("[checkout.js] updateCartCountInDOM() called 🛒");
-  }, 100);
-
-  const cartItemsContainer = document.getElementById("checkoutProducts");
   const subtotalElement = document.getElementById("checkoutSubtotal");
   const shippingSelect = document.getElementById("shippingOption");
   const freeShippingText = document.getElementById("freeShippingText");
-
   const subtotalValue = calculateSubtotal(cart);
-  subtotalElement.textContent = `R${subtotalValue.toFixed(2)}`;
-  renderCartItems(cart);
 
-  shippingSelect?.addEventListener("change", () => {
-    if (shippingSelect.value === "standard") {
-      freeShippingText.style.display = "block";
-      console.log("[checkout.js] Free shipping applied ✅");
-    }
-  });
+  if (subtotalElement) {
+    subtotalElement.textContent = `R${subtotalValue.toFixed(2)}`;
+  }
 
-  // PayPal Integration
+  // ✅ Show free shipping note
+  if (shippingSelect && freeShippingText) {
+    shippingSelect.addEventListener("change", () => {
+      if (shippingSelect.value === "standard") {
+        freeShippingText.style.display = "block";
+      }
+    });
+  }
+
+  // ✅ Render products in right panel
+  renderCheckoutProducts(cart);
+
+  // ✅ PayPal button setup
   if (typeof paypal !== "undefined") {
-    console.log("[checkout.js] PayPal SDK loaded");
-
     paypal.Buttons({
       style: {
         layout: "vertical",
@@ -64,12 +54,10 @@ document.addEventListener("DOMContentLoaded", () => {
         });
       },
       onError: (err) => {
-        console.error("❌ PayPal Checkout error:", err);
+        console.error("PayPal Checkout error", err);
         alert("There was an issue processing your payment.");
       }
     }).render("#paypal-button-container");
-  } else {
-    console.warn("[checkout.js] PayPal SDK not found ❌");
   }
 });
 
@@ -77,35 +65,34 @@ function calculateSubtotal(cart) {
   return cart.reduce((total, item) => total + item.price * item.quantity, 0);
 }
 
-function renderCartItems(cart) {
-  const container = document.getElementById("checkoutCartItems");
+function renderCheckoutProducts(cart) {
+  const container = document.getElementById("checkoutProducts");
 
-  if (!container || cart.length === 0) {
-    console.log("[checkout.js] Cart is empty or container not found");
+  if (!container) {
+    console.warn("[checkout.js] #checkoutProducts not found in DOM.");
+    return;
+  }
+
+  if (cart.length === 0) {
     container.innerHTML = "<p>Your cart is empty.</p>";
     return;
   }
 
-  container.innerHTML = `
-    <table class="cart-table">
-      <thead>
-        <tr>
-          <th>Item</th>
-          <th>Qty</th>
-          <th>Price</th>
-        </tr>
-      </thead>
-      <tbody>
-        ${cart.map(item => `
-          <tr>
-            <td>${item.name}</td>
-            <td>${item.quantity}</td>
-            <td>R${(item.price * item.quantity).toFixed(2)}</td>
-          </tr>
-        `).join("")}
-      </tbody>
-    </table>
-  `;
+  cart.forEach(item => {
+    const itemDiv = document.createElement("div");
+    itemDiv.className = "checkout-item";
 
-  console.log("[checkout.js] Rendered cart items ✅");
+    itemDiv.innerHTML = `
+      <img src="${item.image}" alt="${item.name}" class="checkout-item-img" />
+      <div class="checkout-item-details">
+        <h4>${item.name}</h4>
+        <p>Qty: ${item.quantity}</p>
+        <p>Total: R${(item.price * item.quantity).toFixed(2)}</p>
+      </div>
+    `;
+
+    container.appendChild(itemDiv);
+  });
+
+  console.log("[checkout.js] Rendered products:", cart);
 }
