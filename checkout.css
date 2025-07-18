@@ -79,6 +79,57 @@ html, body {
   font-weight: bold;
 }
 
+/* ========== CHECKOUT RIGHT SIDE ITEMS ========== */
+.checkout-products-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 16px;
+}
+
+.checkout-item {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 12px;
+}
+
+.checkout-item-img {
+  width: 70px;
+  height: 70px;
+  object-fit: cover;
+  border-radius: 6px;
+  flex-shrink: 0;
+  margin-right: 12px;
+}
+
+.checkout-item-details {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.checkout-item-details h4 {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.checkout-item-details p {
+  font-size: 14px;
+  color: #555;
+  margin: 0;
+}
+
+.checkout-item-price {
+  font-size: 15px;
+  font-weight: 600;
+  color: #000;
+  margin-left: auto;
+}
+
+
 /* === Optional Terms Modal (if reused later) === */
 .terms-modal {
   position: fixed;
