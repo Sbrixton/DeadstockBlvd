@@ -83,10 +83,12 @@ function renderCheckoutProducts(cart) {
     itemDiv.className = "checkout-item";
     
     itemDiv.innerHTML = `
-      <img src="${item.image}" alt="${item.name}" class="checkout-item-img" />
+      <div class="checkout-img-wrapper">
+        <img src="${item.image}" alt="${item.name}" class="checkout-item-img" />
+        <span class="checkout-qty-badge">${item.quantity}</span>
+      </div>
       <div class="checkout-item-details">
         <h4>${item.name}</h4>
-        <p>Qty: ${item.quantity}</p>
       </div>
       <div class="checkout-item-price">R${(item.price * item.quantity).toFixed(2)}</div>
     `;
