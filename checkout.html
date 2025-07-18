@@ -63,18 +63,31 @@
         </select>
         <p id="shippingNote" style="margin-top: 10px; color: green; display: none;">✅ Free shipping applied!</p>
       </div>
-
+      
       <div class="summary">
         <p>Subtotal: <strong id="checkoutSubtotal">R0.00</strong></p>
       </div>
 
       <div id="paypal-button-container" style="margin-top: 20px;"></div>
     </section>
-
+    
     <section class="checkout-right">
       <h2>Your Items</h2>
       <div id="checkoutProducts" class="checkout-products-list"></div>
+      
+      <div class="shipping-row">
+        <label for="shippingOption">Shipping:</label>
+        <select id="shippingOption">
+          <option value="standard">Standard Shipping</option>
+        </select>
+        <span id="freeShippingText" style="display: none; color: green;">✅ Free Shipping</span>
+      </div>
+      
+      <div class="checkout-subtotal">
+        Subtotal: <strong id="checkoutSubtotal">R0.00</strong>
+      </div>
     </section>
+    
   </main>
 
   <!-- ✅ Cart Drawer -->
