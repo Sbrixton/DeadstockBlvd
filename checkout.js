@@ -1,36 +1,44 @@
 import { getCart, updateCartCountInDOM } from "./cart-utils.js";
 
 document.addEventListener("DOMContentLoaded", () => {
+  console.log("[checkout.js] DOM fully loaded ✅");
+
   const cart = getCart();
+  console.log("[checkout.js] Cart contents:", cart);
+
+  const cartCountEl = document.getElementById("cart-count");
+  if (cartCountEl) {
+    console.log("[checkout.js] Found #cart-count element ✅");
+  } else {
+    console.warn("[checkout.js] #cart-count element NOT FOUND ❌");
+  }
+
+  // Slight delay to ensure DOM stability
+  setTimeout(() => {
+    updateCartCountInDOM();
+    console.log("[checkout.js] updateCartCountInDOM() called 🛒");
+  }, 100);
+
   const cartItemsContainer = document.getElementById("checkoutCartItems");
   const subtotalElement = document.getElementById("checkoutSubtotal");
   const shippingSelect = document.getElementById("shippingOption");
   const freeShippingText = document.getElementById("freeShippingText");
 
-  // Render products
+  const subtotalValue = calculateSubtotal(cart);
+  subtotalElement.textContent = `R${subtotalValue.toFixed(2)}`;
   renderCartItems(cart);
 
-  // Calculate and display subtotal
-  const subtotalValue = calculateSubtotal(cart);
-  if (subtotalElement) {
-    subtotalElement.textContent = `R${subtotalValue.toFixed(2)}`;
-  }
-
-  // Delay cart count update to ensure #cart-count is in DOM
-  setTimeout(() => {
-    console.log("[checkout.js] Updating cart count…");
-    updateCartCountInDOM();
-  }, 0);
-
-  // Free shipping note
   shippingSelect?.addEventListener("change", () => {
-    if (shippingSelect.value === "standard" && freeShippingText) {
+    if (shippingSelect.value === "standard") {
       freeShippingText.style.display = "block";
+      console.log("[checkout.js] Free shipping applied ✅");
     }
   });
 
   // PayPal Integration
   if (typeof paypal !== "undefined") {
+    console.log("[checkout.js] PayPal SDK loaded");
+
     paypal.Buttons({
       style: {
         layout: "vertical",
@@ -56,12 +64,12 @@ document.addEventListener("DOMContentLoaded", () => {
         });
       },
       onError: (err) => {
-        console.error("PayPal Checkout error", err);
+        console.error("❌ PayPal Checkout error:", err);
         alert("There was an issue processing your payment.");
       }
     }).render("#paypal-button-container");
   } else {
-    console.warn("PayPal SDK not found.");
+    console.warn("[checkout.js] PayPal SDK not found ❌");
   }
 });
 
@@ -73,7 +81,8 @@ function renderCartItems(cart) {
   const container = document.getElementById("checkoutCartItems");
 
   if (!container || cart.length === 0) {
-    if (container) container.innerHTML = "<p>Your cart is empty.</p>";
+    console.log("[checkout.js] Cart is empty or container not found");
+    container.innerHTML = "<p>Your cart is empty.</p>";
     return;
   }
 
@@ -97,4 +106,6 @@ function renderCartItems(cart) {
       </tbody>
     </table>
   `;
+
+  console.log("[checkout.js] Rendered cart items ✅");
 }
