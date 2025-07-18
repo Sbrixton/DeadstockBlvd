@@ -150,6 +150,33 @@ html, body {
   line-height: 1;
 }
 
+.shipping-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 24px;
+  font-size: 14px;
+  gap: 8px;
+}
+
+.shipping-row select {
+  padding: 6px;
+  font-size: 14px;
+}
+
+#freeShippingText {
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.checkout-subtotal {
+  margin-top: 12px;
+  font-size: 16px;
+  font-weight: bold;
+  border-top: 1px solid #ddd;
+  padding-top: 12px;
+}
+
 /* === Optional Terms Modal (if reused later) === */
 .terms-modal {
   position: fixed;
