@@ -152,16 +152,17 @@ html, body {
 
 .shipping-row {
   display: flex;
-  align-items: center;
   justify-content: space-between;
+  align-items: center;
   margin-top: 24px;
-  font-size: 14px;
-  gap: 8px;
+  font-size: 15px;
+  font-weight: 500;
+  color: #000;
 }
 
-.shipping-row select {
-  padding: 6px;
-  font-size: 14px;
+.free-tag {
+  color: green;
+  font-weight: bold;
 }
 
 #freeShippingText {
