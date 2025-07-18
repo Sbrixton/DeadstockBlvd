@@ -6,20 +6,30 @@ document.addEventListener("DOMContentLoaded", () => {
   const subtotalElement = document.getElementById("checkoutSubtotal");
   const shippingSelect = document.getElementById("shippingOption");
   const freeShippingText = document.getElementById("freeShippingText");
-  const subtotalValue = calculateSubtotal(cart);
 
-  updateCartCountInDOM();
+  // Render products
   renderCartItems(cart);
-  subtotalElement.textContent = `R${subtotalValue.toFixed(2)}`;
 
-  // Show free shipping text on option select
+  // Calculate and display subtotal
+  const subtotalValue = calculateSubtotal(cart);
+  if (subtotalElement) {
+    subtotalElement.textContent = `R${subtotalValue.toFixed(2)}`;
+  }
+
+  // Delay cart count update to ensure #cart-count is in DOM
+  setTimeout(() => {
+    console.log("[checkout.js] Updating cart count…");
+    updateCartCountInDOM();
+  }, 0);
+
+  // Free shipping note
   shippingSelect?.addEventListener("change", () => {
-    if (shippingSelect.value === "standard") {
+    if (shippingSelect.value === "standard" && freeShippingText) {
       freeShippingText.style.display = "block";
     }
   });
 
-  // Setup PayPal button
+  // PayPal Integration
   if (typeof paypal !== "undefined") {
     paypal.Buttons({
       style: {
@@ -50,6 +60,8 @@ document.addEventListener("DOMContentLoaded", () => {
         alert("There was an issue processing your payment.");
       }
     }).render("#paypal-button-container");
+  } else {
+    console.warn("PayPal SDK not found.");
   }
 });
 
@@ -61,7 +73,7 @@ function renderCartItems(cart) {
   const container = document.getElementById("checkoutCartItems");
 
   if (!container || cart.length === 0) {
-    container.innerHTML = "<p>Your cart is empty.</p>";
+    if (container) container.innerHTML = "<p>Your cart is empty.</p>";
     return;
   }
 
