@@ -81,16 +81,16 @@ function renderCheckoutProducts(cart) {
   cart.forEach(item => {
     const itemDiv = document.createElement("div");
     itemDiv.className = "checkout-item";
-
+    
     itemDiv.innerHTML = `
       <img src="${item.image}" alt="${item.name}" class="checkout-item-img" />
       <div class="checkout-item-details">
         <h4>${item.name}</h4>
         <p>Qty: ${item.quantity}</p>
-        <p>Total: R${(item.price * item.quantity).toFixed(2)}</p>
       </div>
+      <div class="checkout-item-price">R${(item.price * item.quantity).toFixed(2)}</div>
     `;
-
+    
     container.appendChild(itemDiv);
   });
 
