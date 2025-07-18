@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
     console.log("[checkout.js] updateCartCountInDOM() called 🛒");
   }, 100);
 
-  const cartItemsContainer = document.getElementById("checkoutCartItems");
+  const cartItemsContainer = document.getElementById("checkoutProducts");
   const subtotalElement = document.getElementById("checkoutSubtotal");
   const shippingSelect = document.getElementById("shippingOption");
   const freeShippingText = document.getElementById("freeShippingText");
