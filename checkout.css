@@ -178,53 +178,58 @@ html, body {
   padding-top: 12px;
 }
 
-/* === Optional Terms Modal (if reused later) === */
-.terms-modal {
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-}
-
-.terms-modal.hidden {
-  display: none;
-}
-
-.terms-modal-content {
-  background: #fff;
-  padding: 30px;
-  border-radius: 10px;
-  max-width: 600px;
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
-}
-
-.terms-modal-content h2 {
-  margin-top: 0;
-}
-
-.terms-scroll {
-  max-height: 300px;
-  overflow-y: auto;
-  margin: 15px 0;
-  line-height: 1.6;
+/* ========== Terms Agreement ========== */
+.terms-container {
+  margin-top: 20px;
+  font-size: 14px;
   color: #333;
 }
 
-.terms-modal-content button {
-  padding: 10px 20px;
-  background: #000;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
+.terms-link {
+  color: #007bff;
+  text-decoration: underline;
   cursor: pointer;
-  font-weight: bold;
-  transition: background 0.3s ease;
 }
 
-.terms-modal-content button:hover {
-  background: #222;
+/* ========== Modal Styling ========== */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 2000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+  background: #fff;
+  margin: 10% auto;
+  padding: 20px;
+  max-width: 500px;
+  border-radius: 8px;
+  position: relative;
+}
+
+.close-modal {
+  position: absolute;
+  top: 10px;
+  right: 16px;
+  font-size: 22px;
+  cursor: pointer;
+}
+
+/* ========== Overlay to disable page ========== */
+#pageOverlay {
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.7);
+  z-index: 1500;
+  pointer-events: auto;
 }
