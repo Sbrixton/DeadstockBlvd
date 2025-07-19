@@ -13,6 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   renderCheckoutProducts(cart);
 
+  // ✅ PayPal Setup
   if (typeof paypal !== "undefined") {
     paypal.Buttons({
       style: {
@@ -45,25 +46,32 @@ document.addEventListener("DOMContentLoaded", () => {
     }).render("#paypal-button-container");
   }
 
-  // ✅ Terms checkbox and modal logic
+  // ✅ Terms Agreement Logic
   const checkbox = document.getElementById("termsCheckbox");
   const overlay = document.getElementById("pageOverlay");
   const modal = document.getElementById("termsModal");
   const showTerms = document.getElementById("showTerms");
   const closeModal = document.querySelector(".close-modal");
 
-  if (checkbox && overlay) {
-    overlay.style.display = "block"; // Disable page at first
+  if (overlay) {
+    overlay.style.display = "block"; // Page starts blocked
+  }
+
+  if (checkbox) {
     checkbox.addEventListener("change", () => {
-      overlay.style.display = checkbox.checked ? "none" : "block";
+      if (overlay) {
+        overlay.style.display = checkbox.checked ? "none" : "block";
+      }
     });
   }
 
-  if (showTerms && modal && closeModal) {
+  if (showTerms && modal) {
     showTerms.addEventListener("click", () => {
       modal.style.display = "block";
     });
+  }
 
+  if (closeModal && modal) {
     closeModal.addEventListener("click", () => {
       modal.style.display = "none";
     });
@@ -96,7 +104,7 @@ function renderCheckoutProducts(cart) {
   cart.forEach(item => {
     const itemDiv = document.createElement("div");
     itemDiv.className = "checkout-item";
-    
+
     itemDiv.innerHTML = `
       <div class="checkout-img-wrapper">
         <img src="${item.image}" alt="${item.name}" class="checkout-item-img" />
@@ -107,7 +115,7 @@ function renderCheckoutProducts(cart) {
       </div>
       <div class="checkout-item-price">R${(item.price * item.quantity).toFixed(2)}</div>
     `;
-    
+
     container.appendChild(itemDiv);
   });
 
