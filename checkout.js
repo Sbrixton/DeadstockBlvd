@@ -44,6 +44,36 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     }).render("#paypal-button-container");
   }
+
+  // ✅ Terms checkbox and modal logic
+  const checkbox = document.getElementById("termsCheckbox");
+  const overlay = document.getElementById("pageOverlay");
+  const modal = document.getElementById("termsModal");
+  const showTerms = document.getElementById("showTerms");
+  const closeModal = document.querySelector(".close-modal");
+
+  if (checkbox && overlay) {
+    overlay.style.display = "block"; // Disable page at first
+    checkbox.addEventListener("change", () => {
+      overlay.style.display = checkbox.checked ? "none" : "block";
+    });
+  }
+
+  if (showTerms && modal && closeModal) {
+    showTerms.addEventListener("click", () => {
+      modal.style.display = "block";
+    });
+
+    closeModal.addEventListener("click", () => {
+      modal.style.display = "none";
+    });
+
+    window.addEventListener("click", (e) => {
+      if (e.target === modal) {
+        modal.style.display = "none";
+      }
+    });
+  }
 });
 
 function calculateSubtotal(cart) {
