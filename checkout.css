@@ -183,12 +183,27 @@ html, body {
   margin-top: 20px;
   font-size: 14px;
   color: #333;
+  line-height: 1.6;
+}
+
+.terms-container label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
 }
 
 .terms-link {
   color: #007bff;
   text-decoration: underline;
   cursor: pointer;
+  display: inline-block;
+}
+
+/* Ensure checkbox appears in correct position */
+.terms-container input[type="checkbox"] {
+  margin: 0;
+  transform: scale(1.1);
 }
 
 /* ========== Modal Styling ========== */
@@ -219,6 +234,12 @@ html, body {
   right: 16px;
   font-size: 22px;
   cursor: pointer;
+  color: #888;
+  transition: color 0.2s;
+}
+
+.close-modal:hover {
+  color: #000;
 }
 
 /* ========== Overlay to disable page ========== */
