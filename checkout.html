@@ -55,8 +55,31 @@
   <main id="checkoutWrapper">
     <section class="checkout-left">
       <h2>Payment</h2>
-
+      
       <div id="paypal-button-container" style="margin-top: 20px;"></div>
+      <!-- ✅ Terms Checkbox & Modal -->
+      <div class="terms-container">
+        <label>
+          <input type="checkbox" id="termsCheckbox" />
+          I agree and understand the 
+          <span id="showTerms" class="terms-link">Terms & Conditions</span> of this website.
+        </label>
+      </div>
+      
+      <!-- ✅ Modal Popup -->
+      <div id="termsModal" class="modal">
+        <div class="modal-content">
+          <span class="close-modal">&times;</span>
+          <h3>Terms & Conditions</h3>
+          <p>
+            <!-- You can customize this content -->
+            By placing an order, you agree to our policies, including returns, shipping expectations, and product authenticity.
+          </p>
+        </div>
+      </div>
+      
+      <!-- ✅ Overlay to disable the page -->
+      <div id="pageOverlay"></div>
     </section>
     
     <section class="checkout-right">
