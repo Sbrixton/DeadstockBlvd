@@ -1,33 +1,18 @@
-import { getCart, updateCartCountInDOM } from "./cart-utils.js";
-
 document.addEventListener("DOMContentLoaded", () => {
   console.log("[checkout.js] Page loaded");
 
-  const cart = getCart();
+  const cart = JSON.parse(localStorage.getItem("cart") || "[]");
   updateCartCountInDOM();
 
   const subtotalElement = document.getElementById("checkoutSubtotal");
-  const shippingSelect = document.getElementById("shippingOption");
-  const freeShippingText = document.getElementById("freeShippingText");
   const subtotalValue = calculateSubtotal(cart);
 
   if (subtotalElement) {
     subtotalElement.textContent = `R${subtotalValue.toFixed(2)}`;
   }
 
-  // ✅ Show free shipping note
-  if (shippingSelect && freeShippingText) {
-    shippingSelect.addEventListener("change", () => {
-      if (shippingSelect.value === "standard") {
-        freeShippingText.style.display = "block";
-      }
-    });
-  }
-
-  // ✅ Render products in right panel
   renderCheckoutProducts(cart);
 
-  // ✅ PayPal button setup
   if (typeof paypal !== "undefined") {
     paypal.Buttons({
       style: {
@@ -97,4 +82,16 @@ function renderCheckoutProducts(cart) {
   });
 
   console.log("[checkout.js] Rendered products:", cart);
+}
+
+function updateCartCountInDOM() {
+  const cart = JSON.parse(localStorage.getItem("cart") || "[]");
+  const cartCount = document.getElementById("cart-count");
+  const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+
+  if (cartCount) {
+    cartCount.textContent = totalItems;
+  } else {
+    console.warn("[checkout.js] #cart-count element not found.");
+  }
 }
