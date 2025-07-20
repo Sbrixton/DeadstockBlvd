@@ -55,16 +55,26 @@
   <main id="checkoutWrapper">
     <section class="checkout-left">
       <h2>Payment</h2>
-      
       <!-- ✅ PayPal Buttons -->
       <div id="paypal-button-container" style="margin-top: 20px;"></div>
-      
       <!-- ✅ Terms Agreement Section -->
       <div class="checkout-agreement">
         I 
         <input type="checkbox" id="termsCheckbox" />
         agree and understand the
         <a id="showTerms">Terms & Conditions</a> of this website.
+      </div>
+      
+      <!-- ✅ Terms Modal -->
+      <div id="termsModal" class="modal">
+        <div class="modal-content">
+          <span class="close-modal">&times;</span>
+          <h3>Terms & Conditions</h3>
+          <p>
+            By placing an order, you agree to DeadstockBlvd’s terms including return policies,
+            privacy rights, and payment rules. Read carefully before continuing.
+          </p>
+        </div>
       </div>
             
       <!-- ✅ Page Overlay -->
