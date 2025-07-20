@@ -210,6 +210,10 @@ html, body {
   position: relative;
 }
 
+.checkout-agreement a:hover {
+  text-decoration: none;
+}
+
 /* ========== Modal Styling ========== */
 .modal {
   display: none;
