@@ -585,15 +585,8 @@ body.sticky-footer main {
   }
   
   .navbar {
-    position: sticky;
-    top: 0;
-    z-index: 999;
-    background: #ffffff; /* white nav */
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08); /* ✅ slightly stronger shadow */
-    padding: 20px 30px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    padding: 40px 0px;
+    flex-wrap: nowrap;
   }
   
   /* Show hamburger */
@@ -655,6 +648,8 @@ body.sticky-footer main {
     z-index: 998;
     transition: left 0.3s ease;
     box-shadow: 4px 0 10px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
   }
   
   .nav-wrapper.active {
@@ -787,6 +782,26 @@ body.sticky-footer main {
   .thrift-btn {
     padding: 14px 20px;
     font-size: 16px;
+  }
+  
+  .empty-cart-mobile {
+    text-align: center;
+    padding: 20px;
+  }
+  
+  .proceed-to-shop-btn {
+    margin-top: 12px;
+    padding: 10px 18px;
+    background: #f1f1f1;
+    color: #222;
+    border: none;
+    border-radius: 4px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  
+  .proceed-to-shop-btn:hover {
+    background: #333;
   }
 }
 
