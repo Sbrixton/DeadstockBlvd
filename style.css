@@ -717,7 +717,7 @@ body.sticky-footer main {
     max-width: 100%;
     box-sizing: border-box;
   }
-
+  
   #searchInput {
     font-size: 15px;
     padding: 10px 20px;
@@ -727,7 +727,7 @@ body.sticky-footer main {
     margin-bottom: 20px;
     box-sizing: border-box;
   }
-
+  
   .search-item {
     width: 100%;
     display: flex;
@@ -739,30 +739,30 @@ body.sticky-footer main {
     transition: 0.2s ease;
     box-sizing: border-box;
   }
-
+  
   .search-item:hover {
     background: #f1f1f1;
   }
-
+  
   .search-item img {
     width: 48px;
     height: 48px;
     object-fit: cover;
     border-radius: 4px;
   }
-
+  
   .search-info h4 {
     font-size: 14px;
     margin: 0;
     color: #111;
   }
-
+  
   .search-info p {
     font-size: 12.5px;
     color: #555;
     margin: 4px 0 0;
   }
-
+  
   #closeSearch {
     position: absolute;
     top: 20px;
@@ -774,7 +774,7 @@ body.sticky-footer main {
     cursor: pointer;
     z-index: 1001;
   }
-
+  
   #closeSearch:hover {
     color: #000;
   }
@@ -802,6 +802,63 @@ body.sticky-footer main {
   
   .proceed-to-shop-btn:hover {
     background: #333;
+  }
+
+    /* === Mobile Slide-in Cart Drawer === */
+  #mobileCartDrawer {
+    position: fixed;
+    top: 0;
+    right: -100%; /* Start off-screen on the right */
+    width: 70%; /* You can tweak this width */
+    height: 100vh;
+    background: #fff;
+    z-index: 999;
+    display: flex;
+    flex-direction: column;
+    transition: right 0.3s ease;
+    box-shadow: -4px 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  #mobileCartDrawer.open {
+    right: 0;
+  }
+  
+  #mobileCartHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px;
+    font-size: 1.2rem;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  #closeCartDrawer {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+  }
+  
+  #mobileCartItems {
+    flex: 1;
+    overflow-y: auto;
+    padding: 16px;
+  }
+  
+  #mobileCartFooter {
+    padding: 16px;
+    border-top: 1px solid #ddd;
+  }
+  
+  .checkout-bar {
+    width: 100%;
+    padding: 12px;
+    background: #000;
+    color: #fff;
+    border: none;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-top: 8px;
   }
   
   #mobileCartItems .cart-item {
