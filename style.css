@@ -803,6 +803,112 @@ body.sticky-footer main {
   .proceed-to-shop-btn:hover {
     background: #333;
   }
+  
+  #mobileCartItems .cart-item {
+    display: flex;
+    align-items: center;
+    padding: 12px 16px;
+    border-bottom: 1px solid #eee;
+  }
+  
+  #mobileCartItems .cart-img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 6px;
+    flex-shrink: 0;
+  }
+  
+  #mobileCartItems .cart-details {
+    flex: 1;
+    margin-left: 12px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  #mobileCartItems .cart-name {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+  
+  #mobileCartItems .cart-price {
+    font-size: 14px;
+    color: #444;
+    margin-bottom: 8px;
+  }
+  
+  #mobileCartItems .quantity-controls {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+  
+  #mobileCartItems .qty-btn {
+    width: 28px;
+    height: 28px;
+    border: none;
+    background: #eee;
+    font-size: 18px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  #mobileCartItems .qty-num {
+    font-size: 16px;
+    min-width: 20px;
+    text-align: center;
+  }
+  
+  #mobileCartItems .remove-item-mobile {
+    align-self: flex-start;
+    background: none;
+    border: none;
+    font-size: 18px;
+    color: #c00;
+    cursor: pointer;
+    position: absolute;
+    top: 12px;
+    right: 16px;
+  }
+  
+  .empty-cart-message {
+    text-align: center;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 500px;
+  }
+  
+  #paypal-button-container {
+    width: 100%;
+    max-width: 400px;
+    margin: 20px auto;
+    text-align: center;
+  }
+  
+  #paypal-button-container .paypal-button {
+    width: 100%;
+  }
+  
+  footer {
+    flex-direction: column;
+    align-items: center;
+    padding: 10px 10px;
+    text-align: center;
+  }
+  
+  footer .col {
+    width: 100%;
+    margin: 4px 0;
+  }
+  
+  footer .col h4 {
+    margin-bottom: 8px;
+  }
 }
 
 @media (max-width: 477px) {
