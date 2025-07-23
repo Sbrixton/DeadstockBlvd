@@ -1,5 +1,7 @@
+console.log("search.js loaded");
 document.addEventListener("DOMContentLoaded", () => {
   const searchIcon = document.getElementById("searchIcon");
+  console.log("searchIcon:", searchIcon);
   const searchOverlay = document.getElementById("searchOverlay");
   const searchInput = document.getElementById("searchInput");
   const searchResults = document.getElementById("searchResults");
