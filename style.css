@@ -680,14 +680,11 @@ body.sticky-footer main {
   }
   
   #close {
-    display: block;
+    display: block; /* 🔥 Show close (X) icon */
     position: absolute;
-    top: 20px;
-    right: 20px;
-    font-size: 30px;
-    color: #222; /* or black */
-    cursor: pointer;
-    z-index: 1001;
+    top: 30px;
+    right: 30px;
+    font-size: 28px;
   }
   /* ===== SEARCH OVERLAY ===== */
   #searchOverlay {
