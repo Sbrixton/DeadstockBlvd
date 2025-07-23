@@ -827,7 +827,7 @@ body.sticky-footer main {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 16px;
+    padding: 36px;
     font-size: 1.2rem;
     border-bottom: 1px solid #ddd;
   }
