@@ -23,6 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   searchIcon?.addEventListener("click", (e) => {
     e.stopPropagation();
+    console.log("🔍 Search icon clicked!");
     showOverlay();
   });
 
