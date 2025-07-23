@@ -10,15 +10,14 @@ document.addEventListener("DOMContentLoaded", () => {
   const products = JSON.parse(localStorage.getItem("products")) || [];
 
   const showOverlay = () => {
-    searchOverlay.style.display = "flex";
+    searchOverlay.classList.add("active");
     searchInput.focus();
   };
 
   const hideOverlay = () => {
-    searchOverlay.style.display = "none";
+    searchOverlay.classList.remove("active");
     searchInput.value = "";
     searchResults.innerHTML = "";
-    searchOverlay.style.opacity = "1"; // reset opacity if faded
   };
 
   searchIcon?.addEventListener("click", (e) => {
