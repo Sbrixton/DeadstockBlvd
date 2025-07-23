@@ -600,6 +600,7 @@ body.sticky-footer main {
   #bar {
     position: absolute;
     left: 15px;
+    display: block; /* ← This was missing */
     top: 50%;
     transform: translateY(-50%);
     color: white;
