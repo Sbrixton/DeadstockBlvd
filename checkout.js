@@ -5,10 +5,14 @@ document.addEventListener("DOMContentLoaded", () => {
   updateCartCountInDOM();
 
   const subtotalElement = document.getElementById("checkoutSubtotal");
+  const topSubtotal = document.getElementById("orderSummarySubtotal");
   const subtotalValue = calculateSubtotal(cart);
 
   if (subtotalElement) {
     subtotalElement.textContent = `R${subtotalValue.toFixed(2)}`;
+  }
+  if (topSubtotal) {
+    topSubtotal.textContent = `R${subtotalValue.toFixed(2)}`;
   }
 
   renderCheckoutProducts(cart);
@@ -80,6 +84,19 @@ document.addEventListener("DOMContentLoaded", () => {
       if (e.target === modal) {
         modal.style.display = "none";
       }
+    });
+  }
+
+  // ✅ Order Summary Toggle Logic (Mobile Only)
+  const toggleText = document.getElementById("orderSummaryToggleText");
+  const toggleIcon = document.getElementById("toggleIcon");
+  const summarySection = document.getElementById("mobileOrderSummary");
+
+  if (toggleText && summarySection && window.innerWidth <= 768) {
+    toggleText.addEventListener("click", () => {
+      const isOpen = summarySection.classList.contains("open");
+      summarySection.classList.toggle("open");
+      toggleIcon.textContent = isOpen ? "▼" : "▲";
     });
   }
 });
