@@ -235,32 +235,31 @@
       <div id="pageOverlay"></div>
     </section>
     
-<!-- ✅ Order Summary Toggle (Mobile) -->
-    <section class="checkout-right">
-      <div class="order-summary-toggle">
-        <span id="orderSummaryToggleText">
-          Order Summary <span id="toggleIcon">▼</span>
-        </span>
-        <span id="orderSummarySubtotal">R0.00</span>
+    <!-- ✅ Order Summary Toggle (Mobile) -->
+    <!-- ✅ Mobile Order Summary Toggle -->
+    <div class="order-summary-toggle" id="orderSummaryToggle">
+      <span id="orderSummaryToggleText">
+        Order summary <span id="orderSummaryArrow">▼</span>
+      </span>
+      <span id="orderSummarySubtotal">R0.00</span>
+    </div>
+    
+    <!-- ✅ Collapsible Order Summary Section -->
+    <section class="checkout-right" id="checkoutRightSection">
+      <div id="checkoutProducts" class="checkout-products-list"></div>
+      
+      <div class="shipping-row">
+        <span>Shipping:</span>
+        <span class="free-tag">FREE</span>
       </div>
       
-      <!-- ✅ Collapsible Order Summary Section -->
-      <div id="mobileOrderSummary" class="collapsible-order-summary">
-        <div id="checkoutProducts" class="checkout-products-list"></div>
-        
-        <div class="shipping-row">
-          <span>Shipping:</span>
-          <span class="free-tag">FREE</span>
-        </div>
-        
-        <div class="checkout-subtotal">
-          Subtotal: <strong id="checkoutSubtotal">R0.00</strong>
-        </div>
+      <div class="checkout-subtotal">
+        Subtotal: <strong id="checkoutSubtotal">R0.00</strong>
       </div>
     </section>
     
   </main>
-
+  
   <!-- ✅ Cart Drawer -->
   <div id="mobileCartDrawer">
     <div id="mobileCartHeader">
