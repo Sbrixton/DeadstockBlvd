@@ -235,17 +235,27 @@
       <div id="pageOverlay"></div>
     </section>
     
+<!-- ✅ Order Summary Toggle (Mobile) -->
     <section class="checkout-right">
-      <h2>Your Items</h2>
-      <div id="checkoutProducts" class="checkout-products-list"></div>
-      
-      <div class="shipping-row">
-        <span>Shipping:</span>
-        <span class="free-tag">FREE</span>
+      <div class="order-summary-toggle">
+        <span id="orderSummaryToggleText">
+          Order Summary <span id="toggleIcon">▼</span>
+        </span>
+        <span id="orderSummarySubtotal">R0.00</span>
       </div>
       
-      <div class="checkout-subtotal">
-        Subtotal: <strong id="checkoutSubtotal">R0.00</strong>
+      <!-- ✅ Collapsible Order Summary Section -->
+      <div id="mobileOrderSummary" class="collapsible-order-summary">
+        <div id="checkoutProducts" class="checkout-products-list"></div>
+        
+        <div class="shipping-row">
+          <span>Shipping:</span>
+          <span class="free-tag">FREE</span>
+        </div>
+        
+        <div class="checkout-subtotal">
+          Subtotal: <strong id="checkoutSubtotal">R0.00</strong>
+        </div>
       </div>
     </section>
     
