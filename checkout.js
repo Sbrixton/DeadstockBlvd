@@ -87,21 +87,17 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // ✅ Mobile Order Summary Toggle Logic
+  // ✅ Order Summary Toggle Logic (mobile only visually, but JS always ready)
   const toggleText = document.getElementById("orderSummaryToggleText");
   const toggleIcon = document.getElementById("toggleIcon");
   const summarySection = document.getElementById("mobileOrderSummary");
 
-  function toggleMobileSummary() {
-    const isOpen = summarySection.classList.contains("open");
-    summarySection.classList.toggle("open");
-    toggleIcon.textContent = isOpen ? "▼" : "▲";
-    toggleIcon.classList.toggle("arrow-rotated", !isOpen);
-  }
-
-  // Only add event listener on mobile
-  if (toggleText && summarySection && toggleIcon && window.innerWidth <= 768) {
-    toggleText.addEventListener("click", toggleMobileSummary);
+  if (toggleText && toggleIcon && summarySection) {
+    toggleText.addEventListener("click", () => {
+      const isOpen = summarySection.classList.toggle("open");
+      toggleIcon.textContent = isOpen ? "▲" : "▼";
+      toggleIcon.classList.toggle("arrow-rotated", isOpen);
+    });
   }
 });
 
