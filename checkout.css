@@ -263,6 +263,11 @@ html, body {
   pointer-events: auto;
 }
 
+.order-summary-toggle,
+#mobileOrderSummary {
+  display: none;
+}
+
 /* ========== MOBILE ORDER SUMMARY TOGGLE ========== */
 @media (max-width: 768px) {
   #checkoutWrapper {
