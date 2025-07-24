@@ -262,3 +262,64 @@ html, body {
   z-index: 1500;
   pointer-events: auto;
 }
+
+/* === MOBILE ONLY: Order Summary Toggle === */
+@media (max-width: 768px) {
+  #checkoutWrapper {
+    flex-direction: column;
+  }
+
+  .checkout-left,
+  .checkout-right {
+    padding: 20px;
+    border: none;
+    height: auto;
+  }
+
+  .checkout-left {
+    order: 2;
+  }
+
+  .checkout-right {
+    order: 1;
+    padding-top: 0;
+  }
+
+  .order-summary-toggle {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #f1f1f1;
+    padding: 16px;
+    font-weight: 600;
+    font-size: 16px;
+    cursor: pointer;
+    border-bottom: 1px solid #ddd;
+  }
+
+  .order-summary-toggle span#toggleIcon {
+    font-size: 14px;
+    margin-left: 8px;
+    transition: transform 0.3s ease;
+  }
+
+  #mobileOrderSummary {
+    overflow: hidden;
+    max-height: 0;
+    opacity: 0;
+    transition: max-height 0.4s ease, opacity 0.3s ease;
+  }
+
+  #mobileOrderSummary.open {
+    max-height: 1000px; /* large enough for content */
+    opacity: 1;
+    transition: max-height 0.5s ease, opacity 0.3s ease;
+  }
+
+  /* Make PayPal section full width under everything */
+  #paypal-button-container {
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+}
