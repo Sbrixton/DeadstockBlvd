@@ -87,17 +87,21 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // ✅ Order Summary Toggle Logic (Mobile Only)
+  // ✅ Mobile Order Summary Toggle Logic
   const toggleText = document.getElementById("orderSummaryToggleText");
   const toggleIcon = document.getElementById("toggleIcon");
   const summarySection = document.getElementById("mobileOrderSummary");
 
-  if (toggleText && summarySection && window.innerWidth <= 768) {
-    toggleText.addEventListener("click", () => {
-      const isOpen = summarySection.classList.contains("open");
-      summarySection.classList.toggle("open");
-      toggleIcon.textContent = isOpen ? "▼" : "▲";
-    });
+  function toggleMobileSummary() {
+    const isOpen = summarySection.classList.contains("open");
+    summarySection.classList.toggle("open");
+    toggleIcon.textContent = isOpen ? "▼" : "▲";
+    toggleIcon.classList.toggle("arrow-rotated", !isOpen);
+  }
+
+  // Only add event listener on mobile
+  if (toggleText && summarySection && toggleIcon && window.innerWidth <= 768) {
+    toggleText.addEventListener("click", toggleMobileSummary);
   }
 });
 
