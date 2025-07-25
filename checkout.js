@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   renderCheckoutProducts(cart);
 
-  // ✅ PayPal Setup
+  // PayPal Setup (same as before)
   if (typeof paypal !== "undefined") {
     paypal.Buttons({
       style: {
@@ -50,7 +50,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }).render("#paypal-button-container");
   }
 
-  // ✅ Terms Agreement Logic (with guard)
+  // Terms Agreement Logic
   const checkbox = document.getElementById("termsCheckbox");
   const overlay = document.getElementById("pageOverlay");
   const modal = document.getElementById("termsModal");
@@ -63,13 +63,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (checkbox && overlay) {
     checkbox.addEventListener("change", () => {
-      if (checkbox.checked) {
-        overlay.style.display = "none";
-        console.log("✅ Terms accepted — overlay hidden");
-      } else {
-        overlay.style.display = "block";
-        console.log("🔒 Terms unchecked — overlay shown");
-      }
+      overlay.style.display = checkbox.checked ? "none" : "block";
+      console.log(checkbox.checked ? "✅ Terms accepted — overlay hidden" : "🔒 Terms unchecked — overlay shown");
     });
   }
 
@@ -91,17 +86,16 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // ✅ Mobile Order Summary Toggle Logic
+  // Mobile Order Summary Toggle Logic (updated IDs)
   const toggleText = document.getElementById("orderSummaryToggleText");
-  const toggleIcon = document.getElementById("toggleIcon");
-  const summarySection = document.getElementById("mobileOrderSummary");
+  const toggleArrow = document.getElementById("orderSummaryArrow");
+  const summarySection = document.getElementById("checkoutRightSection");
 
-  if (toggleText && toggleIcon && summarySection) {
+  if (toggleText && toggleArrow && summarySection) {
     toggleText.addEventListener("click", () => {
       const isOpen = summarySection.classList.toggle("open");
-
-      toggleIcon.textContent = isOpen ? "▲" : "▼";
-      toggleIcon.classList.toggle("arrow-rotated", isOpen);
+      toggleArrow.textContent = isOpen ? "▲" : "▼";
+      toggleArrow.classList.toggle("arrow-rotated", isOpen);
     });
   }
 });
@@ -122,6 +116,8 @@ function renderCheckoutProducts(cart) {
     container.innerHTML = "<p>Your cart is empty.</p>";
     return;
   }
+
+  container.innerHTML = ""; // clear before adding
 
   cart.forEach(item => {
     const itemDiv = document.createElement("div");
