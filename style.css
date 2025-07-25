@@ -684,7 +684,7 @@ body.sticky-footer main {
     cursor: pointer;
     z-index: 1001;
   }
-  /* ===== SEARCH OVERLAY ===== */
+  /* === Search Overlay === */
   #searchOverlay {
     position: fixed;
     top: 70px;
@@ -705,13 +705,13 @@ body.sticky-footer main {
     transition: opacity 0.3s ease, transform 0.3s ease;
     box-sizing: border-box;
   }
-
+  
   #searchOverlay.active {
     display: flex;
     opacity: 1;
     transform: translateX(-50%) scale(1);
   }
-
+  
   .search-box {
     width: 100%;
     max-width: 100%;
