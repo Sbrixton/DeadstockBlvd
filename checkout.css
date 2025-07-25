@@ -285,24 +285,21 @@ html, body {
     order: 2;
   }
 
+  /* Hide summary by default on mobile */
   .checkout-right {
-    display: none; /* hidden on mobile unless toggled */
-    overflow: hidden;
-    transition: max-height 0.3s ease, opacity 0.3s ease;
     max-height: 0;
     opacity: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease, opacity 0.3s ease;
   }
 
-  #orderSummaryToggleText {
-    color: #007bff;
-    text-decoration: none;
-    font-weight: 500;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 4px;
+  /* Show summary when open */
+  .checkout-right.open {
+    max-height: 1000px; /* large enough to reveal content */
+    opacity: 1;
   }
 
+  /* The toggle container */
   .order-summary-toggle {
     display: flex;
     justify-content: space-between;
@@ -314,7 +311,18 @@ html, body {
     cursor: pointer;
   }
 
-  .order-summary-toggle span#toggleIcon {
+  /* Toggle text */
+  #orderSummaryToggleText {
+    color: #007bff;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  /* The arrow inside toggle */
+  #orderSummaryArrow {
     font-size: 14px;
     margin-left: 8px;
     transition: transform 0.3s ease;
@@ -324,23 +332,11 @@ html, body {
     transform: rotate(180deg);
   }
 
+  /* Subtotal in toggle */
   #orderSummarySubtotal {
     font-weight: 600;
     font-size: 15px;
     color: #000;
-  }
-
-  #mobileOrderSummary {
-    overflow: hidden;
-    max-height: 0;
-    opacity: 0;
-    transition: max-height 0.4s ease, opacity 0.3s ease;
-  }
-
-  #mobileOrderSummary.open {
-    max-height: 1000px;
-    opacity: 1;
-    transition: max-height 0.5s ease, opacity 0.3s ease;
   }
 
   #paypal-button-container {
