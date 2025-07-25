@@ -124,66 +124,59 @@ p {
     display: inline-block;
   }
   
-  /* ===== SEARCH OVERLAY: INPUT ONLY ===== */
+  /* === Search Overlay === */
   #searchOverlay {
     position: fixed;
-    top: 80px; /* adjust if your navbar is taller */
+    top: 70px; /* directly below navbar */
     left: 0;
-    width: 100%;
-    background: #fff;
-    padding: 12px 20px;
-    z-index: 998;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+    width: 100vw;
+    height: calc(100vh - 70px);
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(4px);
+    z-index: 999;
     display: none;
-    flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 40px 20px;
     box-sizing: border-box;
   }
   
-  /* Active state */
   #searchOverlay.active {
     display: flex;
   }
   
-  /* Input field full width */
+  /* Wrapper with input + clear button */
+  .search-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 600px;
+  }
+  
   #searchInput {
     width: 100%;
-    max-width: 900px;
-    padding: 14px 45px 14px 16px;
+    padding: 14px 45px 14px 18px;
     font-size: 16px;
     border: 1px solid #ccc;
     border-radius: 6px;
+    outline: none;
     box-sizing: border-box;
   }
   
-  /* Clear (X) button inside input */
-  #closeSearch {
+  /*Clear (×) button inside input */
+  #clearSearch {
     position: absolute;
-    top: 13px;
-    right: 30px;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 20px;
     background: none;
     border: none;
-    font-size: 20px;
     color: #666;
     cursor: pointer;
-    z-index: 999;
   }
   
-  /* Search results appear below input */
-  #searchResults {
-    margin-top: 15px;
-    width: 100%;
-    max-width: 900px;
-    box-sizing: border-box;
-  }
-  
-  /* Result items (optional) */
-  .search-item {
-    background: #f9f9f9;
-    padding: 12px 14px;
-    margin-bottom: 8px;
-    border-radius: 4px;
-    border: 1px solid #eee;
+  #clearSearch:hover {
+    color: #000;
   }
   
   #cart-count {
