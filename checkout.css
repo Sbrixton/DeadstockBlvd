@@ -271,6 +271,7 @@ html, body {
 /* ========== MOBILE ORDER SUMMARY TOGGLE ========== */
 @media (max-width: 768px) {
   #checkoutWrapper {
+    flex-direction: column;
     padding-left: 20px;
     padding-right: 20px;
   }
