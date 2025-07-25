@@ -272,13 +272,19 @@ html, body {
 @media (max-width: 768px) {
   #checkoutWrapper {
     flex-direction: column;
+    max-width: 600px;      /* optional max width for nice narrow on mobile */
+    margin: 0 auto;        /* center horizontally */
+    padding: 0 16px;       /* horizontal padding inside wrapper */
+    box-sizing: border-box;
   }
   
   .checkout-left,
   .checkout-right {
-    padding: 20px;
+    padding: 20px 0;       /* keep vertical padding */
     border: none;
     height: auto;
+    width: 100%;           /* full width inside wrapper */
+    box-sizing: border-box;
   }
   
   .checkout-left {
@@ -304,7 +310,7 @@ html, body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 16px;
+    padding: 16px 0;       /* vertical padding only */
     font-size: 16px;
     background: #f9f9f9;
     border-bottom: 1px solid #ddd;
@@ -341,7 +347,7 @@ html, body {
   
   #paypal-button-container {
     width: 100%;
-    padding: 20px;
+    padding: 20px 0;
     box-sizing: border-box;
   }
 }
