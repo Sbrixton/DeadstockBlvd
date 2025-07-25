@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
     paypal.Buttons({
       style: {
         layout: "vertical",
-        color: "black",
+        color: "yellow",
         shape: "rect",
         label: "paypal"
       },
@@ -94,9 +94,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (toggleText && toggleIcon && summarySection) {
     toggleText.addEventListener("click", () => {
-      const isOpen = summarySection.classList.toggle("open");
-      toggleIcon.textContent = isOpen ? "▲" : "▼";
-      toggleIcon.classList.toggle("arrow-rotated", isOpen);
+      const isOpen = summarySection.classList.contains("open");
+      
+      if (isOpen) {
+        summarySection.classList.remove("open");
+        toggleIcon.textContent = "▼";
+        toggleIcon.classList.remove("arrow-rotated");
+      } else {
+        summarySection.classList.add("open");
+        toggleIcon.textContent = "▲";
+        toggleIcon.classList.add("arrow-rotated");
+      }
     });
   }
 });
