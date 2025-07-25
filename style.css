@@ -124,61 +124,66 @@ p {
     display: inline-block;
   }
   
+  /* ===== SEARCH OVERLAY: INPUT ONLY ===== */
   #searchOverlay {
     position: fixed;
-    top: 100%; /* will animate from hidden to visible */
+    top: 80px; /* adjust if your navbar is taller */
     left: 0;
     width: 100%;
     background: #fff;
-    border-top: 1px solid #ccc;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-    display: flex;
+    padding: 12px 20px;
+    z-index: 998;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+    display: none;
     flex-direction: column;
     align-items: center;
-    padding: 16px 20px;
-    z-index: 998;
-    transition: top 0.3s ease;
     box-sizing: border-box;
   }
   
+  /* Active state */
   #searchOverlay.active {
-    top: 80px; /* or match your navbar height */
+    display: flex;
   }
   
-  .search-box {
-    position: relative;
-    width: 100%;
-    max-width: 100%;
-  }
-  
+  /* Input field full width */
   #searchInput {
     width: 100%;
-    padding: 14px 45px 14px 18px;
+    max-width: 900px;
+    padding: 14px 45px 14px 16px;
     font-size: 16px;
     border: 1px solid #ccc;
     border-radius: 6px;
     box-sizing: border-box;
   }
   
+  /* Clear (X) button inside input */
   #closeSearch {
     position: absolute;
-    right: 12px;
-    top: 50%;
-    transform: translateY(-50%);
+    top: 13px;
+    right: 30px;
     background: none;
     border: none;
-    font-size: 22px;
+    font-size: 20px;
     color: #666;
     cursor: pointer;
+    z-index: 999;
   }
   
-  #closeSearch:hover {
-    color: #000;
-  }
-  
+  /* Search results appear below input */
   #searchResults {
-    margin-top: 20px;
+    margin-top: 15px;
     width: 100%;
+    max-width: 900px;
+    box-sizing: border-box;
+  }
+  
+  /* Result items (optional) */
+  .search-item {
+    background: #f9f9f9;
+    padding: 12px 14px;
+    margin-bottom: 8px;
+    border-radius: 4px;
+    border: 1px solid #eee;
   }
   
   #cart-count {
