@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
     paypal.Buttons({
       style: {
         layout: "vertical",
-        color: "yellow",
+        color: "black",
         shape: "rect",
         label: "paypal"
       },
@@ -50,7 +50,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }).render("#paypal-button-container");
   }
 
-  // ✅ Terms Agreement Logic
+  // ✅ Terms Agreement Logic (with guard)
   const checkbox = document.getElementById("termsCheckbox");
   const overlay = document.getElementById("pageOverlay");
   const modal = document.getElementById("termsModal");
@@ -58,13 +58,17 @@ document.addEventListener("DOMContentLoaded", () => {
   const closeModal = document.querySelector(".close-modal");
 
   if (overlay) {
-    overlay.style.display = "block"; // Page starts blocked
+    overlay.style.display = "block";
   }
 
-  if (checkbox) {
+  if (checkbox && overlay) {
     checkbox.addEventListener("change", () => {
-      if (overlay) {
-        overlay.style.display = checkbox.checked ? "none" : "block";
+      if (checkbox.checked) {
+        overlay.style.display = "none";
+        console.log("✅ Terms accepted — overlay hidden");
+      } else {
+        overlay.style.display = "block";
+        console.log("🔒 Terms unchecked — overlay shown");
       }
     });
   }
@@ -87,24 +91,17 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // ✅ Order Summary Toggle Logic (mobile only visually, but JS always ready)
+  // ✅ Mobile Order Summary Toggle Logic
   const toggleText = document.getElementById("orderSummaryToggleText");
   const toggleIcon = document.getElementById("toggleIcon");
   const summarySection = document.getElementById("mobileOrderSummary");
 
   if (toggleText && toggleIcon && summarySection) {
     toggleText.addEventListener("click", () => {
-      const isOpen = summarySection.classList.contains("open");
-      
-      if (isOpen) {
-        summarySection.classList.remove("open");
-        toggleIcon.textContent = "▼";
-        toggleIcon.classList.remove("arrow-rotated");
-      } else {
-        summarySection.classList.add("open");
-        toggleIcon.textContent = "▲";
-        toggleIcon.classList.add("arrow-rotated");
-      }
+      const isOpen = summarySection.classList.toggle("open");
+
+      toggleIcon.textContent = isOpen ? "▲" : "▼";
+      toggleIcon.classList.toggle("arrow-rotated", isOpen);
     });
   }
 });
