@@ -11,27 +11,29 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const products = JSON.parse(localStorage.getItem("products")) || [];
 
-  // Show search bar
   function showSearch() {
     searchBarContainer.classList.add("active");
     searchInput.focus();
   }
 
-  // Hide search bar + results
   function hideSearch() {
-    searchBarContainer.classList.remove("active");
+    searchBarContainer.classList.remove("active", "typing");
     searchInput.value = "";
     searchResults.innerHTML = "";
     noResultsMessage.style.display = "none";
   }
 
-  // Handle search input
   function handleSearchInput() {
     const query = searchInput.value.toLowerCase().trim();
     searchResults.innerHTML = "";
     noResultsMessage.style.display = "none";
 
-    if (!query) return;
+    if (query) {
+      searchBarContainer.classList.add("typing");
+    } else {
+      searchBarContainer.classList.remove("typing");
+      return;
+    }
 
     const matches = products.filter(p =>
       p.name.toLowerCase().includes(query)
@@ -45,7 +47,6 @@ document.addEventListener("DOMContentLoaded", () => {
     renderResults(matches);
   }
 
-  // Render matched results
   function renderResults(results) {
     searchResults.innerHTML = results.map(product => `
       <a href="${product.page}?id=${product.id}" class="search-item-link">
@@ -60,7 +61,6 @@ document.addEventListener("DOMContentLoaded", () => {
     `).join("");
   }
 
-  // Click handlers
   searchIcon?.addEventListener("click", (e) => {
     e.stopPropagation();
     showSearch();
@@ -71,6 +71,7 @@ document.addEventListener("DOMContentLoaded", () => {
     searchInput.value = "";
     searchResults.innerHTML = "";
     noResultsMessage.style.display = "none";
+    searchBarContainer.classList.remove("typing");
     searchInput.focus();
   });
 
