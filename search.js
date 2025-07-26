@@ -1,80 +1,99 @@
 console.log("search.js loaded");
+
 document.addEventListener("DOMContentLoaded", () => {
   const searchIcon = document.getElementById("searchIcon");
-  console.log("searchIcon:", searchIcon);
-  const searchOverlay = document.getElementById("searchOverlay");
   const searchInput = document.getElementById("searchInput");
+  const searchBarContainer = document.getElementById("searchBarContainer");
+  const searchOverlay = document.getElementById("searchOverlay");
   const searchResults = document.getElementById("searchResults");
-  const closeSearch = document.getElementById("closeSearch");
+  const noResultsMessage = document.getElementById("noResultsMessage");
+  const clearSearch = document.getElementById("clearSearch");
 
   const products = JSON.parse(localStorage.getItem("products")) || [];
 
-  const showOverlay = () => {
-    searchOverlay.classList.add("active");
+  // Show search bar
+  function showSearch() {
+    searchBarContainer.classList.add("active");
     searchInput.focus();
-  };
+  }
 
-  const hideOverlay = () => {
-    searchOverlay.classList.remove("active");
+  // Hide search bar + results
+  function hideSearch() {
+    searchBarContainer.classList.remove("active");
     searchInput.value = "";
     searchResults.innerHTML = "";
-  };
+    noResultsMessage.style.display = "none";
+  }
 
+  // Handle search input
+  function handleSearchInput() {
+    const query = searchInput.value.toLowerCase().trim();
+    searchResults.innerHTML = "";
+    noResultsMessage.style.display = "none";
+
+    if (!query) return;
+
+    const matches = products.filter(p =>
+      p.name.toLowerCase().includes(query)
+    );
+
+    if (matches.length === 0) {
+      noResultsMessage.style.display = "block";
+      return;
+    }
+
+    renderResults(matches);
+  }
+
+  // Render matched results
+  function renderResults(results) {
+    searchResults.innerHTML = results.map(product => `
+      <a href="${product.page}?id=${product.id}" class="search-item-link">
+        <div class="search-item">
+          <img src="${product.image}" alt="${product.name}" />
+          <div class="search-info">
+            <h4>${product.name}</h4>
+            <p>R${product.price.toFixed(2)}</p>
+          </div>
+        </div>
+      </a>
+    `).join("");
+  }
+
+  // Click handlers
   searchIcon?.addEventListener("click", (e) => {
     e.stopPropagation();
-    console.log("🔍 Search icon clicked!");
-    showOverlay();
+    showSearch();
   });
 
-  closeSearch?.addEventListener("click", hideOverlay);
+  clearSearch?.addEventListener("click", (e) => {
+    e.stopPropagation();
+    searchInput.value = "";
+    searchResults.innerHTML = "";
+    noResultsMessage.style.display = "none";
+    searchInput.focus();
+  });
 
-  searchOverlay?.addEventListener("click", (e) => {
-    if (e.target === searchOverlay) hideOverlay();
+  document.addEventListener("click", (e) => {
+    const clickedInside = e.target.closest("#searchBarContainer") || e.target.closest("#searchIcon");
+    if (!clickedInside) hideSearch();
   });
 
   document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") hideOverlay();
+    if (e.key === "Escape") hideSearch();
   });
 
-  searchInput?.addEventListener("input", () => {
-    const query = searchInput.value.toLowerCase().trim();
-    const filtered = products.filter((p) => p.name.toLowerCase().includes(query));
-    renderResults(filtered);
-  });
+  searchInput?.addEventListener("input", handleSearchInput);
 
   searchResults?.addEventListener("click", (e) => {
     const link = e.target.closest(".search-item-link");
     if (!link) return;
 
     e.preventDefault();
-    const url = link.getAttribute("href");
-
-    // Fade out overlay before redirecting
-    searchOverlay.style.transition = "opacity 0.3s ease";
     searchOverlay.style.opacity = "0";
 
     setTimeout(() => {
-      window.location.href = url;
+      window.location.href = link.href;
     }, 300);
   });
-
-  function renderResults(results) {
-    if (results.length === 0) {
-      searchResults.innerHTML = `<p style="color:#555;">No matching products found.</p>`;
-      return;
-    }
-
-    searchResults.innerHTML = results
-      .map((product) => `
-          <a href="${product.page}?id=${product.id}" class="search-item-link">
-            <div class="search-item">
-              <img src="${product.image}" alt="${product.name}">
-              <div class="search-info">
-                <h4>${product.name}</h4>
-                <p>R${product.price.toFixed(2)}</p>
-              </div>
-            </div>
-          </a>
-      `).join("");
-  }
 });
