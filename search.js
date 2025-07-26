@@ -80,6 +80,11 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!clickedInside) hideSearch();
   });
 
+  // 👇 Tapping the overlay itself will also close search
+  searchOverlay?.addEventListener("click", () => {
+    hideSearch();
+  });
+
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape") hideSearch();
   });
