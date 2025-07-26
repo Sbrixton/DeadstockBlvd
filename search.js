@@ -61,11 +61,13 @@ document.addEventListener("DOMContentLoaded", () => {
     `).join("");
   }
 
+  // Open search
   searchIcon?.addEventListener("click", (e) => {
     e.stopPropagation();
     showSearch();
   });
 
+  // Clear search
   clearSearch?.addEventListener("click", (e) => {
     e.stopPropagation();
     searchInput.value = "";
@@ -75,22 +77,24 @@ document.addEventListener("DOMContentLoaded", () => {
     searchInput.focus();
   });
 
+  // ✅ Click anywhere outside to close (even without typing)
   document.addEventListener("click", (e) => {
-    const clickedInside = e.target.closest("#searchBarContainer") || e.target.closest("#searchIcon");
-    if (!clickedInside) hideSearch();
+    const isInsideSearch = e.target.closest("#searchBarContainer");
+    const isSearchIcon = e.target.closest("#searchIcon");
+    if (!isInsideSearch && !isSearchIcon) {
+      hideSearch();
+    }
   });
 
-  // 👇 Tapping the overlay itself will also close search
-  searchOverlay?.addEventListener("click", () => {
-    hideSearch();
-  });
-
+  // Escape key closes search
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape") hideSearch();
   });
 
+  // Typing triggers search results
   searchInput?.addEventListener("input", handleSearchInput);
 
+  // Clicking on a result navigates
   searchResults?.addEventListener("click", (e) => {
     const link = e.target.closest(".search-item-link");
     if (!link) return;
@@ -101,5 +105,10 @@ document.addEventListener("DOMContentLoaded", () => {
     setTimeout(() => {
       window.location.href = link.href;
     }, 300);
+  });
+
+  // ✅ Also let the overlay itself close the search
+  searchOverlay?.addEventListener("click", () => {
+    hideSearch();
   });
 });
