@@ -188,7 +188,7 @@ p {
   }
   
   /* Show overlay when active */
-  #searchBarContainer.typing #searchOverlay {
+  #searchBarContainer.active.typing #searchOverlay {
     display: block;
   }
   
