@@ -41,7 +41,7 @@
         </div>
     </header>
     
-    <!-- ✅ Search Bar (below navbar) -->
+    <!-- ✅ Search Bar Container (below navbar) -->
     <div id="searchBarContainer">
       <div class="search-input-wrapper">
         <input
@@ -52,12 +52,15 @@
         />
         <button id="clearSearch" aria-label="Clear Search">&times;</button>
       </div>
-      <div id="searchOverlay"></div>
+            
       <div id="searchResultsWrapper">
         <p id="noResultsMessage" style="display: none;">No products found.</p>
         <div id="searchResults"></div>
       </div>
     </div>
+    
+    <!-- ✅ Search overlay now OUTSIDE the container -->
+    <div id="searchOverlay"></div>
     <!-- ========== SHOP PRODUCT GRID ========== -->
     <section id="products">
         <h2>Shop All</h2>
