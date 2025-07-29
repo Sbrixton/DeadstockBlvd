@@ -11,18 +11,30 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const products = JSON.parse(localStorage.getItem("products")) || [];
 
-  function showSearch() {
-    searchBarContainer.classList.add("active");
-    searchInput.focus();
-  }
-
-  function hideSearch() {
-    searchBarContainer.classList.remove("active", "typing");
-    searchInput.value = "";
+  function handleSearchInput() {
+    const query = searchInput.value.toLowerCase().trim();
     searchResults.innerHTML = "";
     noResultsMessage.style.display = "none";
+    
+    if (query) {
+      searchBarContainer.classList.add("typing");
+    } else {
+      searchBarContainer.classList.remove("typing");
+      return;
+    }
+    
+    const matches = products.filter(p =>
+      p.name.toLowerCase().includes(query)
+    );
+    
+    if (matches.length === 0) {
+      noResultsMessage.style.display = "block";
+      return;
+    }
+    
+    renderResults(matches);
   }
-
+  
   function handleSearchInput() {
     const query = searchInput.value.toLowerCase().trim();
     searchResults.innerHTML = "";
