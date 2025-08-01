@@ -1,8 +1,9 @@
 /* ========== GENERAL RESET & BASE ========== */
 body {
   margin: 0;
-  font-family: 'Segoe UI', sans-serif;
+  font-family: 'Spartan', sans-serif;
   color: #111;
+  font-weight: 400; /* light-medium weight */
 }
 
 /* ========== NAVBAR ========== */
