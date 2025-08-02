@@ -1,8 +1,49 @@
-/* ========== GENERAL LAYOUT ========== */
-body {
+@import url('https://fonts.googleapis.com/css2?family=Spartan:wght@300;400;600;700&display=swap');
+
+* {
   margin: 0;
-  font-family: 'Segoe UI', sans-serif;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Spartan', sans-serif;
+  font-weight: 400;
+}
+
+body {
+  width: 100%;
+  max-width: 2000px;
+  margin: 0 auto;
+  background: #fff;
   color: #111;
+  font-weight: 400; /* consistent body text weight */
+  line-height: 1.6;
+}
+
+h1 {
+  font-weight: 600; /* for page titles */
+  font-size: 48px;
+  line-height: 60px;
+}
+
+h2 {
+  font-weight: 600; /* slightly lighter */
+  font-size: 50px;
+  line-height: 48px;
+}
+
+h3 {
+  font-weight: 400; /* even lighter, for sections */
+  font-size: 28px;
+}
+
+h4, h5, h6 {
+  font-weight: 400;
+}
+
+p {
+  font-size: 15px;
+  font-weight: 300;
+  color: #444;
+  line-height: 1.7;
 }
 
 main.product-page {
@@ -234,9 +275,9 @@ main.product-page {
 }
 
 #navbar a {
-  color: #111;
+  color: #111; /* dark links for light background */
   text-decoration: none;
-  font-weight: 600;
+  font-weight: 500;
 }
 
 #navbar a:hover,
@@ -244,15 +285,20 @@ main.product-page {
   color: #46bd89;
 }
 
+/* Make sure nav-wrapper is visible on desktop */
 .nav-wrapper {
   display: flex;
   align-items: center;
   gap: 30px;
+  flex: 1;
+  justify-content: flex-start;
 }
 
+/* Show hamburger and close icons only on mobile */
 #bar,
 #close {
   display: none;
+  color: #222; /* Dark color for visibility on white navbar */
 }
 
 .logo {
