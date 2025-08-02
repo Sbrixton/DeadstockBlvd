@@ -19,15 +19,24 @@ body {
 }
 
 h1 {
+  font-weight: 600; /* for page titles */
   font-size: 48px;
   line-height: 60px;
-  font-weight: 500;
 }
 
 h2 {
-  font-size: 32px;
-  line-height: 44px;
-  font-weight: 500;
+  font-weight: 500; /* slightly lighter */
+  font-size: 36px;
+  line-height: 48px;
+}
+
+h3 {
+  font-weight: 400; /* even lighter, for sections */
+  font-size: 28px;
+}
+
+h4, h5, h6 {
+  font-weight: 400;
 }
 
 p {
@@ -1057,3 +1066,4 @@ body.sticky-footer main {
     padding: 0 10px;
   }
 }
+
