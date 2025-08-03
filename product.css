@@ -1,39 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Spartan:wght@300;400;600;700&display=swap');
 /* ========== GENERAL LAYOUT ========== */
-/* ========== GENERAL LAYOUT ========== */
-body {
-  margin: 0;
-  font-family: 'Segoe UI', sans-serif;
-  color: #111;
-}
 
-h1 {
-  font-weight: 600; /* for page titles */
-  font-size: 48px;
-  line-height: 60px;
-}
-
-h2 {
-  font-weight: 600; /* slightly lighter */
-  font-size: 50px;
-  line-height: 48px;
-}
-
-h3 {
-  font-weight: 400; /* even lighter, for sections */
-  font-size: 28px;
-}
-
-h4, h5, h6 {
-  font-weight: 400;
-}
-
-p {
-  font-size: 15px;
-  font-weight: 300;
-  color: #444;
-  line-height: 1.7;
-}
 
 main.product-page {
   padding: 40px 30px;
@@ -195,48 +161,6 @@ main.product-page {
   margin-bottom: 8px;
 }
 
-/* ========== NAVBAR / SEARCH / FOOTER ========== */
-.navbar {
-  position: sticky;
-  top: 0;
-  z-index: 999;
-  background: rgba(255, 255, 255, 0.95);
-  padding: 30px 30px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-}
-
-.nav-left {
-  display: flex;
-  align-items: center;
-  gap: 40px;
-}
-
-.nav-right {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-left: auto;
-  z-index: 1;
-  position: relative;
-}
-
-.nav-right i,
-.nav-right button {
-  font-size: 20px;
-  color: #222;
-  background: none;
-  border: none;
-  cursor: pointer;
-  transition: color 0.2s ease;
-}
-
-.nav-right i:hover,
-.nav-right button:hover {
-  color: #555;
-}
 
 /* Cart Count */
 #cart-count {
@@ -258,16 +182,9 @@ main.product-page {
   display: inline-block;
 }
 
-#navbar {
-  display: flex;
-  gap: 30px;
-}
 
-#navbar a {
-  color: #111; /* dark links for light background */
-  text-decoration: none;
-  font-weight: 500;
-}
+
+
 
 #navbar a:hover,
 #navbar a.active {
