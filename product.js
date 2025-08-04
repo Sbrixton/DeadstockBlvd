@@ -28,7 +28,6 @@ document.addEventListener("DOMContentLoaded", () => {
     saveCart(cart);
     updateCartCountInDOM();
 
-    // Update drawer if it's open
     const drawer = document.getElementById("mobileCartDrawer");
     if (drawer?.classList.contains("open")) {
       const module = await import("./cart.js");
@@ -38,16 +37,53 @@ document.addEventListener("DOMContentLoaded", () => {
 
   updateCartCountInDOM();
 
-  // Initialize PayPal Button
-  console.log("Initializing PayPal buttons...");
+  // ======= Product Gallery Slider Logic =======
+  const mainImage = document.getElementById("mainImage");
+  const thumbnails = Array.from(document.querySelectorAll(".thumb"));
+  const prevBtn = document.getElementById("prevSlide");
+  const nextBtn = document.getElementById("nextSlide");
 
+  if (mainImage && thumbnails.length > 0) {
+    let currentIndex = 0;
+
+    function updateMainImage(index) {
+      mainImage.src = thumbnails[index].src;
+
+      thumbnails.forEach((thumb, i) => {
+        thumb.classList.toggle("active", i === index);
+      });
+
+      currentIndex = index;
+    }
+
+    thumbnails.forEach((thumb, index) => {
+      thumb.addEventListener("click", () => {
+        updateMainImage(index);
+      });
+    });
+
+    prevBtn?.addEventListener("click", () => {
+      let newIndex = currentIndex - 1;
+      if (newIndex < 0) newIndex = thumbnails.length - 1;
+      updateMainImage(newIndex);
+    });
+
+    nextBtn?.addEventListener("click", () => {
+      let newIndex = currentIndex + 1;
+      if (newIndex >= thumbnails.length) newIndex = 0;
+      updateMainImage(newIndex);
+    });
+
+    // Initialize first image
+    updateMainImage(0);
+  }
+
+  // ======= PayPal Init =======
   if (window.paypal) {
     paypal.Buttons({
       createOrder(data, actions) {
         const cart = getCart();
         const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
-        console.log("Creating PayPal order, total:", total);
-
         return actions.order.create({
           purchase_units: [{
             amount: {
@@ -58,8 +94,6 @@ document.addEventListener("DOMContentLoaded", () => {
       },
       onApprove(data, actions) {
         return actions.order.capture().then(details => {
-          console.log("PayPal approval complete:", details);
-          // Redirect to checkout page
           window.location.href = "checkout.html";
         });
       },
