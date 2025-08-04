@@ -180,6 +180,39 @@ main.product-page {
   font-weight: 600;
 }
 
+.recommend-box .product-img {
+  position: relative;
+  width: 100%;
+  height: 180px;
+  overflow: hidden;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+.recommend-box .product-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: opacity 0.3s ease;
+  display: block;
+  border-radius: 8px;
+}
+
+.recommend-box .hover-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+}
+
+.recommend-box:hover .hover-img {
+  opacity: 1;
+}
+
+.recommend-box:hover .main-img {
+  opacity: 0;
+}
+
 /* Cart Count */
 #cart-count {
   position: absolute;
