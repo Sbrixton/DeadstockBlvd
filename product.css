@@ -130,37 +130,55 @@ main.product-page {
 }
 
 /* ========== RECOMMENDED PRODUCTS ========== */
-.recommendation-title {
-  margin-top: 30px;
-  font-size: 1.2rem;
-}
-
 .recommendations {
   display: flex;
-  gap: 20px;
+  gap: 24px;
   flex-wrap: wrap;
+  justify-content: flex-start;
+  margin-top: 20px;
+}
+
+.recommend-link {
+  text-decoration: none;
+  color: inherit;
 }
 
 .recommend-box {
-  flex: 1;
-  max-width: 220px;
-  background: #f7f7f7;
-  border-radius: 8px;
-  padding: 14px;
-  text-align: center;
-  transition: transform 0.3s ease;
+  flex: 0 0 200px;
+  background: #f4f4f4;
+  border-radius: 10px;
+  padding: 12px;
+  text-align: left;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
 }
 
 .recommend-box:hover {
-  transform: translateY(-6px);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
 }
 
 .recommend-box img {
   width: 100%;
-  border-radius: 6px;
-  margin-bottom: 8px;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 10px;
 }
 
+.recommend-box p {
+  font-size: 14px;
+  font-weight: 500;
+  color: #222;
+  margin: 5px 0;
+}
+
+.recommend-box span {
+  font-size: 14px;
+  color: #088178;
+  font-weight: 600;
+}
 
 /* Cart Count */
 #cart-count {
