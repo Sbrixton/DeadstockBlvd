@@ -1,6 +1,4 @@
 /* ========== GENERAL LAYOUT ========== */
-
-
 main.product-page {
   padding: 40px 30px;
 }
@@ -65,10 +63,11 @@ main.product-page {
 /* Thumbnails */
 .thumbnails {
   display: flex;
+  flex-wrap: wrap;         /* Allow wrapping to avoid scrolling */
   gap: 14px;
   justify-content: center;
   padding-top: 6px;
-  overflow-x: auto;
+  overflow-x: hidden;      /* Hides horizontal scroll */
 }
 
 .thumb {
@@ -232,10 +231,6 @@ main.product-page {
   position: relative;
   display: inline-block;
 }
-
-
-
-
 
 #navbar a:hover,
 #navbar a.active {
