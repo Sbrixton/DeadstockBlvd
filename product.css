@@ -88,6 +88,10 @@ main.product-page {
   transform: scale(1.05) rotate(1deg);
 }
 
+.thumbnails::-webkit-scrollbar {
+  display: none; /* Chrome, Safari */
+}
+
 /* ========== DESCRIPTION AREA ========== */
 .product-info {
   flex: 1;
