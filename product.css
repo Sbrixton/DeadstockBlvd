@@ -132,6 +132,21 @@ main.product-page {
   background: #333;
 }
 
+.payfast-btn {
+  background-color: #ff6600;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 15px;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+.payfast-btn:hover {
+  background-color: #e65c00;
+}
+
 /* ========== RECOMMENDED PRODUCTS ========== */
 .recommendations {
   display: flex;
