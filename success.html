@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Product Page</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="product.css" />
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" />
+  <script type="module" src="navbar.js"></script>
+  <script src="data.js"></script>
+  <script src="https://www.paypal.com/sdk/js?client-id=YOUR_SANDBOX_CLIENT_ID&currency=USD"></script>
+</head>
+<body>
+    <header class="navbar">
+      <div class="nav-left">
+        <a href="index.html" class="logo">
+          <img src="/images/deadstock-logo.png" alt="DeadstockBlvd Logo" height="40" />
+        </a>
+        
+        <div class="nav-wrapper" id="navWrapper">
+          <nav id="navbar">
+            <i id="close" class="fas fa-times"></i>
+            <a href="index.html">Home</a>
+            <a href="shop.html" class="active">Shop</a>
+            <a href="Contact.html">Contact</a>
+          </nav>
+        </div>
+        <i id="bar" class="fas fa-bars"></i>
+      </div>
+      
+      <div class="nav-right">
+        <button id="searchIcon">
+          <i class="fas fa-search"></i>
+        </button>
+        <div id="cartIcon" class="cart-wrapper" role="button" tabindex="0">
+          <i class="fas fa-shopping-bag"></i>
+          <span id="cart-count">0</span>
+        </div>
+      </div>
+    </header>
+    
+    <!-- ✅ Search Bar Container (below navbar) -->
+    <div id="searchBarContainer">
+      <div class="search-input-wrapper">
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="Search products..."
+          autocomplete="off"
+        />
+        <button id="clearSearch" aria-label="Clear Search">&times;</button>
+      </div>
+            
+      <div id="searchResultsWrapper">
+        <p id="noResultsMessage" style="display: none;">No products found.</p>
+        <div id="searchResults"></div>
+      </div>
+    </div>
+  
+    <!-- ✅ Search overlay now OUTSIDE the container -->
+    <div id="searchOverlay"></div>
+
+  <div class="success-wrapper">
+    <div class="checkmark-circle">
+      <span class="checkmark">&#10003;</span>
+    </div>
+    <div class="thank-you">Thank you!</div>
+    <div class="order-received">Your order has been received.</div>
+    <a href="index.html" class="return-home">Return Home</a>
+  </div>
+  
+  <footer class="section-p1">
+      <div class="col install">
+          <p>Secured Payment Gateways</p>
+          <img src="payments.png" alt="">
+      </div>
+            
+      <div class="copyright">
+          <p>© 2025, DeadstockBlvd</p>
+      </div>
+  </footer>
+  
+    <!-- Mobile Slide-in Cart Drawer -->
+  <div id="mobileCartDrawer">
+    <div id="mobileCartHeader">
+      <h3>Your Cart</h3>
+      <button id="closeCartDrawer">&times;</button>
+    </div>
+    <div id="mobileCartItems"></div>
+    <div id="mobileCartFooter">
+      <div class="footer-totals">
+        <p>Subtotal: <span id="drawerCartSubtotal">R0.00</span></p>
+      </div>
+      <button id="drawerCheckoutBtn" class="checkout-bar">Checkout</button>
+    </div>
+  </div>
+  <script type="module" src="search.js"></script>
+  <script type="module" src="product.js"></script>
+  <script type="module" src="cart.js"></script>
+</body>
+</html>
