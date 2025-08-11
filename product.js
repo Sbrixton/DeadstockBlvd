@@ -77,32 +77,3 @@ document.addEventListener("DOMContentLoaded", () => {
     // Initialize first image
     updateMainImage(0);
   }
-
-  // ======= PayPal Init =======
-  if (window.paypal) {
-    paypal.Buttons({
-      createOrder(data, actions) {
-        const cart = getCart();
-        const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
-        return actions.order.create({
-          purchase_units: [{
-            amount: {
-              value: total.toFixed(2),
-            },
-          }],
-        });
-      },
-      onApprove(data, actions) {
-        return actions.order.capture().then(details => {
-          window.location.href = "checkout.html";
-        });
-      },
-      onError(err) {
-        console.error("PayPal error:", err);
-        alert("There was a problem processing your payment.");
-      }
-    }).render("#paypal-button-container");
-  } else {
-    console.error("window.paypal is undefined — PayPal SDK may not be loaded.");
-  }
-});
