@@ -77,3 +77,4 @@ document.addEventListener("DOMContentLoaded", () => {
     // Initialize first image
     updateMainImage(0);
   }
+});
