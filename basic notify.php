@@ -1,12 +1,17 @@
 <?php
-// Capture raw POST
+$log = "===== New Notify Hit =====\n";
+$log .= "Request Method: " . $_SERVER['REQUEST_METHOD'] . "\n";
+$log .= "Date: " . date('Y-m-d H:i:s') . "\n";
+
+// Raw POST
 $raw_post = file_get_contents('php://input');
+$log .= "Raw POST: " . $raw_post . "\n";
 
-// Try decoding
-$post_data = $_POST ?: json_decode($raw_post, true);
+// $_POST
+$log .= "_POST: " . print_r($_POST, true) . "\n";
 
-// Log both
-file_put_contents('notify.log', print_r($post_data, true) . "\n", FILE_APPEND);
+// Write to notify.log
+file_put_contents('notify.log', $log . "\n", FILE_APPEND);
 
 echo "OK";
 ?>
