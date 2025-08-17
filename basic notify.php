@@ -1,5 +1,4 @@
 <?php
-mail("your.email@example.com", "PayFast IPN Hit", "IPN Received");
-
+file_put_contents('notify.log', json_encode($_POST) . "\n", FILE_APPEND);
 echo "OK";
 ?>
