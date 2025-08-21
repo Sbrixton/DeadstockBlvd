@@ -4,10 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Product Page</title>
+  <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="product.css" />
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" />  
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" />
+  <script type="module" src="navbar.js"></script>
   <script src="data.js"></script>
-  <script src="https://www.paypal.com/sdk/js?client-id=YOUR_SANDBOX_CLIENT_ID&currency=USD"></script>
 </head>
 <body>
 
@@ -39,15 +40,26 @@
     </div>
   </header>
 
-  <div id="searchOverlay">
-    <div class="search-inner">
-      <button id="closeSearch" aria-label="Close Search">&times;</button>
-      <div class="search-box">
-        <input type="text" id="searchInput" placeholder="Search products..." />
+    <!-- ✅ Search Bar Container (below navbar) -->
+    <div id="searchBarContainer">
+      <div class="search-input-wrapper">
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="Search products..."
+          autocomplete="off"
+        />
+        <button id="clearSearch" aria-label="Clear Search">&times;</button>
+      </div>
+            
+      <div id="searchResultsWrapper">
+        <p id="noResultsMessage" style="display: none;">No products found.</p>
         <div id="searchResults"></div>
       </div>
     </div>
-  </div>
+    
+    <!-- ✅ Search overlay now OUTSIDE the container -->
+    <div id="searchOverlay"></div>
 
   <main class="product-page">
     <div class="product-container">
@@ -55,27 +67,27 @@
       <div class="product-gallery">
         <div class="slider">
           <i class="fas fa-chevron-left nav-arrow" id="prevSlide"></i>
-          <img id="mainImage" src="images/product1.jpg" alt="Product Image" class="main-img" />
+          <img id="mainImage" src="Screenshot 2024-12-07 170359.png" alt="Product Image" class="main-img" />
           <i class="fas fa-chevron-right nav-arrow" id="nextSlide"></i>
         </div>
         <div class="thumbnails">
-          <img src="images/product1.jpg" class="thumb" />
-          <img src="images/product2.jpg" class="thumb" />
-          <img src="images/product3.jpg" class="thumb" />
+          <img src="Screenshot 2024-12-07 170359.png" class="thumb" />
+          <img src="Screenshot 2024-12-07 170504.png" class="thumb" />
+          <img src="Screenshot 2024-12-07 170600.png" class="thumb" />
         </div>
       </div>
 
       <div class="product-info">
         <h1>
-          Cargo Pants
+          Graphic Hoodie
         </h1>
+        
+        <p class="price">
+          $600
+        </p>
         
         <p class="description">
           This is a short product description that highlights key features and style.
-        </p>
-        
-        <p class="price">
-          R500.00
         </p>
         <button
           id="addToCartBtn"
@@ -86,19 +98,44 @@
           data-image="images/item3.jpg">
           Add to Cart 🛒
         </button>
-        <div id="paypal-button-container" style="margin-top: 20px;"></div>
+        <!-- PayFast Demo Button -->
+        <form action="https://sandbox.payfast.co.za/eng/process" method="POST" id="payfastFormDemo">
+          <input type="hidden" name="merchant_id" value="10041066" />
+          <input type="hidden" name="merchant_key" value="itdun3pbyglz7" />
+          
+          <input type="hidden" name="return_url" value="https://sbrixton.github.io/DeadstockBlvd/success.html" />
+          <input type="hidden" name="cancel_url" value="https://deadstockblvd.co.za/cancel.html" />
+          <input type="hidden" name="notify_url" value="https://deadstockblvd.wuaze.com/basic%20notify.php" />
+          
+          <input type="hidden" name="m_payment_id" value="1234" />
+          <input type="hidden" name="amount" id="pfAmount" value="600.00" />
+          <input type="hidden" name="currency" value="ZAR" />
+          <input type="hidden" name="item_name" id="pfItemName" value="Graphic Hoodie" />
+          
+          <button type="submit" class="payfast-btn">Pay with PayFast (Demo)</button>
+        </form>
         <h3 class="recommendation-title">YOU MAY ALSO LIKE</h3>
         <div class="recommendations">
-          <div class="recommend-box">
-            <img src="images/item2.jpg" alt="Suggestion 1" />
-            <p>Graphic Hoodie</p>
-            <span>R600.00</span>
-          </div>
-          <div class="recommend-box">
-            <img src="images/item4.jpg" alt="Suggestion 4" />
-            <p>Denim Jeans</p>
-            <span>R780.00</span>
-          </div>
+          <a href="product2.html" class="recommend-link">
+            <div class="recommend-box">
+              <div class="product-img">
+                <img src="Screenshot 2024-12-07 170359.png" alt="Main" class="main-img" />
+                <img src="Screenshot 2024-12-22 201437.png" alt="Hover" class="hover-img" />
+              </div>
+              <p>Denim Jacket</p>
+              <span>R750.00</span>
+            </div>
+          </a>
+          <a href="product3.html" class="recommend-link">
+            <div class="recommend-box">
+              <div class="product-img">
+                <img src="Screenshot 2024-12-07 170359.png" alt="Main" class="main-img" />
+                <img src="Screenshot 2024-12-22 211119.png" alt="Hover" class="hover-img" />
+              </div>
+              <p>Cargo Pants</p>
+              <span>R500.00</span>
+            </div>
+          </a>
         </div>
       </div>
     </div>
@@ -107,7 +144,7 @@
   <footer class="section-p1">
       <div class="col install">
           <p>Secured Payment Gateways</p>
-          <img src="Downloads/payments.PNG" alt="">
+          <img src="payments.png" alt="">
       </div>
             
       <div class="copyright">
@@ -129,8 +166,28 @@
       <button id="drawerCheckoutBtn" class="checkout-bar">Checkout</button>
     </div>
   </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const addToCartBtn = document.getElementById('addToCartBtn');
+      const pfAmount = document.getElementById('pfAmount');
+      const pfItemName = document.getElementById('pfItemName');
+      
+      if (addToCartBtn && pfAmount && pfItemName) {
+        // Get product price & name from Add to Cart button data attributes
+        const price = addToCartBtn.getAttribute('data-price');
+        const name = addToCartBtn.getAttribute('data-name');
+        
+        // Format price to two decimals (e.g., "35.00")
+        const formattedPrice = parseFloat(price).toFixed(2);
+      
+        // Update PayFast form hidden inputs
+        pfAmount.value = formattedPrice;
+        pfItemName.value = name;
+      }
+    });
+  </script>
   
-  <script type="module" src="navbar.js"></script>
   <script type="module" src="search.js"></script>
   <script type="module" src="product.js"></script>
   <script type="module" src="cart.js"></script>
