@@ -27,7 +27,7 @@ h1 {
 h2 {
   font-weight: 600; /* slightly lighter */
   font-size: 50px;
-  line-height: 48px;
+  line-height: 70px;
 }
 
 h3 {
@@ -1066,6 +1066,7 @@ body.sticky-footer main {
     padding: 0 10px;
   }
 }
+
 
 
 
