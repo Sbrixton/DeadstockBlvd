@@ -415,7 +415,7 @@ nav a.active::after {
   object-fit: cover;
   transition: opacity 0.3s ease;
   display: block;
-  border-radius: 10px;
+  border-radius: 0px;
 }
 
 .product-img .hover-img {
@@ -614,7 +614,7 @@ body.sticky-footer main {
     object-fit: cover;
     height: 100%;
     width: 100%;
-    border-radius: 8px;
+    border-radius: 0px;
   }
   
   .pro .des h5 {
@@ -1066,6 +1066,7 @@ body.sticky-footer main {
     padding: 0 10px;
   }
 }
+
 
 
 
