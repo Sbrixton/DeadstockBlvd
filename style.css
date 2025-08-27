@@ -628,60 +628,55 @@ body.sticky-footer main {
   }
   
   .navbar {
-    position: relative;
-    display: flex;
-    justify-content: center; /* center logo by default */
-    align-items: center;
-    height: 70px;
-    padding: 0 20px;
-    background: #fff;
-    z-index: 1000;
+    padding: 40px 0px;
+    flex-wrap: nowrap;
   }
   
-  /* Bar (hamburger) */
+  /* Show hamburger */
   #bar {
-    display: block;
-    font-size: 24px;
+    position: absolute;
+    left: 15px;
+    display: block; /* ← This was missing */
+    top: 50%;
+    transform: translateY(-50%);
     color: #222;
+    font-size: 24px;
     cursor: pointer;
   }
   
-  /* Left section: nav-left */
   .nav-left {
-    position: absolute;
-    left: 20px;
-    top: 50%;
-    transform: translateY(-50%);
-    display: flex;
-    align-items: center;
-    gap: 12px;
+    flex: 0 0 auto;
   }
   
-  /* Logo stays centered */
   .logo {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
   }
   
-  /* Right section: nav-right */
   .nav-right {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 15px;
     position: absolute;
     right: 20px;
     top: 50%;
     transform: translateY(-50%);
-    display: flex;
-    align-items: center;
-    gap: 12px;
   }
   
+  /* Icons made dark for visibility */
   .nav-right i,
+  .nav-right button,
+  #bar {
+    color: #222; /* ✅ dark for white background */
+  }
+  
   .nav-right button {
-    color: #222;
     background: none;
     border: none;
-    font-size: 20px;
+    padding: 0;
+    outline: none;
     cursor: pointer;
   }
   
@@ -1071,6 +1066,7 @@ body.sticky-footer main {
     padding: 0 10px;
   }
 }
+
 
 
 
