@@ -268,7 +268,6 @@ main.product-page {
 /* Show hamburger and close icons only on mobile */
 #bar,
 #close {
-  display: none;
   color: #222; /* Dark color for visibility on white navbar */
 }
 
@@ -438,7 +437,6 @@ main.product-page {
   color: inherit;
   cursor: pointer;
 }
-
 
 .success-wrapper {
   max-width: 600px;
