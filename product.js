@@ -42,9 +42,28 @@ document.addEventListener("DOMContentLoaded", () => {
   const thumbnails = Array.from(document.querySelectorAll(".thumb"));
   const prevBtn = document.getElementById("prevSlide");
   const nextBtn = document.getElementById("nextSlide");
+  const dotContainer = document.querySelector(".mobile-dots");
 
   if (mainImage && thumbnails.length > 0) {
     let currentIndex = 0;
+
+    // ===== Create non-clickable dots =====
+    let dots = [];
+    if (dotContainer) {
+      dots = thumbnails.map((_, i) => {
+        const dot = document.createElement("div");
+        dot.classList.add("dot");
+        if (i === 0) dot.classList.add("active");
+        dotContainer.appendChild(dot);
+        return dot;
+      });
+    }
+
+    function updateDots(index) {
+      dots.forEach((dot, i) => {
+        dot.classList.toggle("active", i === index);
+      });
+    }
 
     function updateMainImage(index) {
       mainImage.src = thumbnails[index].src;
@@ -53,6 +72,7 @@ document.addEventListener("DOMContentLoaded", () => {
         thumb.classList.toggle("active", i === index);
       });
 
+      updateDots(index);
       currentIndex = index;
     }
 
@@ -74,7 +94,36 @@ document.addEventListener("DOMContentLoaded", () => {
       updateMainImage(newIndex);
     });
 
-    // Initialize first image
     updateMainImage(0);
+
+    // ===== Swipe Support (Mobile Touch Gestures) =====
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    mainImage.addEventListener("touchstart", (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+    });
+
+    mainImage.addEventListener("touchend", (e) => {
+      touchEndX = e.changedTouches[0].screenX;
+      handleSwipe();
+    });
+
+    function handleSwipe() {
+      const threshold = 40; // Minimum px to count as a swipe
+      const swipeDistance = touchEndX - touchStartX;
+
+      if (swipeDistance > threshold) {
+        // Swipe right (prev)
+        let newIndex = currentIndex - 1;
+        if (newIndex < 0) newIndex = thumbnails.length - 1;
+        updateMainImage(newIndex);
+      } else if (swipeDistance < -threshold) {
+        // Swipe left (next)
+        let newIndex = currentIndex + 1;
+        if (newIndex >= thumbnails.length) newIndex = 0;
+        updateMainImage(newIndex);
+      }
+    }
   }
 });
