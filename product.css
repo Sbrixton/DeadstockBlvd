@@ -20,13 +20,17 @@ main.product-page {
   gap: 20px;
 }
 
+/* Slider wrapper */
 .slider {
   position: relative;
-  overflow: hidden;
+  width: 100%;
   border-radius: 10px;
+  overflow: hidden;
 }
 
+/* Main image styling */
 .main-img {
+  display: block;
   width: 100%;
   height: auto;
   object-fit: cover;
@@ -34,7 +38,7 @@ main.product-page {
   transition: transform 0.5s ease;
 }
 
-/* Arrows */
+/* Nav arrows — already fine */
 .nav-arrow {
   position: absolute;
   top: 50%;
@@ -837,7 +841,7 @@ footer img {
 
   .mobile-dots {
     position: absolute;
-    bottom: 16px; /* not too close to the edge */
+    bottom: 16px;
     left: 50%;
     transform: translateX(-50%);
     display: flex;
