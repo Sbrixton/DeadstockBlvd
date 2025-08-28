@@ -275,6 +275,26 @@ main.product-page {
   display: block;
 }
 
+/* ======= Mobile Dot Indicators ======= */
+.mobile-dots {
+  display: none; /* Hidden by default */
+  justify-content: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.mobile-dots .dot {
+  width: 10px;
+  height: 10px;
+  background: #bbb;
+  border-radius: 50%;
+  transition: background 0.3s ease;
+}
+
+.mobile-dots .dot.active {
+  background: #333;
+}
+
 /* ========== UPDATED DESKTOP CART SLIDE-IN (matching mobile structure) ========== */
 #mobileCartDrawer {
   position: fixed;
@@ -809,6 +829,14 @@ footer img {
   
   #paypal-button-container .paypal-button {
     width: 100%;
+  }
+  
+  .thumbnails {
+    display: none;
+  }
+  
+  .mobile-dots {
+    display: flex;
   }
   
   footer {
