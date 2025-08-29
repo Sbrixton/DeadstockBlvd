@@ -867,28 +867,43 @@ footer img {
     box-shadow: 0 0 4px rgba(0,0,0,0.4);
   }
   
+  /* Remove padding around main content */
+  main.product-page {
+    padding: 0;
+  }
+  
+  /* Stack layout vertically */
   .product-container {
     flex-direction: column;
     align-items: center;
-    padding: 20px 15px;
+    padding: 0 15px;
   }
   
+  /* Widen gallery wrapper too */
   .product-gallery {
     width: 100%;
     max-width: 100%;
   }
   
+  /* Force full-width slider */
   .slider {
-    width: 100%;
-    max-width: 100%;
+    width: 100vw;
+    margin-left: -30px;  /* offsets original main padding */
+    margin-right: -30px;
+    border-radius: 0;
+    overflow: hidden;
+    background-color: #f9f9f9; /* optional, can be removed */
   }
   
+  /* Main image full width */
   .main-img {
     width: 100%;
     height: auto;
     object-fit: contain;
+    display: block;
   }
   
+  /* Wider content after image */
   .product-info {
     width: 100%;
     max-width: 100%;
