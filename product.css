@@ -553,7 +553,9 @@ footer img {
 
 /* ========== MOBILE NAVBAR + SEARCH + RECOMMENDATION FIXES ========== */
 @media (max-width: 768px) {
-  
+  .slider {
+    background-color: #f8f8f8;
+  }
   /* === Search Overlay === */
   #searchOverlay {
     position: fixed;
