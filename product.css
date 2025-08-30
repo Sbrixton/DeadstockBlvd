@@ -150,6 +150,22 @@ main.product-page {
   background-color: #e65c00;
 }
 
+.main-img-wrapper {
+  width: 100%;
+  height: 400px; /* You can adjust this to your desired size */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff; /* shows as border for smaller imgs */
+  overflow: hidden;
+}
+
+.main-img {
+  max-height: 100%;
+  max-width: 100%;
+  object-fit: contain;
+}
+
 /* ========== RECOMMENDED PRODUCTS ========== */
 .recommendations {
   display: flex;
@@ -556,6 +572,22 @@ footer img {
     margin: 0;
     padding: 0;
     overflow-x: hidden;
+  }
+  
+  .main-img-wrapper {
+    width: 100%;
+    height: 400px; /* You can adjust this to your desired size */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff; /* shows as border for smaller imgs */
+    overflow: hidden;
+  }
+  
+  .main-img {
+    max-height: 100%;
+    max-width: 100%;
+    object-fit: contain;
   }
   
   /* Clear all margins from slider and parents */
