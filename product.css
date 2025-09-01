@@ -100,7 +100,7 @@ main.product-page {
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 30px;
+  gap: 26px;
   min-width: 300px;
   padding-right: 0px;
 }
