@@ -35,6 +35,11 @@ h3 {
   font-size: 28px;
 }
 
+h5 {
+  font-weight: 600;
+  font-size: 30px;
+}
+
 h4, h5, h6 {
   font-weight: 400;
 }
@@ -1066,6 +1071,7 @@ body.sticky-footer main {
     padding: 0 10px;
   }
 }
+
 
 
 
