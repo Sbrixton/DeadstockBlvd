@@ -37,11 +37,13 @@ h3 {
 
 h5 {
   font-weight: 600;
-  font-size: 30px;
+  font-size: 14px;
 }
 
 h4, h6 {
-  font-weight: 400;
+  font-weight: 700;
+  font-size: 30px;
+  color: #444;
 }
 
 p {
@@ -518,9 +520,10 @@ nav a.active::after {
 }
 
 .read-more {
-  color: blue;
+  color: #222;
   text-decoration: underline;
   cursor: pointer;
+  font-weight: 600;
 }
 
 .overlay {
@@ -1112,6 +1115,7 @@ body.sticky-footer main {
     padding: 0 10px;
   }
 }
+
 
 
 
