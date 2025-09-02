@@ -110,8 +110,9 @@ main.product-page {
 }
 
 .description {
-  color: #444;
+  color: #111;
   line-height: 1.6;
+  font-weight: 502;
 }
 
 .price {
