@@ -171,8 +171,8 @@ main.product-page {
 .recommendations {
   display: flex;
   gap: 24px;
-  flex-wrap: wrap;
-  justify-content: flex-start;
+  flex-wrap: nowrap;             /* Don't wrap on smaller screens */
+  justify-content: center;       /* Center the cards in the container */
   margin-top: 20px;
 }
 
@@ -182,7 +182,8 @@ main.product-page {
 }
 
 .recommend-box {
-  flex: 0 0 200px;
+  flex: 1 1 300px;               /* Let it grow, minimum 300px width */
+  max-width: 500px;             /* Prevent cards from becoming too wide */
   background: #f4f4f4;
   border-radius: 10px;
   padding: 12px;
