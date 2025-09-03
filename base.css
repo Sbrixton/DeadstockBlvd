@@ -175,7 +175,7 @@ nav a.active::after {
 #clearSearch {
   position: absolute;
   right: 12px;
-  top: 50%;
+  top: 41%;
   transform: translateY(-50%);
   font-size: 20px;
   background: none;
