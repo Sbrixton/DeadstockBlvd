@@ -137,18 +137,19 @@ main.product-page {
 }
 
 .payfast-btn {
-  background-color: #c5c5c5;
+  background-color: #111; /* Match add-to-cart background */
   color: white;
   border: none;
-  padding: 12px 189px;
+  padding: 14px 20px; /* Match add-to-cart padding */
   font-size: 16px;
   cursor: pointer;
   margin-top: 15px;
-  border-radius: 4px;
+  border-radius: 6px; /* Match add-to-cart border radius */
+  width: 100%; /* Make it responsive */
   transition: background-color 0.3s ease;
 }
 .payfast-btn:hover {
-  background-color: #e65c00;
+  background-color: #333; /* Match add-to-cart hover */
 }
 
 .main-img-wrapper {
