@@ -674,11 +674,11 @@ footer img {
   #searchInput {
     font-size: 15px;
     padding: 10px 20px;
-    width: 108%;
+    width: 100%; /* ✅ fills parent but no overflow */
+    box-sizing: border-box;    
     border: 1px solid #ccc;
     border-radius: 4px;
     margin-bottom: 20px;
-    box-sizing: border-box;
   }
   
   .search-item {
