@@ -126,6 +126,7 @@ main.product-page {
   background: #111;
   color: #fff;
   font-size: 16px;
+  font-weight: 700;
   border: none;
   border-radius: 6px;
   cursor: pointer;
@@ -137,11 +138,12 @@ main.product-page {
 }
 
 .payfast-btn {
-  background-color: #111; /* Match add-to-cart background */
-  color: white;
+  background-color: #ccc; /* Match add-to-cart background */
+  color: #f9f9f9;
   border: none;
   padding: 14px 20px; /* Match add-to-cart padding */
   font-size: 16px;
+  font-weight: 700;
   cursor: pointer;
   margin-top: 15px;
   border-radius: 6px; /* Match add-to-cart border radius */
