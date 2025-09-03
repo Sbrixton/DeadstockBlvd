@@ -795,7 +795,7 @@ footer img {
   .recommendations {
     flex-wrap: nowrap;
     overflow-x: auto;
-    padding-bottom: 10px;
+    padding-bottom: 30px;
     gap: 14px;
   }
   
