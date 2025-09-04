@@ -280,7 +280,7 @@ html, body {
   
   .checkout-left,
   .checkout-right {
-    padding: 20px 0;       /* keep vertical padding */
+    padding: 0px 0;       /* keep vertical padding */
     border: none;
     height: auto;
     width: 100%;           /* full width inside wrapper */
