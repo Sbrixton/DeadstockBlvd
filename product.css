@@ -467,16 +467,6 @@ main.product-page {
   cursor: pointer;
   margin-top: 8px;
 }
-/* ========== PAYPAL BUTTON DESKTOP ========== */
-#paypal-button-container {
-  width: 100%;
-  max-width: 400px;
-  margin: 20px 0;
-}
-
-#paypal-button-container .paypal-button {
-  width: 100%;
-}
 
 /* ========== REMOVE HOVER FOR SEARCH ICON ========== */
 #searchIcon:hover {
@@ -614,6 +604,7 @@ footer img {
     width: 100%;
     padding: 0;
     margin: 0;
+    margin-top: 30px ;
   }
   
   .slider {
