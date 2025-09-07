@@ -41,6 +41,10 @@
     </div>
   </header>
 
+  <div id="preloader">
+    <div class="loader">Loading...</div>
+  </div>
+
     <!-- ✅ Search Bar Container (below navbar) -->
     <div id="searchBarContainer">
       <div class="search-input-wrapper">
@@ -82,16 +86,26 @@
       </div>
 
       <div class="product-info">
-        <h1>
-          Graphic Hoodie
-        </h1>
+        <h5>
+          Nike x The Grateful Dead
+        </h5>
+        <h4>
+          Nike SB Dunk Low Grateful Dead Bears – Orange
+        </h4>
         
         <p class="price">
-          $600
+          £86
         </p>
         
         <p class="description">
-          This is a short product description that highlights key features and style.
+          Size: US10/EUR44/UK43
+        </p>
+        <p class="description">
+          The Grateful Dead x Nike SB Dunk Low "Dead Bear" 
+          sneakers are a highly sought-after collaboration 
+          that combines elements from both the iconic band
+          and the classic Nike Dunk...
+          <span class="read-more">Read more</span>
         </p>
         <button
           id="addToCartBtn"
@@ -170,6 +184,61 @@
       <button id="drawerCheckoutBtn" class="checkout-bar">Checkout</button>
     </div>
   </div>
+
+    <!-- Modal -->
+  <div class="overlay" id="modalOverlay">
+    <div class="popup" id="popupBox">
+      <span class="close-btn" id="closeBtn">&times;</span>
+      <h2>No Refunds & Disclaimer</h2>
+      <p>
+        All second-hand items are final sale — no refunds, 
+        no exchanges. This site acts solely as a third-party 
+        sourcing platform for specific items.
+        <br><br>
+        We ("the brand") do not assume responsibility for your
+        failure to review the clearly stated policies. 
+        By using this site, you acknowledge and accept these terms.
+        <br><br>
+        If you have ANY concerns, please reach out prior to ordering. 
+        Ensure your size is accurate. Violations of these terms may 
+        result in refusal of service or account bans.
+      </p>
+    </div>
+  </div>
+  <script>
+    window.addEventListener("load", () => {
+    const preloader = document.getElementById("preloader");
+    preloader.style.opacity = "0";
+    setTimeout(() => {
+    preloader.style.display = "none";
+      }, 500);
+    });
+  </script>
+  
+  <script>
+    const readMoreLinks = document.querySelectorAll('.read-more');
+    const overlay = document.getElementById('modalOverlay');
+    const closeBtn = document.getElementById('closeBtn');
+    
+    // Open modal for any .read-more clicked
+    readMoreLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        overlay.style.display = 'flex';
+      });
+    });
+  
+    // Close when clicking outside the popup
+    overlay.addEventListener('click', (e) => {
+      if (e.target === overlay) {
+        overlay.style.display = 'none';
+      }
+    });
+    
+    // Close when clicking the X
+    closeBtn.addEventListener('click', () => {
+      overlay.style.display = 'none';
+    });
+  </script>
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
