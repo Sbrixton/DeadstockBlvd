@@ -607,6 +607,11 @@ nav a.active::after {
   font-weight: bold;
 }
 
+.checkout-bar:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
 /* ==== FOOTER ==== */
 footer {
   display: flex;
@@ -1131,6 +1136,7 @@ body.sticky-footer main {
     padding: 0 10px;
   }
 }
+
 
 
 
