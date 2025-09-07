@@ -148,15 +148,19 @@ window.addEventListener("load", () => {
   render();
 });
 
-
-// ✅ Exported so product.js can dynamically import & call it
+// ✅ Render Mobile Drawer — Fully Debugged Version
 export function renderMobileDrawer() {
   console.log("🛒 Rendering mobile drawer...");
   const cart = getCart();
-  console.log("📦 Cart contents:", cart);
+  console.log("📦 Cart contents:", JSON.stringify(cart));
 
   const mobileCartItems = document.getElementById("mobileCartItems");
   const drawerSubtotal = document.getElementById("drawerCartSubtotal");
+
+  if (!mobileCartItems || !drawerSubtotal) {
+    console.error("❌ Missing mobileCartItems or drawerSubtotal DOM elements");
+    return;
+  }
 
   mobileCartItems.innerHTML = "";
   let subtotal = 0;
@@ -171,18 +175,19 @@ export function renderMobileDrawer() {
     drawerSubtotal.textContent = "R0.00";
     document.getElementById("drawerProceedBtn")
       ?.addEventListener("click", () => window.location.href = "shop.html");
+    updateDrawerCheckoutState();
     return;
   }
 
-  cart.forEach(item => {
-    console.log("🧱 Rendering item:", item);
+  cart.forEach((item, idx) => {
+    console.log(`🧱 Rendering item [${idx}]:`, item);
 
     if (
       !item ||
       typeof item.price !== "number" ||
       typeof item.quantity !== "number" ||
-      !item.image ||
-      !item.name
+      !item.name ||
+      !item.image
     ) {
       console.warn("❌ Skipping invalid item:", item);
       return;
@@ -218,8 +223,9 @@ export function renderMobileDrawer() {
       const cart = getCart();
       const prod = cart.find(i => i.id === id);
       if (!prod) return;
-      if (btn.classList.contains('plus')) prod.quantity++;
-      if (btn.classList.contains('minus')) prod.quantity = Math.max(1, prod.quantity - 1);
+      prod.quantity = btn.classList.contains('plus')
+        ? prod.quantity + 1
+        : Math.max(1, prod.quantity - 1);
       saveCart(cart);
       updateCartCountInDOM();
       renderMobileDrawer();
@@ -240,3 +246,4 @@ export function renderMobileDrawer() {
 
   updateDrawerCheckoutState();
 }
+
