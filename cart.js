@@ -23,7 +23,6 @@ window.addEventListener("load", () => {
 
   proceedBtn?.addEventListener("click", () => {
     window.location.href = "shop.html";
-    
   });
 
   function updateDrawerCheckoutState() {
@@ -32,11 +31,7 @@ window.addEventListener("load", () => {
 
     if (!drawerCheckoutBtn) return;
 
-    if (cart.length === 0) {
-      drawerCheckoutBtn.disabled = true;
-    } else {
-      drawerCheckoutBtn.disabled = false;
-    }
+    drawerCheckoutBtn.disabled = cart.length === 0;
   }
 
   function render() {
@@ -53,7 +48,7 @@ window.addEventListener("load", () => {
       subEl.textContent = "R0.00";
       totalEl.textContent = "R0.00";
       updateCartCountInDOM();
-      updateDrawerCheckoutState(); // 👈 Added here
+      updateDrawerCheckoutState();
       return;
     }
 
@@ -74,13 +69,11 @@ window.addEventListener("load", () => {
         <div class="cart-details">
           <p class="cart-name">${item.name}</p>
           <p class="cart-price">Price: R${item.price.toFixed(2)}</p>
-
           <div class="quantity-controls">
             <button class="qty-btn minus" data-name="${item.name}">-</button>
             <span class="qty-num">${item.quantity}</span>
             <button class="qty-btn plus" data-name="${item.name}">+</button>
           </div>
-
           <p class="cart-total">Total: R${(item.price * item.quantity).toFixed(2)}</p>
           <button class="remove-item" data-name="${item.name}">Remove</button>
         </div>
@@ -92,28 +85,33 @@ window.addEventListener("load", () => {
     subEl.textContent = `R${subtotal.toFixed(2)}`;
     totalEl.textContent = `R${subtotal.toFixed(2)}`;
     updateCartCountInDOM();
-    updateDrawerCheckoutState(); // 👈 Also added here
+    updateDrawerCheckoutState();
   }
 
   // 👉 Open cart drawer on all screen sizes
   if (cartIcon && mobileDrawer) {
     cartIcon.addEventListener("click", (e) => {
       e.preventDefault();
-      renderMobileDrawer();
-      mobileDrawer.classList.add("open");
+      try {
+        renderMobileDrawer();
+        mobileDrawer.classList.add("open");
+        console.log("✅ Drawer opened.");
+      } catch (err) {
+        console.error("❌ Error opening cart drawer:", err);
+      }
     });
   }
 
   closeCartDrawer?.addEventListener("click", () => {
     mobileDrawer.classList.remove("open");
   });
-  
+
   drawerCheckoutBtn?.addEventListener("click", () => {
     const cart = getCart();
-    if (cart.length === 0) return; // ⛔ do nothing if cart is empty
+    if (cart.length === 0) return;
     window.location.href = "checkout.html";
   });
-  
+
   // Desktop cart quantity & remove
   document.addEventListener("click", (e) => {
     const target = e.target;
@@ -142,17 +140,21 @@ window.addEventListener("load", () => {
   });
 
   checkoutBtn?.addEventListener("click", () => {
-    const currentCart = getCart(); // 🔄 fetch fresh cart
-    if (currentCart.length === 0) return; // ⛔ do nothing
+    const currentCart = getCart();
+    if (currentCart.length === 0) return;
     window.location.href = "checkout.html";
   });
 
   render();
 });
 
+
 // ✅ Exported so product.js can dynamically import & call it
 export function renderMobileDrawer() {
+  console.log("🛒 Rendering mobile drawer...");
   const cart = getCart();
+  console.log("📦 Cart contents:", cart);
+
   const mobileCartItems = document.getElementById("mobileCartItems");
   const drawerSubtotal = document.getElementById("drawerCartSubtotal");
 
@@ -160,6 +162,7 @@ export function renderMobileDrawer() {
   let subtotal = 0;
 
   if (cart.length === 0) {
+    console.log("📭 Cart is empty. Rendering empty state.");
     mobileCartItems.innerHTML = `
       <div class="empty-cart-message">
         <p>Your cart is empty.</p>
@@ -172,7 +175,21 @@ export function renderMobileDrawer() {
   }
 
   cart.forEach(item => {
+    console.log("🧱 Rendering item:", item);
+
+    if (
+      !item ||
+      typeof item.price !== "number" ||
+      typeof item.quantity !== "number" ||
+      !item.image ||
+      !item.name
+    ) {
+      console.warn("❌ Skipping invalid item:", item);
+      return;
+    }
+
     subtotal += item.price * item.quantity;
+
     const itemDiv = document.createElement("div");
     itemDiv.className = "cart-item";
     itemDiv.style.position = 'relative';
@@ -194,6 +211,7 @@ export function renderMobileDrawer() {
 
   drawerSubtotal.textContent = `R${subtotal.toFixed(2)}`;
 
+  // Bind quantity buttons
   mobileCartItems.querySelectorAll('.qty-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       const id = parseInt(btn.dataset.id);
@@ -208,6 +226,7 @@ export function renderMobileDrawer() {
     });
   });
 
+  // Bind remove buttons
   mobileCartItems.querySelectorAll('.remove-item-mobile').forEach(btn => {
     btn.addEventListener('click', () => {
       const id = parseInt(btn.dataset.id);
@@ -219,5 +238,5 @@ export function renderMobileDrawer() {
     });
   });
 
-  updateDrawerCheckoutState(); 
+  updateDrawerCheckoutState();
 }
