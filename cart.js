@@ -76,7 +76,6 @@ window.addEventListener("load", () => {
           <button class="remove-item" data-name="${item.name}">Remove</button>
         </div>
       `;
-
       cartWrapper.appendChild(itemDiv);
     });
 
@@ -86,16 +85,14 @@ window.addEventListener("load", () => {
     updateDrawerCheckoutState();
   }
 
-  // ✅ Precaution #1: Safe drawer open with try/catch and logging
   if (cartIcon && mobileDrawer) {
     cartIcon.addEventListener("click", (e) => {
       e.preventDefault();
       console.log("🖱️ Cart icon clicked");
-
       try {
         renderMobileDrawer();
         mobileDrawer.classList.add("open");
-        console.log("✅ Drawer opened");
+        console.log("✅ Drawer opened.");
       } catch (err) {
         console.error("❌ Failed to open drawer:", err);
       }
@@ -112,7 +109,6 @@ window.addEventListener("load", () => {
     window.location.href = "checkout.html";
   });
 
-  // Quantity and remove handlers for desktop
   document.addEventListener("click", (e) => {
     const target = e.target;
     const name = target.dataset.name;
@@ -148,7 +144,6 @@ window.addEventListener("load", () => {
   render();
 });
 
-// ✅ Precaution #2 & #3: More error-safe and traceable renderMobileDrawer
 export function renderMobileDrawer() {
   console.log("🛒 Rendering mobile drawer...");
   const cart = getCart();
@@ -157,11 +152,9 @@ export function renderMobileDrawer() {
   const mobileCartItems = document.getElementById("mobileCartItems");
   const drawerSubtotal = document.getElementById("drawerCartSubtotal");
 
+  // Precaution: Make sure critical elements exist
   if (!mobileCartItems || !drawerSubtotal) {
-    console.error("❌ Missing drawer DOM elements:", {
-      mobileCartItems,
-      drawerSubtotal
-    });
+    console.error("❌ Critical drawer elements missing.");
     return;
   }
 
@@ -178,25 +171,26 @@ export function renderMobileDrawer() {
     drawerSubtotal.textContent = "R0.00";
     document.getElementById("drawerProceedBtn")
       ?.addEventListener("click", () => window.location.href = "shop.html");
-    updateDrawerCheckoutState();
     return;
   }
 
-  cart.forEach((item, index) => {
-    console.log(`🧱 Rendering item ${index}:`, item);
+  cart.forEach((item, idx) => {
+    console.log(`🧱 Rendering item ${idx}:`, item);
 
     if (
       !item ||
       typeof item.price !== "number" ||
       typeof item.quantity !== "number" ||
       !item.image ||
-      !item.name
+      !item.name ||
+      typeof item.id === "undefined"
     ) {
-      console.warn("⚠️ Invalid item skipped:", item);
+      console.warn("❌ Skipping invalid item:", item);
       return;
     }
 
     subtotal += item.price * item.quantity;
+
     const itemDiv = document.createElement("div");
     itemDiv.className = "cart-item";
     itemDiv.style.position = 'relative';
@@ -218,7 +212,6 @@ export function renderMobileDrawer() {
 
   drawerSubtotal.textContent = `R${subtotal.toFixed(2)}`;
 
-  // Bind quantity buttons
   mobileCartItems.querySelectorAll('.qty-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       const id = parseInt(btn.dataset.id);
@@ -233,7 +226,6 @@ export function renderMobileDrawer() {
     });
   });
 
-  // Bind remove buttons
   mobileCartItems.querySelectorAll('.remove-item-mobile').forEach(btn => {
     btn.addEventListener('click', () => {
       const id = parseInt(btn.dataset.id);
@@ -246,7 +238,4 @@ export function renderMobileDrawer() {
   });
 
   updateDrawerCheckoutState();
-  console.log("✅ Finished rendering mobile drawer.");
 }
-
-
