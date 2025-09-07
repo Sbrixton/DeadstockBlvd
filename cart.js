@@ -109,6 +109,8 @@ window.addEventListener("load", () => {
   });
   
   drawerCheckoutBtn?.addEventListener("click", () => {
+    const cart = getCart();
+    if (cart.length === 0) return; // ⛔ do nothing if cart is empty
     window.location.href = "checkout.html";
   });
   
@@ -140,7 +142,9 @@ window.addEventListener("load", () => {
   });
 
   checkoutBtn?.addEventListener("click", () => {
-    window.location.href = cart.length > 0 ? "checkout.html" : "shop.html";
+    const currentCart = getCart(); // 🔄 fetch fresh cart
+    if (currentCart.length === 0) return; // ⛔ do nothing
+    window.location.href = "checkout.html";
   });
 
   render();
