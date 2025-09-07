@@ -23,7 +23,21 @@ window.addEventListener("load", () => {
 
   proceedBtn?.addEventListener("click", () => {
     window.location.href = "shop.html";
+    
   });
+
+  function updateDrawerCheckoutState() {
+    const cart = getCart();
+    const drawerCheckoutBtn = document.getElementById("drawerCheckoutBtn");
+
+    if (!drawerCheckoutBtn) return;
+
+    if (cart.length === 0) {
+      drawerCheckoutBtn.disabled = true;
+    } else {
+      drawerCheckoutBtn.disabled = false;
+    }
+  }
 
   function render() {
     if (!hasDesktopCart) return;
@@ -39,6 +53,7 @@ window.addEventListener("load", () => {
       subEl.textContent = "R0.00";
       totalEl.textContent = "R0.00";
       updateCartCountInDOM();
+      updateDrawerCheckoutState(); // 👈 Added here
       return;
     }
 
@@ -77,6 +92,7 @@ window.addEventListener("load", () => {
     subEl.textContent = `R${subtotal.toFixed(2)}`;
     totalEl.textContent = `R${subtotal.toFixed(2)}`;
     updateCartCountInDOM();
+    updateDrawerCheckoutState(); // 👈 Also added here
   }
 
   // 👉 Open cart drawer on all screen sizes
