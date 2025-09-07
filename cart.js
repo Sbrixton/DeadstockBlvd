@@ -214,4 +214,6 @@ export function renderMobileDrawer() {
       renderMobileDrawer();
     });
   });
+
+  updateDrawerCheckoutState(); 
 }
