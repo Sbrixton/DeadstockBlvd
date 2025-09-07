@@ -28,9 +28,7 @@ window.addEventListener("load", () => {
   function updateDrawerCheckoutState() {
     const cart = getCart();
     const drawerCheckoutBtn = document.getElementById("drawerCheckoutBtn");
-
     if (!drawerCheckoutBtn) return;
-
     drawerCheckoutBtn.disabled = cart.length === 0;
   }
 
@@ -88,16 +86,18 @@ window.addEventListener("load", () => {
     updateDrawerCheckoutState();
   }
 
-  // 👉 Open cart drawer on all screen sizes
+  // ✅ Precaution #1: Safe drawer open with try/catch and logging
   if (cartIcon && mobileDrawer) {
     cartIcon.addEventListener("click", (e) => {
       e.preventDefault();
+      console.log("🖱️ Cart icon clicked");
+
       try {
         renderMobileDrawer();
         mobileDrawer.classList.add("open");
-        console.log("✅ Drawer opened.");
+        console.log("✅ Drawer opened");
       } catch (err) {
-        console.error("❌ Error opening cart drawer:", err);
+        console.error("❌ Failed to open drawer:", err);
       }
     });
   }
@@ -112,7 +112,7 @@ window.addEventListener("load", () => {
     window.location.href = "checkout.html";
   });
 
-  // Desktop cart quantity & remove
+  // Quantity and remove handlers for desktop
   document.addEventListener("click", (e) => {
     const target = e.target;
     const name = target.dataset.name;
@@ -148,17 +148,20 @@ window.addEventListener("load", () => {
   render();
 });
 
-// ✅ Render Mobile Drawer — Fully Debugged Version
+// ✅ Precaution #2 & #3: More error-safe and traceable renderMobileDrawer
 export function renderMobileDrawer() {
   console.log("🛒 Rendering mobile drawer...");
   const cart = getCart();
-  console.log("📦 Cart contents:", JSON.stringify(cart));
+  console.log("📦 Cart contents:", cart);
 
   const mobileCartItems = document.getElementById("mobileCartItems");
   const drawerSubtotal = document.getElementById("drawerCartSubtotal");
 
   if (!mobileCartItems || !drawerSubtotal) {
-    console.error("❌ Missing mobileCartItems or drawerSubtotal DOM elements");
+    console.error("❌ Missing drawer DOM elements:", {
+      mobileCartItems,
+      drawerSubtotal
+    });
     return;
   }
 
@@ -179,22 +182,21 @@ export function renderMobileDrawer() {
     return;
   }
 
-  cart.forEach((item, idx) => {
-    console.log(`🧱 Rendering item [${idx}]:`, item);
+  cart.forEach((item, index) => {
+    console.log(`🧱 Rendering item ${index}:`, item);
 
     if (
       !item ||
       typeof item.price !== "number" ||
       typeof item.quantity !== "number" ||
-      !item.name ||
-      !item.image
+      !item.image ||
+      !item.name
     ) {
-      console.warn("❌ Skipping invalid item:", item);
+      console.warn("⚠️ Invalid item skipped:", item);
       return;
     }
 
     subtotal += item.price * item.quantity;
-
     const itemDiv = document.createElement("div");
     itemDiv.className = "cart-item";
     itemDiv.style.position = 'relative';
@@ -223,9 +225,8 @@ export function renderMobileDrawer() {
       const cart = getCart();
       const prod = cart.find(i => i.id === id);
       if (!prod) return;
-      prod.quantity = btn.classList.contains('plus')
-        ? prod.quantity + 1
-        : Math.max(1, prod.quantity - 1);
+      if (btn.classList.contains('plus')) prod.quantity++;
+      if (btn.classList.contains('minus')) prod.quantity = Math.max(1, prod.quantity - 1);
       saveCart(cart);
       updateCartCountInDOM();
       renderMobileDrawer();
@@ -245,5 +246,7 @@ export function renderMobileDrawer() {
   });
 
   updateDrawerCheckoutState();
+  console.log("✅ Finished rendering mobile drawer.");
 }
+
 
