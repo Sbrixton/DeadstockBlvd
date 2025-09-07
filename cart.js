@@ -109,13 +109,6 @@ window.addEventListener("load", () => {
   });
   
   drawerCheckoutBtn?.addEventListener("click", () => {
-    const currentCart = getCart(); // 🔥 get fresh cart data
-    
-    if (currentCart.length === 0) {
-      alert("Your cart is empty. Add something before checking out.");
-      return;
-    }
-    
     window.location.href = "checkout.html";
   });
   
