@@ -43,6 +43,10 @@
         </div>
     </header>
 
+    <div id="preloader">
+        <div class="loader">Loading...</div>
+    </div>
+
     <!-- ✅ Search Bar Container (below navbar) -->
     <div id="searchBarContainer">
       <div class="search-input-wrapper">
@@ -160,6 +164,17 @@
             <button id="drawerCheckoutBtn" class="checkout-bar">Checkout</button>
         </div>
     </div>
+
+    <script>
+        window.addEventListener("load", () => {
+            const preloader = document.getElementById("preloader");
+            preloader.style.opacity = "0";
+            setTimeout(() => {
+                preloader.style.display = "none";
+            }, 500);
+        });
+    </script>
+    
     <script type="module" src="cart-utils.js"></script>
     <script src="shop.js"></script>
     <script type="module" src="product.js"></script>
@@ -168,6 +183,7 @@
     <script type="module" src="search.js"></script>
 </body>
 </html>
+
 
 
 
