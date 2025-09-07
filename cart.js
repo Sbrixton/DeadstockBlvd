@@ -91,13 +91,18 @@ window.addEventListener("load", () => {
   closeCartDrawer?.addEventListener("click", () => {
     mobileDrawer.classList.remove("open");
   });
-
+  
   drawerCheckoutBtn?.addEventListener("click", () => {
-    if (cart.length > 0) {
-      window.location.href = "checkout.html";
+    const currentCart = getCart(); // 🔥 get fresh cart data
+    
+    if (currentCart.length === 0) {
+      alert("Your cart is empty. Add something before checking out.");
+      return;
     }
+    
+    window.location.href = "checkout.html";
   });
-
+  
   // Desktop cart quantity & remove
   document.addEventListener("click", (e) => {
     const target = e.target;
