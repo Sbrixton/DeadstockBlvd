@@ -4,6 +4,14 @@ import {
   updateCartCountInDOM
 } from "./cart-utils.js";
 
+// ✅ FIXED: Make sure this is defined before renderMobileDrawer() calls it
+function updateDrawerCheckoutState() {
+  const cart = getCart();
+  const drawerCheckoutBtn = document.getElementById("drawerCheckoutBtn");
+  if (!drawerCheckoutBtn) return;
+  drawerCheckoutBtn.disabled = cart.length === 0;
+}
+
 window.addEventListener("load", () => {
   const cart = getCart();
   const empty = document.getElementById("emptyCart");
@@ -24,13 +32,6 @@ window.addEventListener("load", () => {
   proceedBtn?.addEventListener("click", () => {
     window.location.href = "shop.html";
   });
-
-  function updateDrawerCheckoutState() {
-    const cart = getCart();
-    const drawerCheckoutBtn = document.getElementById("drawerCheckoutBtn");
-    if (!drawerCheckoutBtn) return;
-    drawerCheckoutBtn.disabled = cart.length === 0;
-  }
 
   function render() {
     if (!hasDesktopCart) return;
@@ -76,6 +77,7 @@ window.addEventListener("load", () => {
           <button class="remove-item" data-name="${item.name}">Remove</button>
         </div>
       `;
+
       cartWrapper.appendChild(itemDiv);
     });
 
@@ -85,6 +87,7 @@ window.addEventListener("load", () => {
     updateDrawerCheckoutState();
   }
 
+  // ✅ Open cart drawer when icon is clicked
   if (cartIcon && mobileDrawer) {
     cartIcon.addEventListener("click", (e) => {
       e.preventDefault();
@@ -109,6 +112,7 @@ window.addEventListener("load", () => {
     window.location.href = "checkout.html";
   });
 
+  // Quantity and remove buttons (desktop cart)
   document.addEventListener("click", (e) => {
     const target = e.target;
     const name = target.dataset.name;
@@ -144,6 +148,7 @@ window.addEventListener("load", () => {
   render();
 });
 
+// ✅ Exported for dynamic import from product pages
 export function renderMobileDrawer() {
   console.log("🛒 Rendering mobile drawer...");
   const cart = getCart();
@@ -152,9 +157,8 @@ export function renderMobileDrawer() {
   const mobileCartItems = document.getElementById("mobileCartItems");
   const drawerSubtotal = document.getElementById("drawerCartSubtotal");
 
-  // Precaution: Make sure critical elements exist
   if (!mobileCartItems || !drawerSubtotal) {
-    console.error("❌ Critical drawer elements missing.");
+    console.error("❌ Mobile cart drawer elements not found.");
     return;
   }
 
@@ -174,16 +178,15 @@ export function renderMobileDrawer() {
     return;
   }
 
-  cart.forEach((item, idx) => {
-    console.log(`🧱 Rendering item ${idx}:`, item);
+  cart.forEach((item, i) => {
+    console.log(`🧱 Rendering item ${i}:`, item);
 
     if (
       !item ||
       typeof item.price !== "number" ||
       typeof item.quantity !== "number" ||
       !item.image ||
-      !item.name ||
-      typeof item.id === "undefined"
+      !item.name
     ) {
       console.warn("❌ Skipping invalid item:", item);
       return;
@@ -212,6 +215,7 @@ export function renderMobileDrawer() {
 
   drawerSubtotal.textContent = `R${subtotal.toFixed(2)}`;
 
+  // Bind quantity buttons
   mobileCartItems.querySelectorAll('.qty-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       const id = parseInt(btn.dataset.id);
@@ -226,6 +230,7 @@ export function renderMobileDrawer() {
     });
   });
 
+  // Bind remove buttons
   mobileCartItems.querySelectorAll('.remove-item-mobile').forEach(btn => {
     btn.addEventListener('click', () => {
       const id = parseInt(btn.dataset.id);
