@@ -277,9 +277,12 @@ p {
     color: #666;
   }
   
-  .search-info a {
-    text-decoration: none;
-    color: inherit;
+  .search-info a,
+  .search-info a:visited,
+  .search-info a:hover,
+  .search-info a:active {
+    color: inherit !important;
+    text-decoration: none !important;
   }
   
   .cart-wrapper {
@@ -1141,6 +1144,7 @@ body.sticky-footer main {
     padding: 0 10px;
   }
 }
+
 
 
 
