@@ -8,6 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const searchResults = document.getElementById("searchResults");
   const noResultsMessage = document.getElementById("noResultsMessage");
   const clearSearch = document.getElementById("clearSearch");
+  const searchSuggestions = document.getElementById("searchSuggestions");
 
   const products = JSON.parse(localStorage.getItem("products")) || [];
 
@@ -24,6 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
     searchOverlay.classList.remove("visible");
     searchInput.value = "";
     searchResults.innerHTML = "";
+    searchSuggestions.innerHTML = "";
     noResultsMessage.style.display = "none";
   }
 
@@ -31,28 +33,37 @@ document.addEventListener("DOMContentLoaded", () => {
   function handleSearchInput() {
     const query = searchInput.value.toLowerCase().trim();
     searchResults.innerHTML = "";
+    searchSuggestions.innerHTML = "";
     noResultsMessage.style.display = "none";
 
-    if (query) {
-      searchBarContainer.classList.add("typing");
-    } else {
+    if (!query) {
       searchBarContainer.classList.remove("typing");
       return;
     }
+
+    searchBarContainer.classList.add("typing");
 
     const matches = products.filter(p =>
       p.name.toLowerCase().includes(query)
     );
 
-    if (matches.length === 0) {
-      noResultsMessage.style.display = "block";
-      return;
-    }
+    // 🔍 Show top 5 suggestions
+    const topSuggestions = matches.slice(0, 5);
+    searchSuggestions.innerHTML = topSuggestions.map(product => `
+      <li data-id="${product.id}" data-page="${product.page}">
+        ${product.name}
+      </li>
+    `).join("");
 
-    renderResults(matches);
+    // Show full results
+    if (matches.length > 0) {
+      renderResults(matches);
+    } else {
+      noResultsMessage.style.display = "block";
+    }
   }
 
-  // ✅ Render results
+  // ✅ Render full search results
   function renderResults(results) {
     searchResults.innerHTML = results.map(product => `
       <a href="${product.page}?id=${product.id}" class="search-item-link">
@@ -78,6 +89,7 @@ document.addEventListener("DOMContentLoaded", () => {
     e.stopPropagation();
     searchInput.value = "";
     searchResults.innerHTML = "";
+    searchSuggestions.innerHTML = "";
     noResultsMessage.style.display = "none";
     searchBarContainer.classList.remove("typing");
     searchInput.focus();
@@ -97,7 +109,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (e.key === "Escape") hideSearch();
   });
 
-  // ✅ Typing triggers search
+  // ✅ Typing triggers search + suggestions
   searchInput?.addEventListener("input", handleSearchInput);
 
   // ✅ Click result → go to page
@@ -113,8 +125,24 @@ document.addEventListener("DOMContentLoaded", () => {
     }, 300);
   });
 
-  // ✅ Clicking overlay also closes it
+  // ✅ Click suggestion → go to product
+  searchSuggestions?.addEventListener("click", (e) => {
+    const li = e.target.closest("li");
+    if (!li) return;
+
+    const id = li.getAttribute("data-id");
+    const page = li.getAttribute("data-page");
+
+    searchOverlay.style.opacity = "0";
+
+    setTimeout(() => {
+      window.location.href = `${page}?id=${id}`;
+    }, 300);
+  });
+
+  // ✅ Clicking overlay also closes everything
   searchOverlay?.addEventListener("click", () => {
     hideSearch();
   });
 });
+
