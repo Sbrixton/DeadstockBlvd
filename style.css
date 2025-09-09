@@ -285,6 +285,10 @@ p {
     text-decoration: none !important;
   }
   
+  .search-item {
+    color: #111; /* or any color you want your text to be */
+  }
+  
   .cart-wrapper {
     position: relative;
     display: inline-block;
@@ -1144,6 +1148,7 @@ body.sticky-footer main {
     padding: 0 10px;
   }
 }
+
 
 
 
