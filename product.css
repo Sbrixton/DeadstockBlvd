@@ -469,9 +469,12 @@ main.product-page {
 }
 
 /* ========== REMOVE HOVER FOR SEARCH ICON ========== */
-#searchIcon:hover {
-  color: inherit;
-  cursor: pointer;
+.search-info a,
+.search-info a:visited,
+.search-info a:hover,
+.search-info a:active {
+  color: inherit !important;
+  text-decoration: none !important;
 }
 
 .success-wrapper {
