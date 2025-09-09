@@ -277,12 +277,17 @@ p {
     color: #666;
   }
   
-  .search-info a,
-  .search-info a:visited,
-  .search-info a:hover,
-  .search-info a:active {
-    color: inherit !important;
+  .search-item-link {
     text-decoration: none !important;
+    color: inherit !important;
+    display: block;
+  }
+  
+  .search-item-link:visited,
+  .search-item-link:hover,
+  .search-item-link:active {
+    text-decoration: none !important;
+    color: inherit !important;
   }
   
   .search-item {
@@ -1148,6 +1153,7 @@ body.sticky-footer main {
     padding: 0 10px;
   }
 }
+
 
 
 
