@@ -294,6 +294,36 @@ p {
     color: #111; /* or any color you want your text to be */
   }
   
+  .search-suggestions {
+    list-style: none;
+    margin: 4px 0 0;
+    padding: 0;
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    max-height: 180px;
+    overflow-y: auto;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    position: absolute;
+    width: 100%;
+    z-index: 1002;
+  }
+  
+  .search-suggestions li {
+    padding: 10px 14px;
+    cursor: pointer;
+    font-size: 15px;
+    border-bottom: 1px solid #eee;
+  }
+  
+  .search-suggestions li:hover {
+    background-color: #f1f1f1;
+  }
+  
+  .search-suggestions li:last-child {
+    border-bottom: none;
+  }
+  
   .cart-wrapper {
     position: relative;
     display: inline-block;
@@ -1153,6 +1183,7 @@ body.sticky-footer main {
     padding: 0 10px;
   }
 }
+
 
 
 
