@@ -255,6 +255,11 @@ nav a.active::after {
   color: #666;
 }
 
+.search-info a {
+  text-decoration: none;
+  color: inherit;
+}
+
 /* ========== SLIDE-IN CART DRAWER ========== */
 #mobileCartDrawer {
   position: fixed;
