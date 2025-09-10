@@ -232,10 +232,6 @@ p {
     width: 100%;
     max-width: 700px;
     margin: 0 auto;
-    
-    /* 🔥 Add scrollable container */
-    max-height: 300px;
-    overflow-y: auto;
     padding-top: 10px;
   }
   
@@ -1202,6 +1198,7 @@ body.sticky-footer main {
     padding: 0 10px;
   }
 }
+
 
 
 
