@@ -399,12 +399,11 @@ nav a.active::after {
 
 /* === Proceed to Shop Button === */
 .proceed-to-shop-btn {
-  background-color: #000;
+  background-color: #afafaf;
   color: #fff;
   border: none;
-  padding: 12px 24px;
+  padding: 10px 39px;
   font-size: 15px;
-  border-radius: 6px;
   cursor: pointer;
   transition: background-color 0.2s ease;
 }
