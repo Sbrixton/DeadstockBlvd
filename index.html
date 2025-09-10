@@ -162,11 +162,19 @@
             <h3>Your Cart</h3>
             <button id="closeCartDrawer">&times;</button>
         </div>
-        <div id="mobileCartItems"></div>
+        <div id="mobileCartItems">
+            <!-- ✅ Empty cart message placeholder -->
+            <div class="empty-cart-message" style="display: none;">
+              <p>Your cart is empty.</p>
+              <button id="drawerProceedBtn" class="proceed-to-shop-btn">Proceed to Shop</button>
+            </div>
+            
+            <!-- ✅ Cart items will be injected here -->
+        </div>
         <div id="mobileCartFooter">
             <div class="footer-totals">
-            <p>Subtotal: <span id="drawerCartSubtotal">R0.00</span></p>
-        </div>
+                <p>Subtotal: <span id="drawerCartSubtotal">R0.00</span></p>
+            </div>
             <button id="drawerCheckoutBtn" class="checkout-bar">Checkout</button>
         </div>
     </div>
@@ -189,6 +197,7 @@
     <script type="module" src="search.js"></script>
 </body>
 </html>
+
 
 
 
