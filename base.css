@@ -374,7 +374,7 @@ nav a.active::after {
   background: none;
   border: none;
   font-size: 18px;
-  color: #c00;
+  color: #141414;
   cursor: pointer;
 }
 
@@ -382,6 +382,35 @@ nav a.active::after {
   flex: 1;
   overflow-y: auto;
   padding: 16px;
+}
+
+/* === Empty Cart Message Styling === */
+.empty-cart-message {
+  text-align: center;
+  padding: 40px 20px;
+  color: #333;
+  font-size: 16px;
+}
+
+.empty-cart-message p {
+  margin-bottom: 16px;
+  font-weight: 500;
+}
+
+/* === Proceed to Shop Button === */
+.proceed-to-shop-btn {
+  background-color: #000;
+  color: #fff;
+  border: none;
+  padding: 12px 24px;
+  font-size: 15px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.proceed-to-shop-btn:hover {
+  background-color: #333;
 }
 
 #mobileCartFooter {
