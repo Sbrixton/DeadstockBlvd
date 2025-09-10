@@ -43,11 +43,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
     searchBarContainer.classList.add("typing");
 
-    const matches = products.filter(p =>
-      p.name.toLowerCase().includes(query)
-    );
+    // ✅ Match only names that start with the query & sort alphabetically
+    const matches = products
+      .filter(p => p.name.toLowerCase().startsWith(query))
+      .sort((a, b) => a.name.localeCompare(b.name));
 
-    // 🔍 Show top 5 suggestions
+    // ✅ Show top 5 suggestions
     const topSuggestions = matches.slice(0, 5);
     searchSuggestions.innerHTML = topSuggestions.map(product => `
       <li data-id="${product.id}" data-page="${product.page}">
@@ -55,7 +56,7 @@ document.addEventListener("DOMContentLoaded", () => {
       </li>
     `).join("");
 
-    // Show full results
+    // ✅ Show full results
     if (matches.length > 0) {
       renderResults(matches);
     } else {
