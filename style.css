@@ -301,20 +301,11 @@ p {
   
   .search-suggestions {
     list-style: none;
-    margin: 8px auto 0;
+    margin: 0;
     padding: 0;
     background: #fff;
     border-radius: 4px;
-    max-height: 160px;
-    overflow-y: auto;
     width: 100%;
-    max-width: 700px;
-    z-index: 1001;
-    
-    /* 🔥 Fix: remove positioning so it stays in flow */
-    position: static;
-    
-    /* Optional: subtle separation */
     border: 1px solid #ddd;
   }
   
@@ -342,6 +333,19 @@ p {
   .cart-wrapper {
     position: relative;
     display: inline-block;
+  }
+  
+  #searchScrollableArea {
+    width: 100%;
+    max-width: 700px;
+    margin: 0 auto;
+    max-height: 400px; /* or whatever height you want */
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding-top: 10px;
+    z-index: 1001;
   }
   
   #cart-count {
@@ -1198,6 +1202,7 @@ body.sticky-footer main {
     padding: 0 10px;
   }
 }
+
 
 
 
