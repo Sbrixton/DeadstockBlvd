@@ -1,4 +1,6 @@
 // script.js
+import { updateCartCountInDOM } from './cart-utils.js';
+
 document.addEventListener("DOMContentLoaded", () => {
   const bar = document.getElementById("bar");
   const close = document.getElementById("close");
@@ -11,20 +13,20 @@ document.addEventListener("DOMContentLoaded", () => {
     if (window.innerWidth > 768) navWrapper.classList.remove("active");
   });
 
-  // ✅ Add to Cart Functionality
+  // ✅ Add to Cart Functionality (for index.html product cards)
   const addToCartButtons = document.querySelectorAll(".add-to-cart-btn");
 
   addToCartButtons.forEach((button) => {
     button.addEventListener("click", (e) => {
       e.preventDefault();
-      e.stopPropagation(); // Prevents link click if button is inside <a>
+      e.stopPropagation(); // Prevent navigation if inside <a>
 
-      const id = button.getAttribute("data-id");
+      const id = parseInt(button.getAttribute("data-id"));
       const name = button.getAttribute("data-name");
       const price = parseFloat(button.getAttribute("data-price"));
       const image = button.getAttribute("data-image");
 
-      const item = {
+      const newItem = {
         id,
         name,
         price,
@@ -34,18 +36,25 @@ document.addEventListener("DOMContentLoaded", () => {
 
       let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-      const existingItem = cart.find((product) => product.id === id);
+      const existingItem = cart.find((item) => item.id === id);
 
       if (existingItem) {
         existingItem.quantity += 1;
       } else {
-        cart.push(item);
+        cart.push(newItem);
       }
 
       localStorage.setItem("cart", JSON.stringify(cart));
-      alert(`${name} added to cart!`);
+
+      // ✅ Update cart count without reload
+      updateCartCountInDOM();
     });
   });
+
+  // ✅ Ensure cart count is updated on load
+  updateCartCountInDOM();
 });
+
+
 
 
