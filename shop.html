@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="base.css">
     <link rel="stylesheet" href="style.css">
     <script type="module" src="navbar.js"></script>
-    <script type="module" src="data.js"></script>
+    <script type="module" src="script.js" defer></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"/>
 </head>
 
@@ -76,166 +76,186 @@
         <h2>Shop All</h2>
         <div class="pro-container">
             <!-- Product Card -->
-            <a href="product1.html" class="pro-link">
-                <div class="pro">
+                <a href="product1.html" class="pro-link">
                     <div class="product-img">
-                        <img src="Nike SB Dunk Orange Grateful Dead (1).png" alt="Main Image" class="main-img" />
-                        <img src="Nike SB Dunk Orange Grateful Dead (4).png" alt="Hover Image" class="hover-img" />
+                      <img src="Nike SB Dunk Orange Grateful Dead (1).png" alt="Main" class="main-img" />
+                      <img src="Nike SB Dunk Orange Grateful Dead (4).png" alt="Hover" class="hover-img" />
                     </div>
                     <div class="des">
-                        <span>Streetware</span>
-                        <h5>Graphic Hoodie</h5>
-                        <h4>R600.00</h4>
+                      <h5>Nike SB Dunk</h5>
+                      <h4>R600.00</h4>
                     </div>
-                    <div class="cart" 
-                            data-name="Graphic Hoodie" 
-                            data-price="600.00" 
-                            data-image="Screenshot 2024-12-07 170359.png">
-                        <i class="fas fa-shopping-bag"></i>
-                    </div>
-                </div>
-            </a>
+                </a>
+                
+                <!-- ✅ New Add-to-Cart Button -->
+                <button 
+                    class="add-to-cart-btn"
+                    data-name="Nike SB Dunk"
+                    data-price="600"
+                    data-image="Nike SB Dunk Orange Grateful Dead (1).png"
+                    data-id="1">
+                    <img src="shopping_16438481.png" alt="Add to cart" class="btn-icon" style="height: 30px" />
+                </button>
+            </div>
             
             <!-- Add more .pro blocks as needed -->
-            <a href="product2.html" class="pro-link">
-                <div class="pro">
+            <div class="pro">
+                <a href="product2.html" class="pro-link">
                     <div class="product-img">
-                        <img src="Nike x CRTZ  (1).png" alt="Main Image" class="main-img" />
-                        <img src="Nike x CRTZ  (3).png" alt="Hover Image" class="hover-img" />
+                        <img src="Nike x CRTZ  (1).png" alt="Main" class="main-img" />
+                        <img src="Nike x CRTZ  (3).png" alt="Hover" class="hover-img" />
                     </div>
                     <div class="des">
-                        <span>Streetwear</span>
-                        <h5>Denim Jacket</h5>
+                        <span>Vintage</span>
+                        <h5>Nike x Corteiz Air Max 95</h5>
                         <h4>R750.00</h4>
                     </div>
-                    <div class="cart" 
-                            data-name="Denim Jacket" 
-                            data-price="750.00" 
-                            data-image="Screenshot 2024-12-22 201324.png">
-                        <i class="fas fa-shopping-bag"></i>
-                    </div>
-                </div>
-            </a>
+                </a>
+                <button 
+                    class="add-to-cart-btn"
+                    data-name="Nike x Corteiz Air Max 95"
+                    data-price="750"
+                    data-image="Nike x CRTZ  (3).png"
+                    data-id="2"
+                >
+                    <img src="shopping_16438481.png" alt="Add to cart" class="btn-icon" style="height: 30px" />
+                </button>
+            </div>
             
-            <a href="product3.html" class="pro-link">
-                <div class="pro">
+            <div class="pro">
+                <a href="product3.html" class="pro-link">
                     <div class="product-img">
-                        <img src="Nike Hoodie (1).png" alt="Main Image" class="main-img" />
-                        <img src="Nike Hoodie (4).png" alt="Hover Image" class="hover-img" />
+                        <img src="Nike Hoodie (1).png" alt="Main" class="main-img" />
+                        <img src="Nike Hoodie (4).png" alt="Hover" class="hover-img" />
                     </div>
                     <div class="des">
-                        <span>Streetwear</span>
-                        <h5>Cargo Pants</h5>
+                        <span>Vintage</span>
+                        <h5>Nike Hoodie </h5>
                         <h4>R500.00</h4>
                     </div>
-                    <div class="cart" 
-                            data-name="Cargo Pants" 
-                            data-price="500.00" 
-                            data-image="Nike Hoodie (1).png">
-                        <i class="fas fa-shopping-bag"></i>
-                    </div>
-                </div>
-            </a>
+                </a>
+                <button 
+                    class="add-to-cart-btn"
+                    data-name="Nike Sweater"
+                    data-price="500"
+                    data-image="Nike Hoodie (1).png"
+                    data-id="3"
+                >
+                    <img src="shopping_16438481.png" alt="Add to cart" class="btn-icon" style="height: 30px" />
+                </button>
+            </div>
             
-            <a href="product4.html" class="pro-link">
-                <div class="pro">
+            <div class="pro">
+                <a href="product4.html" class="pro-link">
                     <div class="product-img">
-                        <img src="Balenciaga Track Pants (2).png" alt="Main Image" class="main-img" />
-                        <img src="Balenciaga Track Pants (4).png" alt="Hover Image" class="hover-img" />
+                        <img src="Balenciaga Track Pants (2).png" alt="Main" class="main-img" />
+                        <img src="Balenciaga Track Pants (4).png" alt="Hover" class="hover-img" />
                     </div>
                     <div class="des">
-                        <span>Streetwear</span>
-                        <h5>Denim Jeans</h5>
+                        <span>Vintage</span>
+                        <h5>Balenciaga Track Pants</h5>
                         <h4>R780.00</h4>
                     </div>
-                    <div class="cart" 
-                            data-name="Denim Jeans" 
-                            data-price="780.00" 
-                            data-image="Balenciaga Track Pants (2).png">
-                        <i class="fas fa-shopping-bag"></i>
-                    </div>
-                </div>
-            </a>
+                </a>
+                <button 
+                    class="add-to-cart-btn"
+                    data-name="Balenciage Track Pants"
+                    data-price="780"
+                    data-image="Balenciaga Track Pants (2).png"
+                    data-id="4"
+                >
+                    <img src="shopping_16438481.png" alt="Add to cart" class="btn-icon" style="height: 30px" />
+                </button>
+            </div>
             
-            <a href="product5.html" class="pro-link">
-                <div class="pro">
+            <div class="pro">
+                <a href="product5.html" class="pro-link">
                     <div class="product-img">
                         <img src="Nike Air Max 95 OG Mandarin-2 (5).png" alt="Main Image" class="main-img" />
-                        <img src="Nike Air Max 95 OG Mandarin-2 (3).png" alt="Hover Image" class="hover-img" />
+                        <img src="Nike Air Max 95 OG Mandarin-2 (3).png" alt="Hover Image" class="hover-img" /> 
                     </div>
                     <div class="des">
-                        <span>Streetwear</span>
-                        <h5>Denim Cargos</h5>
-                        <h4>R800.00</h4>
+                        <span>Vintage</span>
+                        <h5>Nike Air Max 95 OG Mandarin</h5>
+                        <h4>R780.00</h4>
                     </div>
-                    <div class="cart" 
-                            data-name="Denim Cargos" 
-                            data-price="800.00" 
-                            data-image="images/item5.jpg">
-                        <i class="fas fa-shopping-bag"></i>
-                    </div>
-                </div>
-            </a>
+                </a>
+                <button 
+                    class="add-to-cart-btn"
+                    data-name="Balenciage Track Pants"
+                    data-price="780"
+                    data-image="Nike Air Max 95 OG Mandarin-2 (5).png"
+                    data-id="5">
+                    <img src="shopping_16438481.png" alt="Add to cart" class="btn-icon" style="height: 30px" />
+                </button>
+            </div>
             
-            <a href="product6.html" class="pro-link">
-                <div class="pro">
+            <div class="pro">
+                <a href="product6.html" class="pro-link">
                     <div class="product-img">
                         <img src="Nike X PSG Tech Fleece Zip-Up (3).png" alt="Main Image" class="main-img" />
-                        <img src="Nike X PSG Tech Fleece Zip-Up (4).png" alt="Hover Image" class="hover-img" />
+                        <img src="Nike X PSG Tech Fleece Zip-Up (4).png" alt="Hover Image" class="hover-img" />        
                     </div>
                     <div class="des">
-                        <span>Streetwear</span>
-                        <h5>Puffer Jacket</h5>
-                        <h4>R700.00</h4>
+                        <span>Vintage</span>
+                        <h5>Nike X PSG Tech Fleece</h5>
+                        <h4>R780.00</h4>
                     </div>
-                    <div class="cart" 
-                            data-name="Puffer Jacket" 
-                            data-price="700.00" 
-                            data-image="images/item6.jpg">
-                        <i class="fas fa-shopping-bag"></i>
-                    </div>
-                </div>
-            </a>
+                </a>
+                <button 
+                    class="add-to-cart-btn"
+                    data-name="Nike X PSG Tech Fleece"
+                    data-price="780"
+                    data-image="Nike X PSG Tech Fleece Zip-Up (4).png"
+                    data-id="6">
+                    <img src="shopping_16438481.png" alt="Add to cart" class="btn-icon" style="height: 30px" />
+                </button>
+            </div>
             
-            <a href="product7.html" class="pro-link">
-                <div class="pro">
+            <div class="pro">
+                <a href="product7.html" class="pro-link">
                     <div class="product-img">
                         <img src="Nike Sweatpants (3).png" alt="Main Image" class="main-img" />
                         <img src="Nike Sweatpants (4).png" alt="Hover Image" class="hover-img" />
                     </div>
                     <div class="des">
                         <span>Vintage</span>
-                        <h5>Graphic T-Shirt</h5>
-                        <h4>R400.00</h4>
+                        <h5>Nike Sweatpants</h5>
+                        <h4>R780.00</h4>
                     </div>
-                    <div class="cart" 
-                            data-name="Graphic T-Shirt" 
-                            data-price="400.00" 
-                            data-image="images/item7.jpg">
-                        <i class="fas fa-shopping-bag"></i>
-                    </div>
-                </div>
-            </a>
+                </a>
+                <button 
+                    class="add-to-cart-btn"
+                    data-name="Nike Sweatpants"
+                    data-price="780"
+                    data-image="Balenciaga Track Pants (2).png"
+                    data-id="7"
+                >
+                    <img src="shopping_16438481.png" alt="Add to cart" class="btn-icon" style="height: 30px" />
+                </button>
+            </div>
 
-            <a href="product8.html" class="pro-link">
-                <div class="pro">
+            <div class="pro">
+                <a href="product8.html" class="pro-link">
                     <div class="product-img">
                         <img src="Nike Shox TL Orange-Black (5).png" alt="Main Image" class="main-img" />
                         <img src="Nike Shox TL Orange-Black (4).png" alt="Hover Image" class="hover-img" />
                     </div>
                     <div class="des">
-                        <span>Streetwear</span>
-                        <h5>Bikini</h5>
-                        <h4>R380.00</h4>
+                        <span>Vintage</span>
+                        <h5>Nike Shox TL Orange-Black</h5>
+                        <h4>R780.00</h4>
                     </div>
-                    <div class="cart" 
-                            data-name="Bikini" 
-                            data-price="380.00" 
-                            data-image="Nike Shox TL Orange-Black (5).png">
-                        <i class="fas fa-shopping-bag"></i>
-                    </div>
-                </div>
-            </a>
+                </a>
+                <button 
+                    class="add-to-cart-btn"
+                    data-name="Nike Shox TL Orange-Black"
+                    data-price="780"
+                    data-image="Nike Shox TL Orange-Black (5).png"
+                    data-id="8">
+                    <img src="shopping_16438481.png" alt="Add to cart" class="btn-icon" style="height: 30px" />
+                </button>
+            </div>
             
         </div>
     </section>
@@ -277,10 +297,10 @@
     <script src="shop.js"></script>
     <script type="module" src="product.js"></script>
     <script type="module" src="cart.js"></script> 
-    <script src="script.js"></script>
     <script type="module" src="search.js"></script>
 </body>
 </html>
+
 
 
 
