@@ -1,4 +1,3 @@
-// shop.js
 import { addToCart, updateCartCountInDOM } from './cart-utils.js';
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -7,6 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
   cartIcons.forEach((icon) => {
     icon.addEventListener("click", () => {
       const product = {
+        id: parseInt(icon.dataset.id), // ✅ REQUIRED for cart logic
         name: icon.dataset.name,
         price: parseFloat(icon.dataset.price),
         image: icon.dataset.image,
@@ -17,3 +17,4 @@ document.addEventListener("DOMContentLoaded", () => {
 
   updateCartCountInDOM();
 });
+
