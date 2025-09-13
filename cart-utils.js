@@ -12,7 +12,7 @@ export function updateCartCountInDOM() {
   const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
 
   if (cartCount) {
-    cartCount.textContent = totalItems; // ✅ just show the number
+    cartCount.textContent = totalItems;
   } else {
     console.warn("[cart-utils] #cart-count element not found");
   }
@@ -21,3 +21,20 @@ export function updateCartCountInDOM() {
 export function showToast(message) {
   alert(message); // Optional
 }
+
+export function addToCart(product) {
+  const cart = getCart();
+  const existing = cart.find(item => item.id === product.id);
+
+  if (existing) {
+    existing.quantity += 1;
+  } else {
+    product.quantity = 1;
+    cart.push(product);
+  }
+
+  saveCart(cart);
+  updateCartCountInDOM();
+  showToast(`${product.name} added to cart!`);
+}
+
