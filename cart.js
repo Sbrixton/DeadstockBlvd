@@ -4,7 +4,6 @@ import {
   updateCartCountInDOM
 } from "./cart-utils.js";
 
-// ✅ FIXED: Make sure this is defined before renderMobileDrawer() calls it
 function updateDrawerCheckoutState() {
   const cart = getCart();
   const drawerCheckoutBtn = document.getElementById("drawerCheckoutBtn");
@@ -35,6 +34,8 @@ window.addEventListener("load", () => {
 
   function render() {
     if (!hasDesktopCart) return;
+
+    let cart = getCart();
 
     cartWrapper.innerHTML = "";
     let subtotal = 0;
@@ -69,12 +70,12 @@ window.addEventListener("load", () => {
           <p class="cart-name">${item.name}</p>
           <p class="cart-price">Price: R${item.price.toFixed(2)}</p>
           <div class="quantity-controls">
-            <button class="qty-btn minus" data-name="${item.name}">-</button>
+            <button class="qty-btn minus" data-id="${item.id}">-</button>
             <span class="qty-num">${item.quantity}</span>
-            <button class="qty-btn plus" data-name="${item.name}">+</button>
+            <button class="qty-btn plus" data-id="${item.id}">+</button>
           </div>
           <p class="cart-total">Total: R${(item.price * item.quantity).toFixed(2)}</p>
-          <button class="remove-item" data-name="${item.name}">Remove</button>
+          <button class="remove-item" data-id="${item.id}">Remove</button>
         </div>
       `;
 
@@ -87,18 +88,12 @@ window.addEventListener("load", () => {
     updateDrawerCheckoutState();
   }
 
-  // ✅ Open cart drawer when icon is clicked
+  // Open cart drawer when icon clicked
   if (cartIcon && mobileDrawer) {
     cartIcon.addEventListener("click", (e) => {
       e.preventDefault();
-      console.log("🖱️ Cart icon clicked");
-      try {
-        renderMobileDrawer();
-        mobileDrawer.classList.add("open");
-        console.log("✅ Drawer opened.");
-      } catch (err) {
-        console.error("❌ Failed to open drawer:", err);
-      }
+      renderMobileDrawer();
+      mobileDrawer.classList.add("open");
     });
   }
 
@@ -112,53 +107,45 @@ window.addEventListener("load", () => {
     window.location.href = "checkout.html";
   });
 
-  // Quantity and remove buttons (desktop cart)
+  // Handle quantity and remove buttons on desktop cart
   document.addEventListener("click", (e) => {
     const target = e.target;
-    const name = target.dataset.name;
-    const item = cart.find((i) => i.name === name);
-    if (!item) return;
+    const id = parseInt(target.dataset.id);
+    if (!id) return;
+
+    let cart = getCart();
+    const itemIndex = cart.findIndex(i => i.id === id);
+    if (itemIndex === -1) return;
 
     if (target.classList.contains("qty-btn")) {
       if (target.classList.contains("plus")) {
-        item.quantity += 1;
+        cart[itemIndex].quantity += 1;
       } else if (target.classList.contains("minus")) {
-        item.quantity = Math.max(1, item.quantity - 1);
+        cart[itemIndex].quantity = Math.max(1, cart[itemIndex].quantity - 1);
       }
       saveCart(cart);
       render();
     }
 
     if (target.classList.contains("remove-item")) {
-      const index = cart.findIndex((i) => i.name === name);
-      if (index > -1) {
-        cart.splice(index, 1);
-        saveCart(cart);
-        render();
-      }
+      cart.splice(itemIndex, 1);
+      saveCart(cart);
+      render();
     }
-  });
-
-  checkoutBtn?.addEventListener("click", () => {
-    const currentCart = getCart();
-    if (currentCart.length === 0) return;
-    window.location.href = "checkout.html";
   });
 
   render();
 });
 
-// ✅ Exported for dynamic import from product pages
+// Exported for dynamic import from product page
 export function renderMobileDrawer() {
-  console.log("🛒 Rendering mobile drawer...");
   const cart = getCart();
-  console.log("📦 Cart contents:", cart);
 
   const mobileCartItems = document.getElementById("mobileCartItems");
   const drawerSubtotal = document.getElementById("drawerCartSubtotal");
 
   if (!mobileCartItems || !drawerSubtotal) {
-    console.error("❌ Mobile cart drawer elements not found.");
+    console.error("Mobile cart drawer elements not found.");
     return;
   }
 
@@ -166,7 +153,6 @@ export function renderMobileDrawer() {
   let subtotal = 0;
 
   if (cart.length === 0) {
-    console.log("📭 Cart is empty. Rendering empty state.");
     mobileCartItems.innerHTML = `
       <div class="empty-cart-message">
         <p>Your cart is empty.</p>
@@ -175,12 +161,11 @@ export function renderMobileDrawer() {
     drawerSubtotal.textContent = "R0.00";
     document.getElementById("drawerProceedBtn")
       ?.addEventListener("click", () => window.location.href = "shop.html");
+    updateCartCountInDOM();
     return;
   }
 
-  cart.forEach((item, i) => {
-    console.log(`🧱 Rendering item ${i}:`, item);
-
+  cart.forEach((item) => {
     if (
       !item ||
       typeof item.price !== "number" ||
@@ -188,7 +173,6 @@ export function renderMobileDrawer() {
       !item.image ||
       !item.name
     ) {
-      console.warn("❌ Skipping invalid item:", item);
       return;
     }
 
@@ -215,11 +199,11 @@ export function renderMobileDrawer() {
 
   drawerSubtotal.textContent = `R${subtotal.toFixed(2)}`;
 
-  // Bind quantity buttons
+  // Bind quantity buttons on mobile drawer
   mobileCartItems.querySelectorAll('.qty-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       const id = parseInt(btn.dataset.id);
-      const cart = getCart();
+      let cart = getCart();
       const prod = cart.find(i => i.id === id);
       if (!prod) return;
       if (btn.classList.contains('plus')) prod.quantity++;
@@ -230,7 +214,7 @@ export function renderMobileDrawer() {
     });
   });
 
-  // Bind remove buttons
+  // Bind remove buttons on mobile drawer
   mobileCartItems.querySelectorAll('.remove-item-mobile').forEach(btn => {
     btn.addEventListener('click', () => {
       const id = parseInt(btn.dataset.id);
@@ -242,5 +226,7 @@ export function renderMobileDrawer() {
     });
   });
 
+  updateCartCountInDOM();
   updateDrawerCheckoutState();
 }
+
