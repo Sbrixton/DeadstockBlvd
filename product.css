@@ -257,6 +257,13 @@ main.product-page {
   opacity: 0;
 }
 
+.recommendations-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  padding: 10px 0;
+}
+
 /* Cart Count */
 #cart-count {
   position: absolute;
