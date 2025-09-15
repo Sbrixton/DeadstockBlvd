@@ -688,45 +688,94 @@ nav a.active::after {
   cursor: not-allowed;
 }
 
-/* ==== FOOTER ==== */
-footer {
+footer.section-p1 {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
+  align-items: flex-end;
   background: #eee;
-  padding: 40px 20px;
+  padding: 40px;
+  flex-wrap: wrap;
+  position: relative;
+}
+
+.footer-left {
+  display: flex;
+  gap: 20px;
   flex-wrap: wrap;
 }
 
-footer .col {
-  flex: 1;
-  margin: 10px;
-}
-
-footer .col h4 {
-  margin-bottom: 10px;
-}
-
-footer .col a {
-  display: block;
-  margin: 5px 0;
+.footer-left a {
   text-decoration: none;
+  color: #333;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.footer-right {
+  text-align: right;
+  padding-right: 20px;
+}
+
+.footer-right p {
+  margin-bottom: 8px;
+  font-size: 14px;
   color: #333;
 }
 
-footer .socials i {
-  margin-right: 10px;
-  font-size: 18px;
-  color: #222;
+.footer-right img {
+  max-width: 150px;
+  height: auto;
 }
 
-body.sticky-footer, html.sticky-footer {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
+.copyright {
+  width: 100%;
+  text-align: center;
+  margin-top: 20px;
+  font-size: 14px;
+  color: #555;
 }
 
-body.sticky-footer main {
-  flex-grow: 1;
+/* ==== MODALS ==== */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  padding-top: 100px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.4);
+}
+
+.modal-content {
+  background-color: #fff;
+  margin: auto;
+  padding: 30px;
+  border: 1px solid #ccc;
+  width: 90%;
+  max-width: 500px;
+  border-radius: 8px;
+  position: relative;
+}
+
+.modal-content h3 {
+  margin-top: 0;
+}
+
+.modal .close {
+  color: #aaa;
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.modal .close:hover {
+  color: #000;
 }
 
 /* ========== RESPONSIVE DESIGN ========== */
@@ -1212,6 +1261,7 @@ body.sticky-footer main {
     padding: 0 10px;
   }
 }
+
 
 
 
