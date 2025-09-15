@@ -818,20 +818,14 @@ footer img {
     font-size: 1.3rem;
     margin: 40px 0 20px;
   }
-  
-  .recommendations {
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    padding-bottom: 30px;
-    gap: 14px;
+
+  /* ✅ MOBILE: 2 recommendation cards per row */
+  .recommendations-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    padding: 0 15px;
   }
-  
-  .recommend-box {
-    flex: 0 0 auto;
-    min-width: 130px;
-    max-width: 220px;
-  }
-  
+
   .empty-cart-mobile {
     text-align: center;
     padding: 20px;
