@@ -244,15 +244,46 @@
   </main>
   
   <footer class="section-p1">
-      <div class="col install">
-          <p>Secured Payment Gateways</p>
-          <img src="payments.png" alt="">
-      </div>
-            
-      <div class="copyright">
-          <p>© 2025, DeadstockBlvd</p>
-      </div>
+    <div class="footer-left">
+      <a href="#" class="policy-link" data-modal="modal-policy">Policies</a>
+      <a href="#" class="policy-link" data-modal="modal-refund">No Refund Policy</a>
+      <a href="#" class="policy-link" data-modal="modal-terms">Terms & Conditions</a>
+    </div>
+    
+    <div class="footer-right">
+      <p>Secured Payment Gateways</p>
+      <img src="payments.png" alt="Payments" />
+    </div>
+      
+    <div class="copyright">
+      <p>© 2025, DeadstockBlvd</p>
+    </div>
   </footer>
+  
+  <!-- ✅ Modal Structure (reusable) -->
+  <div id="modal-policy" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h3>Policies</h3>
+      <p>Your policy content goes here.</p>
+    </div>
+  </div>
+    
+  <div id="modal-refund" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h3>No Refund Policy</h3>
+      <p>No refunds. All sales are final.</p>
+    </div>
+  </div>
+  
+  <div id="modal-terms" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h3>Terms & Conditions</h3>
+      <p>By using this site, you agree to...</p>
+    </div>
+  </div>
   
     <!-- Mobile Slide-in Cart Drawer -->
   <div id="mobileCartDrawer">
