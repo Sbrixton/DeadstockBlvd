@@ -597,7 +597,7 @@ footer img {
 }
 
 /* ========== MOBILE NAVBAR + SEARCH + RECOMMENDATION FIXES ========== */
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   html, body {
     margin: 0;
     padding: 0;
