@@ -693,7 +693,7 @@ footer.section-p1 {
   justify-content: space-between;
   align-items: flex-end;
   background: #eee;
-  padding: 40px;
+  padding: 10px;
   flex-wrap: wrap;
   position: relative;
 }
@@ -1261,6 +1261,7 @@ footer.section-p1 {
     padding: 0 10px;
   }
 }
+
 
 
 
