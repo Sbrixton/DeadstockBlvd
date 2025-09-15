@@ -826,6 +826,10 @@ footer img {
     padding: 0 15px;
   }
 
+  .hide-on-mobile {
+    display: none !important;
+  }
+
   .empty-cart-mobile {
     text-align: center;
     padding: 20px;
