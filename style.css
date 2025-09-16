@@ -1251,16 +1251,23 @@ footer.section-p1 {
     align-items: flex-start;
     padding: 10px 20px;
   }
-
+  
   .nav-icons {
     margin-top: 10px;
   }
+  
+  .navbar {
+    padding: 30px 0px;
+  }
 
+  
+  
   .pro-container {
     grid-template-columns: 1fr 1fr; /* 2 items per row even on small screens */
     padding: 0 10px;
   }
 }
+
 
 
 
