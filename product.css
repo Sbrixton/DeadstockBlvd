@@ -1016,13 +1016,62 @@ footer img {
 }
 
 @media (max-width: 480px) {
-  .recommendation-wrapper .recommendations-grid {
-    gap: 20px;
-    padding: 0 12px;
+  .recommendation-wrapper {
+    padding: 0;
   }
 
-  .recommendation-wrapper .pro {
-    padding: 18px;
+  .recommendation-title {
+    font-size: 1.1rem;
+    margin: 30px 10px 20px;
+  }
+
+  .recommendation-wrapper .recommendations-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* 2 cards per row */
+    gap: 10px;
+    padding: 0 6px; /* Very close to the edge */
+  }
+
+  .rec-card {
+    padding: 4px;
+    background: #fff;
+    border-radius: 2px;
+    box-sizing: border-box;
+  }
+
+  .rec-card .product-img {
+    width: 100%;
+    height: 230px; /* Image is dominant */
+    overflow: hidden;
+    border-radius: 2px;
+    background-color: #fff;
+  }
+
+  .rec-card .product-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .rec-card .des {
+    padding-top: 6px;
+    text-align: left;
+  }
+
+  .rec-card .des h5 {
+    font-size: 13px;
+    margin: 4px 0 2px;
+  }
+
+  .rec-card .des h4 {
+    font-size: 14px;
+    font-weight: bold;
+    margin: 0;
+  }
+
+  .hide-on-mobile {
+    display: none !important;
   }
 }
 
