@@ -818,12 +818,17 @@ footer img {
     font-size: 1.3rem;
     margin: 40px 0 20px;
   }
-
+  
   /* ✅ MOBILE: 2 recommendation cards per row */
-  .recommendations-grid {
+  .recommendation-wrapper .recommendations-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 16px;
-    padding: 0 15px;
+    padding: 0 10px;
+  }
+
+  .recommendation-wrapper .pro {
+    padding: 16px;
+    box-sizing: border-box;
   }
 
   .hide-on-mobile {
@@ -986,3 +991,15 @@ footer img {
     margin-bottom: 8px;
   }
 }
+
+@media (max-width: 480px) {
+  .recommendation-wrapper .recommendations-grid {
+    gap: 20px;
+    padding: 0 12px;
+  }
+
+  .recommendation-wrapper .pro {
+    padding: 18px;
+  }
+}
+
