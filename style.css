@@ -788,38 +788,48 @@ footer.section-p1 {
     padding: 20px;
   }
   
-  .pro-container {
+  .pro-container.shop-grid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
+    gap: 12px;
+    padding: 0 10px;
   }
   
-  .pro {
+  .shop-card {
+    background: #fff;
+    padding: 8px;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  
+  .shop-card .product-img {
     width: 100%;
-    max-width: 100%; /* Ensure it doesn't stretch wider */
-    padding: 10px; /* Slightly less padding */
-    border-radius: 8px;
-    background: #f9f9f9;
+    height: 200px;
+    overflow: hidden;
+    background-color: #fff;
+    border-radius: 4px;
   }
   
-  .product-img {
-    height: 160px; /* Reduce height for mobile screens */
-  }
-  
-  .product-img img {
-    object-fit: cover;
+  .shop-card .product-img img {
+    width: 100%;
     height: 100%;
-    width: 100%;
-    border-radius: 0px;
+    object-fit: cover;
+    display: block;
   }
   
-  .pro .des h5 {
+  .shop-card .des {
+    padding-top: 6px;
+    text-align: left;
+  }
+  
+  .shop-card .des h5 {
     font-size: 13px;
-    margin: 5px 0 2px;
+    margin: 4px 0 2px;
   }
   
-  .pro .des h4 {
-    font-size: 15px;
-    margin-top: 2px;
+  .shop-card .des h4 {
+    font-size: 14px;
+    font-weight: bold;
+    margin: 0;
   }
   
   .navbar {
@@ -1241,11 +1251,7 @@ footer.section-p1 {
   }
 }
 
-@media (max-width: 477px) {
-  .pro-container {
-    grid-template-columns: repeat(2, 1fr); /* Still keep 2 per row even on small screens */
-  }
-
+@media (max-width: 480px) {
   #header {
     flex-direction: column;
     align-items: flex-start;
@@ -1260,13 +1266,40 @@ footer.section-p1 {
     padding: 30px 0px;
   }
 
-  
-  
-  .pro-container {
-    grid-template-columns: 1fr 1fr; /* 2 items per row even on small screens */
-    padding: 0 10px;
+  .shop-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    padding: 0 6px;
+  }
+
+  .shop-grid .pro {
+    padding: 4px;
+    background: #fff;
+    border-radius: 2px;
+    box-sizing: border-box;
+  }
+
+  .shop-grid .product-img {
+    height: 230px;
+    border-radius: 2px;
+  }
+
+  .shop-grid .des h5 {
+    font-size: 13px;
+    margin: 4px 0 2px;
+  }
+
+  .shop-grid .des h4 {
+    font-size: 14px;
+    font-weight: bold;
+  }
+
+  .shop-grid .btn-icon {
+    width: 22px;
+    height: 22px;
   }
 }
+
 
 
 
