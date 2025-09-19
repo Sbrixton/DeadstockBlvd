@@ -400,13 +400,19 @@ nav a.active::after {
   padding: 40px 20px;
 }
 
+@media (max-width: 1000px) and (min-width: 700px) {
+  .pro-container {
+    grid-template: repeat(3, 1fr);
+  }
+}
+
 .pro-container {
   display: grid;
   grid-template-columns: repeat(4, 1fr); /* 4 items per row on larger screens */
   gap: 20px;
   padding: 20px;
 }
-
+  
 .pro {
   background: #f5f5f5;
   padding: 15px;
@@ -782,6 +788,12 @@ footer.section-p1 {
 
 .modal .close:hover {
   color: #000;
+}
+
+@media (max-width: 699px) and (min-width: 350px) {
+  .pro-container {
+    grid-template: repeat(2, 1fr);
+  }
 }
 
 /* ========== RESPONSIVE DESIGN ========== */
@@ -1257,6 +1269,12 @@ footer.section-p1 {
   }
 }
 
+@media (max-width: 349px) and (min-width: 99px) {
+  .pro-container {
+    grid-template: repeat(1, 1fr);
+  }
+}
+
 @media (max-width: 480px) {
   #header {
     flex-direction: column;
@@ -1300,6 +1318,7 @@ footer.section-p1 {
     font-weight: bold;
   }
 }
+
 
 
 
