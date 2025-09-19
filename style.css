@@ -373,6 +373,12 @@ p {
   }
 }
 
+@media (max-width: 1000px) and (min-width: 700px) {
+  .pro-container.shop-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
 /* ========== ACTIVE NAV LINK ========== */
 nav a.active {
   position: relative;
@@ -1294,6 +1300,7 @@ footer.section-p1 {
     font-weight: bold;
   }
 }
+
 
 
 
