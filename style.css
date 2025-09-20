@@ -806,12 +806,6 @@ footer.section-p1 {
     padding: 20px;
   }
   
-  .pro-container.shop-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
-    padding: 0 10px;
-  }
-  
   .shop-card {
     background: #fff;
     padding: 8px;
@@ -1290,12 +1284,6 @@ footer.section-p1 {
     padding: 30px 0px;
   }
 
-  .shop-grid {
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-    padding: 0 6px;
-  }
-
   .shop-grid .pro {
     padding: 4px;
     background: #fff;
@@ -1318,6 +1306,7 @@ footer.section-p1 {
     font-weight: bold;
   }
 }
+
 
 
 
