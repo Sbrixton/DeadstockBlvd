@@ -183,13 +183,21 @@ main.product-page {
   margin-bottom: 20px;
 }
 
-/* 4 per row: 1025px and up */
+/* ========== 4 per row + 4 visible (1025px and up) ========== */
 @media (min-width: 1025px) {
   .recommendations-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 20px;
     padding-bottom: 40px;
+  }
+
+  .recommendations-grid > .pro {
+    display: none;
+  }
+
+  .recommendations-grid > .pro:nth-child(-n+4) {
+    display: block;
   }
 }
 
@@ -1007,7 +1015,7 @@ footer img {
   }
 }
 
-/* 3 per row: 600px to 1024px */
+/* ========== 3 per row + 3 visible (600px – 1024px) ========== */
 @media (max-width: 1024px) and (min-width: 600px) {
   .recommendations-grid {
     display: grid;
@@ -1015,15 +1023,31 @@ footer img {
     gap: 20px;
     padding-bottom: 40px;
   }
+
+  .recommendations-grid > .pro {
+    display: none;
+  }
+
+  .recommendations-grid > .pro:nth-child(-n+3) {
+    display: block;
+  }
 }
 
-/* 2 per row: 300px to 599px */
+/* ========== 2 per row + 2 visible (300px – 599px) ========== */
 @media (max-width: 599px) and (min-width: 300px) {
   .recommendations-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 20px;
     padding-bottom: 40px;
+  }
+
+  .recommendations-grid > .pro {
+    display: none;
+  }
+
+  .recommendations-grid > .pro:nth-child(-n+2) {
+    display: block;
   }
 }
 
@@ -1080,12 +1104,20 @@ footer img {
   }
 }
 
-/* 1 per row: 200px to 299px */
+/* ========== 1 per row + 1 visible (200px – 299px) ========== */
 @media (max-width: 299px) and (min-width: 200px) {
   .recommendations-grid {
     display: grid;
     grid-template-columns: repeat(1, 1fr);
     gap: 20px;
     padding-bottom: 40px;
+  }
+
+  .recommendations-grid > .pro {
+    display: none;
+  }
+
+  .recommendations-grid > .pro:nth-child(1) {
+    display: block;
   }
 }
