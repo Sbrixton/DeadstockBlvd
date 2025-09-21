@@ -41,15 +41,31 @@
       <div class="loader">Loading...</div>
     </div>
     
-    <div id="searchOverlay">
-      <div class="search-inner">
-        <button id="closeSearch" aria-label="Close Search">&times;</button>
-        <div class="search-box">
-          <input type="text" id="searchInput" placeholder="Search products..." />
-          <div id="searchResults"></div>
-        </div>
+    <!-- ✅ Search Bar Container (below navbar) -->
+    <div id="searchBarContainer">
+      <div class="search-input-wrapper">
+        <input
+          type="text"
+          id="searchInput"
+          placeholder="Search products..."
+          autocomplete="off"
+        />
+        <button id="clearSearch" aria-label="Clear Search">&times;</button>
       </div>
+        
+        <!-- ✅ Shared scroll wrapper for both -->
+        <div id="searchScrollableArea">
+            <ul id="searchSuggestions" class="search-suggestions"></ul>
+            
+            <div id="searchResultsWrapper">
+                <p id="noResultsMessage" style="display: none;">No products found.</p>
+                <div id="searchResults"></div>
+            </div>
+        </div>
     </div>
+    
+    <!-- ✅ Search overlay now OUTSIDE the container -->
+    <div id="searchOverlay"></div>
     
     <!-- ========== MAIN CONTACT CONTENT (placeholder) ========== -->
     <main style="padding: 40px; text-align: center;">
