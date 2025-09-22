@@ -45,33 +45,37 @@
   <div id="preloader">
     <div class="loader">Loading...</div>
   </div>
-
-    <!-- ✅ Search Bar Container (below navbar) -->
-    <div id="searchBarContainer">
-      <div class="search-input-wrapper">
-        <input
-          type="text"
-          id="searchInput"
-          placeholder="Search products..."
-          autocomplete="off"
-        />
-        <button id="clearSearch" aria-label="Clear Search">&times;</button>
-      </div>
-        
-        <!-- ✅ Shared scroll wrapper for both -->
-        <div id="searchScrollableArea">
-            <ul id="searchSuggestions" class="search-suggestions"></ul>
-            
-            <div id="searchResultsWrapper">
-                <p id="noResultsMessage" style="display: none;">No products found.</p>
-                <div id="searchResults"></div>
-            </div>
-        </div>
+  
+  <!-- ✅ Search Bar Container (works for all screen sizes) -->
+  <div id="searchBarContainer">
+    <!-- 🔍 Input field with clear button -->
+    <div class="search-input-wrapper">
+      <input
+        type="text"
+        id="searchInput"
+        placeholder="Search products..."
+        autocomplete="off"
+      />
+      <button id="clearSearch" aria-label="Clear Search">&times;</button>
     </div>
     
-    <!-- ✅ Search overlay now OUTSIDE the container -->
-    <div id="searchOverlay"></div>
-
+    <!-- ✅ Scrollable area for suggestions + results -->
+    <div id="searchScrollableArea">
+      <!-- 🔽 Suggestions (autocomplete-style) -->
+      <ul id="searchSuggestions" class="search-suggestions"></ul>
+      
+      <!-- 🔍 Search Results -->
+      <div id="searchResultsWrapper">
+        <p id="noResultsMessage" style="display: none;">No products found.</p>
+        <div id="searchResults">
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- ✅ Optional: Dimmed overlay (used when input is active) -->
+  <div id="searchOverlay"></div>
+  
   <main class="product-page">
     <div class="product-container">
       
