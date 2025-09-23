@@ -109,9 +109,17 @@
           Nike SB Dunk Low Grateful Dead Bears – Orange
         </h4>
         
-        <p class="price">
-          £86
-        </p>
+        <!-- 🏷️ Dynamic Price Display + Dropdown -->
+        <p class="price" id="convertedPrice">Loading price...</p>
+        
+        <label for="currencySelector">View price in:</label>
+        <select id="currencySelector">
+          <option value="GBP" selected>GBP (£)</option>
+          <option value="USD">USD ($)</option>
+          <option value="EUR">EUR (€)</option>
+          <option value="AUD">AUD (A$)</option>
+          <option value="CAD">CAD (C$)</option>
+        </select>
         
         <p class="description">
           Size: US10/EUR44/UK43
@@ -383,6 +391,58 @@
         pfItemName.value = name;
       }
     });
+  </script>
+
+  <script>
+    const API_KEY = 'c483f69d404b3072a225d9bb'; // Your exchangerate-api.com key
+    const baseCurrency = 'ZAR'; // Your default currency
+    const defaultDisplayCurrency = 'GBP'; // First currency users will see
+    
+    const priceEl = document.getElementById('convertedPrice');
+    const currencySelector = document.getElementById('currencySelector');
+    const productBtn = document.getElementById('addToCartBtn');
+    const priceZAR = parseFloat(productBtn.dataset.price); // This reads from your button
+    
+    let currentRates = {};
+      
+    async function fetchRates() {
+      try {
+        const res = await fetch(`https://v6.exchangerate-api.com/v6/${API_KEY}/latest/${baseCurrency}`);
+        const data = await res.json();
+        currentRates = data.conversion_rates;
+      } catch (err) {
+        console.error('Currency API failed:', err);
+        priceEl.textContent = `R${priceZAR.toFixed(2)}`;
+      }
+    }
+    
+    function format(value, currency) {
+      return new Intl.NumberFormat(undefined, {
+        style: 'currency',
+        currency: currency,
+        maximumFractionDigits: 2
+      }).format(value);
+    }
+    
+    function updateDisplayedPrice() {
+      const selectedCurrency = currencySelector.value;
+      if (!currentRates[selectedCurrency]) return;
+      
+      const rate = currentRates[selectedCurrency];
+      const converted = priceZAR * rate;
+      
+      priceEl.textContent = format(converted, selectedCurrency);
+    }
+    
+    // Init
+    document.addEventListener('DOMContentLoaded', async () => {
+      await fetchRates();
+      currencySelector.value = defaultDisplayCurrency;
+      updateDisplayedPrice();
+    });
+    
+    // On dropdown change
+    currencySelector.addEventListener('change', updateDisplayedPrice);
   </script>
   
   <script type="module" src="search.js"></script>
