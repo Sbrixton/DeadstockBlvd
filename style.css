@@ -67,7 +67,7 @@ p {
   left: 50%;
   transform: translateX(-50%);
   width: 88%;
-  max-width: 430px; /* prevents it from going too wide on small phones */
+  max-width: 430px; /* ✅ Prevents overly wide bar on small phones */
   height: auto;
   background: rgba(255, 255, 255, 0.98);
   padding: 16px;
@@ -78,6 +78,19 @@ p {
   gap: 14px;
   z-index: 1000;
   box-sizing: border-box;
+}
+
+@media (min-width: 481px) and (max-width: 768px) {
+  #searchBarContainer {
+    width: 600px; /* ✅ Better fit for tablets */
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  #searchBarContainer input {
+    font-size: 16px;
+    padding: 12px 22px;
+  }
 }
 
 @media (min-width: 769px) {
@@ -1360,6 +1373,7 @@ footer.section-p1 {
     font-weight: bold;
   }
 }
+
 
 
 
