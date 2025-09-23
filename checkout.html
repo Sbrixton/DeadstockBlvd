@@ -75,8 +75,21 @@
   <main id="checkoutWrapper">
     <section class="checkout-left">
       <h2>Payment</h2>
-      <!-- ✅ PayPal Buttons -->
-      <div id="paypal-button-container" style="margin-top: 20px;"></div>
+      <form action="https://sandbox.payfast.co.za/eng/process" method="POST" id="payfastCheckoutForm">
+        <input type="hidden" name="merchant_id" value="	10041066" />
+        <input type="hidden" name="merchant_key" value="itdun3pbyglz7" />
+        
+        <input type="hidden" name="return_url" value="https://your-site.com/success.html" />
+        <input type="hidden" name="cancel_url" value="https://your-site.com/cancel.html" />
+        <input type="hidden" name="notify_url" value="https://your-site.com/notify.php" />
+        
+        <input type="hidden" name="m_payment_id" value="12345" />
+        <input type="hidden" name="amount" id="checkoutPayfastAmount" value="" />
+        <input type="hidden" name="item_name" id="checkoutPayfastItem" value="" />
+        <input type="hidden" name="currency" value="ZAR" />
+        
+        <button type="submit" class="payfast-btn">Pay with PayFast (Demo)</button>
+      </form>
       <!-- ✅ Terms Agreement Section -->
       <div class="checkout-agreement">
         I 
@@ -303,6 +316,24 @@
       }, 500);
     });
   </script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const cartData = JSON.parse(localStorage.getItem("cart")) || [];
+      
+      if (cartData.length === 0) return;
+      
+      // Combine item names (optional)
+      const itemNames = cartData.map(item => item.name).join(", ");
+      
+      // Calculate total price in ZAR
+      const totalPrice = cartData.reduce((sum, item) => sum + (parseFloat(item.price) || 0), 0).toFixed(2);
+      
+      // Set hidden form values
+      document.getElementById("checkoutPayfastItem").value = itemNames;
+      document.getElementById("checkoutPayfastAmount").value = totalPrice;
+    });
+  </script>
   
   <script src="navbar.js"></script>
   <script type="module" src="navbar.js"></script>
@@ -311,6 +342,7 @@
   <script type="module" src="checkout.js"></script>
 </body>
 </html>
+
 
 
 
