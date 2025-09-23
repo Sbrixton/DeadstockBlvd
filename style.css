@@ -86,26 +86,17 @@ p {
     left: 50%;
     transform: translateX(-50%);
     top: 70px;
-    background: rgba(255, 255, 255, 0.98);
-    padding: 16px;
-    border-radius: 10px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
-    display: none;
-    flex-direction: column;
-    gap: 14px;
-    z-index: 1000;
-    box-sizing: border-box;
   }
 
   #searchBarContainer.active {
     display: flex;
   }
-  
+
   .search-input-wrapper {
     position: relative;
     width: 100%;
   }
-  
+
   #searchInput {
     font-size: 15px;
     padding: 10px 20px;
@@ -115,7 +106,7 @@ p {
     margin-bottom: 16px;
     box-sizing: border-box;
   }
-  
+
   #clearSearch {
     position: absolute;
     right: 12px;
@@ -128,7 +119,7 @@ p {
     cursor: pointer;
     z-index: 2;
   }
-  
+
   #searchScrollableArea {
     max-height: 400px;
     overflow-y: auto;
@@ -136,7 +127,7 @@ p {
     flex-direction: column;
     gap: 12px;
   }
-  
+
   #noResultsMessage {
     font-size: 14px;
     font-weight: 500;
@@ -144,7 +135,7 @@ p {
     margin-bottom: 10px;
     display: none;
   }
-  
+
   .search-item {
     background: #f9f9f9;
     padding: 10px 14px;
@@ -155,38 +146,32 @@ p {
     align-items: center;
     color: #111;
   }
-  
-  .search-item:hover {
-    background-color: #eaeaea;
-    cursor: pointer;
-  }
-  
+
   .search-item img {
     width: 48px;
     height: 48px;
     object-fit: cover;
     border-radius: 4px;
   }
-  
+
   .search-info h4 {
     margin: 0;
     font-size: 14px;
     color: #111;
   }
-  
+
   .search-info p {
     margin: 3px 0 0;
     font-size: 13px;
     color: #666;
   }
-  
-  /* ✅ Mobile-specific link styling */
+
   .search-item-link {
     text-decoration: none !important;
     color: inherit !important;
     display: block;
   }
-  
+
   .search-item-link:visited,
   .search-item-link:hover,
   .search-item-link:active {
@@ -196,10 +181,9 @@ p {
 }
 
 @media (min-width: 1001px) {
-  /* === Search Bar Below Navbar === */
   #searchBarContainer {
     position: fixed;
-    top: 80px; /* just below your navbar */
+    top: 80px;
     left: 0;
     width: 100%;
     background: white;
@@ -210,12 +194,11 @@ p {
     flex-direction: column;
     gap: 12px;
   }
-  
+
   #searchBarContainer.active {
     display: flex;
   }
-  
-  /* Input wrapper */
+
   .search-input-wrapper {
     position: relative;
     width: 100%;
@@ -223,8 +206,7 @@ p {
     margin: 0 auto;
     z-index: 999;
   }
-  
-  /* Search input */
+
   #searchInput {
     width: 100%;
     padding: 14px 40px 14px 16px;
@@ -233,8 +215,7 @@ p {
     border-radius: 6px;
     outline: none;
   }
-  
-  /* Clear (×) button */
+
   #clearSearch {
     position: absolute;
     right: 12px;
@@ -247,12 +228,7 @@ p {
     cursor: pointer;
     z-index: 2;
   }
-  
-  #clearSearch:hover {
-    color: #000;
-  }
-  
-  /*Dimmed overlay when typing */
+
   #searchOverlay {
     position: fixed;
     top: 80px;
@@ -263,23 +239,11 @@ p {
     z-index: 900;
     display: none;
   }
-  
-  #searchOverlay {
-    display: none;
-    position: fixed;
-    top: 80px;
-    left: 0;
-    width: 100vw;
-    height: calc(100vh - 80px);
-    background: rgba(0, 0, 0, 0.45);
-    z-index: 900;
-  }
-  
+
   #searchOverlay.visible {
     display: block;
   }
-  
-  /* Search results container */
+
   #searchResultsWrapper {
     position: relative;
     z-index: 1000;
@@ -288,21 +252,20 @@ p {
     margin: 0 auto;
     padding-top: 10px;
   }
-  
-  #noResultsMessage {
-    font-size: 16px;
-    font-weight: 500;
-    color: #555;
-    margin-bottom: 10px;
-    display: none;
-  }
-  
-  #searchResults {
+
+  #searchScrollableArea {
+    width: 100%;
+    max-width: 700px;
+    margin: 0 auto;
+    max-height: 400px;
+    overflow-y: auto;
     display: flex;
     flex-direction: column;
     gap: 12px;
+    padding-top: 10px;
+    z-index: 1001;
   }
-  
+
   .search-item {
     background: #f9f9f9;
     padding: 12px 16px;
@@ -312,43 +275,39 @@ p {
     gap: 12px;
     align-items: center;
   }
-  
+
   .search-item img {
     width: 50px;
     height: 50px;
     object-fit: cover;
     border-radius: 4px;
   }
-  
+
   .search-info h4 {
     margin: 0;
     font-size: 16px;
     color: #111;
   }
-  
+
   .search-info p {
     margin: 3px 0 0;
     font-size: 14px;
     color: #666;
   }
-  
+
   .search-item-link {
     text-decoration: none !important;
     color: inherit !important;
     display: block;
   }
-  
+
   .search-item-link:visited,
   .search-item-link:hover,
   .search-item-link:active {
     text-decoration: none !important;
     color: inherit !important;
   }
-  
-  .search-item {
-    color: #111; /* or any color you want your text to be */
-  }
-  
+
   .search-suggestions {
     list-style: none;
     margin: 0;
@@ -358,39 +317,26 @@ p {
     width: 100%;
     border: 1px solid #ddd;
   }
-  
+
   .search-suggestions li {
     padding: 10px 14px;
     cursor: pointer;
     font-size: 15px;
     border-bottom: 1px solid #eee;
   }
-  
+
   .search-suggestions li:hover {
     background-color: #f1f1f1;
   }
-  
+
   .search-suggestions li:last-child {
     border-bottom: none;
   }
-  
+
   .search-item:hover {
     background-color: #eaeaea;
     cursor: pointer;
     transition: background 0.2s ease;
-  }
-
-  #searchScrollableArea {
-    width: 100%;
-    max-width: 700px;
-    margin: 0 auto;
-    max-height: 400px; /* or whatever height you want */
-    overflow-y: auto;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    padding-top: 10px;
-    z-index: 1001;
   }
 }
 
@@ -1356,6 +1302,7 @@ footer.section-p1 {
     font-weight: bold;
   }
 }
+
 
 
 
