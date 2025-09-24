@@ -4,6 +4,13 @@ import {
   updateCartCountInDOM
 } from "./cart-utils.js";
 
+
+import {
+  getCurrency,
+  formatPrice,
+  convertPrice
+} from "./currency.js";
+
 function updateDrawerCheckoutState() {
   const cart = getCart();
   const drawerCheckoutBtn = document.getElementById("drawerCheckoutBtn");
@@ -82,8 +89,10 @@ window.addEventListener("load", () => {
       cartWrapper.appendChild(itemDiv);
     });
 
-    subEl.textContent = `R${subtotal.toFixed(2)}`;
-    totalEl.textContent = `R${subtotal.toFixed(2)}`;
+    formatPrice(subtotal).then((formatted) => {
+      subEl.textContent = formatted;
+      totalEl.textContent = formatted;
+    });
     updateCartCountInDOM();
     updateDrawerCheckoutState();
   }
@@ -197,8 +206,9 @@ export function renderMobileDrawer() {
     mobileCartItems.appendChild(itemDiv);
   });
 
-  drawerSubtotal.textContent = `R${subtotal.toFixed(2)}`;
-
+  formatPrice(subtotal).then((formatted) => {
+    drawerSubtotal.textContent = formatted;
+  });
   // Bind quantity buttons on mobile drawer
   mobileCartItems.querySelectorAll('.qty-btn').forEach(btn => {
     btn.addEventListener('click', () => {
