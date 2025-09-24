@@ -7,7 +7,8 @@
   <link rel="stylesheet" href="base.css" />
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="checkout.css" />
-  <script src="search.js"></script>
+  <link rel="stylesheet" href="product.css" />
+  <script type="module" src="search.js"></script>
   <script src="data.js"></script>
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" />
   <script src="https://www.paypal.com/sdk/js?client-id=sb&currency=USD"></script>
@@ -79,9 +80,9 @@
         <input type="hidden" name="merchant_id" value="	10041066" />
         <input type="hidden" name="merchant_key" value="itdun3pbyglz7" />
         
-        <input type="hidden" name="return_url" value="https://your-site.com/success.html" />
-        <input type="hidden" name="cancel_url" value="https://your-site.com/cancel.html" />
-        <input type="hidden" name="notify_url" value="https://your-site.com/notify.php" />
+        <input type="hidden" name="return_url" value="https://sbrixton.github.io/DeadstockBlvd/success.html" />
+        <input type="hidden" name="cancel_url" value="https://deadstockblvd.co.za/cancel.html" />
+        <input type="hidden" name="notify_url" value="https://deadstockblvd.wuaze.com/basic%20notify.php" />
         
         <input type="hidden" name="m_payment_id" value="12345" />
         <input type="hidden" name="amount" id="checkoutPayfastAmount" value="" />
@@ -335,13 +336,14 @@
     });
   </script>
   
-  <script src="navbar.js"></script>
   <script type="module" src="navbar.js"></script>
-  <script src="script.js"></script>
+  <script type="module" src="navbar.js"></script>
+  <script type="module" src="script.js" defer></script>
   <script type="module" src="cart.js"></script>
   <script type="module" src="checkout.js"></script>
 </body>
 </html>
+
 
 
 
