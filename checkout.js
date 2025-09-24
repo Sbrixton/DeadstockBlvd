@@ -1,4 +1,6 @@
-document.addEventListener("DOMContentLoaded", () => {
+import { getCurrency, formatPrice, convertFromGBP } from "./currency.js";
+
+document.addEventListener("DOMContentLoaded", async () => {
   console.log("[checkout.js] Page loaded");
 
   const cart = JSON.parse(localStorage.getItem("cart") || "[]");
@@ -8,49 +10,22 @@ document.addEventListener("DOMContentLoaded", () => {
   const topSubtotal = document.getElementById("orderSummarySubtotal");
   const subtotalValue = calculateSubtotal(cart);
 
-  if (subtotalElement) {
-    subtotalElement.textContent = `R${subtotalValue.toFixed(2)}`;
-  }
-  if (topSubtotal) {
-    topSubtotal.textContent = `R${subtotalValue.toFixed(2)}`;
-  }
+  // 🪙 Format subtotal in selected currency
+  const formatted = await formatPrice(subtotalValue);
+  if (subtotalElement) subtotalElement.innerHTML = formatted;
+  if (topSubtotal) topSubtotal.innerHTML = formatted;
 
   renderCheckoutProducts(cart);
 
-  // PayPal Setup (same as before)
-  if (typeof paypal !== "undefined") {
-    paypal.Buttons({
-      style: {
-        layout: "vertical",
-        color: "black",
-        shape: "rect",
-        label: "paypal"
-      },
-      createOrder: (data, actions) => {
-        return actions.order.create({
-          purchase_units: [{
-            amount: {
-              value: subtotalValue.toFixed(2),
-              currency_code: "USD"
-            }
-          }]
-        });
-      },
-      onApprove: (data, actions) => {
-        return actions.order.capture().then(details => {
-          alert(`✅ Payment completed by ${details.payer.name.given_name}`);
-          localStorage.removeItem("cart");
-          window.location.href = "thankyou.html";
-        });
-      },
-      onError: (err) => {
-        console.error("PayPal Checkout error", err);
-        alert("There was an issue processing your payment.");
-      }
-    }).render("#paypal-button-container");
-  }
+  // 💳 Set PayFast hidden inputs (ZAR only)
+  const checkoutZAR = await convertFromGBP(subtotalValue, "ZAR");
+  const pfAmountInput = document.getElementById("checkoutPayfastAmount");
+  const pfItemInput = document.getElementById("checkoutPayfastItem");
 
-  // Terms Agreement Logic
+  if (pfAmountInput) pfAmountInput.value = checkoutZAR.toFixed(2);
+  if (pfItemInput) pfItemInput.value = cart.map(item => item.name).join(", ");
+
+  // ✅ Terms Agreement Logic
   const checkbox = document.getElementById("termsCheckbox");
   const overlay = document.getElementById("pageOverlay");
   const modal = document.getElementById("termsModal");
@@ -64,7 +39,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (checkbox && overlay) {
     checkbox.addEventListener("change", () => {
       overlay.style.display = checkbox.checked ? "none" : "block";
-      console.log(checkbox.checked ? "✅ Terms accepted — overlay hidden" : "🔒 Terms unchecked — overlay shown");
+      console.log(checkbox.checked ? " Terms accepted — overlay hidden" : " Terms unchecked — overlay shown");
     });
   }
 
@@ -86,7 +61,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Mobile Order Summary Toggle Logic (updated IDs)
+  // 📱 Mobile Order Summary Toggle
   const toggleText = document.getElementById("orderSummaryToggleText");
   const toggleArrow = document.getElementById("orderSummaryArrow");
   const summarySection = document.getElementById("checkoutRightSection");
@@ -100,10 +75,12 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
+// 🔢 Calculate subtotal in base GBP (raw cart prices)
 function calculateSubtotal(cart) {
   return cart.reduce((total, item) => total + item.price * item.quantity, 0);
 }
 
+// 🧾 Renders cart items into the checkout page
 function renderCheckoutProducts(cart) {
   const container = document.getElementById("checkoutProducts");
 
@@ -117,7 +94,7 @@ function renderCheckoutProducts(cart) {
     return;
   }
 
-  container.innerHTML = ""; // clear before adding
+  container.innerHTML = "";
 
   cart.forEach(item => {
     const itemDiv = document.createElement("div");
@@ -140,6 +117,7 @@ function renderCheckoutProducts(cart) {
   console.log("[checkout.js] Rendered products:", cart);
 }
 
+// 🛒 Updates cart icon count in navbar
 function updateCartCountInDOM() {
   const cart = JSON.parse(localStorage.getItem("cart") || "[]");
   const cartCount = document.getElementById("cart-count");
@@ -151,3 +129,4 @@ function updateCartCountInDOM() {
     console.warn("[checkout.js] #cart-count element not found.");
   }
 }
+
