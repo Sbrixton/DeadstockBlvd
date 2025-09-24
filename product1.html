@@ -109,16 +109,13 @@
           Nike SB Dunk Low Grateful Dead Bears – Orange
         </h4>
         
-        <!-- 🏷️ Dynamic Price Display + Dropdown -->
-        <p class="price" id="convertedPrice">Loading price...</p>
+        <p class="price" id="convertedPrice"><span class="loading-spinner"></span></p>
         
         <label for="currencySelector">View price in:</label>
         <select id="currencySelector">
           <option value="GBP" selected>GBP (£)</option>
           <option value="USD">USD ($)</option>
           <option value="EUR">EUR (€)</option>
-          <option value="AUD">AUD (A$)</option>
-          <option value="CAD">CAD (C$)</option>
         </select>
         
         <p class="description">
@@ -369,8 +366,6 @@
       overlay.style.display = 'none';
     });
   </script>
-
-  
   
   <script>
     document.addEventListener('DOMContentLoaded', () => {
@@ -443,6 +438,33 @@
     
     // On dropdown change
     currencySelector.addEventListener('change', updateDisplayedPrice);
+  </script>
+  
+  <!-- ✅ Add this at the bottom, before </body> -->
+  <script type="module">
+    import {
+      setCurrency,
+      getCurrency,
+      formatPrice
+    } from './currency.js';
+    
+    document.addEventListener('DOMContentLoaded', async () => {
+      const basePriceGBP = 86; // or dynamically fetch from data attribute
+      const priceEl = document.getElementById("convertedPrice");
+      const selector = document.getElementById("currencySelector");
+      
+      async function updatePriceDisplay() {
+        priceEl.innerHTML = await formatPrice(basePriceGBP);
+      }
+      
+      selector.value = getCurrency();
+      selector.addEventListener('change', async (e) => {
+        setCurrency(e.target.value);
+        await updatePriceDisplay();
+      });
+      
+      await updatePriceDisplay();
+    });
   </script>
   
   <script type="module" src="search.js"></script>
