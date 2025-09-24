@@ -274,7 +274,7 @@
       <span id="orderSummaryToggleText">
         Order summary <span id="orderSummaryArrow">▼</span>
       </span>
-      <span id="orderSummarySubtotal">R0.00</span>
+      <span id="orderSummarySubtotal" class="currency-subtotal">Loading...</span>
     </div>
     
     <!-- ✅ Collapsible Order Summary Section -->
@@ -286,9 +286,9 @@
         <span class="free-tag">FREE</span>
       </div>
       
-      <div class="checkout-subtotal">
-        Subtotal: <strong id="checkoutSubtotal">R0.00</strong>
-      </div>
+    <div class="checkout-subtotal">
+      Subtotal: <strong id="checkoutSubtotal" class="currency-subtotal">Loading...</strong>
+    </div>
     </section>
     
   </main>
@@ -317,24 +317,6 @@
       }, 500);
     });
   </script>
-
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const cartData = JSON.parse(localStorage.getItem("cart")) || [];
-      
-      if (cartData.length === 0) return;
-      
-      // Combine item names (optional)
-      const itemNames = cartData.map(item => item.name).join(", ");
-      
-      // Calculate total price in ZAR
-      const totalPrice = cartData.reduce((sum, item) => sum + (parseFloat(item.price) || 0), 0).toFixed(2);
-      
-      // Set hidden form values
-      document.getElementById("checkoutPayfastItem").value = itemNames;
-      document.getElementById("checkoutPayfastAmount").value = totalPrice;
-    });
-  </script>
   
   <script type="module" src="navbar.js"></script>
   <script type="module" src="navbar.js"></script>
@@ -343,9 +325,3 @@
   <script type="module" src="checkout.js"></script>
 </body>
 </html>
-
-
-
-
-
-
