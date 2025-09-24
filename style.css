@@ -133,6 +133,21 @@ p {
   transition: background 0.2s ease;
 }
 
+.currency-spinner {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border: 2px solid #ccc;
+  border-top: 2px solid #333;
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+  vertical-align: middle;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
 @media (min-width: 481px) and (max-width: 1000px) {
   #searchBarContainer {
     width: 600px;
@@ -1387,6 +1402,7 @@ footer.section-p1 {
     font-weight: bold;
   }
 }
+
 
 
 
