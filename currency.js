@@ -1,7 +1,8 @@
 // currency.js
 
-const API_KEY = 'c483f69d404b3072a225d9bb'; // Replace if needed
+const API_KEY = 'c483f69d404b3072a225d9bb';
 const BASE_CURRENCY = 'GBP';
+
 const SYMBOLS = {
   GBP: '£',
   USD: '$',
@@ -15,7 +16,8 @@ export function setCurrency(currencyCode) {
 
 // Get saved or default currency
 export function getCurrency() {
-  return localStorage.getItem('selectedCurrency') || BASE_CURRENCY;
+  const selected = localStorage.getItem('selectedCurrency');
+  return ['GBP', 'USD', 'EUR'].includes(selected) ? selected : BASE_CURRENCY;
 }
 
 // Fetch exchange rates
@@ -25,7 +27,7 @@ export async function getRates() {
   return data.conversion_rates;
 }
 
-// Format price for UI
+// Format price for display
 export async function formatPrice(gbpAmount) {
   const currency = getCurrency();
   const rates = await getRates();
@@ -34,7 +36,7 @@ export async function formatPrice(gbpAmount) {
   return `${SYMBOLS[currency]}${converted}`;
 }
 
-// Convert amount for PayFast
+// Convert to selected currency numerically
 export async function convertAmount(gbpAmount) {
   const currency = getCurrency();
   const rates = await getRates();
@@ -42,7 +44,15 @@ export async function convertAmount(gbpAmount) {
   return (gbpAmount * rate).toFixed(2);
 }
 
-// Get just the symbol
+// Convert to a specific currency (e.g. ZAR for PayFast)
+export async function convertFromGBP(gbpAmount, targetCurrency) {
+  const rates = await getRates();
+  const rate = rates[targetCurrency];
+  return gbpAmount * rate;
+}
+
+// Get just the symbol of selected currency
 export function getCurrencySymbol() {
   return SYMBOLS[getCurrency()];
 }
+
