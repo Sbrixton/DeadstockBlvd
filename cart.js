@@ -37,7 +37,7 @@ window.addEventListener("load", () => {
     window.location.href = "shop.html";
   });
 
-  function render() {
+  async function render() {
     if (!hasDesktopCart) return;
 
     let cart = getCart();
@@ -49,8 +49,8 @@ window.addEventListener("load", () => {
       section.style.display = "none";
       checkoutBtn.style.display = "none";
       proceedBtn.style.display = "inline-block";
-      subEl.textContent = "R0.00";
-      totalEl.textContent = "R0.00";
+      subEl.textContent = "0.00";
+      totalEl.textContent = "0.00";
       updateCartCountInDOM();
       updateDrawerCheckoutState();
       return;
@@ -61,35 +61,39 @@ window.addEventListener("load", () => {
     checkoutBtn.style.display = "block";
     proceedBtn.style.display = "none";
 
-    cart.forEach((item) => {
-      if (!item || typeof item.price !== "number") return;
+    for (const item of cart) {
+      if (!item || typeof item.price !== "number") continue;
 
-      subtotal += item.price * item.quantity;
+      const itemTotal = item.price * item.quantity;
+      subtotal += itemTotal;
 
       const itemDiv = document.createElement("div");
       itemDiv.className = "cart-item";
+
+      const formattedItemTotal = await formatPrice(itemTotal);
+      const formattedItemPrice = await formatPrice(item.price);
+
       itemDiv.innerHTML = `
         <img src="${item.image}" alt="${item.name}" class="cart-img">
         <div class="cart-details">
           <p class="cart-name">${item.name}</p>
-          <p class="cart-price">Price: R${item.price.toFixed(2)}</p>
+          <p class="cart-price">Price: ${formattedItemPrice}</p>
           <div class="quantity-controls">
             <button class="qty-btn minus" data-id="${item.id}">-</button>
             <span class="qty-num">${item.quantity}</span>
             <button class="qty-btn plus" data-id="${item.id}">+</button>
           </div>
-          <p class="cart-total">Total: R${(item.price * item.quantity).toFixed(2)}</p>
+          <p class="cart-total">Total: ${formattedItemTotal}</p>
           <button class="remove-item" data-id="${item.id}">Remove</button>
         </div>
       `;
 
       cartWrapper.appendChild(itemDiv);
-    });
+    }
 
-    formatPrice(subtotal).then((formatted) => {
-      subEl.textContent = formatted;
-      totalEl.textContent = formatted;
-    });
+    const formattedSubtotal = await formatPrice(subtotal);
+    subEl.textContent = formattedSubtotal;
+    totalEl.textContent = formattedSubtotal;
 
     updateCartCountInDOM();
     updateDrawerCheckoutState();
@@ -142,9 +146,8 @@ window.addEventListener("load", () => {
   render();
 });
 
-export function renderMobileDrawer() {
+export async function renderMobileDrawer() {
   const cart = getCart();
-
   const mobileCartItems = document.getElementById("mobileCartItems");
   const drawerSubtotal = document.getElementById("drawerCartSubtotal");
 
@@ -162,17 +165,19 @@ export function renderMobileDrawer() {
         <p>Your cart is empty.</p>
         <button id="drawerProceedBtn" class="proceed-to-shop-btn">Proceed to Shop</button>
       </div>`;
-    drawerSubtotal.textContent = "R0.00";
+    drawerSubtotal.textContent = "0.00";
     document.getElementById("drawerProceedBtn")
       ?.addEventListener("click", () => window.location.href = "shop.html");
     updateCartCountInDOM();
     return;
   }
 
-  cart.forEach((item) => {
-    if (!item || typeof item.price !== "number" || typeof item.quantity !== "number") return;
+  for (const item of cart) {
+    if (!item || typeof item.price !== "number" || typeof item.quantity !== "number") continue;
 
     subtotal += item.price * item.quantity;
+
+    const formattedItemPrice = await formatPrice(item.price);
 
     const itemDiv = document.createElement("div");
     itemDiv.className = "cart-item";
@@ -180,7 +185,7 @@ export function renderMobileDrawer() {
       <img src="${item.image}" alt="${item.name}" class="cart-img" />
       <div class="cart-details">
         <p class="cart-name">${item.name}</p>
-        <p class="cart-price">R${item.price.toFixed(2)}</p>
+        <p class="cart-price">${formattedItemPrice}</p>
         <div class="quantity-controls">
           <button class="qty-btn minus" data-id="${item.id}">−</button>
           <span class="qty-num">${item.quantity}</span>
@@ -191,11 +196,10 @@ export function renderMobileDrawer() {
     `;
 
     mobileCartItems.appendChild(itemDiv);
-  });
+  }
 
-  formatPrice(subtotal).then((formatted) => {
-    drawerSubtotal.textContent = formatted;
-  });
+  const formattedSubtotal = await formatPrice(subtotal);
+  drawerSubtotal.textContent = formattedSubtotal;
 
   mobileCartItems.querySelectorAll('.qty-btn').forEach(btn => {
     btn.addEventListener('click', () => {
@@ -224,4 +228,3 @@ export function renderMobileDrawer() {
   updateCartCountInDOM();
   updateDrawerCheckoutState();
 }
-
