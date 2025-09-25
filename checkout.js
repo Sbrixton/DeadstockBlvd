@@ -10,14 +10,14 @@ document.addEventListener("DOMContentLoaded", async () => {
   const topSubtotal = document.getElementById("orderSummarySubtotal");
   const subtotalValue = calculateSubtotal(cart);
 
-  // 🪙 Format subtotal in selected currency
+  // Format subtotal in selected currency
   const formatted = await formatPrice(subtotalValue);
   if (subtotalElement) subtotalElement.innerHTML = formatted;
   if (topSubtotal) topSubtotal.innerHTML = formatted;
 
   renderCheckoutProducts(cart);
 
-  // 💳 Set PayFast hidden inputs (ZAR only)
+  // Convert subtotal to ZAR for PayFast
   const checkoutZAR = await convertFromGBP(subtotalValue, "ZAR");
   const pfAmountInput = document.getElementById("checkoutPayfastAmount");
   const pfItemInput = document.getElementById("checkoutPayfastItem");
@@ -25,12 +25,13 @@ document.addEventListener("DOMContentLoaded", async () => {
   if (pfAmountInput) pfAmountInput.value = checkoutZAR.toFixed(2);
   if (pfItemInput) pfItemInput.value = cart.map(item => item.name).join(", ");
 
-  // ✅ Terms Agreement Logic
+  // Terms & Conditions Checkbox + Overlay
   const checkbox = document.getElementById("termsCheckbox");
   const overlay = document.getElementById("pageOverlay");
   const modal = document.getElementById("termsModal");
   const showTerms = document.getElementById("showTerms");
   const closeModal = document.querySelector(".close-modal");
+  const form = document.getElementById("payfastCheckoutForm");
 
   if (overlay) {
     overlay.style.display = "block";
@@ -39,7 +40,15 @@ document.addEventListener("DOMContentLoaded", async () => {
   if (checkbox && overlay) {
     checkbox.addEventListener("change", () => {
       overlay.style.display = checkbox.checked ? "none" : "block";
-      console.log(checkbox.checked ? " Terms accepted — overlay hidden" : " Terms unchecked — overlay shown");
+    });
+  }
+
+  if (form && checkbox) {
+    form.addEventListener("submit", (e) => {
+      if (!checkbox.checked) {
+        e.preventDefault();
+        alert("You must accept the Terms & Conditions to proceed.");
+      }
     });
   }
 
@@ -61,7 +70,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
   }
 
-  // 📱 Mobile Order Summary Toggle
+  // Mobile Order Summary Toggle
   const toggleText = document.getElementById("orderSummaryToggleText");
   const toggleArrow = document.getElementById("orderSummaryArrow");
   const summarySection = document.getElementById("checkoutRightSection");
@@ -75,13 +84,13 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 });
 
-// 🔢 Calculate subtotal in base GBP (raw cart prices)
+// Calculate subtotal in base GBP
 function calculateSubtotal(cart) {
   return cart.reduce((total, item) => total + item.price * item.quantity, 0);
 }
 
-// 🧾 Renders cart items into the checkout page
-function renderCheckoutProducts(cart) {
+// Render products into checkout
+async function renderCheckoutProducts(cart) {
   const container = document.getElementById("checkoutProducts");
 
   if (!container) {
@@ -96,9 +105,12 @@ function renderCheckoutProducts(cart) {
 
   container.innerHTML = "";
 
-  cart.forEach(item => {
+  for (const item of cart) {
     const itemDiv = document.createElement("div");
     itemDiv.className = "checkout-item";
+
+    const itemTotal = item.price * item.quantity;
+    const formattedPrice = await formatPrice(itemTotal);
 
     itemDiv.innerHTML = `
       <div class="checkout-img-wrapper">
@@ -108,16 +120,16 @@ function renderCheckoutProducts(cart) {
       <div class="checkout-item-details">
         <h4>${item.name}</h4>
       </div>
-      <div class="checkout-item-price">R${(item.price * item.quantity).toFixed(2)}</div>
+      <div class="checkout-item-price">${formattedPrice}</div>
     `;
 
     container.appendChild(itemDiv);
-  });
+  }
 
   console.log("[checkout.js] Rendered products:", cart);
 }
 
-// 🛒 Updates cart icon count in navbar
+// Update cart icon counter
 function updateCartCountInDOM() {
   const cart = JSON.parse(localStorage.getItem("cart") || "[]");
   const cartCount = document.getElementById("cart-count");
@@ -129,4 +141,3 @@ function updateCartCountInDOM() {
     console.warn("[checkout.js] #cart-count element not found.");
   }
 }
-
