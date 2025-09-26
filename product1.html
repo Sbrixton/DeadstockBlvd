@@ -109,7 +109,7 @@
           Nike SB Dunk Low Grateful Dead Bears – Orange
         </h4>
         
-        <p class="price" id="convertedPrice">Loading...</p>
+        <p class="price" id="convertedPrice">£86.00</p> <!-- use GBP by default -->
         <div id="currencySpinner" class="currency-spinner" style="display: none;"></div>
 
         <label for="currencySelector">View price in:</label>
@@ -333,15 +333,15 @@
       </p>
     </div>
   </div>
-<script>
-  window.addEventListener("load", () => {
-  const preloader = document.getElementById("preloader");
-  preloader.style.opacity = "0";
-  setTimeout(() => {
-    preloader.style.display = "none";
-  }, 500);
-});
-</script>
+  <script>
+    window.addEventListener("load", () => {
+    const preloader = document.getElementById("preloader");
+    preloader.style.opacity = "0";
+    setTimeout(() => {
+      preloader.style.display = "none";
+    }, 500);
+  });
+  </script>
   
   <script>
     const readMoreLinks = document.querySelectorAll('.read-more');
@@ -387,58 +387,6 @@
         pfItemName.value = name;
       }
     });
-  </script>
-
-  <script>
-    const API_KEY = 'c483f69d404b3072a225d9bb'; // Your exchangerate-api.com key
-    const baseCurrency = 'ZAR'; // Your default currency
-    const defaultDisplayCurrency = 'GBP'; // First currency users will see
-    
-    const priceEl = document.getElementById('convertedPrice');
-    const currencySelector = document.getElementById('currencySelector');
-    const productBtn = document.getElementById('addToCartBtn');
-    const priceZAR = parseFloat(productBtn.dataset.price); // This reads from your button
-    
-    let currentRates = {};
-      
-    async function fetchRates() {
-      try {
-        const res = await fetch(`https://v6.exchangerate-api.com/v6/${API_KEY}/latest/${baseCurrency}`);
-        const data = await res.json();
-        currentRates = data.conversion_rates;
-      } catch (err) {
-        console.error('Currency API failed:', err);
-        priceEl.textContent = `R${priceZAR.toFixed(2)}`;
-      }
-    }
-    
-    function format(value, currency) {
-      return new Intl.NumberFormat(undefined, {
-        style: 'currency',
-        currency: currency,
-        maximumFractionDigits: 2
-      }).format(value);
-    }
-    
-    function updateDisplayedPrice() {
-      const selectedCurrency = currencySelector.value;
-      if (!currentRates[selectedCurrency]) return;
-      
-      const rate = currentRates[selectedCurrency];
-      const converted = priceZAR * rate;
-      
-      priceEl.textContent = format(converted, selectedCurrency);
-    }
-    
-    // Init
-    document.addEventListener('DOMContentLoaded', async () => {
-      await fetchRates();
-      currencySelector.value = defaultDisplayCurrency;
-      updateDisplayedPrice();
-    });
-    
-    // On dropdown change
-    currencySelector.addEventListener('change', updateDisplayedPrice);
   </script>
   
   <!-- ✅ Add this at the bottom, before </body> -->
