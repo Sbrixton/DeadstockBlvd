@@ -84,7 +84,7 @@
                     </div>
                     <div class="des">
                       <h5>Nike SB Dunk</h5>
-                      <h4>R600.00</h4>
+                      <h4 class="converted-price" data-gbp="30">£30.00</h4>
                     </div>
                 </a>
                 
@@ -109,7 +109,7 @@
                     <div class="des">
                         <span>Vintage</span>
                         <h5>Nike x Corteiz Air Max 95</h5>
-                        <h4>R750.00</h4>
+                        <h4 class="converted-price" data-gbp="30">£30.00</h4>
                     </div>
                 </a>
                 <button 
@@ -132,7 +132,7 @@
                     <div class="des">
                         <span>Vintage</span>
                         <h5>Nike Hoodie </h5>
-                        <h4>R500.00</h4>
+                        <h4 class="converted-price" data-gbp="30">£30.00</h4>
                     </div>
                 </a>
                 <button 
@@ -155,7 +155,7 @@
                     <div class="des">
                         <span>Vintage</span>
                         <h5>Balenciaga Track Pants</h5>
-                        <h4>R780.00</h4>
+                        <h4 class="converted-price" data-gbp="30">£30.00</h4>
                     </div>
                 </a>
                 <button 
@@ -178,7 +178,7 @@
                     <div class="des">
                         <span>Vintage</span>
                         <h5>Nike Air Max 95 OG Mandarin</h5>
-                        <h4>R780.00</h4>
+                        <h4 class="converted-price" data-gbp="30">£30.00</h4>
                     </div>
                 </a>
                 <button 
@@ -200,7 +200,7 @@
                     <div class="des">
                         <span>Vintage</span>
                         <h5>Nike X PSG Tech Fleece</h5>
-                        <h4>R780.00</h4>
+                        <h4 class="converted-price" data-gbp="30">£30.00</h4>
                     </div>
                 </a>
                 <button 
@@ -222,7 +222,7 @@
                     <div class="des">
                         <span>Vintage</span>
                         <h5>Nike Sweatpants</h5>
-                        <h4>R780.00</h4>
+                        <h4 class="converted-price" data-gbp="30">£30.00</h4>
                     </div>
                 </a>
                 <button 
@@ -245,7 +245,7 @@
                     <div class="des">
                         <span>Vintage</span>
                         <h5>Nike Shox TL Orange-Black</h5>
-                        <h4>R780.00</h4>
+                        <h4 class="converted-price" data-gbp="30">£30.00</h4>
                     </div>
                 </a>
                 <button 
@@ -293,7 +293,21 @@
           }, 500);
         });
     </script>
-    
+
+    <script type="module">
+      import { formatPrice, getCurrency, setCurrency } from './currency.js';
+        
+      document.addEventListener('DOMContentLoaded', async () => {
+        const priceEls = document.querySelectorAll('.converted-price');
+        
+        for (let el of priceEls) {
+          const gbp = parseFloat(el.dataset.gbp);
+          el.innerText = await formatPrice(gbp);
+        }
+      });
+    </script>
+
+
     <script type="module" src="cart-utils.js"></script>
     <script src="shop.js"></script>
     <script type="module" src="product.js"></script>
@@ -301,6 +315,7 @@
     <script type="module" src="search.js"></script>
 </body>
 </html>
+
 
 
 
