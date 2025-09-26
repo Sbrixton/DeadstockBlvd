@@ -22,25 +22,36 @@ export function getCurrency() {
 
 // Fetch exchange rates
 export async function getRates() {
-  const res = await fetch(`https://v6.exchangerate-api.com/v6/${API_KEY}/latest/${BASE_CURRENCY}`);
-  const data = await res.json();
-  return data.conversion_rates;
+  try {
+    const res = await fetch(`https://v6.exchangerate-api.com/v6/${API_KEY}/latest/${BASE_CURRENCY}`);
+    const data = await res.json();
+
+    if (!data || !data.conversion_rates) {
+      console.warn("[currency.js] Missing conversion_rates in response. Returning default rates.");
+      return { GBP: 1, USD: 1.3, EUR: 1.15 }; // fallback default rates
+    }
+
+    return data.conversion_rates;
+  } catch (error) {
+    console.error("[currency.js] Failed to fetch exchange rates:", error);
+    return { GBP: 1, USD: 1.3, EUR: 1.15 }; // fallback
+  }
 }
 
 // Format price for display
 export async function formatPrice(gbpAmount) {
   const currency = getCurrency();
   const rates = await getRates();
-  const rate = rates[currency];
+  const rate = rates[currency] || 1;
   const converted = (gbpAmount * rate).toFixed(2);
-  return `${SYMBOLS[currency]}${converted}`;
+  return `${SYMBOLS[currency] || '£'}${converted}`;
 }
 
 // Convert to selected currency numerically
 export async function convertAmount(gbpAmount) {
   const currency = getCurrency();
   const rates = await getRates();
-  const rate = rates[currency];
+  const rate = rates[currency] || 1;
   return (gbpAmount * rate).toFixed(2);
 }
 
@@ -48,11 +59,17 @@ export async function convertAmount(gbpAmount) {
 export async function convertFromGBP(gbpAmount, targetCurrency) {
   const rates = await getRates();
   const rate = rates[targetCurrency];
+
+  if (!rate) {
+    console.warn(`[currency.js] No exchange rate found for ${targetCurrency}, using 1 as fallback.`);
+    return gbpAmount;
+  }
+
   return gbpAmount * rate;
 }
 
 // Get just the symbol of selected currency
 export function getCurrencySymbol() {
-  return SYMBOLS[getCurrency()];
+  return SYMBOLS[getCurrency()] || '£';
 }
 
