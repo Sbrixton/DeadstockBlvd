@@ -10,20 +10,26 @@ document.addEventListener("DOMContentLoaded", async () => {
   const topSubtotal = document.getElementById("orderSummarySubtotal");
   const subtotalValue = calculateSubtotal(cart);
 
-  // Format subtotal in selected currency
-  const formatted = await formatPrice(subtotalValue);
-  if (subtotalElement) subtotalElement.innerHTML = formatted;
-  if (topSubtotal) topSubtotal.innerHTML = formatted;
+  try {
+    const formatted = await formatPrice(subtotalValue);
+    if (subtotalElement) subtotalElement.innerHTML = formatted;
+    if (topSubtotal) topSubtotal.innerHTML = formatted;
+  } catch (err) {
+    console.error("[checkout.js] Error formatting subtotal:", err);
+  }
 
   renderCheckoutProducts(cart);
 
-  // Convert subtotal to ZAR for PayFast
-  const checkoutZAR = await convertFromGBP(subtotalValue, "ZAR");
-  const pfAmountInput = document.getElementById("checkoutPayfastAmount");
-  const pfItemInput = document.getElementById("checkoutPayfastItem");
+  try {
+    const checkoutZAR = await convertFromGBP(subtotalValue, "ZAR");
+    const pfAmountInput = document.getElementById("checkoutPayfastAmount");
+    const pfItemInput = document.getElementById("checkoutPayfastItem");
 
-  if (pfAmountInput) pfAmountInput.value = checkoutZAR.toFixed(2);
-  if (pfItemInput) pfItemInput.value = cart.map(item => item.name).join(", ");
+    if (pfAmountInput) pfAmountInput.value = checkoutZAR.toFixed(2);
+    if (pfItemInput) pfItemInput.value = cart.map(item => item.name).join(", ");
+  } catch (err) {
+    console.warn("[checkout.js] Error converting subtotal to ZAR:", err);
+  }
 
   // Terms & Conditions Checkbox + Overlay
   const checkbox = document.getElementById("termsCheckbox");
@@ -126,7 +132,7 @@ async function renderCheckoutProducts(cart) {
     container.appendChild(itemDiv);
   }
 
-  console.log("[checkout.js] Rendered products:", cart);
+  console.log("[checkout.js] Rendered checkout products:", cart);
 }
 
 // Update cart icon counter
