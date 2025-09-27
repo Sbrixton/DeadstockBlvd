@@ -5,7 +5,6 @@ import {
 } from "./cart-utils.js";
 
 import {
-  getCurrency,
   formatPrice
 } from "./currency.js";
 
@@ -102,7 +101,7 @@ window.addEventListener("load", () => {
   if (cartIcon && mobileDrawer) {
     cartIcon.addEventListener("click", (e) => {
       e.preventDefault();
-      renderMobileDrawer();
+      renderMobileDrawer(); // ✅ opens with updated cart
       mobileDrawer.classList.add("open");
     });
   }
@@ -134,12 +133,14 @@ window.addEventListener("load", () => {
       }
       saveCart(cart);
       render();
+      renderMobileDrawer(); // ✅ keeps mobile drawer in sync
     }
 
     if (target.classList.contains("remove-item")) {
       cart.splice(itemIndex, 1);
       saveCart(cart);
       render();
+      renderMobileDrawer();
     }
   });
 
@@ -169,6 +170,7 @@ export async function renderMobileDrawer() {
     document.getElementById("drawerProceedBtn")
       ?.addEventListener("click", () => window.location.href = "shop.html");
     updateCartCountInDOM();
+    updateDrawerCheckoutState();
     return;
   }
 
@@ -228,3 +230,4 @@ export async function renderMobileDrawer() {
   updateCartCountInDOM();
   updateDrawerCheckoutState();
 }
+
