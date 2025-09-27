@@ -1,7 +1,8 @@
 import { addToCart, updateCartCountInDOM } from './cart-utils.js';
+import { renderMobileDrawer } from './cart.js'; // ✅ Import to update cart drawer
 
 document.addEventListener("DOMContentLoaded", () => {
-  const cartIcons = document.querySelectorAll(".cart");
+  const cartIcons = document.querySelectorAll(".cart, .add-to-cart-btn");
 
   cartIcons.forEach((icon) => {
     icon.addEventListener("click", () => {
@@ -11,10 +12,11 @@ document.addEventListener("DOMContentLoaded", () => {
         price: parseFloat(icon.dataset.price),
         image: icon.dataset.image,
       };
+      
       addToCart(product);
+      renderMobileDrawer(); // ✅ Update drawer immediately (without opening)
     });
   });
 
   updateCartCountInDOM();
 });
-
