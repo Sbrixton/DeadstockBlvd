@@ -5,6 +5,7 @@ import {
 } from "./cart-utils.js";
 
 import {
+  getCurrency,
   formatPrice
 } from "./currency.js";
 
@@ -48,8 +49,8 @@ window.addEventListener("load", () => {
       section.style.display = "none";
       checkoutBtn.style.display = "none";
       proceedBtn.style.display = "inline-block";
-      subEl.textContent = "0.00";
-      totalEl.textContent = "0.00";
+      subEl.textContent = await formatPrice(0);
+      totalEl.textContent = await formatPrice(0);
       updateCartCountInDOM();
       updateDrawerCheckoutState();
       return;
@@ -101,7 +102,7 @@ window.addEventListener("load", () => {
   if (cartIcon && mobileDrawer) {
     cartIcon.addEventListener("click", (e) => {
       e.preventDefault();
-      renderMobileDrawer(); // ✅ opens with updated cart
+      renderMobileDrawer();
       mobileDrawer.classList.add("open");
     });
   }
@@ -133,14 +134,12 @@ window.addEventListener("load", () => {
       }
       saveCart(cart);
       render();
-      renderMobileDrawer(); // ✅ keeps mobile drawer in sync
     }
 
     if (target.classList.contains("remove-item")) {
       cart.splice(itemIndex, 1);
       saveCart(cart);
       render();
-      renderMobileDrawer();
     }
   });
 
@@ -157,6 +156,13 @@ export async function renderMobileDrawer() {
     return;
   }
 
+  // Show instant default subtotal
+  drawerSubtotal.textContent = await formatPrice(0);
+
+  // Immediate feedback (even if cart is still rendering)
+  updateCartCountInDOM();
+  updateDrawerCheckoutState();
+
   mobileCartItems.innerHTML = "";
   let subtotal = 0;
 
@@ -166,11 +172,10 @@ export async function renderMobileDrawer() {
         <p>Your cart is empty.</p>
         <button id="drawerProceedBtn" class="proceed-to-shop-btn">Proceed to Shop</button>
       </div>`;
-    drawerSubtotal.textContent = "0.00";
+    drawerSubtotal.textContent = await formatPrice(0);
     document.getElementById("drawerProceedBtn")
       ?.addEventListener("click", () => window.location.href = "shop.html");
     updateCartCountInDOM();
-    updateDrawerCheckoutState();
     return;
   }
 
@@ -230,4 +235,3 @@ export async function renderMobileDrawer() {
   updateCartCountInDOM();
   updateDrawerCheckoutState();
 }
-
