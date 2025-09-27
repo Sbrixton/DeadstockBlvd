@@ -49,8 +49,11 @@ window.addEventListener("load", () => {
       section.style.display = "none";
       checkoutBtn.style.display = "none";
       proceedBtn.style.display = "inline-block";
-      subEl.textContent = await formatPrice(0);
-      totalEl.textContent = await formatPrice(0);
+
+      const formattedZero = await formatPrice(0);
+      subEl.textContent = formattedZero;
+      totalEl.textContent = formattedZero;
+
       updateCartCountInDOM();
       updateDrawerCheckoutState();
       return;
@@ -156,13 +159,6 @@ export async function renderMobileDrawer() {
     return;
   }
 
-  // Show instant default subtotal
-  drawerSubtotal.textContent = await formatPrice(0);
-
-  // Immediate feedback (even if cart is still rendering)
-  updateCartCountInDOM();
-  updateDrawerCheckoutState();
-
   mobileCartItems.innerHTML = "";
   let subtotal = 0;
 
@@ -172,9 +168,13 @@ export async function renderMobileDrawer() {
         <p>Your cart is empty.</p>
         <button id="drawerProceedBtn" class="proceed-to-shop-btn">Proceed to Shop</button>
       </div>`;
+
+    // Use formatted 0.00 instead of hardcoded R0.00
     drawerSubtotal.textContent = await formatPrice(0);
+
     document.getElementById("drawerProceedBtn")
       ?.addEventListener("click", () => window.location.href = "shop.html");
+
     updateCartCountInDOM();
     return;
   }
@@ -205,6 +205,7 @@ export async function renderMobileDrawer() {
     mobileCartItems.appendChild(itemDiv);
   }
 
+  // Set subtotal only once and with correct formatting
   const formattedSubtotal = await formatPrice(subtotal);
   drawerSubtotal.textContent = formattedSubtotal;
 
