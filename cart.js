@@ -9,6 +9,9 @@ import {
   formatPrice
 } from "./currency.js";
 
+// ✅ Preload exchange rates early to speed up formatting later
+formatPrice(1); // Warm-up
+
 function updateDrawerCheckoutState() {
   const cart = getCart();
   const drawerCheckoutBtn = document.getElementById("drawerCheckoutBtn");
@@ -70,7 +73,6 @@ window.addEventListener("load", () => {
       const itemDiv = document.createElement("div");
       itemDiv.className = "cart-item";
 
-      // Placeholder render
       itemDiv.innerHTML = `
         <img src="${item.image}" alt="${item.name}" class="cart-img">
         <div class="cart-details">
@@ -88,7 +90,7 @@ window.addEventListener("load", () => {
 
       cartWrapper.appendChild(itemDiv);
 
-      // Format and update prices after rendering
+      // Format and update prices
       formatPrice(item.price).then(formatted => {
         itemDiv.querySelector(".cart-price").textContent = `Price: ${formatted}`;
       });
@@ -98,7 +100,6 @@ window.addEventListener("load", () => {
       });
     }
 
-    // Subtotals with placeholder first
     subEl.textContent = "0.00";
     totalEl.textContent = "0.00";
 
@@ -219,7 +220,7 @@ export async function renderMobileDrawer() {
     drawerSubtotal.textContent = formatted;
   });
 
-  // Attach button events
+  // Button events
   mobileCartItems.querySelectorAll('.qty-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       const id = parseInt(btn.dataset.id);
@@ -247,4 +248,5 @@ export async function renderMobileDrawer() {
   updateCartCountInDOM();
   updateDrawerCheckoutState();
 }
+
 
