@@ -287,60 +287,17 @@
         </div>
     </div>
     <script>
-      document.addEventListener("DOMContentLoaded", () => {
+      window.addEventListener("load", () => {
         const preloader = document.getElementById("preloader");
+        if (!preloader) return;
         
-        // Check if there's a product/gallery/image area to focus on
-        const container =
-          document.querySelector(".product-container") ||
-          document.querySelector(".shop-grid") ||
-          document.querySelector(".main-gallery") ||
-          document.querySelector("main");
-        
-        if (!container) {
-          console.warn("No container found. Removing preloader after short delay.");
-          fadeOutPreloader();
-          return;
-        }
-        
-        const images = container.querySelectorAll("img");
-        if (images.length === 0) {
-          console.warn("No images found in container. Removing preloader.");
-          fadeOutPreloader();
-          return;
-        }
-        
-        let loadedCount = 0;
-        images.forEach((img) => {
-          if (img.complete) {
-            loadedCount++;
-          } else {
-            img.addEventListener("load", imageLoaded);
-            img.addEventListener("error", imageLoaded);
-          }
-        });
-        
-        function imageLoaded() {
-          loadedCount++;
-          if (loadedCount === images.length) {
-            fadeOutPreloader();
-          }
-        }
-        
-        // Fallback: if it takes too long, hide anyway after 3 seconds
+        // Short delay to make sure images render properly
         setTimeout(() => {
-          if (loadedCount < images.length) {
-            console.warn("Timeout reached — forcing preloader to close.");
-            fadeOutPreloader();
-          }
-        }, 3000);
-        
-        function fadeOutPreloader() {
           preloader.style.opacity = "0";
           setTimeout(() => {
             preloader.style.display = "none";
-          }, 300);
-        }
+          }, 500); // fade out transition
+        }, 300); // only wait 300ms after load
       });
     </script>
     
@@ -357,37 +314,6 @@
       });
     </script>
 
-    <style>
-        #preloader {
-          position: fixed;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          background: white;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          z-index: 9999;
-          transition: opacity 0.3s ease;
-        }
-        
-        .loader {
-          border: 4px solid #ccc;
-          border-top: 4px solid #000;
-          border-radius: 50%;
-          width: 40px;
-          height: 40px;
-          animation: spin 1s linear infinite;
-        }
-        
-        @keyframes spin {
-          to {
-            transform: rotate(360deg);
-          }
-        }
-    </style>
-
 
     <script type="module" src="cart-utils.js"></script>
     <script type="module" src="shop.js"></script>
@@ -396,6 +322,7 @@
     <script type="module" src="search.js"></script>
 </body>
 </html>
+
 
 
 
