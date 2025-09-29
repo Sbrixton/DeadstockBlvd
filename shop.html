@@ -287,43 +287,63 @@
         </div>
     </div>
     <script>
-        document.addEventListener("DOMContentLoaded", () => {
-          const preloader = document.getElementById("preloader");
+      document.addEventListener("DOMContentLoaded", () => {
+        const preloader = document.getElementById("preloader");
         
-          // Target the main area with images
-          const container = document.querySelector(".product-container");
-          const images = container.querySelectorAll("img");
-          let loadedCount = 0;
+        // Check if there's a product/gallery/image area to focus on
+        const container =
+          document.querySelector(".product-container") ||
+          document.querySelector(".shop-grid") ||
+          document.querySelector(".main-gallery") ||
+          document.querySelector("main");
         
-          images.forEach((img) => {
-            if (img.complete) {
-              loadedCount++;
-            } else {
-              img.addEventListener("load", () => {
-                loadedCount++;
-                if (loadedCount === images.length) finishLoading();
-              });
-              img.addEventListener("error", () => {
-                loadedCount++;
-                if (loadedCount === images.length) finishLoading();
-              });
-            }
-          });
+        if (!container) {
+          console.warn("No container found. Removing preloader after short delay.");
+          fadeOutPreloader();
+          return;
+        }
         
-          // If all images are already loaded
-          if (loadedCount === images.length) {
-            finishLoading();
-          }
+        const images = container.querySelectorAll("img");
+        if (images.length === 0) {
+          console.warn("No images found in container. Removing preloader.");
+          fadeOutPreloader();
+          return;
+        }
         
-          function finishLoading() {
-            preloader.style.opacity = "0";
-            setTimeout(() => {
-              preloader.style.display = "none";
-            }, 300); // Delay to allow fade-out
+        let loadedCount = 0;
+        images.forEach((img) => {
+          if (img.complete) {
+            loadedCount++;
+          } else {
+            img.addEventListener("load", imageLoaded);
+            img.addEventListener("error", imageLoaded);
           }
         });
+        
+        function imageLoaded() {
+          loadedCount++;
+          if (loadedCount === images.length) {
+            fadeOutPreloader();
+          }
+        }
+        
+        // Fallback: if it takes too long, hide anyway after 3 seconds
+        setTimeout(() => {
+          if (loadedCount < images.length) {
+            console.warn("Timeout reached — forcing preloader to close.");
+            fadeOutPreloader();
+          }
+        }, 3000);
+        
+        function fadeOutPreloader() {
+          preloader.style.opacity = "0";
+          setTimeout(() => {
+            preloader.style.display = "none";
+          }, 300);
+        }
+      });
     </script>
-
+    
     <script type="module">
       import { formatPrice, getCurrency, setCurrency } from './currency.js';
         
@@ -345,6 +365,7 @@
     <script type="module" src="search.js"></script>
 </body>
 </html>
+
 
 
 
