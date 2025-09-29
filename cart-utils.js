@@ -18,8 +18,9 @@ export function updateCartCountInDOM() {
   }
 }
 
+// Removed showToast alert to avoid multiple clicks adding duplicates
 export function showToast(message) {
-  alert(message); // Optional
+  // alert(message); // Disabled for UX improvement
 }
 
 export function addToCart(product) {
@@ -35,6 +36,8 @@ export function addToCart(product) {
 
   saveCart(cart);
   updateCartCountInDOM();
-  showToast(`${product.name} added to cart!`);
+  // Removed showToast call
+  // showToast(`${product.name} added to cart!`);
 }
+
 
