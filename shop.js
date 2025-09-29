@@ -6,15 +6,16 @@ import { formatPrice } from './currency.js'; // ✅ Import formatPrice for warm-
 formatPrice(1); // Pre-fetch exchange rates & symbol early
 
 document.addEventListener("DOMContentLoaded", () => {
-  const cartIcons = document.querySelectorAll(".cart, .add-to-cart-btn");
+  // ✅ Only attach to add-to-cart buttons
+  const addToCartButtons = document.querySelectorAll(".add-to-cart-btn");
 
-  cartIcons.forEach((icon) => {
-    icon.addEventListener("click", () => {
+  addToCartButtons.forEach((button) => {
+    button.addEventListener("click", () => {
       const product = {
-        id: parseInt(icon.dataset.id),
-        name: icon.dataset.name,
-        price: parseFloat(icon.dataset.price),
-        image: icon.dataset.image,
+        id: parseInt(button.dataset.id),
+        name: button.dataset.name,
+        price: parseFloat(button.dataset.price),
+        image: button.dataset.image,
       };
 
       addToCart(product);
@@ -24,4 +25,3 @@ document.addEventListener("DOMContentLoaded", () => {
 
   updateCartCountInDOM();
 });
-
