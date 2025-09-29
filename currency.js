@@ -9,6 +9,8 @@ const SYMBOLS = {
   EUR: '€',
 };
 
+let cachedRates = null; // ✅ Add in-memory cache
+
 // Save user's selected currency
 export function setCurrency(currencyCode) {
   localStorage.setItem('selectedCurrency', currencyCode);
@@ -20,21 +22,26 @@ export function getCurrency() {
   return ['GBP', 'USD', 'EUR'].includes(selected) ? selected : BASE_CURRENCY;
 }
 
-// Fetch exchange rates
+// ✅ Fetch & cache exchange rates
 export async function getRates() {
+  if (cachedRates) return cachedRates;
+
   try {
     const res = await fetch(`https://v6.exchangerate-api.com/v6/${API_KEY}/latest/${BASE_CURRENCY}`);
     const data = await res.json();
 
     if (!data || !data.conversion_rates) {
       console.warn("[currency.js] Missing conversion_rates in response. Returning default rates.");
-      return { GBP: 1, USD: 1.3, EUR: 1.15 }; // fallback default rates
+      cachedRates = { GBP: 1, USD: 1.3, EUR: 1.15 };
+      return cachedRates;
     }
 
-    return data.conversion_rates;
+    cachedRates = data.conversion_rates;
+    return cachedRates;
   } catch (error) {
     console.error("[currency.js] Failed to fetch exchange rates:", error);
-    return { GBP: 1, USD: 1.3, EUR: 1.15 }; // fallback
+    cachedRates = { GBP: 1, USD: 1.3, EUR: 1.15 };
+    return cachedRates;
   }
 }
 
