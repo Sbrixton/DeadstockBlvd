@@ -290,7 +290,7 @@
         document.addEventListener("DOMContentLoaded", () => {
           const preloader = document.getElementById("preloader");
         
-          // Wait for images inside `.product-container` to load
+          // Target the main area with images
           const container = document.querySelector(".product-container");
           const images = container.querySelectorAll("img");
           let loadedCount = 0;
@@ -310,7 +310,7 @@
             }
           });
         
-          // If all images were already loaded
+          // If all images are already loaded
           if (loadedCount === images.length) {
             finishLoading();
           }
@@ -319,7 +319,7 @@
             preloader.style.opacity = "0";
             setTimeout(() => {
               preloader.style.display = "none";
-            }, 300);
+            }, 300); // Delay to allow fade-out
           }
         });
     </script>
@@ -345,6 +345,7 @@
     <script type="module" src="search.js"></script>
 </body>
 </html>
+
 
 
 
