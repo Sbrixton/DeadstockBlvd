@@ -1,5 +1,5 @@
-// script.js
-import { updateCartCountInDOM } from './cart-utils.js';
+// script.js//
+import { updateCartCountInDOM, addToCart } from './cart-utils.js';
 
 document.addEventListener("DOMContentLoaded", () => {
   const bar = document.getElementById("bar");
@@ -13,48 +13,26 @@ document.addEventListener("DOMContentLoaded", () => {
     if (window.innerWidth > 768) navWrapper.classList.remove("active");
   });
 
-  // ✅ Add to Cart Functionality (for index.html product cards)
+  // ✅ Attach to Cart buttons — just call addToCart()
   const addToCartButtons = document.querySelectorAll(".add-to-cart-btn");
 
   addToCartButtons.forEach((button) => {
     button.addEventListener("click", (e) => {
       e.preventDefault();
-      e.stopPropagation(); // Prevent navigation if inside <a>
+      e.stopPropagation();
 
       const id = parseInt(button.getAttribute("data-id"));
       const name = button.getAttribute("data-name");
       const price = parseFloat(button.getAttribute("data-price"));
       const image = button.getAttribute("data-image");
 
-      const newItem = {
-        id,
-        name,
-        price,
-        image,
-        quantity: 1,
-      };
+      const product = { id, name, price, image };
 
-      let cart = JSON.parse(localStorage.getItem("cart")) || [];
-
-      const existingItem = cart.find((item) => item.id === id);
-
-      if (existingItem) {
-        existingItem.quantity += 1;
-      } else {
-        cart.push(newItem);
-      }
-
-      localStorage.setItem("cart", JSON.stringify(cart));
-
-      // ✅ Update cart count without reload
-      updateCartCountInDOM();
+      addToCart(product); // ✅ Use central function
     });
   });
 
-  // ✅ Ensure cart count is updated on load
   updateCartCountInDOM();
 });
-
-
 
 
