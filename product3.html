@@ -92,7 +92,15 @@
           Nike Hoodie
         </h5>
         
-        <h4 class="converted-price" data-gbp="25">£25.00</h4>
+        <p class="price" id="convertedPrice">£25.00</p> <!-- use GBP by default -->
+        <div id="currencySpinner" class="currency-spinner" style="display: none;"></div>
+
+        <label for="currencySelector">View price in:</label>
+        <select id="currencySelector">
+          <option value="GBP" selected>GBP (£)</option>
+          <option value="USD">USD ($)</option>
+          <option value="EUR">EUR (€)</option>
+        </select>
         
         <p class="description">
           Size: US10/EUR44/UK43
