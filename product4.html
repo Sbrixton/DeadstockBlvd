@@ -73,11 +73,14 @@
       
       <div class="product-gallery">
         <div class="slider">
+          
           <i class="fas fa-chevron-left nav-arrow" id="prevSlide"></i>
-          <img id="mainImage" src="Balenciaga Track Pants (2).png" alt="Product Image" class="main-img" />
+          <div class="main-img-wrapper">
+            <img id="mainImage" src="Balenciaga Track Pants (2).png" alt="Product Image" class="main-img" />
+          </div>
           <i class="fas fa-chevron-right nav-arrow" id="nextSlide"></i>
           
-          <div class="mobile-dots"></div>
+          <div class="mobile-dots"></div> 
         </div>
         <div class="thumbnails">
           <img src="Balenciaga Track Pants (2).png" class="thumb" />
@@ -89,16 +92,19 @@
       </div>
 
       <div class="product-info">
-        <h5>
-          Nike x The Grateful Dead
-        </h5>
         <h4>
-          Nike SB Dunk Low Grateful Dead Bears – Orange
+          Balenciaga Track Pants
         </h4>
         
-        <p class="price">
-          £86
-        </p>
+        <p class="price" id="convertedPrice">£96.00</p> <!-- use GBP by default -->
+        <div id="currencySpinner" class="currency-spinner" style="display: none;"></div>
+
+        <label for="currencySelector">View price in:</label>
+        <select id="currencySelector">
+          <option value="GBP" selected>GBP (£)</option>
+          <option value="USD">USD ($)</option>
+          <option value="EUR">EUR (€)</option>
+        </select>
         
         <p class="description">
           Size: US10/EUR44/UK43
@@ -113,9 +119,9 @@
         <button
           id="addToCartBtn"
           class="add-to-cart"
-          data-id="1"
-          data-name="Graphic Hoodie"
-          data-price="600"
+          data-id="4"
+          data-name="Balenciaga Track Pants"
+          data-price="96"
           data-image="Balenciaga Track Pants (2).png">
           Add to Cart 🛒
         </button>
@@ -129,9 +135,9 @@
           <input type="hidden" name="notify_url" value="https://deadstockblvd.wuaze.com/basic%20notify.php" />
           
           <input type="hidden" name="m_payment_id" value="1234" />
-          <input type="hidden" name="amount" id="pfAmount" value="600.00" />
+          <input type="hidden" name="amount" id="pfAmount" value="96.00" />
           <input type="hidden" name="currency" value="ZAR" />
-          <input type="hidden" name="item_name" id="pfItemName" value="Graphic Hoodie" />
+          <input type="hidden" name="item_name" id="pfItemName" value="Balenciaga Track Pants" />
           
           <button type="submit" class="payfast-btn">Pay with PayFast (Demo)</button>
         </form>
