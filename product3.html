@@ -89,15 +89,10 @@
 
       <div class="product-info">
         <h5>
-          Nike x The Grateful Dead
+          Nike Hoodie
         </h5>
-        <h4>
-          Nike SB Dunk Low Grateful Dead Bears – Orange
-        </h4>
         
-        <p class="price">
-          £86
-        </p>
+        <h4 class="converted-price" data-gbp="25">£25.00</h4>
         
         <p class="description">
           Size: US10/EUR44/UK43
@@ -113,8 +108,8 @@
           id="addToCartBtn"
           class="add-to-cart"
           data-id="3"
-          data-name="Cargo Pants"
-          data-price="500.00"
+          data-name="Nike Hoodies"
+          data-price="25.00"
           data-image="Nike Hoodie (1).png">
           Add to Cart 🛒
         </button>
@@ -127,10 +122,10 @@
           <input type="hidden" name="cancel_url" value="https://deadstockblvd.co.za/cancel.html" />
           <input type="hidden" name="notify_url" value="https://deadstockblvd.wuaze.com/basic%20notify.php" />
           
-          <input type="hidden" name="m_payment_id" value="1234" />
-          <input type="hidden" name="amount" id="pfAmount" value="600.00" />
+          <input type="hidden" name="m_payment_id" value="91011" />
+          <input type="hidden" name="amount" id="pfAmount" value="25.00" />
           <input type="hidden" name="currency" value="ZAR" />
-          <input type="hidden" name="item_name" id="pfItemName" value="Graphic Hoodie" />
+          <input type="hidden" name="item_name" id="pfItemName" value="Nike Hoodies" />
           
           <button type="submit" class="payfast-btn">Pay with PayFast (Demo)</button>
         </form>
@@ -245,19 +240,19 @@
   </footer>
   
     <!-- Mobile Slide-in Cart Drawer -->
-  <div id="mobileCartDrawer">
-    <div id="mobileCartHeader">
-      <h3>Your Cart</h3>
-      <button id="closeCartDrawer">&times;</button>
+    <div id="mobileCartDrawer">
+        <div id="mobileCartHeader">
+            <h3>Your Cart</h3>
+            <button id="closeCartDrawer">&times;</button>
+        </div>
+        <div id="mobileCartItems"></div>
+        <div id="mobileCartFooter">
+            <div class="footer-totals">
+                <p>Subtotal: <span id="drawerCartSubtotal">0.00</span></p>
+            </div>
+            <button id="drawerCheckoutBtn" class="checkout-bar">Checkout</button>
+        </div>
     </div>
-    <div id="mobileCartItems"></div>
-    <div id="mobileCartFooter">
-      <div class="footer-totals">
-        <p>Subtotal: <span id="drawerCartSubtotal">R0.00</span></p>
-      </div>
-      <button id="drawerCheckoutBtn" class="checkout-bar">Checkout</button>
-    </div>
-  </div>
   
     <!-- Modal -->
   <div class="overlay" id="modalOverlay">
@@ -279,15 +274,20 @@
       </p>
     </div>
   </div>
-  <script>
-    window.addEventListener("load", () => {
-      const preloader = document.getElementById("preloader");
-      preloader.style.opacity = "0";
-      setTimeout(() => {
-        preloader.style.display = "none";
-      }, 500);
-    });
-  </script>
+    <script>
+      window.addEventListener("load", () => {
+        const preloader = document.getElementById("preloader");
+        if (!preloader) return;
+        
+        // Short delay to make sure images render properly
+        setTimeout(() => {
+          preloader.style.opacity = "0";
+          setTimeout(() => {
+            preloader.style.display = "none";
+          }, 500); // fade out transition
+        }, 300); // only wait 300ms after load
+      });
+    </script>
 
   <script>
     const readMoreLinks = document.querySelectorAll('.read-more');
@@ -334,7 +334,34 @@
       }
     });
   </script>
-  
+
+  <!-- ✅ Add this at the bottom, before </body> -->
+  <script type="module">
+    import {
+      setCurrency,
+      getCurrency,
+      formatPrice
+    } from './currency.js';
+    
+    document.addEventListener('DOMContentLoaded', async () => {
+      const basePriceGBP = 86; // or dynamically fetch from data attribute
+      const priceEl = document.getElementById("convertedPrice");
+      const selector = document.getElementById("currencySelector");
+      
+      async function updatePriceDisplay() {
+        priceEl.innerHTML = await formatPrice(basePriceGBP);
+      }
+      
+      selector.value = getCurrency();
+      selector.addEventListener('change', async (e) => {
+        setCurrency(e.target.value);
+        await updatePriceDisplay();
+      });
+      
+      await updatePriceDisplay();
+    });
+  </script>
+
   <script type="module" src="search.js"></script>
   <script type="module" src="product.js"></script>
   <script type="module" src="cart.js"></script>
