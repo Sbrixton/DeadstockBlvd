@@ -28,7 +28,8 @@ document.addEventListener("DOMContentLoaded", () => {
     noResultsMessage.style.display = "none";
   }
 
-  function handleSearchInput() {
+  // 🔁 NOW async
+  async function handleSearchInput() {
     const query = searchInput.value.toLowerCase().trim();
     searchResults.innerHTML = "";
     searchSuggestions.innerHTML = "";
@@ -53,24 +54,30 @@ document.addEventListener("DOMContentLoaded", () => {
     `).join("");
 
     if (matches.length > 0) {
-      renderResults(matches);
+      await renderResults(matches); // ✅ await async render
     } else {
       noResultsMessage.style.display = "block";
     }
   }
 
-  function renderResults(results) {
-    searchResults.innerHTML = results.map(product => `
-      <a href="${product.page}?id=${product.id}" class="search-item-link">
-        <div class="search-item">
-          <img src="${product.image}" alt="${product.name}" />
-          <div class="search-info">
-            <h4>${product.name}</h4>
-            <p>${formatPrice(product.price)}</p> <!-- ✅ Converted price -->
+  // 🔁 NOW async
+  async function renderResults(results) {
+    const items = await Promise.all(results.map(async (product) => {
+      const price = await formatPrice(product.price);
+      return `
+        <a href="${product.page}?id=${product.id}" class="search-item-link">
+          <div class="search-item">
+            <img src="${product.image}" alt="${product.name}" />
+            <div class="search-info">
+              <h4>${product.name}</h4>
+              <p>${price}</p>
+            </div>
           </div>
-        </div>
-      </a>
-    `).join("");
+        </a>
+      `;
+    }));
+
+    searchResults.innerHTML = items.join("");
   }
 
   searchIcon?.addEventListener("click", (e) => {
@@ -100,7 +107,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (e.key === "Escape") hideSearch();
   });
 
-  searchInput?.addEventListener("input", handleSearchInput);
+  searchInput?.addEventListener("input", handleSearchInput); // ✅ async works fine here
 
   searchResults?.addEventListener("click", (e) => {
     const link = e.target.closest(".search-item-link");
@@ -132,5 +139,6 @@ document.addEventListener("DOMContentLoaded", () => {
     hideSearch();
   });
 });
+
 
 
