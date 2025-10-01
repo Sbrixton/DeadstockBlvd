@@ -73,11 +73,14 @@
       
       <div class="product-gallery">
         <div class="slider">
+          
           <i class="fas fa-chevron-left nav-arrow" id="prevSlide"></i>
-          <img id="mainImage" src="Nike Shox TL Orange-Black (3).png" alt="Product Image" class="main-img" />
+          <div class="main-img-wrapper">
+            <img id="mainImage" src="Nike Shox TL Orange-Black (3).png" alt="Product Image" class="main-img" />
+          </div>
           <i class="fas fa-chevron-right nav-arrow" id="nextSlide"></i>
-
-          <div class="mobile-dots"></div>
+          
+          <div class="mobile-dots"></div> 
         </div>
         <div class="thumbnails">
           <img src="Nike Shox TL Orange-Black (3).png" class="thumb" />
@@ -89,16 +92,19 @@
       </div>
 
       <div class="product-info">
-        <h5>
-          Nike x The Grateful Dead
-        </h5>
         <h4>
-          Nike SB Dunk Low Grateful Dead Bears – Orange
+          Nike Shox TL Orange-Black
         </h4>
         
-        <p class="price">
-          £86
-        </p>
+        <p class="price" id="convertedPrice">£50.00</p> <!-- use GBP by default -->
+        <div id="currencySpinner" class="currency-spinner" style="display: none;"></div>
+
+        <label for="currencySelector">View price in:</label>
+        <select id="currencySelector">
+          <option value="GBP" selected>GBP (£)</option>
+          <option value="USD">USD ($)</option>
+          <option value="EUR">EUR (€)</option>
+        </select>
         
         <p class="description">
           Size: US10/EUR44/UK43
@@ -113,9 +119,9 @@
         <button
           id="addToCartBtn"
           class="add-to-cart"
-          data-id="1"
-          data-name="Graphic Hoodie"
-          data-price="600"
+          data-id="8"
+          data-name="Nike Shox TL Orange-Black"
+          data-price="50"
           data-image="Nike Shox TL Orange-Black (5).png">
           Add to Cart 🛒
         </button>
@@ -129,9 +135,9 @@
           <input type="hidden" name="notify_url" value="https://deadstockblvd.wuaze.com/basic%20notify.php" />
           
           <input type="hidden" name="m_payment_id" value="1234" />
-          <input type="hidden" name="amount" id="pfAmount" value="600.00" />
+          <input type="hidden" name="amount" id="pfAmount" value="50.00" />
           <input type="hidden" name="currency" value="ZAR" />
-          <input type="hidden" name="item_name" id="pfItemName" value="Graphic Hoodie" />
+          <input type="hidden" name="item_name" id="pfItemName" value="Nike Shox TL Orange-Black" />
           
           <button type="submit" class="payfast-btn">Pay with PayFast (Demo)</button>
         </form>
@@ -193,7 +199,6 @@
                   <img src="Nike X PSG Tech Fleece Zip-Up (4).png" alt="Hover Image" class="hover-img" />        
                 </div>
                 <div class="des">
-                  <span>Vintage</span>
                   <h5>Nike X PSG Tech Fleece</h5>
                   <h4>R780.00</h4>
                 </div>
@@ -215,7 +220,6 @@
                   <img src="Nike Shox TL Orange-Black (4).png" alt="Hover Image" class="hover-img" />
                 </div>
                 <div class="des">
-                  <span>Vintage</span>
                   <h5>Nike Shox TL Orange-Black</h5>
                   <h4>R780.00</h4>
                 </div>
@@ -245,19 +249,19 @@
       </div>
   </footer>
   
-    <!-- Mobile Slide-in Cart Drawer -->
+  <!-- Mobile Slide-in Cart Drawer -->
   <div id="mobileCartDrawer">
-    <div id="mobileCartHeader">
-      <h3>Your Cart</h3>
-      <button id="closeCartDrawer">&times;</button>
-    </div>
-    <div id="mobileCartItems"></div>
-    <div id="mobileCartFooter">
-      <div class="footer-totals">
-        <p>Subtotal: <span id="drawerCartSubtotal">R0.00</span></p>
+      <div id="mobileCartHeader">
+          <h3>Your Cart</h3>
+          <button id="closeCartDrawer">&times;</button>
       </div>
-      <button id="drawerCheckoutBtn" class="checkout-bar">Checkout</button>
-    </div>
+      <div id="mobileCartItems"></div>
+      <div id="mobileCartFooter">
+          <div class="footer-totals">
+              <p>Subtotal: <span id="drawerCartSubtotal">0.00</span></p>
+          </div>
+          <button id="drawerCheckoutBtn" class="checkout-bar">Checkout</button>
+      </div>
   </div>
 
     <!-- Modal -->
@@ -282,11 +286,16 @@
   </div>
   <script>
     window.addEventListener("load", () => {
-    const preloader = document.getElementById("preloader");
-    preloader.style.opacity = "0";
-    setTimeout(() => {
-    preloader.style.display = "none";
-      }, 500);
+      const preloader = document.getElementById("preloader");
+      if (!preloader) return;
+        
+      // Short delay to make sure images render properly
+      setTimeout(() => {
+        preloader.style.opacity = "0";
+        setTimeout(() => {
+          preloader.style.display = "none";
+        }, 500); // fade out transition
+      }, 300); // only wait 300ms after load
     });
   </script>
   
@@ -335,9 +344,38 @@
       }
     });
   </script>
-  
+
+  <!-- ✅ Add this at the bottom, before </body> -->
+  <script type="module">
+    import {
+      setCurrency,
+      getCurrency,
+      formatPrice
+    } from './currency.js';
+    
+    document.addEventListener('DOMContentLoaded', async () => {
+      const basePriceGBP = 86; // or dynamically fetch from data attribute
+      const priceEl = document.getElementById("convertedPrice");
+      const selector = document.getElementById("currencySelector");
+      
+      async function updatePriceDisplay() {
+        priceEl.innerHTML = await formatPrice(basePriceGBP);
+      }
+      
+      selector.value = getCurrency();
+      selector.addEventListener('change', async (e) => {
+        setCurrency(e.target.value);
+        await updatePriceDisplay();
+      });
+      
+      await updatePriceDisplay();
+    });
+  </script>
+
   <script type="module" src="search.js"></script>
   <script type="module" src="product.js"></script>
   <script type="module" src="cart.js"></script>
+  <script type="module" src="currency.js"></script>
+  <script type="module" src="currency-init.js"></script>
 </body>
 </html>
