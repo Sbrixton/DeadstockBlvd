@@ -402,7 +402,8 @@
     } from './currency.js';
     
     document.addEventListener('DOMContentLoaded', async () => {
-      const basePriceGBP = 86; // or dynamically fetch from data attribute
+      const addToCartBtn = document.getElementById("addToCartBtn");
+      const basePriceGBP = parseFloat(addToCartBtn?.dataset.price || 0);
       const priceEl = document.getElementById("convertedPrice");
       const selector = document.getElementById("currencySelector");
       
