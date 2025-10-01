@@ -12,6 +12,8 @@
     <script type="module" src="data.js"></script>
     <script type="module" src="script.js" defer></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"/>
+    <script type="module" src="currency.js"></script>
+    <script type="module" src="currency-init.js"></script>
 </head>
     
 <body>
@@ -93,7 +95,7 @@
                     </div>
                     <div class="des">
                       <h5>Nike SB Dunk</h5>
-                      <h4>R600.00</h4>
+                      <h4 class="converted-price" data-gbp="86">£86.00</h4>
                     </div>
                 </a>
                 
@@ -101,7 +103,7 @@
                 <button 
                     class="add-to-cart-btn"
                     data-name="Nike SB Dunk"
-                    data-price="600"
+                    data-price="86"
                     data-image="Nike SB Dunk Orange Grateful Dead (1).png"
                     data-id="1">
                     <img src="shopping_16438481.png" alt="Add to cart" class="btn-icon" style="height: 30px" />
@@ -115,18 +117,16 @@
                         <img src="Nike x CRTZ  (3).png" alt="Hover" class="hover-img" />
                     </div>
                     <div class="des">
-                        <span>Vintage</span>
                         <h5>Nike x Corteiz Air Max 95</h5>
-                        <h4>R750.00</h4>
+                        <h4 class="converted-price" data-gbp="98">£98.00</h4>
                     </div>
                 </a>
                 <button 
                     class="add-to-cart-btn"
                     data-name="Nike x Corteiz Air Max 95"
-                    data-price="750"
+                    data-price="98"
                     data-image="Nike x CRTZ  (3).png"
-                    data-id="2"
-                >
+                    data-id="2">
                     <img src="shopping_16438481.png" alt="Add to cart" class="btn-icon" style="height: 30px" />
                 </button>
             </div>
@@ -138,18 +138,16 @@
                         <img src="Nike Hoodie (4).png" alt="Hover" class="hover-img" />
                     </div>
                     <div class="des">
-                        <span>Vintage</span>
                         <h5>Nike Hoodie </h5>
-                        <h4>R500.00</h4>
+                        <h4 class="converted-price" data-gbp="25">£25.00</h4>
                     </div>
                 </a>
                 <button 
                     class="add-to-cart-btn"
-                    data-name="Nike Sweater"
-                    data-price="500"
+                    data-name="Nike Hoodie"
+                    data-price="25"
                     data-image="Nike Hoodie (1).png"
-                    data-id="3"
-                >
+                    data-id="3">
                     <img src="shopping_16438481.png" alt="Add to cart" class="btn-icon" style="height: 30px" />
                 </button>
             </div>
@@ -161,20 +159,19 @@
                         <img src="Balenciaga Track Pants (4).png" alt="Hover" class="hover-img" />
                     </div>
                     <div class="des">
-                        <span>Vintage</span>
                         <h5>Balenciaga Track Pants</h5>
-                        <h4>R780.00</h4>
+                        <h4 class="converted-price" data-gbp="96">£96.00</h4>
                     </div>
                 </a>
                 <button 
                     class="add-to-cart-btn"
                     data-name="Balenciage Track Pants"
-                    data-price="780"
+                    data-price="96"
                     data-image="Balenciaga Track Pants (2).png"
-                    data-id="4"
-                >
+                    data-id="4">
                     <img src="shopping_16438481.png" alt="Add to cart" class="btn-icon" style="height: 30px" />
                 </button>
+
             </div>
         </div>
     </section>
@@ -194,39 +191,76 @@
             <h3>Your Cart</h3>
             <button id="closeCartDrawer">&times;</button>
         </div>
-        <div id="mobileCartItems">
-            <!-- ✅ Empty cart message placeholder -->
-            <div class="empty-cart-message" style="display: none;">
-              <p>Your cart is empty.</p>
-              <button id="drawerProceedBtn" class="proceed-to-shop-btn">Proceed to Shop</button>
-            </div>
-            
-            <!-- ✅ Cart items will be injected here -->
-        </div>
+        <div id="mobileCartItems"></div>
         <div id="mobileCartFooter">
             <div class="footer-totals">
-                <p>Subtotal: <span id="drawerCartSubtotal">R0.00</span></p>
+                <p>Subtotal: <span id="drawerCartSubtotal">0.00</span></p>
             </div>
             <button id="drawerCheckoutBtn" class="checkout-bar">Checkout</button>
         </div>
     </div>
 
     <script>
-        window.addEventListener("load", () => {
-            const preloader = document.getElementById("preloader");
-            preloader.style.opacity = "0";
-            setTimeout(() => {
-                preloader.style.display = "none";
-            }, 500);
-        });
+      window.addEventListener("load", () => {
+        const preloader = document.getElementById("preloader");
+        if (!preloader) return;
+        
+        // Short delay to make sure images render properly
+        setTimeout(() => {
+          preloader.style.opacity = "0";
+          setTimeout(() => {
+            preloader.style.display = "none";
+          }, 500); // fade out transition
+        }, 300); // only wait 300ms after load
+      });
     </script>
-    
+
+    <script type="module">
+      import { formatPrice, getCurrency, setCurrency } from './currency.js';
+        
+      document.addEventListener('DOMContentLoaded', async () => {
+        const priceEls = document.querySelectorAll('.converted-price');
+        
+        for (let el of priceEls) {
+          const gbp = parseFloat(el.dataset.gbp);
+          el.innerText = await formatPrice(gbp);
+        }
+      });
+    </script>
+
+      <script type="module">
+        import {
+          setCurrency,
+          getCurrency,
+          formatPrice
+        } from './currency.js';
+        
+        document.addEventListener('DOMContentLoaded', async () => {
+          const basePriceGBP = 86; // or dynamically fetch from data attribute
+          const priceEl = document.getElementById("convertedPrice");
+          const selector = document.getElementById("currencySelector");
+          
+          async function updatePriceDisplay() {
+            priceEl.innerHTML = await formatPrice(basePriceGBP);
+          }
+          
+          selector.value = getCurrency();
+          selector.addEventListener('change', async (e) => {
+            setCurrency(e.target.value);
+            await updatePriceDisplay();
+          });
+          
+          await updatePriceDisplay();
+        });
+      </script>
+        
     <script type="module" src="cart-utils.js"></script>
     <script type="module" src="product.js"></script>
     <script type="module" src="cart.js"></script> 
     <script type="module" src="search.js"></script>
 </body>
 </html>
+
 
 
 
