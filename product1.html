@@ -419,7 +419,20 @@
       await updatePriceDisplay();
     });
   </script>
-  
+
+  <script type="module">
+    import { formatPrice, getCurrency, setCurrency } from './currency.js';
+        
+    document.addEventListener('DOMContentLoaded', async () => {
+      const priceEls = document.querySelectorAll('.converted-price');
+        
+      for (let el of priceEls) {
+        const gbp = parseFloat(el.dataset.gbp);
+        el.innerText = await formatPrice(gbp);
+      }
+    });
+  </script>
+
   <script type="module" src="search.js"></script>
   <script type="module" src="product.js"></script>
   <script type="module" src="cart.js"></script>
