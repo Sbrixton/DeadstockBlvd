@@ -150,7 +150,7 @@
           <input type="hidden" name="m_payment_id" value="1234" />
           <input type="hidden" name="amount" id="pfAmount" value="86.00" />
           <input type="hidden" name="currency" value="ZAR" />
-          <input type="hidden" name="item_name" id="pfItemName" value="Graphic Hoodie" />
+          <input type="hidden" name="item_name" id="pfItemName" value="Nike SB Dunk Low Grateful Dead Bears" />
           
           <button type="submit" class="payfast-btn">Pay with PayFast (Demo)</button>
         </form>
@@ -215,7 +215,6 @@
                   <img src="Nike X PSG Tech Fleece Zip-Up (4).png" alt="Hover Image" class="hover-img" />        
                 </div>
                 <div class="des">
-                  <span>Vintage</span>
                   <h5>Nike X PSG Tech Fleece</h5>
                   <h4>R780.00</h4>
                 </div>
@@ -300,17 +299,17 @@
   
     <!-- Mobile Slide-in Cart Drawer -->
   <div id="mobileCartDrawer">
-    <div id="mobileCartHeader">
-      <h3>Your Cart</h3>
-      <button id="closeCartDrawer">&times;</button>
-    </div>
-    <div id="mobileCartItems"></div>
-    <div id="mobileCartFooter">
-      <div class="footer-totals">
-        <p>Subtotal: <span id="drawerCartSubtotal">R0.00</span></p>
+      <div id="mobileCartHeader">
+          <h3>Your Cart</h3>
+          <button id="closeCartDrawer">&times;</button>
       </div>
-      <button id="drawerCheckoutBtn" class="checkout-bar">Checkout</button>
-    </div>
+      <div id="mobileCartItems"></div>
+      <div id="mobileCartFooter">
+          <div class="footer-totals">
+              <p>Subtotal: <span id="drawerCartSubtotal">0.00</span></p>
+          </div>
+          <button id="drawerCheckoutBtn" class="checkout-bar">Checkout</button>
+      </div>
   </div>
 
   <!-- Modal -->
@@ -335,12 +334,17 @@
   </div>
   <script>
     window.addEventListener("load", () => {
-    const preloader = document.getElementById("preloader");
-    preloader.style.opacity = "0";
-    setTimeout(() => {
-      preloader.style.display = "none";
-    }, 500);
-  });
+      const preloader = document.getElementById("preloader");
+      if (!preloader) return;
+        
+      // Short delay to make sure images render properly
+      setTimeout(() => {
+        preloader.style.opacity = "0";
+        setTimeout(() => {
+          preloader.style.display = "none";
+        }, 500); // fade out transition
+      }, 300); // only wait 300ms after load
+    });
   </script>
   
   <script>
