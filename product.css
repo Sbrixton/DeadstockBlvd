@@ -183,6 +183,27 @@ main.product-page {
   margin-bottom: 20px;
 }
 
+footer.section-p1 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background: #eee;
+  padding: 40px 20px;
+  text-align: center;
+}
+
+footer img {
+  max-width: 120px;
+  height: auto;
+  margin-bottom: 10px;
+}
+
+footer .col {
+  width: 100%;
+  margin: 10px 0;
+}
+
 /* ========== 4 per row + 4 visible (1025px and up) ========== */
 @media (min-width: 1025px) {
   .recommendations-grid {
@@ -957,17 +978,6 @@ footer img {
     height: 500px;
   }
   
-  #paypal-button-container {
-    width: 100%;
-    max-width: 400px;
-    margin: 20px auto;
-    text-align: center;
-  }
-  
-  #paypal-button-container .paypal-button {
-    width: 100%;
-  }
-  
   .thumbnails {
     display: none;
   }
@@ -1012,6 +1022,36 @@ footer img {
   
   footer .col h4 {
     margin-bottom: 8px;
+  }
+  .success-wrapper {
+    margin: 2rem 1rem;
+    padding: 1.5rem;
+    text-align: center;
+  }
+
+  .checkmark-circle {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 1.5rem;
+  }
+
+  .checkmark {
+    font-size: 40px;
+  }
+
+  .thank-you {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+  }
+
+  .order-received {
+    font-size: 1rem;
+    margin-bottom: 20px;
+  }
+
+  .return-home {
+    font-size: 14px;
+    padding: 10px 20px;
   }
 }
 
