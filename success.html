@@ -12,7 +12,8 @@
   <script src="data.js"></script>
   <script type="module" src="script.js" defer></script>
 </head>
-<body>
+<body class="sticky-footer" >
+  <div class="page-wrapper">
     <header class="navbar">
       <div class="nav-left">
         <a href="index.html" class="logo">
@@ -67,7 +68,7 @@
         <a href="index.html" class="return-home">Return Home</a>
       </div>
     </main>
-  
+    
     <footer class="section-p1">
         <div class="col">
             <p>Secured Payment Gateways</p>
@@ -93,92 +94,93 @@
             <button id="drawerCheckoutBtn" class="checkout-bar">Checkout</button>
         </div>
     </div>
-
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const addToCartBtn = document.getElementById('addToCartBtn');
-      const pfAmount = document.getElementById('pfAmount');
-      const pfItemName = document.getElementById('pfItemName');
-      
-      if (addToCartBtn && pfAmount && pfItemName) {
-        // Get product price & name from Add to Cart button data attributes
-        const price = addToCartBtn.getAttribute('data-price');
-        const name = addToCartBtn.getAttribute('data-name');
-        
-        // Format price to two decimals (e.g., "35.00")
-        const formattedPrice = parseFloat(price).toFixed(2);
-      
-        // Update PayFast form hidden inputs
-        pfAmount.value = formattedPrice;
-        pfItemName.value = name;
-      }
-    });
-  </script>
-  
-  <!-- ✅ Add this at the bottom, before </body> -->
-  <script type="module">
-    import {
-      setCurrency,
-      getCurrency,
-      formatPrice
-    } from './currency.js';
     
-    document.addEventListener('DOMContentLoaded', async () => {
-      const basePriceGBP = 86; // or dynamically fetch from data attribute
-      const priceEl = document.getElementById("convertedPrice");
-      const selector = document.getElementById("currencySelector");
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const addToCartBtn = document.getElementById('addToCartBtn');
+        const pfAmount = document.getElementById('pfAmount');
+        const pfItemName = document.getElementById('pfItemName');
+        
+        if (addToCartBtn && pfAmount && pfItemName) {
+          // Get product price & name from Add to Cart button data attributes
+          const price = addToCartBtn.getAttribute('data-price');
+          const name = addToCartBtn.getAttribute('data-name');
+        
+          // Format price to two decimals (e.g., "35.00")
+          const formattedPrice = parseFloat(price).toFixed(2);
+          
+          // Update PayFast form hidden inputs
+          pfAmount.value = formattedPrice;
+          pfItemName.value = name;
+        }
+      });
+    </script>
+    
+    <!-- ✅ Add this at the bottom, before </body> -->
+    <script type="module">
+      import {
+        setCurrency,
+        getCurrency,
+        formatPrice
+      } from './currency.js';
       
-      async function updatePriceDisplay() {
-        priceEl.innerHTML = await formatPrice(basePriceGBP);
-      }
-      
-      selector.value = getCurrency();
-      selector.addEventListener('change', async (e) => {
-        setCurrency(e.target.value);
+      document.addEventListener('DOMContentLoaded', async () => {
+        const basePriceGBP = 86; // or dynamically fetch from data attribute
+        const priceEl = document.getElementById("convertedPrice");
+        const selector = document.getElementById("currencySelector");
+        
+        async function updatePriceDisplay() {
+          priceEl.innerHTML = await formatPrice(basePriceGBP);
+        }
+        
+        selector.value = getCurrency();
+        selector.addEventListener('change', async (e) => {
+          setCurrency(e.target.value);
+          await updatePriceDisplay();
+        });
+        
         await updatePriceDisplay();
       });
-      
-      await updatePriceDisplay();
-    });
-  </script>
-
-  <script type="module">
-    import { formatPrice, getCurrency, setCurrency } from './currency.js';
+    </script>
+    
+    <script type="module">
+      import { formatPrice, getCurrency, setCurrency } from './currency.js';
         
-    document.addEventListener('DOMContentLoaded', async () => {
-      const priceEls = document.querySelectorAll('.converted-price');
+      document.addEventListener('DOMContentLoaded', async () => {
+        const priceEls = document.querySelectorAll('.converted-price');
         
-      for (let el of priceEls) {
-        const gbp = parseFloat(el.dataset.gbp);
-        el.innerText = await formatPrice(gbp);
+        for (let el of priceEls) {
+          const gbp = parseFloat(el.dataset.gbp);
+          el.innerText = await formatPrice(gbp);
+        }
+      });
+    </script>
+    
+    <style>
+      /* === Full height layout to push footer down === */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
       }
-    });
-  </script>
-
-  <style>
-    /* === Full height layout to push footer down === */
-    html, body {
-      height: 100%;
-      margin: 0;
-      padding: 0;
-    }
+      
+      .page-wrapper {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh; /* full viewport height */
+      }
+      
+      main.success-wrapper {
+        flex: 1; /* grows to fill space */
+      }
+      
+    </style>
     
-    .page-wrapper {
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh; /* full viewport height */
-    }
-    
-    main.success-wrapper {
-      flex: 1; /* grows to fill space */
-    }
-    
-  </style>
-
-  <script type="module" src="search.js"></script>
-  <script type="module" src="product.js"></script>
-  <script type="module" src="cart.js"></script>
-  <script type="module" src="currency.js"></script>
-  <script type="module" src="currency-init.js"></script>
+    <script type="module" src="search.js"></script>
+    <script type="module" src="product.js"></script>
+    <script type="module" src="cart.js"></script>
+    <script type="module" src="currency.js"></script>
+    <script type="module" src="currency-init.js"></script>
+  </div>
 </body>
 </html>
