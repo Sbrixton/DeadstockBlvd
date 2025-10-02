@@ -8,6 +8,8 @@
   <link rel="stylesheet" href="style.css"> 
   <script type="module" src="cart-utils.js"></script>
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"/>
+  <script src="data.js"></script>
+  <script type="module" src="script.js" defer></script>
 </head>
 <body>
     <!-- ========== NAVBAR ========== -->
@@ -28,10 +30,10 @@
       </div>
       <div class="nav-right">
         <button id="searchIcon">
-          <i class="fas fa-search"></i>
+          <img src="SearchIcon.png" alt="Search" class="search-icon" style="height: 30px" />
         </button>
         <div id="cartIcon" class="cart-wrapper" role="button" tabindex="0">
-          <i class="fas fa-shopping-cart"></i>
+          <img src="CartIcon.png" alt="Cart" class="cart-icon" style="height: 30px" />
           <span id="cart-count">0</span>
         </div>
       </div>
@@ -41,30 +43,33 @@
       <div class="loader">Loading...</div>
     </div>
     
-    <!-- ✅ Search Bar Container (below navbar) -->
+    <!-- ✅ Search Bar Container (works for all screen sizes) -->
     <div id="searchBarContainer">
+      <!-- 🔍 Input field with clear button -->
       <div class="search-input-wrapper">
         <input
           type="text"
           id="searchInput"
           placeholder="Search products..."
-          autocomplete="off"
-        />
+          autocomplete="off"/>
         <button id="clearSearch" aria-label="Clear Search">&times;</button>
       </div>
+      
+      <!-- ✅ Scrollable area for suggestions + results -->
+      <div id="searchScrollableArea">
+        <!-- 🔽 Suggestions (autocomplete-style) -->
+        <ul id="searchSuggestions" class="search-suggestions"></ul>
         
-        <!-- ✅ Shared scroll wrapper for both -->
-        <div id="searchScrollableArea">
-            <ul id="searchSuggestions" class="search-suggestions"></ul>
-            
-            <div id="searchResultsWrapper">
-                <p id="noResultsMessage" style="display: none;">No products found.</p>
-                <div id="searchResults"></div>
-            </div>
+        <!-- 🔍 Search Results -->
+        <div id="searchResultsWrapper">
+          <p id="noResultsMessage" style="display: none;">No products found.</p>
+          <div id="searchResults">
+          </div>
         </div>
+      </div>
     </div>
     
-    <!-- ✅ Search overlay now OUTSIDE the container -->
+    <!-- ✅ Optional: Dimmed overlay (used when input is active) -->
     <div id="searchOverlay"></div>
     
     <!-- ========== MAIN CONTACT CONTENT (placeholder) ========== -->
@@ -118,30 +123,35 @@
       </div>
     </footer>
     
-    <!-- ========== CART DRAWER (Mobile/Desktop) ========== -->
-    <div id="mobileCartDrawer">
+    <!-- Mobile Slide-in Cart Drawer -->
+  <div id="mobileCartDrawer">
       <div id="mobileCartHeader">
-        <h3>Your Cart</h3>
-        <button id="closeCartDrawer">&times;</button>
+          <h3>Your Cart</h3>
+          <button id="closeCartDrawer">&times;</button>
       </div>
       <div id="mobileCartItems"></div>
       <div id="mobileCartFooter">
-        <div class="footer-totals">
-          <p>Subtotal: <span id="drawerCartSubtotal">R0.00</span></p>
-        </div>
-        <button id="drawerCheckoutBtn" class="checkout-bar">Checkout</button>
+          <div class="footer-totals">
+              <p>Subtotal: <span id="drawerCartSubtotal">0.00</span></p>
+          </div>
+          <button id="drawerCheckoutBtn" class="checkout-bar">Checkout</button>
       </div>
-    </div>
+  </div>
 
-    <script>
-      window.addEventListener("load", () => {
-        const preloader = document.getElementById("preloader");
+  <script>
+    window.addEventListener("load", () => {
+      const preloader = document.getElementById("preloader");
+      if (!preloader) return;
+        
+      // Short delay to make sure images render properly
+      setTimeout(() => {
         preloader.style.opacity = "0";
         setTimeout(() => {
           preloader.style.display = "none";
-        }, 500);
-      });
-    </script>
+        }, 500); // fade out transition
+      }, 300); // only wait 300ms after load
+    });
+  </script>
         
     <script>
       const form = document.getElementById('contactForm');
@@ -189,11 +199,113 @@
         }
       });
     </script>
-
     
+    <script>
+      window.addEventListener("load", () => {
+        const preloader = document.getElementById("preloader");
+        if (!preloader) return;
+        
+        // Short delay to make sure images render properly
+        setTimeout(() => {
+          preloader.style.opacity = "0";
+          setTimeout(() => {
+            preloader.style.display = "none";
+          }, 500); // fade out transition
+        }, 300); // only wait 300ms after load
+      });
+    </script>
+    
+    <script>
+      const readMoreLinks = document.querySelectorAll('.read-more');
+      const overlay = document.getElementById('modalOverlay');
+      const closeBtn = document.getElementById('closeBtn');
+      
+      // Open modal for any .read-more clicked
+      readMoreLinks.forEach(link => {
+        link.addEventListener('click', () => {
+          overlay.style.display = 'flex';
+        });
+      });
+      
+      // Close when clicking outside the popup
+      overlay.addEventListener('click', (e) => {
+        if (e.target === overlay) {
+          overlay.style.display = 'none';
+        }
+      });
+      
+      // Close when clicking the X
+      closeBtn.addEventListener('click', () => {
+        overlay.style.display = 'none';
+      });
+    </script>
+    
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const addToCartBtn = document.getElementById('addToCartBtn');
+        const pfAmount = document.getElementById('pfAmount');
+        const pfItemName = document.getElementById('pfItemName');
+        
+        if (addToCartBtn && pfAmount && pfItemName) {
+          // Get product price & name from Add to Cart button data attributes
+          const price = addToCartBtn.getAttribute('data-price');
+          const name = addToCartBtn.getAttribute('data-name');
+          
+          // Format price to two decimals (e.g., "35.00")
+          const formattedPrice = parseFloat(price).toFixed(2);
+          
+          // Update PayFast form hidden inputs
+          pfAmount.value = formattedPrice;
+          pfItemName.value = name;
+        }
+      });
+    </script>
+    
+    <!-- ✅ Add this at the bottom, before </body> -->
+    <script type="module">
+      import {
+        setCurrency,
+        getCurrency,
+        formatPrice
+      } from './currency.js';
+    
+      document.addEventListener('DOMContentLoaded', async () => {
+        const addToCartBtn = document.getElementById("addToCartBtn");
+        const basePriceGBP = parseFloat(addToCartBtn?.dataset.price || 0);
+        const priceEl = document.getElementById("convertedPrice");
+        const selector = document.getElementById("currencySelector");
+        
+        async function updatePriceDisplay() {
+          priceEl.innerHTML = await formatPrice(basePriceGBP);
+        }
+        
+        selector.value = getCurrency();
+        selector.addEventListener('change', async (e) => {
+          setCurrency(e.target.value);
+          await updatePriceDisplay();
+        });
+        
+        await updatePriceDisplay();
+      });
+    </script>
+    
+    <script type="module">
+      import { formatPrice, getCurrency, setCurrency } from './currency.js';
+          
+      document.addEventListener('DOMContentLoaded', async () => {
+        const priceEls = document.querySelectorAll('.converted-price');
+          
+        for (let el of priceEls) {
+          const gbp = parseFloat(el.dataset.gbp);
+          el.innerText = await formatPrice(gbp);
+        }
+      });
+    </script>
     <!-- ========== SCRIPTS ========== -->
     <script type="module" src="navbar.js"></script>
     <script type="module" src="search.js"></script>
     <script type="module" src="cart.js"></script>
+    <script type="module" src="currency.js"></script>
+    <script type="module" src="currency-init.js"></script>
 </body>
 </html>
