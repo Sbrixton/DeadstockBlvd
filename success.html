@@ -41,43 +41,35 @@
       </div>
     </header>
     
-    <!-- ✅ Search Bar Container (below navbar) -->
-    <div id="searchBarContainer">
-      <div class="search-input-wrapper">
-        <input
-          type="text"
-          id="searchInput"
-          placeholder="Search products..."
-          autocomplete="off"
-        />
-        <button id="clearSearch" aria-label="Clear Search">&times;</button>
-      </div>
-        
-        <!-- ✅ Shared scroll wrapper for both -->
-        <div id="searchScrollableArea">
-            <ul id="searchSuggestions" class="search-suggestions"></ul>
-            
-            <div id="searchResultsWrapper">
-                <p id="noResultsMessage" style="display: none;">No products found.</p>
-                <div id="searchResults"></div>
-            </div>
+      <!-- ✅ Search Bar -->
+      <div id="searchBarContainer">
+        <div class="search-input-wrapper">
+          <input type="text" id="searchInput" placeholder="Search products..." autocomplete="off" />
+          <button id="clearSearch" aria-label="Clear Search">&times;</button>
         </div>
-    </div>
-    
-    <!-- ✅ Search overlay now OUTSIDE the container -->
-    <div id="searchOverlay"></div>
-    
-    <div class="success-wrapper">
-      <div class="checkmark-circle">
-        <span class="checkmark">&#10003;</span>
+        <div id="searchScrollableArea">
+          <ul id="searchSuggestions" class="search-suggestions"></ul>
+          <div id="searchResultsWrapper">
+            <p id="noResultsMessage" style="display: none;">No products found.</p>
+            <div id="searchResults"></div>
+          </div>
+        </div>
       </div>
-      <div class="thank-you">Thank you!</div>
-      <div class="order-received">Your order has been received.</div>
-      <a href="index.html" class="return-home">Return Home</a>
-    </div>
-    
+    <div id="searchOverlay"></div>
+      <!-- ✅ Main Content -->
+    <main class="section-p1">
+      <div class="success-wrapper">
+        <div class="checkmark-circle">
+          <span class="checkmark">&#10003;</span>
+        </div>
+        <div class="thank-you">Thank you!</div>
+        <div class="order-received">Your order has been received.</div>
+        <a href="index.html" class="return-home">Return Home</a>
+      </div>
+    </main>
+  
     <footer class="section-p1">
-        <div class="col install">
+        <div class="col">
             <p>Secured Payment Gateways</p>
             <img src="payments.png" alt="">
         </div>
