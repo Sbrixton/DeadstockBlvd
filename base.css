@@ -8,7 +8,8 @@ html, body {
 .page-wrapper {
   display: flex;
   flex-direction: column;
-  flex-grow: 1;
+  flex-grow: 1; /* Take up available space */
+  min-height: 0; /* prevent overflow issues */
 }
 
 .page-wrapper main {
@@ -442,17 +443,6 @@ nav a.active::after {
   font-size: 1rem;
   cursor: pointer;
   margin-top: 8px;
-}
-
-/* ========== PAYPAL BUTTON ========== */
-#paypal-button-container {
-  width: 100%;
-  max-width: 400px;
-  margin: 20px 0;
-}
-
-#paypal-button-container .paypal-button {
-  width: 100%;
 }
 
 .contact-form {
