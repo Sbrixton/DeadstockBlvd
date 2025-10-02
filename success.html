@@ -155,6 +155,26 @@
     });
   </script>
 
+  <style>
+    /* === Full height layout to push footer down === */
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+    
+    .page-wrapper {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh; /* full viewport height */
+    }
+    
+    main.success-wrapper {
+      flex: 1; /* grows to fill space */
+    }
+    
+  </style>
+
   <script type="module" src="search.js"></script>
   <script type="module" src="product.js"></script>
   <script type="module" src="cart.js"></script>
