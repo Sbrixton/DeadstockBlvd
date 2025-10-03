@@ -504,23 +504,30 @@
     const overlay = document.getElementById('modalOverlay');
     const closeBtn = document.getElementById('closeBtn');
     
-    // Open modal for any .read-more clicked
+    // ✅ Open modal and disable background scroll
     readMoreLinks.forEach(link => {
       link.addEventListener('click', () => {
         overlay.style.display = 'flex';
+        document.body.style.overflow = 'hidden'; // prevent background scroll
       });
     });
-  
+    
+    // ✅ Close modal and re-enable scroll
+    function closeModal() {
+      overlay.style.display = 'none';
+      document.body.style.overflow = ''; // re-enable background scroll
+    }
+    
     // Close when clicking outside the popup
     overlay.addEventListener('click', (e) => {
       if (e.target === overlay) {
-        overlay.style.display = 'none';
+        closeModal();
       }
     });
     
     // Close when clicking the X
     closeBtn.addEventListener('click', () => {
-      overlay.style.display = 'none';
+      closeModal();
     });
   </script>
   
