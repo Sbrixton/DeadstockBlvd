@@ -955,6 +955,8 @@ footer.section-p1 {
   max-width: 500px;
   border-radius: 8px;
   position: relative;
+  max-height: 80vh;     /* Limit height to 80% of viewport */
+  overflow-y: auto;     /* Enable scrolling within modal */
 }
 
 .modal-content h3 {
@@ -973,6 +975,13 @@ footer.section-p1 {
 
 .modal .close:hover {
   color: #000;
+}
+
+@media (max-width: 600px) {
+  .modal-content {
+    max-height: 70vh;
+    padding: 20px;
+  }
 }
 
 /* 2 products per row: 350px to 699px */
@@ -1404,6 +1413,7 @@ footer.section-p1 {
     font-weight: bold;
   }
 }
+
 
 
 
