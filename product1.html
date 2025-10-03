@@ -272,27 +272,29 @@
     </div>
   </footer>
   
-  <!-- ✅ Modal Structure (reusable) -->
-  <div id="modal-policy" class="modal">
+  <!-- ✅ Policy Modal -->
+  <div id="modal-policy" class="modal" role="dialog" aria-modal="true" aria-labelledby="policy-title">
     <div class="modal-content">
-      <span class="close">&times;</span>
-      <h3>Policies</h3>
+      <span class="close" role="button" aria-label="Close Modal">&times;</span>
+      <h3 id="policy-title">Policies</h3>
       <p>Your policy content goes here.</p>
     </div>
   </div>
-    
-  <div id="modal-refund" class="modal">
+  
+  <!-- ✅ Refund Policy Modal -->
+  <div id="modal-refund" class="modal" role="dialog" aria-modal="true" aria-labelledby="refund-title">
     <div class="modal-content">
-      <span class="close">&times;</span>
-      <h3>No Refund Policy</h3>
+      <span class="close" role="button" aria-label="Close Modal">&times;</span>
+      <h3 id="refund-title">No Refund Policy</h3>
       <p>No refunds. All sales are final.</p>
     </div>
   </div>
   
-  <div id="modal-terms" class="modal">
+  <!-- ✅ Terms & Conditions Modal -->
+  <div id="modal-terms" class="modal" role="dialog" aria-modal="true" aria-labelledby="terms-title">
     <div class="modal-content">
-      <span class="close">&times;</span>
-      <h3>Terms & Conditions</h3>
+      <span class="close" role="button" aria-label="Close Modal">&times;</span>
+      <h3 id="terms-title">Terms & Conditions</h3>
       <p>By using this site, you agree to...</p>
     </div>
   </div>
@@ -528,6 +530,38 @@
     // Close when clicking the X
     closeBtn.addEventListener('click', () => {
       closeModal();
+    });
+  </script>
+
+  <script>
+    // Get all modal triggers (buttons or links)
+    const modalTriggers = document.querySelectorAll('[data-modal-target]');
+    const modals = document.querySelectorAll('.modal');
+    const closeButtons = document.querySelectorAll('.modal .close');
+    
+    // Open specific modal
+    modalTriggers.forEach(trigger => {
+      trigger.addEventListener('click', () => {
+        const targetId = trigger.getAttribute('data-modal-target');
+        const modal = document.getElementById(targetId);
+        if (modal) modal.style.display = 'flex';
+      });
+    });
+    
+    // Close modal when clicking X
+    closeButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        btn.closest('.modal').style.display = 'none';
+      });
+    });
+    
+    // Close when clicking outside modal content
+    modals.forEach(modal => {
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+          modal.style.display = 'none';
+        }
+      });
     });
   </script>
   
