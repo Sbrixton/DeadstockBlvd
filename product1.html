@@ -502,34 +502,39 @@
   </script>
   
   <script>
-    const readMoreLinks = document.querySelectorAll('.read-more');
-    const overlay = document.getElementById('modalOverlay');
-    const closeBtn = document.getElementById('closeBtn');
+    const modalTriggers = document.querySelectorAll('[data-modal-target]');
+    const modals = document.querySelectorAll('.modal');
+    const closeButtons = document.querySelectorAll('.modal .close');
     
-    // ✅ Open modal and disable background scroll
-    readMoreLinks.forEach(link => {
-      link.addEventListener('click', () => {
-        overlay.style.display = 'flex';
-        document.body.style.overflow = 'hidden'; // prevent background scroll
+    // Open specific modal
+    modalTriggers.forEach(trigger => {
+      trigger.addEventListener('click', () => {
+        const targetId = trigger.getAttribute('data-modal-target');
+        const modal = document.getElementById(targetId);
+        if (modal) {
+          modal.style.display = 'flex';
+          document.body.style.overflow = 'hidden'; // ✅ Prevent background scroll
+        }
       });
     });
     
-    // ✅ Close modal and re-enable scroll
-    function closeModal() {
-      overlay.style.display = 'none';
-      document.body.style.overflow = ''; // re-enable background scroll
-    }
-    
-    // Close when clicking outside the popup
-    overlay.addEventListener('click', (e) => {
-      if (e.target === overlay) {
-        closeModal();
-      }
+    // Close modal when clicking X
+    closeButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const modal = btn.closest('.modal');
+        modal.style.display = 'none';
+        document.body.style.overflow = ''; // ✅ Re-enable background scroll
+      });
     });
     
-    // Close when clicking the X
-    closeBtn.addEventListener('click', () => {
-      closeModal();
+    // Close when clicking outside modal content
+    modals.forEach(modal => {
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+          modal.style.display = 'none';
+          document.body.style.overflow = ''; // ✅ Re-enable background scroll
+        }
+      });
     });
   </script>
 
