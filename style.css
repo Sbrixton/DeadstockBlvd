@@ -815,6 +815,8 @@ nav a.active::after {
   width: 90%;
   box-shadow: 0 0 15px rgba(0,0,0,0.3);
   position: relative;
+  max-height: 90vh;       /* Limit height to screen size */
+  overflow-y: auto;       /* Allow vertical scrolling */
 }
 
 .close-btn {
@@ -1402,6 +1404,7 @@ footer.section-p1 {
     font-weight: bold;
   }
 }
+
 
 
 
