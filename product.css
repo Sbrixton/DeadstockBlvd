@@ -529,6 +529,39 @@ footer .col {
   margin-left: 0; /* Ensure no weird margin */
 }
 
+/* ========== FIX: Spinner Replaces +1 in Qty Button ========== */
+
+/* Common styling for plus buttons */
+.qty-btn.plus {
+  position: relative;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* Hide the +1 text when loading */
+.qty-btn.plus.loading .plus-text {
+  opacity: 0;
+  visibility: hidden;
+}
+
+/* Show spinner over center of button */
+.qty-btn.plus .plus-loader {
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.qty-btn.plus.loading .plus-loader {
+  display: inline-flex;
+}
+
 /* ========== REMOVE HOVER FOR SEARCH ICON ========== */
 .search-info a,
 .search-info a:visited,
