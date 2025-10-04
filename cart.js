@@ -208,8 +208,14 @@ export async function renderMobileDrawer() {
     const itemTotal = item.price * item.quantity;
     subtotal += itemTotal;
 
+    // Create wrapper to hold cart-item and message vertically
+    const wrapper = document.createElement("div");
+    wrapper.className = "cart-item-wrapper";
+
+    // Create cart-item div
     const itemDiv = document.createElement("div");
     itemDiv.className = "cart-item";
+
     itemDiv.innerHTML = `
       <img src="${item.image}" alt="${item.name}" class="cart-img" />
       <div class="cart-details">
@@ -227,10 +233,18 @@ export async function renderMobileDrawer() {
         </div>
       </div>
       <button class="remove-item-mobile" data-id="${item.id}">✕</button>
-      <div class="limit-message" style="display:none;"></div>
     `;
 
-    mobileCartItems.appendChild(itemDiv);
+    // Append itemDiv and messageDiv inside wrapper
+    wrapper.appendChild(itemDiv);
+
+    const messageDiv = document.createElement("div");
+    messageDiv.className = "limit-message";
+    messageDiv.style.display = "none";
+    wrapper.appendChild(messageDiv);
+
+    // Append wrapper to mobileCartItems
+    mobileCartItems.appendChild(wrapper);
 
     formatPrice(item.price).then(formatted => {
       itemDiv.querySelector(".cart-price").textContent = `Price: ${formatted}`;
@@ -241,6 +255,7 @@ export async function renderMobileDrawer() {
     drawerSubtotal.textContent = formatted;
   });
 
+  // Attach event listeners for quantity buttons and remove buttons inside mobile drawer
   mobileCartItems.querySelectorAll('.qty-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       const id = parseInt(btn.dataset.id);
@@ -249,7 +264,7 @@ export async function renderMobileDrawer() {
       if (itemIndex === -1) return;
 
       const itemDiv = btn.closest(".cart-item");
-      const messageDiv = itemDiv.querySelector(".limit-message");
+      const messageDiv = itemDiv.parentElement.querySelector(".limit-message");
       const plusLoader = itemDiv.querySelector(".plus-loader");
 
       if (btn.classList.contains('plus')) {
