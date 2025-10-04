@@ -158,6 +158,7 @@ p {
   margin-top: 6px;
   padding-left: 2px;
   animation: fadeIn 0.3s ease-in-out;
+  margin-left: 70px; /* adjust as needed to align */
   display: block;
 }
 
@@ -175,6 +176,12 @@ p {
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(-2px); }
   to { opacity: 1; transform: translateY(0); }
+}
+
+.cart-item-wrapper {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 16px;
 }
 
 @media (min-width: 481px) and (max-width: 1000px) {
@@ -1444,6 +1451,7 @@ footer.section-p1 {
     font-weight: bold;
   }
 }
+
 
 
 
