@@ -133,20 +133,10 @@ p {
   transition: background 0.2s ease;
 }
 
-.currency-spinner {
-  display: inline-block;
-  width: 16px;
-  height: 16px;
-  border: 2px solid #ccc;
-  border-top: 2px solid #333;
-  border-radius: 50%;
-  animation: spin 0.6s linear infinite;
-  vertical-align: middle;
-}
-
-.mini-loader {
-  border: 2px solid rgba(255, 255, 255, 0.2);   /* light outer border */
-  border-top: 2px solid #ffffff;                /* visible top (spinner) */
+/* Spinner used in +1 loader — renamed to avoid .loader conflicts */
+.plus-spinner {
+  border: 2px solid rgba(0, 0, 0, 0.1); /* Light border */
+  border-top: 2px solid #1890ff;       /* Blue top */
   border-radius: 50%;
   width: 14px;
   height: 14px;
@@ -155,17 +145,31 @@ p {
   vertical-align: middle;
 }
 
+/* Animations */
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
 
+/* Limit message beneath the item */
 .limit-message {
   font-size: 0.8rem;
   color: #ff4d4f;
-  margin-top: 8px;
-  display: block;
+  margin-top: 6px;
+  padding-left: 2px;
   animation: fadeIn 0.3s ease-in-out;
+  display: block;
+}
+
+/* +1 loader container */
+.plus-loader {
+  margin-left: 8px;
+  font-size: 0.75rem;
+  color: #1890ff;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  vertical-align: middle;
 }
 
 @keyframes fadeIn {
@@ -1440,6 +1444,7 @@ footer.section-p1 {
     font-weight: bold;
   }
 }
+
 
 
 
