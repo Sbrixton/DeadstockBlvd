@@ -80,8 +80,8 @@ window.addEventListener("load", () => {
             <button class="qty-btn minus" data-id="${item.id}">-</button>
             <span class="qty-num">${item.quantity}</span>
             <button class="qty-btn plus" data-id="${item.id}">
-              <span class="plus-text">+1</span>
-              <span class="plus-loader" style="display:none;">
+              <span class="plus-text">+</span>
+              <span class="plus-loader">
                 <span class="plus-spinner"></span>
               </span>
             </button>
@@ -141,16 +141,15 @@ window.addEventListener("load", () => {
     if (target.classList.contains("qty-btn")) {
       const itemDiv = target.closest(".cart-item");
       const messageDiv = itemDiv.querySelector(".limit-message");
-      const plusLoader = itemDiv.querySelector(".plus-loader");
 
       if (target.classList.contains("plus")) {
         if (cart[itemIndex].quantity >= 1) {
-          plusLoader.style.display = "inline-flex";
+          target.classList.add("loading");
           messageDiv.textContent = "Only 1 item was added due to availability.";
           messageDiv.style.display = "block";
 
           setTimeout(() => {
-            plusLoader.style.display = "none";
+            target.classList.remove("loading");
             messageDiv.style.display = "none";
           }, 2000);
           return;
@@ -159,7 +158,7 @@ window.addEventListener("load", () => {
       } else if (target.classList.contains("minus")) {
         cart[itemIndex].quantity = Math.max(1, cart[itemIndex].quantity - 1);
         messageDiv.style.display = "none";
-        plusLoader.style.display = "none";
+        target.classList.remove("loading");
       }
 
       saveCart(cart);
@@ -221,8 +220,8 @@ export async function renderMobileDrawer() {
           <button class="qty-btn minus" data-id="${item.id}">−</button>
           <span class="qty-num">${item.quantity}</span>
           <button class="qty-btn plus" data-id="${item.id}">
-            <span class="plus-text">+1</span>
-            <span class="plus-loader" style="display:none;">
+            <span class="plus-text">+</span>
+            <span class="plus-loader">
               <span class="plus-spinner"></span>
             </span>
           </button>
@@ -258,15 +257,14 @@ export async function renderMobileDrawer() {
 
       const itemDiv = btn.closest(".cart-item");
       const messageDiv = itemDiv.parentElement.querySelector(".limit-message");
-      const plusLoader = itemDiv.querySelector(".plus-loader");
 
       if (btn.classList.contains('plus')) {
         if (cart[itemIndex].quantity >= 1) {
-          plusLoader.style.display = "inline-flex";
+          btn.classList.add("loading");
           messageDiv.textContent = "Only 1 item was added due to availability.";
           messageDiv.style.display = "block";
           setTimeout(() => {
-            plusLoader.style.display = "none";
+            btn.classList.remove("loading");
             messageDiv.style.display = "none";
           }, 2000);
           return;
@@ -275,7 +273,7 @@ export async function renderMobileDrawer() {
       } else if (btn.classList.contains('minus')) {
         cart[itemIndex].quantity = Math.max(1, cart[itemIndex].quantity - 1);
         messageDiv.style.display = "none";
-        plusLoader.style.display = "none";
+        btn.classList.remove("loading");
       }
 
       saveCart(cart);
@@ -297,5 +295,4 @@ export async function renderMobileDrawer() {
   updateCartCountInDOM();
   updateDrawerCheckoutState();
 }
-
 
