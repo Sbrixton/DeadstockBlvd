@@ -4,6 +4,8 @@ import {
   updateCartCountInDOM
 } from "./cart-utils.js";
 
+import { convertFromGBP } from "./currency.js"; // ✅ Import currency conversion
+
 document.addEventListener("DOMContentLoaded", () => {
   const addToCartBtn = document.getElementById("addToCartBtn");
 
@@ -114,16 +116,33 @@ document.addEventListener("DOMContentLoaded", () => {
       const swipeDistance = touchEndX - touchStartX;
 
       if (swipeDistance > threshold) {
-        // Swipe right (prev)
         let newIndex = currentIndex - 1;
         if (newIndex < 0) newIndex = thumbnails.length - 1;
         updateMainImage(newIndex);
       } else if (swipeDistance < -threshold) {
-        // Swipe left (next)
         let newIndex = currentIndex + 1;
         if (newIndex >= thumbnails.length) newIndex = 0;
         updateMainImage(newIndex);
       }
     }
   }
+
+  // ✅ PAYFAST AMOUNT CONVERSION (GBP → ZAR)
+  (async () => {
+    const pfAmountInput = document.getElementById("pfAmount");
+    const pfCurrencyInput = document.querySelector('input[name="currency"]');
+
+    if (!pfAmountInput || !pfCurrencyInput) return;
+
+    const basePriceGBP = parseFloat(pfAmountInput.dataset.basePrice); // Get GBP value from data attribute
+
+    try {
+      const amountZAR = await convertFromGBP(basePriceGBP, "ZAR");
+      pfAmountInput.value = amountZAR.toFixed(2);
+      pfCurrencyInput.value = "ZAR";
+    } catch (err) {
+      console.error("[product.js] Failed to convert amount to ZAR:", err);
+    }
+  })();
 });
+
