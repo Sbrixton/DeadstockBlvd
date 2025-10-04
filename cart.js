@@ -9,10 +9,9 @@ import {
   formatPrice
 } from "./currency.js";
 
-// Preload exchange rates
-formatPrice(1);
+// ✅ Preload exchange rates early to speed up formatting later
+formatPrice(1); // Warm-up
 
-// Update checkout button in mobile drawer
 function updateDrawerCheckoutState() {
   const cart = getCart();
   const drawerCheckoutBtn = document.getElementById("drawerCheckoutBtn");
@@ -21,13 +20,16 @@ function updateDrawerCheckoutState() {
 }
 
 window.addEventListener("load", () => {
+  const cart = getCart();
+  const empty = document.getElementById("emptyCart");
+  const section = document.getElementById("cartSection");
   const cartWrapper = document.getElementById("cart-items-wrapper");
   const subEl = document.getElementById("CartSubtotal");
   const totalEl = document.getElementById("Total");
-  const empty = document.getElementById("emptyCart");
-  const section = document.getElementById("cartSection");
   const checkoutBtn = document.getElementById("checkoutBtn");
   const proceedBtn = document.getElementById("proceedBtn");
+
+  const hasDesktopCart = cartWrapper && subEl && totalEl;
 
   const cartIcon = document.getElementById("cartIcon");
   const mobileDrawer = document.getElementById("mobileCartDrawer");
@@ -39,7 +41,9 @@ window.addEventListener("load", () => {
   });
 
   async function render() {
-    const cart = getCart();
+    if (!hasDesktopCart) return;
+
+    let cart = getCart();
     cartWrapper.innerHTML = "";
     let subtotal = 0;
 
@@ -77,41 +81,55 @@ window.addEventListener("load", () => {
           <div class="quantity-controls">
             <button class="qty-btn minus" data-id="${item.id}">-</button>
             <span class="qty-num">${item.quantity}</span>
-            <button class="qty-btn plus" data-id="${item.id}">+</button>
+            <button class="qty-btn plus" data-id="${item.id}">
+              +
+              <span class="plus-loader" style="display:none; margin-left:6px;">
+                <span class="loader" style="border-color: #1890ff transparent transparent transparent;"></span> +1
+              </span>
+            </button>
           </div>
           <p class="cart-total">Total: 0.00</p>
-          <div class="limit-message" style="display: none;"></div>
           <button class="remove-item" data-id="${item.id}">Remove</button>
         </div>
       `;
 
+      // Create the message div BELOW the entire cart item block
+      const messageDiv = document.createElement("div");
+      messageDiv.className = "limit-message";
+      messageDiv.style.display = "none"; // hidden initially
+      itemDiv.appendChild(messageDiv);
+
       cartWrapper.appendChild(itemDiv);
 
-      // Format prices
-      formatPrice(item.price).then(f => {
-        itemDiv.querySelector(".cart-price").textContent = `Price: ${f}`;
+      // Format and update prices
+      formatPrice(item.price).then(formatted => {
+        itemDiv.querySelector(".cart-price").textContent = `Price: ${formatted}`;
       });
 
-      formatPrice(itemTotal).then(f => {
-        itemDiv.querySelector(".cart-total").textContent = `Total: ${f}`;
+      formatPrice(itemTotal).then(formatted => {
+        itemDiv.querySelector(".cart-total").textContent = `Total: ${formatted}`;
       });
     }
 
-    formatPrice(subtotal).then(f => {
-      subEl.textContent = f;
-      totalEl.textContent = f;
+    subEl.textContent = "0.00";
+    totalEl.textContent = "0.00";
+
+    formatPrice(subtotal).then(formatted => {
+      subEl.textContent = formatted;
+      totalEl.textContent = formatted;
     });
 
     updateCartCountInDOM();
     updateDrawerCheckoutState();
   }
 
-  // Cart icon toggle
-  cartIcon?.addEventListener("click", (e) => {
-    e.preventDefault();
-    renderMobileDrawer();
-    mobileDrawer.classList.add("open");
-  });
+  if (cartIcon && mobileDrawer) {
+    cartIcon.addEventListener("click", (e) => {
+      e.preventDefault();
+      renderMobileDrawer();
+      mobileDrawer.classList.add("open");
+    });
+  }
 
   closeCartDrawer?.addEventListener("click", () => {
     mobileDrawer.classList.remove("open");
@@ -123,7 +141,7 @@ window.addEventListener("load", () => {
     window.location.href = "checkout.html";
   });
 
-  document.addEventListener("click", async (e) => {
+  document.addEventListener("click", (e) => {
     const target = e.target;
     const id = parseInt(target.dataset.id);
     if (!id) return;
@@ -132,41 +150,40 @@ window.addEventListener("load", () => {
     const itemIndex = cart.findIndex(i => i.id === id);
     if (itemIndex === -1) return;
 
-    const item = cart[itemIndex];
-    const itemContainer = target.closest(".cart-item");
-    const qtyDisplay = itemContainer.querySelector(".qty-num");
-    const limitMsg = itemContainer.querySelector(".limit-message");
-
     if (target.classList.contains("qty-btn")) {
+      const itemDiv = target.closest(".cart-item");
+      const messageDiv = itemDiv.querySelector(".limit-message");
+      const plusLoader = target.querySelector(".plus-loader");
+
       if (target.classList.contains("plus")) {
-        // Show mini loader
-        const originalHTML = target.innerHTML;
-        target.innerHTML = `<span class="mini-loader"></span>`;
-        target.disabled = true;
-
-        // Simulate delay
-        setTimeout(() => {
-          if (item.quantity >= 1) {
-            // Don't increase quantity
-            limitMsg.textContent = "Only 1 item was added due to availability.";
-            limitMsg.style.display = "block";
-          } else {
-            item.quantity++;
-            limitMsg.style.display = "none";
+        if (cart[itemIndex].quantity >= 1) {
+          // Show loader +1 and message because max is 1 allowed
+          if (plusLoader) {
+            plusLoader.style.display = "inline-flex";
           }
+          messageDiv.textContent = "Only 1 item was added due to availability.";
+          messageDiv.style.display = "block";
 
-          saveCart(cart);
-          render();
-          target.innerHTML = originalHTML;
-          target.disabled = false;
-        }, 1000);
-      }
+          // Hide loader/message after 2 seconds
+          setTimeout(() => {
+            if (plusLoader) {
+              plusLoader.style.display = "none";
+            }
+            messageDiv.style.display = "none";
+          }, 2000);
 
-      if (target.classList.contains("minus")) {
-        item.quantity = Math.max(1, item.quantity - 1);
-        saveCart(cart);
-        render();
+          return; // don't increase quantity beyond 1
+        }
+        cart[itemIndex].quantity += 1;
+      } else if (target.classList.contains("minus")) {
+        cart[itemIndex].quantity = Math.max(1, cart[itemIndex].quantity - 1);
+        // Clear any message when quantity is decreased
+        messageDiv.style.display = "none";
+        const plusLoader = target.closest(".cart-item").querySelector(".plus-loader");
+        if (plusLoader) plusLoader.style.display = "none";
       }
+      saveCart(cart);
+      render();
     }
 
     if (target.classList.contains("remove-item")) {
@@ -179,8 +196,6 @@ window.addEventListener("load", () => {
   render();
 });
 
-
-// ✅ Mobile Drawer Renderer
 export async function renderMobileDrawer() {
   const cart = getCart();
   const mobileCartItems = document.getElementById("mobileCartItems");
@@ -209,6 +224,8 @@ export async function renderMobileDrawer() {
   }
 
   for (const item of cart) {
+    if (!item || typeof item.price !== "number" || typeof item.quantity !== "number") continue;
+
     const itemTotal = item.price * item.quantity;
     subtotal += itemTotal;
 
@@ -222,23 +239,33 @@ export async function renderMobileDrawer() {
         <div class="quantity-controls">
           <button class="qty-btn minus" data-id="${item.id}">−</button>
           <span class="qty-num">${item.quantity}</span>
-          <button class="qty-btn plus" data-id="${item.id}">＋</button>
+          <button class="qty-btn plus" data-id="${item.id}">
+            ＋
+            <span class="plus-loader" style="display:none; margin-left:6px;">
+              <span class="loader" style="border-color: #1890ff transparent transparent transparent;"></span> +1
+            </span>
+          </button>
         </div>
-        <div class="limit-message" style="display: none;"></div>
       </div>
       <button class="remove-item-mobile" data-id="${item.id}">✕</button>
     `;
 
+    // Add message div below cart item
+    const messageDiv = document.createElement("div");
+    messageDiv.className = "limit-message";
+    messageDiv.style.display = "none";
+    itemDiv.appendChild(messageDiv);
+
     mobileCartItems.appendChild(itemDiv);
 
-    // Format price
-    formatPrice(item.price).then(f => {
-      itemDiv.querySelector(".cart-price").textContent = `Price: ${f}`;
+    // Format and update price after render
+    formatPrice(item.price).then(formatted => {
+      itemDiv.querySelector(".cart-price").textContent = `Price: ${formatted}`;
     });
   }
 
-  formatPrice(subtotal).then(f => {
-    drawerSubtotal.textContent = f;
+  formatPrice(subtotal).then(formatted => {
+    drawerSubtotal.textContent = formatted;
   });
 
   // Button events
@@ -246,35 +273,35 @@ export async function renderMobileDrawer() {
     btn.addEventListener('click', () => {
       const id = parseInt(btn.dataset.id);
       let cart = getCart();
-      const prod = cart.find(i => i.id === id);
-      const container = btn.closest(".cart-item");
-      const limitMsg = container.querySelector(".limit-message");
+      const itemIndex = cart.findIndex(i => i.id === id);
+      if (itemIndex === -1) return;
 
-      if (!prod) return;
+      const itemDiv = btn.closest(".cart-item");
+      const messageDiv = itemDiv.querySelector(".limit-message");
+      const plusLoader = btn.querySelector(".plus-loader");
 
       if (btn.classList.contains('plus')) {
-        btn.innerHTML = `<span class="mini-loader"></span>`;
-        btn.disabled = true;
+        if (cart[itemIndex].quantity >= 1) {
+          if (plusLoader) plusLoader.style.display = "inline-flex";
+          messageDiv.textContent = "Only 1 item was added due to availability.";
+          messageDiv.style.display = "block";
 
-        setTimeout(() => {
-          if (prod.quantity >= 1) {
-            limitMsg.textContent = "Only 1 item was added due to availability.";
-            limitMsg.style.display = "block";
-          } else {
-            prod.quantity++;
-            limitMsg.style.display = "none";
-          }
+          setTimeout(() => {
+            if (plusLoader) plusLoader.style.display = "none";
+            messageDiv.style.display = "none";
+          }, 2000);
 
-          saveCart(cart);
-          renderMobileDrawer();
-        }, 1000);
+          return;
+        }
+        cart[itemIndex].quantity++;
+      } else if (btn.classList.contains('minus')) {
+        cart[itemIndex].quantity = Math.max(1, cart[itemIndex].quantity - 1);
+        messageDiv.style.display = "none";
+        if (plusLoader) plusLoader.style.display = "none";
       }
-
-      if (btn.classList.contains('minus')) {
-        prod.quantity = Math.max(1, prod.quantity - 1);
-        saveCart(cart);
-        renderMobileDrawer();
-      }
+      saveCart(cart);
+      updateCartCountInDOM();
+      renderMobileDrawer();
     });
   });
 
@@ -291,6 +318,4 @@ export async function renderMobileDrawer() {
   updateCartCountInDOM();
   updateDrawerCheckoutState();
 }
-
-
 
