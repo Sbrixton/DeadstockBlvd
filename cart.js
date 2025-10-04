@@ -9,9 +9,10 @@ import {
   formatPrice
 } from "./currency.js";
 
-// ✅ Preload exchange rates
+// Preload exchange rates
 formatPrice(1);
 
+// Update checkout button in mobile drawer
 function updateDrawerCheckoutState() {
   const cart = getCart();
   const drawerCheckoutBtn = document.getElementById("drawerCheckoutBtn");
@@ -20,16 +21,13 @@ function updateDrawerCheckoutState() {
 }
 
 window.addEventListener("load", () => {
-  const cart = getCart();
-  const empty = document.getElementById("emptyCart");
-  const section = document.getElementById("cartSection");
   const cartWrapper = document.getElementById("cart-items-wrapper");
   const subEl = document.getElementById("CartSubtotal");
   const totalEl = document.getElementById("Total");
+  const empty = document.getElementById("emptyCart");
+  const section = document.getElementById("cartSection");
   const checkoutBtn = document.getElementById("checkoutBtn");
   const proceedBtn = document.getElementById("proceedBtn");
-
-  const hasDesktopCart = cartWrapper && subEl && totalEl;
 
   const cartIcon = document.getElementById("cartIcon");
   const mobileDrawer = document.getElementById("mobileCartDrawer");
@@ -41,9 +39,7 @@ window.addEventListener("load", () => {
   });
 
   async function render() {
-    if (!hasDesktopCart) return;
-
-    let cart = getCart();
+    const cart = getCart();
     cartWrapper.innerHTML = "";
     let subtotal = 0;
 
@@ -84,6 +80,7 @@ window.addEventListener("load", () => {
             <button class="qty-btn plus" data-id="${item.id}">+</button>
           </div>
           <p class="cart-total">Total: 0.00</p>
+          <div class="limit-message" style="display: none;"></div>
           <button class="remove-item" data-id="${item.id}">Remove</button>
         </div>
       `;
@@ -91,34 +88,30 @@ window.addEventListener("load", () => {
       cartWrapper.appendChild(itemDiv);
 
       // Format prices
-      formatPrice(item.price).then(formatted => {
-        itemDiv.querySelector(".cart-price").textContent = `Price: ${formatted}`;
+      formatPrice(item.price).then(f => {
+        itemDiv.querySelector(".cart-price").textContent = `Price: ${f}`;
       });
 
-      formatPrice(itemTotal).then(formatted => {
-        itemDiv.querySelector(".cart-total").textContent = `Total: ${formatted}`;
+      formatPrice(itemTotal).then(f => {
+        itemDiv.querySelector(".cart-total").textContent = `Total: ${f}`;
       });
     }
 
-    subEl.textContent = "0.00";
-    totalEl.textContent = "0.00";
-
-    formatPrice(subtotal).then(formatted => {
-      subEl.textContent = formatted;
-      totalEl.textContent = formatted;
+    formatPrice(subtotal).then(f => {
+      subEl.textContent = f;
+      totalEl.textContent = f;
     });
 
     updateCartCountInDOM();
     updateDrawerCheckoutState();
   }
 
-  if (cartIcon && mobileDrawer) {
-    cartIcon.addEventListener("click", (e) => {
-      e.preventDefault();
-      renderMobileDrawer();
-      mobileDrawer.classList.add("open");
-    });
-  }
+  // Cart icon toggle
+  cartIcon?.addEventListener("click", (e) => {
+    e.preventDefault();
+    renderMobileDrawer();
+    mobileDrawer.classList.add("open");
+  });
 
   closeCartDrawer?.addEventListener("click", () => {
     mobileDrawer.classList.remove("open");
@@ -130,7 +123,7 @@ window.addEventListener("load", () => {
     window.location.href = "checkout.html";
   });
 
-  document.addEventListener("click", (e) => {
+  document.addEventListener("click", async (e) => {
     const target = e.target;
     const id = parseInt(target.dataset.id);
     if (!id) return;
@@ -139,18 +132,41 @@ window.addEventListener("load", () => {
     const itemIndex = cart.findIndex(i => i.id === id);
     if (itemIndex === -1) return;
 
+    const item = cart[itemIndex];
+    const itemContainer = target.closest(".cart-item");
+    const qtyDisplay = itemContainer.querySelector(".qty-num");
+    const limitMsg = itemContainer.querySelector(".limit-message");
+
     if (target.classList.contains("qty-btn")) {
       if (target.classList.contains("plus")) {
-        if (cart[itemIndex].quantity >= 1) {
-          showLimitFeedback(target);
-          return;
-        }
-        cart[itemIndex].quantity += 1;
-      } else if (target.classList.contains("minus")) {
-        cart[itemIndex].quantity = Math.max(1, cart[itemIndex].quantity - 1);
+        // Show mini loader
+        const originalHTML = target.innerHTML;
+        target.innerHTML = `<span class="mini-loader"></span>`;
+        target.disabled = true;
+
+        // Simulate delay
+        setTimeout(() => {
+          if (item.quantity >= 1) {
+            // Don't increase quantity
+            limitMsg.textContent = "Only 1 item was added due to availability.";
+            limitMsg.style.display = "block";
+          } else {
+            item.quantity++;
+            limitMsg.style.display = "none";
+          }
+
+          saveCart(cart);
+          render();
+          target.innerHTML = originalHTML;
+          target.disabled = false;
+        }, 1000);
       }
-      saveCart(cart);
-      render();
+
+      if (target.classList.contains("minus")) {
+        item.quantity = Math.max(1, item.quantity - 1);
+        saveCart(cart);
+        render();
+      }
     }
 
     if (target.classList.contains("remove-item")) {
@@ -163,12 +179,17 @@ window.addEventListener("load", () => {
   render();
 });
 
+
+// ✅ Mobile Drawer Renderer
 export async function renderMobileDrawer() {
   const cart = getCart();
   const mobileCartItems = document.getElementById("mobileCartItems");
   const drawerSubtotal = document.getElementById("drawerCartSubtotal");
 
-  if (!mobileCartItems || !drawerSubtotal) return;
+  if (!mobileCartItems || !drawerSubtotal) {
+    console.error("Mobile cart drawer elements not found.");
+    return;
+  }
 
   mobileCartItems.innerHTML = "";
   drawerSubtotal.textContent = "0.00";
@@ -203,41 +224,57 @@ export async function renderMobileDrawer() {
           <span class="qty-num">${item.quantity}</span>
           <button class="qty-btn plus" data-id="${item.id}">＋</button>
         </div>
+        <div class="limit-message" style="display: none;"></div>
       </div>
       <button class="remove-item-mobile" data-id="${item.id}">✕</button>
     `;
 
     mobileCartItems.appendChild(itemDiv);
 
-    formatPrice(item.price).then(formatted => {
-      itemDiv.querySelector(".cart-price").textContent = `Price: ${formatted}`;
+    // Format price
+    formatPrice(item.price).then(f => {
+      itemDiv.querySelector(".cart-price").textContent = `Price: ${f}`;
     });
   }
 
-  formatPrice(subtotal).then(formatted => {
-    drawerSubtotal.textContent = formatted;
+  formatPrice(subtotal).then(f => {
+    drawerSubtotal.textContent = f;
   });
 
+  // Button events
   mobileCartItems.querySelectorAll('.qty-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       const id = parseInt(btn.dataset.id);
       let cart = getCart();
       const prod = cart.find(i => i.id === id);
+      const container = btn.closest(".cart-item");
+      const limitMsg = container.querySelector(".limit-message");
+
       if (!prod) return;
 
       if (btn.classList.contains('plus')) {
-        if (prod.quantity >= 1) {
-          showLimitFeedback(btn);
-          return;
-        }
-        prod.quantity++;
+        btn.innerHTML = `<span class="mini-loader"></span>`;
+        btn.disabled = true;
+
+        setTimeout(() => {
+          if (prod.quantity >= 1) {
+            limitMsg.textContent = "Only 1 item was added due to availability.";
+            limitMsg.style.display = "block";
+          } else {
+            prod.quantity++;
+            limitMsg.style.display = "none";
+          }
+
+          saveCart(cart);
+          renderMobileDrawer();
+        }, 1000);
       }
+
       if (btn.classList.contains('minus')) {
         prod.quantity = Math.max(1, prod.quantity - 1);
+        saveCart(cart);
+        renderMobileDrawer();
       }
-      saveCart(cart);
-      updateCartCountInDOM();
-      renderMobileDrawer();
     });
   });
 
@@ -253,30 +290,6 @@ export async function renderMobileDrawer() {
 
   updateCartCountInDOM();
   updateDrawerCheckoutState();
-}
-
-// ✅ Show message if item limit reached
-function showLimitFeedback(button) {
-  const originalHTML = button.innerHTML;
-
-  button.innerHTML = `<span class="loader"></span>`;
-  button.disabled = true;
-
-  const cartItem = button.closest('.cart-item');
-  if (!cartItem) return;
-
-  if (cartItem.querySelector('.limit-message')) return;
-
-  const message = document.createElement("p");
-  message.className = "limit-message";
-  message.textContent = "Only 1 item was added due to availability.";
-  cartItem.appendChild(message);
-
-  setTimeout(() => {
-    button.innerHTML = originalHTML;
-    button.disabled = false;
-    setTimeout(() => message.remove(), 5000);
-  }, 1500);
 }
 
 
