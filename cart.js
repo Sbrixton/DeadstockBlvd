@@ -8,7 +8,8 @@ import {
   formatPrice
 } from "./currency.js";
 
-formatPrice(1); // Warm-up exchange rates
+// Preload currency formatting
+formatPrice(1);
 
 function updateDrawerCheckoutState() {
   const cart = getCart();
@@ -18,13 +19,15 @@ function updateDrawerCheckoutState() {
 }
 
 window.addEventListener("load", () => {
+  const empty = document.getElementById("emptyCart");
+  const section = document.getElementById("cartSection");
   const cartWrapper = document.getElementById("cart-items-wrapper");
   const subEl = document.getElementById("CartSubtotal");
   const totalEl = document.getElementById("Total");
-  const empty = document.getElementById("emptyCart");
-  const section = document.getElementById("cartSection");
   const checkoutBtn = document.getElementById("checkoutBtn");
   const proceedBtn = document.getElementById("proceedBtn");
+
+  const hasDesktopCart = cartWrapper && subEl && totalEl;
 
   const cartIcon = document.getElementById("cartIcon");
   const mobileDrawer = document.getElementById("mobileCartDrawer");
@@ -36,7 +39,9 @@ window.addEventListener("load", () => {
   });
 
   async function render() {
-    const cart = getCart();
+    if (!hasDesktopCart) return;
+
+    let cart = getCart();
     cartWrapper.innerHTML = "";
     let subtotal = 0;
 
@@ -74,10 +79,12 @@ window.addEventListener("load", () => {
           <div class="quantity-controls">
             <button class="qty-btn minus" data-id="${item.id}">-</button>
             <span class="qty-num">${item.quantity}</span>
-            <button class="qty-btn plus" data-id="${item.id}">+</button>
-            <span class="plus-loader" style="display:none;">
-              <span class="loader"></span> +1
-            </span>
+            <button class="qty-btn plus" data-id="${item.id}">
+              +
+              <span class="plus-loader" style="display:none;">
+                <span class="plus-spinner"></span>
+              </span>
+            </button>
           </div>
           <p class="cart-total">Total: 0.00</p>
           <button class="remove-item" data-id="${item.id}">Remove</button>
@@ -87,18 +94,18 @@ window.addEventListener("load", () => {
 
       cartWrapper.appendChild(itemDiv);
 
-      formatPrice(item.price).then(f => {
-        itemDiv.querySelector(".cart-price").textContent = `Price: ${f}`;
+      // Format price
+      formatPrice(item.price).then(formatted => {
+        itemDiv.querySelector(".cart-price").textContent = `Price: ${formatted}`;
       });
-
-      formatPrice(itemTotal).then(f => {
-        itemDiv.querySelector(".cart-total").textContent = `Total: ${f}`;
+      formatPrice(itemTotal).then(formatted => {
+        itemDiv.querySelector(".cart-total").textContent = `Total: ${formatted}`;
       });
     }
 
-    formatPrice(subtotal).then(f => {
-      subEl.textContent = f;
-      totalEl.textContent = f;
+    formatPrice(subtotal).then(formatted => {
+      subEl.textContent = formatted;
+      totalEl.textContent = formatted;
     });
 
     updateCartCountInDOM();
@@ -147,7 +154,6 @@ window.addEventListener("load", () => {
             plusLoader.style.display = "none";
             messageDiv.style.display = "none";
           }, 2000);
-
           return;
         }
         cart[itemIndex].quantity += 1;
@@ -171,6 +177,7 @@ window.addEventListener("load", () => {
   render();
 });
 
+// ---------- Mobile Cart Drawer ----------
 export async function renderMobileDrawer() {
   const cart = getCart();
   const mobileCartItems = document.getElementById("mobileCartItems");
@@ -196,12 +203,13 @@ export async function renderMobileDrawer() {
   }
 
   for (const item of cart) {
+    if (!item || typeof item.price !== "number" || typeof item.quantity !== "number") continue;
+
     const itemTotal = item.price * item.quantity;
     subtotal += itemTotal;
 
     const itemDiv = document.createElement("div");
     itemDiv.className = "cart-item";
-
     itemDiv.innerHTML = `
       <img src="${item.image}" alt="${item.name}" class="cart-img" />
       <div class="cart-details">
@@ -210,10 +218,12 @@ export async function renderMobileDrawer() {
         <div class="quantity-controls">
           <button class="qty-btn minus" data-id="${item.id}">−</button>
           <span class="qty-num">${item.quantity}</span>
-          <button class="qty-btn plus" data-id="${item.id}">＋</button>
-          <span class="plus-loader" style="display:none;">
-            <span class="loader"></span> +1
-          </span>
+          <button class="qty-btn plus" data-id="${item.id}">
+            ＋
+            <span class="plus-loader" style="display:none;">
+              <span class="plus-spinner"></span>
+            </span>
+          </button>
         </div>
       </div>
       <button class="remove-item-mobile" data-id="${item.id}">✕</button>
@@ -222,13 +232,13 @@ export async function renderMobileDrawer() {
 
     mobileCartItems.appendChild(itemDiv);
 
-    formatPrice(item.price).then(f => {
-      itemDiv.querySelector(".cart-price").textContent = `Price: ${f}`;
+    formatPrice(item.price).then(formatted => {
+      itemDiv.querySelector(".cart-price").textContent = `Price: ${formatted}`;
     });
   }
 
-  formatPrice(subtotal).then(f => {
-    drawerSubtotal.textContent = f;
+  formatPrice(subtotal).then(formatted => {
+    drawerSubtotal.textContent = formatted;
   });
 
   mobileCartItems.querySelectorAll('.qty-btn').forEach(btn => {
@@ -247,7 +257,6 @@ export async function renderMobileDrawer() {
           plusLoader.style.display = "inline-flex";
           messageDiv.textContent = "Only 1 item was added due to availability.";
           messageDiv.style.display = "block";
-
           setTimeout(() => {
             plusLoader.style.display = "none";
             messageDiv.style.display = "none";
@@ -280,5 +289,4 @@ export async function renderMobileDrawer() {
   updateCartCountInDOM();
   updateDrawerCheckoutState();
 }
-
 
