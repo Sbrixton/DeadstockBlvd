@@ -145,8 +145,8 @@ p {
 }
 
 .mini-loader {
-  border: 2px solid #f3f3f3;
-  border-top: 2px solid #222;
+  border: 2px solid rgba(255, 255, 255, 0.2);   /* light outer border */
+  border-top: 2px solid #ffffff;                /* visible top (spinner) */
   border-radius: 50%;
   width: 14px;
   height: 14px;
@@ -1439,6 +1439,7 @@ footer.section-p1 {
     font-weight: bold;
   }
 }
+
 
 
 
