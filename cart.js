@@ -80,7 +80,7 @@ window.addEventListener("load", () => {
             <button class="qty-btn minus" data-id="${item.id}">-</button>
             <span class="qty-num">${item.quantity}</span>
             <button class="qty-btn plus" data-id="${item.id}">
-              +
+              <span class="plus-text">+1</span>
               <span class="plus-loader" style="display:none;">
                 <span class="plus-spinner"></span>
               </span>
@@ -94,7 +94,6 @@ window.addEventListener("load", () => {
 
       cartWrapper.appendChild(itemDiv);
 
-      // Format price
       formatPrice(item.price).then(formatted => {
         itemDiv.querySelector(".cart-price").textContent = `Price: ${formatted}`;
       });
@@ -177,7 +176,6 @@ window.addEventListener("load", () => {
   render();
 });
 
-// ---------- Mobile Cart Drawer ----------
 export async function renderMobileDrawer() {
   const cart = getCart();
   const mobileCartItems = document.getElementById("mobileCartItems");
@@ -208,11 +206,9 @@ export async function renderMobileDrawer() {
     const itemTotal = item.price * item.quantity;
     subtotal += itemTotal;
 
-    // Create wrapper to hold cart-item and message vertically
     const wrapper = document.createElement("div");
     wrapper.className = "cart-item-wrapper";
 
-    // Create cart-item div
     const itemDiv = document.createElement("div");
     itemDiv.className = "cart-item";
 
@@ -225,7 +221,7 @@ export async function renderMobileDrawer() {
           <button class="qty-btn minus" data-id="${item.id}">−</button>
           <span class="qty-num">${item.quantity}</span>
           <button class="qty-btn plus" data-id="${item.id}">
-            ＋
+            <span class="plus-text">+1</span>
             <span class="plus-loader" style="display:none;">
               <span class="plus-spinner"></span>
             </span>
@@ -235,7 +231,6 @@ export async function renderMobileDrawer() {
       <button class="remove-item-mobile" data-id="${item.id}">✕</button>
     `;
 
-    // Append itemDiv and messageDiv inside wrapper
     wrapper.appendChild(itemDiv);
 
     const messageDiv = document.createElement("div");
@@ -243,7 +238,6 @@ export async function renderMobileDrawer() {
     messageDiv.style.display = "none";
     wrapper.appendChild(messageDiv);
 
-    // Append wrapper to mobileCartItems
     mobileCartItems.appendChild(wrapper);
 
     formatPrice(item.price).then(formatted => {
@@ -255,7 +249,6 @@ export async function renderMobileDrawer() {
     drawerSubtotal.textContent = formatted;
   });
 
-  // Attach event listeners for quantity buttons and remove buttons inside mobile drawer
   mobileCartItems.querySelectorAll('.qty-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       const id = parseInt(btn.dataset.id);
@@ -304,4 +297,5 @@ export async function renderMobileDrawer() {
   updateCartCountInDOM();
   updateDrawerCheckoutState();
 }
+
 
