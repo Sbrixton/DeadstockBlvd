@@ -150,6 +150,7 @@
           <input type="hidden" name="m_payment_id" value="1234" />
           <input type="hidden" name="amount" id="pfAmount" value="86.00" />
           <input type="hidden" name="currency" value="ZAR" />
+          <input type="hidden" name="amount" id="pfAmount" data-base-price="86.00" value="86.00" />
           <input type="hidden" name="item_name" id="pfItemName" value="Nike SB Dunk Low Grateful Dead Bears" />
           
           <button type="submit" class="payfast-btn">Pay with PayFast (Demo)</button>
@@ -500,7 +501,7 @@
       }, 300); // only wait 300ms after load
     });
   </script>
-  
+
   <script>
     const modalTriggers = document.querySelectorAll('[data-modal-target]');
     const modals = document.querySelectorAll('.modal');
