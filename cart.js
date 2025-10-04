@@ -5,12 +5,10 @@ import {
 } from "./cart-utils.js";
 
 import {
-  getCurrency,
   formatPrice
 } from "./currency.js";
 
-// ✅ Preload exchange rates early to speed up formatting later
-formatPrice(1); // Warm-up
+formatPrice(1); // Warm-up exchange rates
 
 function updateDrawerCheckoutState() {
   const cart = getCart();
@@ -20,16 +18,13 @@ function updateDrawerCheckoutState() {
 }
 
 window.addEventListener("load", () => {
-  const cart = getCart();
-  const empty = document.getElementById("emptyCart");
-  const section = document.getElementById("cartSection");
   const cartWrapper = document.getElementById("cart-items-wrapper");
   const subEl = document.getElementById("CartSubtotal");
   const totalEl = document.getElementById("Total");
+  const empty = document.getElementById("emptyCart");
+  const section = document.getElementById("cartSection");
   const checkoutBtn = document.getElementById("checkoutBtn");
   const proceedBtn = document.getElementById("proceedBtn");
-
-  const hasDesktopCart = cartWrapper && subEl && totalEl;
 
   const cartIcon = document.getElementById("cartIcon");
   const mobileDrawer = document.getElementById("mobileCartDrawer");
@@ -41,9 +36,7 @@ window.addEventListener("load", () => {
   });
 
   async function render() {
-    if (!hasDesktopCart) return;
-
-    let cart = getCart();
+    const cart = getCart();
     cartWrapper.innerHTML = "";
     let subtotal = 0;
 
@@ -81,42 +74,31 @@ window.addEventListener("load", () => {
           <div class="quantity-controls">
             <button class="qty-btn minus" data-id="${item.id}">-</button>
             <span class="qty-num">${item.quantity}</span>
-            <button class="qty-btn plus" data-id="${item.id}">
-              +
-              <span class="plus-loader" style="display:none; margin-left:6px;">
-                <span class="loader" style="border-color: #1890ff transparent transparent transparent;"></span> +1
-              </span>
-            </button>
+            <button class="qty-btn plus" data-id="${item.id}">+</button>
+            <span class="plus-loader" style="display:none;">
+              <span class="loader"></span> +1
+            </span>
           </div>
           <p class="cart-total">Total: 0.00</p>
           <button class="remove-item" data-id="${item.id}">Remove</button>
         </div>
+        <div class="limit-message" style="display:none;"></div>
       `;
-
-      // Create the message div BELOW the entire cart item block
-      const messageDiv = document.createElement("div");
-      messageDiv.className = "limit-message";
-      messageDiv.style.display = "none"; // hidden initially
-      itemDiv.appendChild(messageDiv);
 
       cartWrapper.appendChild(itemDiv);
 
-      // Format and update prices
-      formatPrice(item.price).then(formatted => {
-        itemDiv.querySelector(".cart-price").textContent = `Price: ${formatted}`;
+      formatPrice(item.price).then(f => {
+        itemDiv.querySelector(".cart-price").textContent = `Price: ${f}`;
       });
 
-      formatPrice(itemTotal).then(formatted => {
-        itemDiv.querySelector(".cart-total").textContent = `Total: ${formatted}`;
+      formatPrice(itemTotal).then(f => {
+        itemDiv.querySelector(".cart-total").textContent = `Total: ${f}`;
       });
     }
 
-    subEl.textContent = "0.00";
-    totalEl.textContent = "0.00";
-
-    formatPrice(subtotal).then(formatted => {
-      subEl.textContent = formatted;
-      totalEl.textContent = formatted;
+    formatPrice(subtotal).then(f => {
+      subEl.textContent = f;
+      totalEl.textContent = f;
     });
 
     updateCartCountInDOM();
@@ -153,35 +135,28 @@ window.addEventListener("load", () => {
     if (target.classList.contains("qty-btn")) {
       const itemDiv = target.closest(".cart-item");
       const messageDiv = itemDiv.querySelector(".limit-message");
-      const plusLoader = target.querySelector(".plus-loader");
+      const plusLoader = itemDiv.querySelector(".plus-loader");
 
       if (target.classList.contains("plus")) {
         if (cart[itemIndex].quantity >= 1) {
-          // Show loader +1 and message because max is 1 allowed
-          if (plusLoader) {
-            plusLoader.style.display = "inline-flex";
-          }
+          plusLoader.style.display = "inline-flex";
           messageDiv.textContent = "Only 1 item was added due to availability.";
           messageDiv.style.display = "block";
 
-          // Hide loader/message after 2 seconds
           setTimeout(() => {
-            if (plusLoader) {
-              plusLoader.style.display = "none";
-            }
+            plusLoader.style.display = "none";
             messageDiv.style.display = "none";
           }, 2000);
 
-          return; // don't increase quantity beyond 1
+          return;
         }
         cart[itemIndex].quantity += 1;
       } else if (target.classList.contains("minus")) {
         cart[itemIndex].quantity = Math.max(1, cart[itemIndex].quantity - 1);
-        // Clear any message when quantity is decreased
         messageDiv.style.display = "none";
-        const plusLoader = target.closest(".cart-item").querySelector(".plus-loader");
-        if (plusLoader) plusLoader.style.display = "none";
+        plusLoader.style.display = "none";
       }
+
       saveCart(cart);
       render();
     }
@@ -201,10 +176,7 @@ export async function renderMobileDrawer() {
   const mobileCartItems = document.getElementById("mobileCartItems");
   const drawerSubtotal = document.getElementById("drawerCartSubtotal");
 
-  if (!mobileCartItems || !drawerSubtotal) {
-    console.error("Mobile cart drawer elements not found.");
-    return;
-  }
+  if (!mobileCartItems || !drawerSubtotal) return;
 
   mobileCartItems.innerHTML = "";
   drawerSubtotal.textContent = "0.00";
@@ -224,13 +196,12 @@ export async function renderMobileDrawer() {
   }
 
   for (const item of cart) {
-    if (!item || typeof item.price !== "number" || typeof item.quantity !== "number") continue;
-
     const itemTotal = item.price * item.quantity;
     subtotal += itemTotal;
 
     const itemDiv = document.createElement("div");
     itemDiv.className = "cart-item";
+
     itemDiv.innerHTML = `
       <img src="${item.image}" alt="${item.name}" class="cart-img" />
       <div class="cart-details">
@@ -239,36 +210,27 @@ export async function renderMobileDrawer() {
         <div class="quantity-controls">
           <button class="qty-btn minus" data-id="${item.id}">−</button>
           <span class="qty-num">${item.quantity}</span>
-          <button class="qty-btn plus" data-id="${item.id}">
-            ＋
-            <span class="plus-loader" style="display:none; margin-left:6px;">
-              <span class="loader" style="border-color: #1890ff transparent transparent transparent;"></span> +1
-            </span>
-          </button>
+          <button class="qty-btn plus" data-id="${item.id}">＋</button>
+          <span class="plus-loader" style="display:none;">
+            <span class="loader"></span> +1
+          </span>
         </div>
       </div>
       <button class="remove-item-mobile" data-id="${item.id}">✕</button>
+      <div class="limit-message" style="display:none;"></div>
     `;
-
-    // Add message div below cart item
-    const messageDiv = document.createElement("div");
-    messageDiv.className = "limit-message";
-    messageDiv.style.display = "none";
-    itemDiv.appendChild(messageDiv);
 
     mobileCartItems.appendChild(itemDiv);
 
-    // Format and update price after render
-    formatPrice(item.price).then(formatted => {
-      itemDiv.querySelector(".cart-price").textContent = `Price: ${formatted}`;
+    formatPrice(item.price).then(f => {
+      itemDiv.querySelector(".cart-price").textContent = `Price: ${f}`;
     });
   }
 
-  formatPrice(subtotal).then(formatted => {
-    drawerSubtotal.textContent = formatted;
+  formatPrice(subtotal).then(f => {
+    drawerSubtotal.textContent = f;
   });
 
-  // Button events
   mobileCartItems.querySelectorAll('.qty-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       const id = parseInt(btn.dataset.id);
@@ -278,27 +240,27 @@ export async function renderMobileDrawer() {
 
       const itemDiv = btn.closest(".cart-item");
       const messageDiv = itemDiv.querySelector(".limit-message");
-      const plusLoader = btn.querySelector(".plus-loader");
+      const plusLoader = itemDiv.querySelector(".plus-loader");
 
       if (btn.classList.contains('plus')) {
         if (cart[itemIndex].quantity >= 1) {
-          if (plusLoader) plusLoader.style.display = "inline-flex";
+          plusLoader.style.display = "inline-flex";
           messageDiv.textContent = "Only 1 item was added due to availability.";
           messageDiv.style.display = "block";
 
           setTimeout(() => {
-            if (plusLoader) plusLoader.style.display = "none";
+            plusLoader.style.display = "none";
             messageDiv.style.display = "none";
           }, 2000);
-
           return;
         }
         cart[itemIndex].quantity++;
       } else if (btn.classList.contains('minus')) {
         cart[itemIndex].quantity = Math.max(1, cart[itemIndex].quantity - 1);
         messageDiv.style.display = "none";
-        if (plusLoader) plusLoader.style.display = "none";
+        plusLoader.style.display = "none";
       }
+
       saveCart(cart);
       updateCartCountInDOM();
       renderMobileDrawer();
@@ -318,4 +280,5 @@ export async function renderMobileDrawer() {
   updateCartCountInDOM();
   updateDrawerCheckoutState();
 }
+
 
