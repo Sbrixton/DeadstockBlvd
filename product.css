@@ -529,6 +529,24 @@ footer .col {
   margin-top: 8px;
 }
 
+#mobileCartItems .qty-btn.plus {
+  display: inline-flex;
+  align-items: center;  /* vertically center plus sign and spinner */
+  justify-content: center;
+  gap: 6px;             /* spacing between plus and spinner */
+  position: relative;   /* in case you want to do fine-tune absolute positioning later */
+}
+
+#mobileCartItems .plus-loader {
+  margin-left: 0;        /* remove any left margin */
+  font-size: 0.75rem;
+  color: #1890ff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+}
+
 /* ========== REMOVE HOVER FOR SEARCH ICON ========== */
 .search-info a,
 .search-info a:visited,
