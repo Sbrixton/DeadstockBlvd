@@ -9,8 +9,8 @@ import {
   formatPrice
 } from "./currency.js";
 
-// ✅ Preload exchange rates early to speed up formatting later
-formatPrice(1); // Warm-up
+// ✅ Preload exchange rates
+formatPrice(1);
 
 function updateDrawerCheckoutState() {
   const cart = getCart();
@@ -90,7 +90,7 @@ window.addEventListener("load", () => {
 
       cartWrapper.appendChild(itemDiv);
 
-      // Format and update prices
+      // Format prices
       formatPrice(item.price).then(formatted => {
         itemDiv.querySelector(".cart-price").textContent = `Price: ${formatted}`;
       });
@@ -141,6 +141,10 @@ window.addEventListener("load", () => {
 
     if (target.classList.contains("qty-btn")) {
       if (target.classList.contains("plus")) {
+        if (cart[itemIndex].quantity >= 1) {
+          showLimitFeedback(target);
+          return;
+        }
         cart[itemIndex].quantity += 1;
       } else if (target.classList.contains("minus")) {
         cart[itemIndex].quantity = Math.max(1, cart[itemIndex].quantity - 1);
@@ -164,10 +168,7 @@ export async function renderMobileDrawer() {
   const mobileCartItems = document.getElementById("mobileCartItems");
   const drawerSubtotal = document.getElementById("drawerCartSubtotal");
 
-  if (!mobileCartItems || !drawerSubtotal) {
-    console.error("Mobile cart drawer elements not found.");
-    return;
-  }
+  if (!mobileCartItems || !drawerSubtotal) return;
 
   mobileCartItems.innerHTML = "";
   drawerSubtotal.textContent = "0.00";
@@ -187,8 +188,6 @@ export async function renderMobileDrawer() {
   }
 
   for (const item of cart) {
-    if (!item || typeof item.price !== "number" || typeof item.quantity !== "number") continue;
-
     const itemTotal = item.price * item.quantity;
     subtotal += itemTotal;
 
@@ -210,7 +209,6 @@ export async function renderMobileDrawer() {
 
     mobileCartItems.appendChild(itemDiv);
 
-    // Format and update price after render
     formatPrice(item.price).then(formatted => {
       itemDiv.querySelector(".cart-price").textContent = `Price: ${formatted}`;
     });
@@ -220,15 +218,23 @@ export async function renderMobileDrawer() {
     drawerSubtotal.textContent = formatted;
   });
 
-  // Button events
   mobileCartItems.querySelectorAll('.qty-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       const id = parseInt(btn.dataset.id);
       let cart = getCart();
       const prod = cart.find(i => i.id === id);
       if (!prod) return;
-      if (btn.classList.contains('plus')) prod.quantity++;
-      if (btn.classList.contains('minus')) prod.quantity = Math.max(1, prod.quantity - 1);
+
+      if (btn.classList.contains('plus')) {
+        if (prod.quantity >= 1) {
+          showLimitFeedback(btn);
+          return;
+        }
+        prod.quantity++;
+      }
+      if (btn.classList.contains('minus')) {
+        prod.quantity = Math.max(1, prod.quantity - 1);
+      }
       saveCart(cart);
       updateCartCountInDOM();
       renderMobileDrawer();
@@ -248,5 +254,30 @@ export async function renderMobileDrawer() {
   updateCartCountInDOM();
   updateDrawerCheckoutState();
 }
+
+// ✅ Show message if item limit reached
+function showLimitFeedback(button) {
+  const originalHTML = button.innerHTML;
+
+  button.innerHTML = `<span class="loader"></span>`;
+  button.disabled = true;
+
+  const cartItem = button.closest('.cart-item');
+  if (!cartItem) return;
+
+  if (cartItem.querySelector('.limit-message')) return;
+
+  const message = document.createElement("p");
+  message.className = "limit-message";
+  message.textContent = "Only 1 item was added due to availability.";
+  cartItem.appendChild(message);
+
+  setTimeout(() => {
+    button.innerHTML = originalHTML;
+    button.disabled = false;
+    setTimeout(() => message.remove(), 5000);
+  }, 1500);
+}
+
 
 
