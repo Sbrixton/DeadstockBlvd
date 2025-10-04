@@ -538,7 +538,7 @@ footer .col {
 }
 
 #mobileCartItems .plus-loader {
-  margin-left: 0;        /* remove any left margin */
+  margin-left: 4px !important; /* less than 8px, nudges spinner left */
   font-size: 0.75rem;
   color: #1890ff;
   display: inline-flex;
