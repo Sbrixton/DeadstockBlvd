@@ -562,6 +562,31 @@ footer .col {
   display: inline-flex;
 }
 
+/* === Qty Plus Button with Spinner === */
+.qty-btn.plus {
+  position: relative;
+  overflow: hidden;
+}
+
+.qty-btn.plus .plus-loader {
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.qty-btn.plus.loading .plus-text {
+  visibility: hidden;
+  opacity: 0;
+}
+
+.qty-btn.plus.loading .plus-loader {
+  display: inline-flex;
+}
+
+
+
 /* ========== REMOVE HOVER FOR SEARCH ICON ========== */
 .search-info a,
 .search-info a:visited,
