@@ -161,10 +161,11 @@ p {
 }
 
 .limit-message {
-  font-size: 0.85rem;
-  color: #c00;
-  margin-top: 6px;
-  animation: fadeIn 0.3s ease;
+  font-size: 0.8rem;
+  color: #ff4d4f;
+  margin-top: 8px;
+  display: block;
+  animation: fadeIn 0.3s ease-in-out;
 }
 
 @keyframes fadeIn {
@@ -1439,6 +1440,7 @@ footer.section-p1 {
     font-weight: bold;
   }
 }
+
 
 
 
