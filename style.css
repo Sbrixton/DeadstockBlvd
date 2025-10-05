@@ -146,14 +146,25 @@ p {
 }
 
 /* +1 loader container (used next to plus button) */
+/* + Loader Wrapper */
 .plus-loader {
   margin-left: 8px;
   font-size: 0.75rem;
   color: #1890ff;
-  display: inline-flex;
+  display: none; /* default hidden */
   align-items: center;
   gap: 4px;
   vertical-align: middle;
+}
+
+/* Show spinner only when .loading is present on button */
+.qty-btn.plus.loading .plus-loader {
+  display: inline-flex;
+}
+
+/* Hide the + sign when loading */
+.qty-btn.plus.loading .plus-text {
+  display: none;
 }
 
 /* Limit message beneath the item */
@@ -1322,6 +1333,7 @@ footer.section-p1 {
     font-weight: bold;
   }
 }
+
 
 
 
