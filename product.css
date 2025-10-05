@@ -183,27 +183,6 @@ main.product-page {
   margin-bottom: 20px;
 }
 
-footer.section-p1 {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  background: #eee;
-  padding: 40px 20px;
-  text-align: center;
-}
-
-footer img {
-  max-width: 120px;
-  height: auto;
-  margin-bottom: 10px;
-}
-
-footer .col {
-  width: 100%;
-  margin: 10px 0;
-}
-
 /* ========== 4 per row + 4 visible (1025px and up) ========== */
 @media (min-width: 1025px) {
   .recommendations-grid {
@@ -571,40 +550,75 @@ footer .col {
 }
 
 
-/* ========== FOOTER ========== */
-footer {
+* ================= CUSTOM FOOTER LAYOUT ================== */
+
+footer.section-p1 {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  align-items: center;
   background: #eee;
   padding: 40px 20px;
   text-align: center;
+  gap: 20px;
 }
 
-footer.sticky-footer {
-  position: sticky;
-  bottom: 0;
-  background: #eee;
-  z-index: 100;
+/* Top row: Currency | Copy | Payments */
+.footer-row {
+  display: flex;
+  width: 100%;
+  max-width: 1200px;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  text-align: left;
 }
 
-footer .col a {
-  display: block;
-  margin: 5px 0;
+/* Left: Currency dropdown */
+.footer-currency label {
+  font-weight: 500;
+  margin-right: 8px;
+}
+.footer-currency select {
+  padding: 6px 10px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+/* Center: Copyright */
+.footer-copy {
+  flex: 1;
+  text-align: center;
+  font-weight: 500;
+}
+
+/* Right: Payment Info */
+.footer-payment {
+  text-align: right;
+}
+.footer-payment img {
+  max-width: 120px;
+  height: auto;
+  margin-top: 5px;
+}
+
+/* Bottom row: Policy Links */
+.footer-policy-links {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  font-size: 13px;
+  flex-wrap: wrap;
+}
+
+.footer-policy-links .policy-link {
   text-decoration: none;
   color: #333;
+  transition: color 0.2s ease;
 }
 
-footer img {
-  margin-top: 10px;
-  max-width: 100%;
-  height: auto;
-}
-
-.copyright {
-  margin-top: 20px;
-  font-size: 14px;
-  color: #444;
+.footer-policy-links .policy-link:hover {
+  color: #000;
 }
 
 /* ========== MOBILE NAVBAR + SEARCH + RECOMMENDATION FIXES ========== */
@@ -988,21 +1002,21 @@ footer img {
     box-shadow: 0 0 4px rgba(0,0,0,0.4);
   }
   
-  footer {
+  .footer-row {
     flex-direction: column;
     align-items: center;
-    padding: 10px 10px;
     text-align: center;
   }
   
-  footer .col {
-    width: 100%;
-    margin: 4px 0;
+  .footer-currency,
+  .footer-payment {
+    text-align: center;
   }
   
-  footer .col h4 {
-    margin-bottom: 8px;
+  .footer-payment img {
+    margin-top: 10px;
   }
+  
   .success-wrapper {
     margin: 2rem 1rem;
     padding: 1.5rem;
