@@ -509,26 +509,6 @@ footer .col {
   margin-top: 8px;
 }
 
-/* === + Button with Spinner === */
-#mobileCartItems .qty-btn.plus {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 4px; /* Adjust spacing between plus and spinner */
-  padding: 0 6px; /* Adds a little breathing room */
-  position: relative;
-}
-
-#mobileCartItems .qty-btn.plus .plus-loader {
-  font-size: 0.75rem;
-  color: #1890ff;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  vertical-align: middle;
-  margin-left: 0; /* Ensure no weird margin */
-}
-
 /* ========== REMOVE HOVER FOR SEARCH ICON ========== */
 .search-info a,
 .search-info a:visited,
