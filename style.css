@@ -145,15 +145,14 @@ p {
   vertical-align: middle;
 }
 
-/* +1 loader container (used next to plus button) */
-/* + Loader Wrapper */
+/* Spinner wrapper: hidden by default */
 .plus-loader {
-  margin-left: 8px;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  margin-left: -2px;  /* 🔄 Shift spinner left slightly */
   font-size: 0.75rem;
   color: #1890ff;
-  display: none; /* default hidden */
-  align-items: center;
-  gap: 4px;
   vertical-align: middle;
 }
 
@@ -165,6 +164,23 @@ p {
 /* Hide the + sign when loading */
 .qty-btn.plus.loading .plus-text {
   display: none;
+}
+
+
+/* Plus sign */
+.qty-btn.plus .plus-text {
+  display: inline-block;
+  font-weight: 600; /* Optional, extra emphasis */
+}
+
+/* Quantity button: plus */
+.qty-btn.plus {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  gap: 4px;
+  font-weight: 600; /* 💪 Bold the row */
 }
 
 /* Limit message beneath the item */
@@ -190,6 +206,8 @@ p {
   opacity: 0.5;
   cursor: not-allowed;
 }
+
+
 
 /* ========== ANIMATIONS ========== */
 @keyframes spin {
@@ -1333,6 +1351,7 @@ footer.section-p1 {
     font-weight: bold;
   }
 }
+
 
 
 
