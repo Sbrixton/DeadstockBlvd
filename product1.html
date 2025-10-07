@@ -254,15 +254,31 @@
         </div>
   </main>
   
-  <footer class="footer-right-block">
-    <div class="footer-content">
+  <footer class="footer-flex">
+    <!-- LEFT SIDE: Currency Selector -->
+    <div class="footer-left">
+      <div class="currency-dropdown">
+        <label for="currencySelector" class="currency-label">Currency</label>
+        <div class="custom-select">
+          <select id="currencySelector">
+            <option value="GBP" selected>GBP (£)</option>
+            <option value="USD">USD ($)</option>
+            <option value="EUR">EUR (€)</option>
+          </select>
+          <span class="arrow">&#x25BC;</span> <!-- Down arrow -->
+        </div>
+      </div>
+    </div>
+    
+    <!-- RIGHT SIDE: Copy & Links -->
+    <div class="footer-right">
       <p class="footer-copy">© 2025 DEADSTOCKBLVD</p>
       <div class="footer-links">
         <a href="#" class="policy-link" data-modal-target="modal-terms">T&Cs</a>
         <a href="#" class="policy-link" data-modal-target="modal-policy">Privacy Policy</a>
         <a href="#" class="policy-link" data-modal-target="modal-service">Terms of Service</a>
         <a href="#" class="policy-link" data-modal-target="modal-refund">Refund Policy</a>
-        <a href="Contact.html" class="policy-link">Contact Information</a>
+        <a href="/contact.html" class="policy-link">Contact Information</a>
       </div>
     </div>
   </footer>
