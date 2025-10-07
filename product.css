@@ -558,6 +558,8 @@ main.product-page {
   align-items: center;
   background: #eee;
   padding: 20px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .single-line-footer {
@@ -566,22 +568,24 @@ main.product-page {
   align-items: center;
   width: 100%;
   max-width: 1200px;
-  flex-wrap: wrap; /* allows stacking on smaller screens */
   gap: 20px;
+  flex-wrap: wrap; /* allow wrap on smaller screens */
+  box-sizing: border-box;
 }
 
 /* Left: Payment image */
 .footer-payment img {
   max-height: 32px;
+  height: auto;
   width: auto;
 }
 
 /* Center: Copyright */
 .footer-copy {
-  flex: 1;
   text-align: center;
   font-weight: 500;
   font-size: 14px;
+  flex: 1;
 }
 
 /* Right: Policy links */
@@ -985,13 +989,21 @@ main.product-page {
   
   .single-line-footer {
     flex-direction: column;
+    align-items: center;
     text-align: center;
   }
-
+  
+  .footer-payment,
+  .footer-copy,
+  .footer-policy-links {
+    width: 100%;
+    justify-content: center;
+  }
+  
   .footer-copy {
     order: 2;
   }
-
+  
   .footer-payment,
   .footer-policy-links {
     order: 1;
