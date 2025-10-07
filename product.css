@@ -550,59 +550,46 @@ main.product-page {
 }
 
 
-/* ================= CLEAN SINGLE-ROW FOOTER ================= */
+/* ======= Right-Aligned Footer Block ======= */
 
-.footer {
+.footer-right-block {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: flex-end;
+  align-items: flex-end;
   background: #eee;
-  padding: 20px;
+  padding: 30px 60px;
   width: 100%;
   box-sizing: border-box;
 }
 
-.single-line-footer {
+.footer-content {
+  text-align: right;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  max-width: 1200px;
-  gap: 20px;
-  flex-wrap: wrap; /* allow wrap on smaller screens */
-  box-sizing: border-box;
+  flex-direction: column;
+  gap: 10px;
 }
 
-/* Left: Payment image */
-.footer-payment img {
-  max-height: 32px;
-  height: auto;
-  width: auto;
-}
-
-/* Center: Copyright */
 .footer-copy {
-  text-align: center;
-  font-weight: 500;
   font-size: 14px;
-  flex: 1;
+  font-weight: 500;
+  color: #333;
 }
 
-/* Right: Policy links */
-.footer-policy-links {
+.footer-links {
   display: flex;
-  gap: 15px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 10px 15px;
   font-size: 13px;
-  white-space: nowrap;
 }
 
-.footer-policy-links .policy-link {
+.footer-links .policy-link {
   text-decoration: none;
   color: #333;
   transition: color 0.2s ease;
 }
 
-.footer-policy-links .policy-link:hover {
+.footer-links .policy-link:hover {
   color: #000;
 }
 
@@ -987,26 +974,19 @@ main.product-page {
     box-shadow: 0 0 4px rgba(0,0,0,0.4);
   }
   
-  .single-line-footer {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
-  
-  .footer-payment,
-  .footer-copy,
-  .footer-policy-links {
-    width: 100%;
+  .footer-right-block {
     justify-content: center;
+    align-items: center;
+    padding: 20px;
   }
-  
-  .footer-copy {
-    order: 2;
+
+  .footer-content {
+    text-align: center;
+    align-items: center;
   }
-  
-  .footer-payment,
-  .footer-policy-links {
-    order: 1;
+
+  .footer-links {
+    justify-content: center;
   }
   
   .success-wrapper {
