@@ -148,7 +148,7 @@
           <input type="hidden" name="notify_url" value="https://deadstockblvd.wuaze.com/basic%20notify.php" />
           
           <input type="hidden" name="m_payment_id" value="1234" />
-          <input type="hidden" name="amount" id="pfAmount" data-base-price="86.00" value="86.00" /> //new here\\
+          <input type="hidden" name="amount" id="pfAmount" data-base-price="86.00" value="86.00" />
           <input type="hidden" name="currency" value="ZAR" />
           <input type="hidden" name="item_name" id="pfItemName" value="Nike SB Dunk Low Grateful Dead Bears" />
           
@@ -258,6 +258,8 @@
     <!-- Top Row -->
     <div class="footer-row">
       <div class="footer-currency">
+        <div id="currencySpinner" class="currency-spinner" style="display: none;"></div>
+
         <label for="currencySelector">View price in:</label>
         <select id="currencySelector">
           <option value="GBP" selected>GBP (£)</option>
