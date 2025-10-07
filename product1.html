@@ -520,6 +520,19 @@
       }, 300); // only wait 300ms after load
     });
   </script>
+  
+  <script>
+    const currencySelect = document.querySelector('#currencySelector');
+    const customSelectWrapper = document.querySelector('.custom-select');
+    
+    currencySelect.addEventListener('focus', () => {
+      customSelectWrapper.classList.add('open');
+    });
+    
+    currencySelect.addEventListener('blur', () => {
+      customSelectWrapper.classList.remove('open');
+    });
+  </script>
 
   <script>   //new here//
     const modalTriggers = document.querySelectorAll('[data-modal-target]');
