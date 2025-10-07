@@ -550,25 +550,77 @@ main.product-page {
 }
 
 
-/* ======= Right-Aligned Footer Block ======= */
-
-.footer-right-block {
+/* === Footer Structure === */
+.footer-flex {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
   align-items: flex-end;
   background: #eee;
   padding: 30px 60px;
-  width: 100%;
-  box-sizing: border-box;
+  flex-wrap: wrap;
 }
 
-.footer-content {
-  text-align: right;
+.footer-left {
+  display: flex;
+  align-items: center;
+}
+
+.footer-right {
   display: flex;
   flex-direction: column;
+  text-align: right;
   gap: 10px;
 }
 
+/* === Currency Selector Styling === */
+.currency-dropdown {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  font-size: 14px;
+}
+
+.currency-label {
+  margin-bottom: 5px;
+  font-weight: 500;
+  color: #333;
+}
+
+/* Wrapper for select and arrow */
+.custom-select {
+  position: relative;
+  display: inline-block;
+}
+
+.custom-select select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  padding: 8px 35px 8px 12px;
+  font-size: 14px;
+  border: 1px solid #999;
+  border-radius: 4px;
+  background: #fff;
+  cursor: pointer;
+}
+
+/* Arrow */
+.custom-select .arrow {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  font-size: 12px;
+  pointer-events: none;
+  transition: transform 0.2s ease;
+}
+
+/* Rotate arrow when select is open */
+.custom-select.open .arrow {
+  transform: translateY(-50%) rotate(180deg);
+}
+
+/* === Footer Links === */
 .footer-copy {
   font-size: 14px;
   font-weight: 500;
@@ -974,18 +1026,23 @@ main.product-page {
     box-shadow: 0 0 4px rgba(0,0,0,0.4);
   }
   
-  .footer-right-block {
-    justify-content: center;
+  .footer-flex {
+    flex-direction: column;
     align-items: center;
-    padding: 20px;
+    text-align: center;
+    gap: 20px;
   }
 
-  .footer-content {
-    text-align: center;
+  .footer-right {
     align-items: center;
+    text-align: center;
   }
 
   .footer-links {
+    justify-content: center;
+  }
+
+  .footer-left {
     justify-content: center;
   }
   
