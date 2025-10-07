@@ -550,39 +550,30 @@ main.product-page {
 }
 
 
-* ================= CUSTOM FOOTER LAYOUT ================== */
+/* ================= CLEAN SINGLE-ROW FOOTER ================= */
 
-footer.section-p1 {
+.footer {
   display: flex;
-  flex-direction: column;
+  justify-content: center;
   align-items: center;
   background: #eee;
-  padding: 40px 20px;
-  text-align: center;
-  gap: 20px;
+  padding: 20px;
 }
 
-/* Top row: Currency | Copy | Payments */
-.footer-row {
+.single-line-footer {
   display: flex;
-  width: 100%;
-  max-width: 1200px;
   justify-content: space-between;
   align-items: center;
-  flex-wrap: wrap;
+  width: 100%;
+  max-width: 1200px;
+  flex-wrap: wrap; /* allows stacking on smaller screens */
   gap: 20px;
-  text-align: left;
 }
 
-/* Left: Currency dropdown */
-.footer-currency label {
-  font-weight: 500;
-  margin-right: 8px;
-}
-.footer-currency select {
-  padding: 6px 10px;
-  border-radius: 4px;
-  border: 1px solid #ccc;
+/* Left: Payment image */
+.footer-payment img {
+  max-height: 32px;
+  width: auto;
 }
 
 /* Center: Copyright */
@@ -590,25 +581,15 @@ footer.section-p1 {
   flex: 1;
   text-align: center;
   font-weight: 500;
+  font-size: 14px;
 }
 
-/* Right: Payment Info */
-.footer-payment {
-  text-align: right;
-}
-.footer-payment img {
-  max-width: 120px;
-  height: auto;
-  margin-top: 5px;
-}
-
-/* Bottom row: Policy Links */
+/* Right: Policy links */
 .footer-policy-links {
   display: flex;
-  justify-content: center;
-  gap: 20px;
+  gap: 15px;
   font-size: 13px;
-  flex-wrap: wrap;
+  white-space: nowrap;
 }
 
 .footer-policy-links .policy-link {
@@ -1002,19 +983,18 @@ footer.section-p1 {
     box-shadow: 0 0 4px rgba(0,0,0,0.4);
   }
   
-  .footer-row {
+  .single-line-footer {
     flex-direction: column;
-    align-items: center;
     text-align: center;
   }
-  
-  .footer-currency,
-  .footer-payment {
-    text-align: center;
+
+  .footer-copy {
+    order: 2;
   }
-  
-  .footer-payment img {
-    margin-top: 10px;
+
+  .footer-payment,
+  .footer-policy-links {
+    order: 1;
   }
   
   .success-wrapper {
