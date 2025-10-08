@@ -594,7 +594,7 @@ main.product-page {
   right: 12px;
   width: 16px;
   height: 16px;
-  background-image: url('/assets/arrow-down.png'); /* Default is DOWN */
+  background-image: url('Arrow down.png'); /* Default is DOWN */
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
@@ -604,7 +604,7 @@ main.product-page {
 }
 
 .custom-select.open .arrow {
-  background-image: url('/assets/arrow-up.png'); /* When open, show UP arrow */
+  background-image: url('Arrow up.png'); /* When open, show UP arrow */
 }
 
 /* === Footer Links === */
