@@ -525,12 +525,24 @@
     const currencySelect = document.getElementById('currencySelector');
     const customSelect = document.querySelector('.custom-select');
     
-    currencySelect.addEventListener('focus', () => {
+    let isOpen = false;
+    
+    currencySelect.addEventListener('mousedown', () => {
       customSelect.classList.add('open');
+      isOpen = true;
     });
     
-    currencySelect.addEventListener('blur', () => {
+    currencySelect.addEventListener('change', () => {
+      // When a new currency is selected
+      isOpen = false;
       customSelect.classList.remove('open');
+    });
+    
+    document.addEventListener('click', (e) => {
+      if (!customSelect.contains(e.target)) {
+        customSelect.classList.remove('open');
+        isOpen = false;
+      }
     });
   </script>
   
