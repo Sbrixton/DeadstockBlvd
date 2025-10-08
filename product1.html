@@ -524,21 +524,22 @@
   <script>
     const currencySelect = document.getElementById('currencySelector');
     const customSelect = document.querySelector('.custom-select');
+    const arrow = customSelect.querySelector('.arrow');
     
-    // Open on focus
+    // Show ^ when open
     currencySelect.addEventListener('focus', () => {
-      customSelect.classList.add('open');
+      arrow.textContent = '^';
     });
     
-    // Close when it loses focus
+    // Back to v when closed
     currencySelect.addEventListener('blur', () => {
-      customSelect.classList.remove('open');
+      arrow.textContent = 'v';
     });
     
-    // Extra safety: close when clicking elsewhere
+    // Fallback if clicked outside
     document.addEventListener('click', (e) => {
       if (!customSelect.contains(e.target)) {
-        customSelect.classList.remove('open');
+        arrow.textContent = 'v';
       }
     });
   </script>
