@@ -265,7 +265,7 @@
             <option value="USD">USD ($)</option>
             <option value="EUR">EUR (€)</option>
           </select>
-          <span class="arrow">&#x25BC;</span> <!-- ▼ Down arrow -->
+          <span class="arrow"></span> <!-- PNG-based arrow -->
         </div>
       </div>
     </div>
@@ -518,6 +518,28 @@
           preloader.style.display = "none";
         }, 500); // fade out transition
       }, 300); // only wait 300ms after load
+    });
+  </script>
+  
+  <script>
+    const currencySelect = document.getElementById('currencySelector');
+    const customSelect = document.querySelector('.custom-select');
+    
+    // When user clicks to open dropdown
+    currencySelect.addEventListener('mousedown', () => {
+      customSelect.classList.add('open');
+    });
+    
+    // When user selects an option
+    currencySelect.addEventListener('change', () => {
+      customSelect.classList.remove('open');
+    });
+    
+    // Close if clicking outside
+    document.addEventListener('click', (e) => {
+      if (!customSelect.contains(e.target)) {
+        customSelect.classList.remove('open');
+      }
     });
   </script>
   
