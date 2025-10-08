@@ -594,17 +594,17 @@ main.product-page {
   right: 12px;
   width: 16px;
   height: 16px;
-  background-image: url('Arrow down.png'); /* Default is DOWN */
+  background-image: url('Arrow down.png'); /* 🔁 Use your down arrow PNG here */
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
-  transform: translateY(-50%);
+  transform: translateY(-50%) rotate(0deg); /* Default: down */
   pointer-events: none;
-  transition: background-image 0.3s ease;
+  transition: transform 0.3s ease;
 }
 
 .custom-select.open .arrow {
-  background-image: url('Arrow up.png'); /* When open, show UP arrow */
+  transform: translateY(-50%) rotate(180deg); /* 🔁 Flips arrow up */
 }
 
 /* === Footer Links === */
