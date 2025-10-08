@@ -572,16 +572,6 @@ main.product-page {
   gap: 10px;
 }
 
-thing. You're very close — the issue is that <select> elements are difficult to animate or style deeply, and they don’t emit mousedown/change/focus in a way that reliably lets you toggle UI like a rotating arrow.
-
-To fully fix the arrow animation, we have two solid options:
-
-✅ Option A (Best UX): Use <select> + fake arrow and CSS-only rotation
-
-This method doesn't require JavaScript at all — instead, we use a CSS trick: detect if the <select> is focused, and rotate the arrow using :focus-within.
-
-🔧 Here's exactly what to do:
-✅ 1. ✅ Replace your .custom-select CSS with this:
 .custom-select {
   position: relative;
   width: 150px;
