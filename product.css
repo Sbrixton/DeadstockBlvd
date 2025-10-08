@@ -586,23 +586,25 @@ main.product-page {
   appearance: none;
   font-size: 14px;
   cursor: pointer;
-  position: relative;
-  z-index: 2;
 }
 
 .custom-select .arrow {
   position: absolute;
   top: 50%;
   right: 12px;
-  transform: translateY(-50%) rotate(0deg);
+  width: 16px;
+  height: 16px;
+  background-image: url('/assets/arrow-down.png'); /* Default is DOWN */
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  transform: translateY(-50%);
   pointer-events: none;
-  transition: transform 0.3s ease;
-  z-index: 1;
+  transition: background-image 0.3s ease;
 }
 
-/* 👇 This handles the arrow rotation when the select is focused */
-.custom-select:focus-within .arrow {
-  transform: translateY(-50%) rotate(180deg);
+.custom-select.open .arrow {
+  background-image: url('/assets/arrow-up.png'); /* When open, show UP arrow */
 }
 
 /* === Footer Links === */
