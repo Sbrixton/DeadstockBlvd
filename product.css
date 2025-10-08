@@ -572,52 +572,47 @@ main.product-page {
   gap: 10px;
 }
 
-/* === Currency Selector Styling === */
-.currency-dropdown {
+/* ===== Currency Selector Styles ===== */
+.custom-select-wrapper {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  gap: 5px;
   font-size: 14px;
 }
 
 .currency-label {
-  margin-bottom: 5px;
-  font-weight: 500;
+  font-weight: 600;
   color: #333;
 }
 
-/* Wrapper for select and arrow */
 .custom-select {
   position: relative;
-  display: inline-block;
+  width: 150px;
 }
 
 .custom-select select {
-  appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  padding: 8px 35px 8px 12px;
-  font-size: 14px;
-  border: 1px solid #999;
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #333;
   border-radius: 4px;
-  background: #fff;
+  background: transparent;
+  appearance: none;
+  font-size: 14px;
   cursor: pointer;
 }
 
-/* Arrow */
 .custom-select .arrow {
   position: absolute;
   top: 50%;
-  right: 10px;
-  transform: translateY(-50%);
-  font-size: 12px;
+  right: 12px;
+  transform: translateY(-50%) rotate(0deg);
   pointer-events: none;
-  transition: transform 0.2s ease;
+  transition: transform 0.3s ease;
 }
 
-/* Rotate arrow when select is open */
 .custom-select.open .arrow {
-  transform: translateY(-50%) rotate(180deg);
+  transform: translateY(-50%) rotate(180deg); /* ⬆ Arrow flips */
 }
 
 /* === Footer Links === */
