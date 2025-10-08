@@ -525,17 +525,17 @@
     const currencySelect = document.getElementById('currencySelector');
     const customSelect = document.querySelector('.custom-select');
     
-    // When user clicks to open dropdown
-    currencySelect.addEventListener('mousedown', () => {
+    // Open on focus
+    currencySelect.addEventListener('focus', () => {
       customSelect.classList.add('open');
     });
     
-    // When user selects an option
-    currencySelect.addEventListener('change', () => {
+    // Close when it loses focus
+    currencySelect.addEventListener('blur', () => {
       customSelect.classList.remove('open');
     });
     
-    // Close if clicking outside
+    // Extra safety: close when clicking elsewhere
     document.addEventListener('click', (e) => {
       if (!customSelect.contains(e.target)) {
         customSelect.classList.remove('open');
