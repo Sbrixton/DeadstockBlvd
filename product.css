@@ -603,11 +603,11 @@ main.product-page {
 .options {
   display: none;
   position: absolute;
-  top: 100%;
+  bottom: 100%; /* ✅ Now opens upward */
   left: 0;
   right: 0;
   border: 1px solid #333;
-  border-top: none;
+  border-bottom: none; /* since it's above */
   background: white;
   z-index: 100;
   list-style: none;
