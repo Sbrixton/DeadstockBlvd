@@ -520,20 +520,24 @@
       }, 300); // only wait 300ms after load
     });
   </script>
-  
-  <script>
-    const currencySelect = document.querySelector('#currencySelector');
-    const customSelectWrapper = document.querySelector('.custom-select');
     
-    currencySelect.addEventListener('focus', () => {
-      customSelectWrapper.classList.add('open');
+  <script>
+    const currencySelect = document.getElementById('currencySelector');
+    const customSelectWrapper = document.querySelector('.custom-select');
+    const arrowIcon = customSelectWrapper.querySelector('.arrow');
+    
+    currencySelect.addEventListener('click', () => {
+      customSelectWrapper.classList.toggle('open');
     });
     
-    currencySelect.addEventListener('blur', () => {
-      customSelectWrapper.classList.remove('open');
+    // Optional: close dropdown on outside click
+    document.addEventListener('click', (e) => {
+      if (!customSelectWrapper.contains(e.target)) {
+        customSelectWrapper.classList.remove('open');
+      }
     });
   </script>
-
+  
   <script>   //new here//
     const modalTriggers = document.querySelectorAll('[data-modal-target]');
     const modals = document.querySelectorAll('.modal');
