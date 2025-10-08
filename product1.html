@@ -523,18 +523,14 @@
     
   <script>
     const currencySelect = document.getElementById('currencySelector');
-    const customSelectWrapper = document.querySelector('.custom-select');
-    const arrowIcon = customSelectWrapper.querySelector('.arrow');
+    const customSelect = document.querySelector('.custom-select');
     
-    currencySelect.addEventListener('click', () => {
-      customSelectWrapper.classList.toggle('open');
+    currencySelect.addEventListener('focus', () => {
+      customSelect.classList.add('open');
     });
     
-    // Optional: close dropdown on outside click
-    document.addEventListener('click', (e) => {
-      if (!customSelectWrapper.contains(e.target)) {
-        customSelectWrapper.classList.remove('open');
-      }
+    currencySelect.addEventListener('blur', () => {
+      customSelect.classList.remove('open');
     });
   </script>
   
