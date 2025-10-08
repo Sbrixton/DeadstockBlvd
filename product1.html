@@ -259,13 +259,14 @@
     <div class="footer-left">
       <div class="custom-select-wrapper">
         <label for="currencySelector" class="currency-label">Currency</label>
-        <div class="custom-select">
-          <select id="currencySelector">
-            <option value="GBP" selected>GBP (£)</option>
-            <option value="USD">USD ($)</option>
-            <option value="EUR">EUR (€)</option>
-          </select>
-          <span class="arrow">v</span> <!-- ▼ default -->
+        <div class="custom-select" id="customSelect">
+          <div class="selected-option" id="selectedOption">GBP (£)</div>
+          <span class="arrow" id="dropdownArrow">v</span>
+          <ul class="options" id="optionsList">
+            <li data-value="GBP">GBP (£)</li>
+            <li data-value="USD">USD ($)</li>
+            <li data-value="EUR">EUR (€)</li>
+          </ul>
         </div>
       </div>
     </div>
@@ -522,29 +523,40 @@
   </script>
   
   <script>
-    const currencySelect = document.getElementById('currencySelector');
-    const customSelect = document.querySelector('.custom-select');
-    const arrow = customSelect.querySelector('.arrow');
+    const customSelect = document.getElementById('customSelect');
+    const selectedOption = document.getElementById('selectedOption');
+    const arrow = document.getElementById('dropdownArrow');
+    const optionsList = document.getElementById('optionsList');
     
-    let isOpen = false;
+    let isDropdownOpen = false;
     
-    // When user clicks/taps on the select — assume it opens
-    currencySelect.addEventListener('mousedown', () => {
-      arrow.textContent = '^';
-      isOpen = true;
+    // Toggle dropdown
+    customSelect.addEventListener('click', () => {
+      isDropdownOpen = !isDropdownOpen;
+      optionsList.style.display = isDropdownOpen ? 'block' : 'none';
+      arrow.textContent = isDropdownOpen ? '^' : 'v';
     });
     
-    // When user selects an option — dropdown closes
-    currencySelect.addEventListener('change', () => {
-      arrow.textContent = 'v';
-      isOpen = false;
+    // Handle option selection
+    optionsList.querySelectorAll('li').forEach(option => {
+      option.addEventListener('click', (e) => {
+        const value = e.target.dataset.value;
+        selectedOption.textContent = e.target.textContent;
+        optionsList.style.display = 'none';
+        arrow.textContent = 'v';
+        isDropdownOpen = false;
+        
+        // 👉 You can also handle currency switching logic here
+        console.log('Currency selected:', value);
+      });
     });
     
-    // If user clicks anywhere else — dropdown should be closed
+    // Click outside closes dropdown
     document.addEventListener('click', (e) => {
       if (!customSelect.contains(e.target)) {
+        optionsList.style.display = 'none';
         arrow.textContent = 'v';
-        isOpen = false;
+        isDropdownOpen = false;
       }
     });
   </script>
