@@ -526,20 +526,25 @@
     const customSelect = document.querySelector('.custom-select');
     const arrow = customSelect.querySelector('.arrow');
     
-    // Show ^ when open
-    currencySelect.addEventListener('focus', () => {
+    let isOpen = false;
+    
+    // When user clicks/taps on the select — assume it opens
+    currencySelect.addEventListener('mousedown', () => {
       arrow.textContent = '^';
+      isOpen = true;
     });
     
-    // Back to v when closed
-    currencySelect.addEventListener('blur', () => {
+    // When user selects an option — dropdown closes
+    currencySelect.addEventListener('change', () => {
       arrow.textContent = 'v';
+      isOpen = false;
     });
     
-    // Fallback if clicked outside
+    // If user clicks anywhere else — dropdown should be closed
     document.addEventListener('click', (e) => {
       if (!customSelect.contains(e.target)) {
         arrow.textContent = 'v';
+        isOpen = false;
       }
     });
   </script>
