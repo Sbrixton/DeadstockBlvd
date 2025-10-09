@@ -1,12 +1,10 @@
 import { addToCart, updateCartCountInDOM } from './cart-utils.js';
 import { renderMobileDrawer } from './cart.js';
-import { formatPrice } from './currency.js'; // ✅ Import formatPrice for warm-up
+import { formatPrice } from './currency.js';
 
-// ✅ Preload currency formatter to reduce cart delay
-formatPrice(1); // Pre-fetch exchange rates & symbol early
+formatPrice(1); // Warm up currency conversion
 
 document.addEventListener("DOMContentLoaded", () => {
-  // ✅ Only attach to add-to-cart buttons
   const addToCartButtons = document.querySelectorAll(".add-to-cart-btn");
 
   addToCartButtons.forEach((button) => {
@@ -19,9 +17,14 @@ document.addEventListener("DOMContentLoaded", () => {
       };
 
       addToCart(product);
-      renderMobileDrawer(); // ✅ Update drawer immediately (without opening)
+
+      // ✅ Always re-render mobile drawer after adding
+      if (typeof window.renderMobileDrawer === 'function') {
+        window.renderMobileDrawer();
+      }
     });
   });
 
   updateCartCountInDOM();
 });
+
