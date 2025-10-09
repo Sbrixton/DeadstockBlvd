@@ -28,23 +28,58 @@ async function updateAllPrices() {
 
 document.addEventListener("DOMContentLoaded", () => {
   const customSelect = document.getElementById('customSelect');
+  const selectedOption = document.getElementById('selectedOption');
   const optionsList = document.getElementById('optionsList');
+  const arrow = document.getElementById('dropdownArrow');
 
-  // Default currency
+  let isDropdownOpen = false;
+
+  // Set default currency if not already set
   if (!localStorage.getItem('selectedCurrency')) {
     setCurrency('GBP');
   }
 
-  // Custom dropdown logic
+  // ✅ Sync visible text with stored currency
+  const currencyMap = {
+    GBP: 'GBP (£)',
+    USD: 'USD ($)',
+    EUR: 'EUR (€)'
+  };
+  const currentCurrency = getCurrency();
+  selectedOption.textContent = currencyMap[currentCurrency] || 'GBP (£)';
+
+  // 🔁 Dropdown toggle
+  customSelect.addEventListener('click', () => {
+    isDropdownOpen = !isDropdownOpen;
+    optionsList.style.display = isDropdownOpen ? 'block' : 'none';
+    arrow.textContent = isDropdownOpen ? '^' : 'v';
+  });
+
+  // 🔄 Handle currency change
   optionsList.querySelectorAll('li').forEach(option => {
     option.addEventListener('click', async (e) => {
       const value = e.target.dataset.value;
+      selectedOption.textContent = currencyMap[value] || value;
+      optionsList.style.display = 'none';
+      arrow.textContent = 'v';
+      isDropdownOpen = false;
+
       setCurrency(value);
       await updateAllPrices(); // 🔥 update prices site-wide
     });
   });
 
-  // Initial render
+  // ❌ Close dropdown on outside click
+  document.addEventListener('click', (e) => {
+    if (!customSelect.contains(e.target)) {
+      optionsList.style.display = 'none';
+      arrow.textContent = 'v';
+      isDropdownOpen = false;
+    }
+  });
+
+  // ✅ Initial render
   updateAllPrices();
 });
+
 
