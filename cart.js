@@ -38,83 +38,10 @@ window.addEventListener("load", () => {
     window.location.href = "shop.html";
   });
 
-  async function render() {
-    if (!hasDesktopCart) return;
-
-    let cart = getCart();
-    cartWrapper.innerHTML = "";
-    let subtotal = 0;
-
-    if (cart.length === 0) {
-      empty.style.display = "flex";
-      section.style.display = "none";
-      checkoutBtn.style.display = "none";
-      proceedBtn.style.display = "inline-block";
-      subEl.textContent = "0.00";
-      totalEl.textContent = "0.00";
-      updateCartCountInDOM();
-      updateDrawerCheckoutState();
-      return;
-    }
-
-    empty.style.display = "none";
-    section.style.display = "block";
-    checkoutBtn.style.display = "block";
-    proceedBtn.style.display = "none";
-
-    for (const item of cart) {
-      if (!item || typeof item.price !== "number") continue;
-
-      const itemTotal = item.price * item.quantity;
-      subtotal += itemTotal;
-
-      const itemDiv = document.createElement("div");
-      itemDiv.className = "cart-item";
-
-      itemDiv.innerHTML = `
-        <img src="${item.image}" alt="${item.name}" class="cart-img">
-        <div class="cart-details">
-          <p class="cart-name">${item.name}</p>
-          <p class="cart-price">Price: 0.00</p>
-          <div class="quantity-controls">
-            <button class="qty-btn minus" data-id="${item.id}">-</button>
-            <span class="qty-num">${item.quantity}</span>
-            <button class="qty-btn plus" data-id="${item.id}">
-              <span class="plus-text">+</span>
-              <span class="plus-loader">
-                <span class="plus-spinner"></span>
-              </span>
-            </button>
-          </div>
-          <p class="cart-total">Total: 0.00</p>
-          <button class="remove-item" data-id="${item.id}">Remove</button>
-        </div>
-        <div class="limit-message" style="display:none;"></div>
-      `;
-
-      cartWrapper.appendChild(itemDiv);
-
-      formatPrice(item.price).then(formatted => {
-        itemDiv.querySelector(".cart-price").textContent = `Price: ${formatted}`;
-      });
-      formatPrice(itemTotal).then(formatted => {
-        itemDiv.querySelector(".cart-total").textContent = `Total: ${formatted}`;
-      });
-    }
-
-    formatPrice(subtotal).then(formatted => {
-      subEl.textContent = formatted;
-      totalEl.textContent = formatted;
-    });
-
-    updateCartCountInDOM();
-    updateDrawerCheckoutState();
-  }
-
   if (cartIcon && mobileDrawer) {
     cartIcon.addEventListener("click", (e) => {
       e.preventDefault();
-      renderMobileDrawer();
+      renderMobileDrawer(); // Live update drawer
       mobileDrawer.classList.add("open");
     });
   }
@@ -163,16 +90,19 @@ window.addEventListener("load", () => {
 
       saveCart(cart);
       render();
+      renderMobileDrawer(); // Live update drawer too
     }
 
     if (target.classList.contains("remove-item")) {
       cart.splice(itemIndex, 1);
       saveCart(cart);
       render();
+      renderMobileDrawer(); // Live update drawer too
     }
   });
 
   render();
+  renderMobileDrawer(); // Ensure mobile drawer always reflects correct prices
 });
 
 export async function renderMobileDrawer() {
@@ -278,7 +208,7 @@ export async function renderMobileDrawer() {
 
       saveCart(cart);
       updateCartCountInDOM();
-      renderMobileDrawer();
+      renderMobileDrawer(); // Always refresh drawer
     });
   });
 
