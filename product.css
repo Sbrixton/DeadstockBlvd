@@ -488,6 +488,14 @@ main.product-page {
   margin-top: 8px;
 }
 
+.cart-backdrop {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.3); /* Slight dark overlay */
+  z-index: 9;
+  display: none;
+}
+
 /* ========== REMOVE HOVER FOR SEARCH ICON ========== */
 .search-info a,
 .search-info a:visited,
