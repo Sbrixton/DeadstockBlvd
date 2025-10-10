@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DEADSTOCKBLVD-Shop</title>
     <link rel="stylesheet" href="base.css">
+    <link rel="stylesheet" href="product.css" />
     <link rel="stylesheet" href="style.css">
     <script type="module" src="navbar.js"></script>
     <script type="module" src="currency.js"></script>
@@ -36,10 +37,10 @@
             <button id="searchIcon">
                 <img src="SearchIcon.png" alt="Search" class="search-icon" style="height: 30px" />
             </button>
-            <div id="cartIcon" class="cart-wrapper" role="button" tabindex="0">
+            <button id="cartIcon" class="cart-wrapper" style="background: none; border: none; cursor: pointer;">
                 <img src="CartIcon.png" alt="Cart" class="cart-icon" style="height: 30px" />
                 <span id="cart-count">0</span>
-            </div>
+            </button>
         </div>
     </header>
     
@@ -138,8 +139,7 @@
                     data-name="Nike Hoodie"
                     data-price="25"
                     data-image="Nike Hoodie (1).png"
-                    data-id="3"
-                >
+                    data-id="3">
                     <img src="CartIcon.png" alt="Add to cart" class="btn-icon" style="height: 30px" />
                 </button>
             </div>
@@ -263,6 +263,7 @@
         </div>
     </footer>
 
+    <!-- Mobile Slide-in Cart Drawer -->
     <div id="mobileCartDrawer">
         <div id="mobileCartHeader">
             <h3>Your Cart</h3>
@@ -276,33 +277,222 @@
             <button id="drawerCheckoutBtn" class="checkout-bar">Checkout</button>
         </div>
     </div>
-    <script>
-      window.addEventListener("load", () => {
-        const preloader = document.getElementById("preloader");
-        if (!preloader) return;
+    <!-- 🔴 New: Backdrop for closing drawer on outside click -->
+    <div id="cartBackdrop" class="cart-backdrop"></div>
         
-        // Short delay to make sure images render properly
-        setTimeout(() => {
-          preloader.style.opacity = "0";
-          setTimeout(() => {
-            preloader.style.display = "none";
-          }, 500); // fade out transition
-        }, 300); // only wait 300ms after load
-      });
-    </script>
-    
-    <script type="module">
-      import { formatPrice, getCurrency, setCurrency } from './currency.js';
+      <!-- ✅ Policy Modal -->
+      <div id="modal-policy" class="modal" role="dialog" aria-modal="true" aria-labelledby="policy-title">
+        <div class="modal-content">
+          <span class="close" role="button" aria-label="Close Modal">&times;</span>
+          <h3 id="policy-title">Terms & Conditions</h3>
+          <p>Your policy content goes here.</p>
+        </div>
+      </div>
+      
+      <!-- ✅ Refund Policy Modal -->
+        <div id="modal-refund" class="modal" role="dialog" aria-modal="true" aria-labelledby="refund-title">
+            <div class="modal-content">
+                <span class="close" role="button" aria-label="Close Modal">&times;</span>
+                <h3 id="refund-title">Refund Policy</h3>
+                <p>No refunds. All sales are final.</p>
+            </div>
+        </div>
         
-      document.addEventListener('DOMContentLoaded', async () => {
-        const priceEls = document.querySelectorAll('.converted-price');
+        <!-- ✅ Terms & Conditions Modal -->
+        <div id="modal-terms" class="modal" role="dialog" aria-modal="true" aria-labelledby="terms-title">
+            <div class="modal-content">
+                <span class="close" role="button" aria-label="Close Modal">&times;</span>
+                <h3 id="terms-title">Terms & Conditions</h3>
+                <p>By using this site, you agree to...</p>
+            </div>
+        </div>
         
-        for (let el of priceEls) {
-          const gbp = parseFloat(el.dataset.gbp);
-          el.innerText = await formatPrice(gbp);
-        }
-      });
-    </script>
+        <!-- ✅ Terms of Service Modal -->
+        <div id="modal-service" class="modal" role="dialog" aria-modal="true" aria-labelledby="service-title">
+            <div class="modal-content">
+                <span class="close" role="button" aria-label="Close Modal">&times;</span>
+                <h3 id="service-title">Terms of Service</h3>
+                <p>Your Terms of Service content goes here.</p>
+            </div>
+        </div>
+        
+        <script>
+            window.addEventListener("load", () => {
+                const preloader = document.getElementById("preloader");
+                if (!preloader) return;
+                
+                // Short delay to make sure images render properly
+                setTimeout(() => {
+                    preloader.style.opacity = "0";
+                    setTimeout(() => {
+                        preloader.style.display = "none";
+                    }, 500); // fade out transition
+                }, 300); // only wait 300ms after load
+            });
+        </script>
+        
+      <script>
+        const customSelect = document.getElementById('customSelect');
+        const selectedOption = document.getElementById('selectedOption');
+        const arrow = document.getElementById('dropdownArrow');
+        const optionsList = document.getElementById('optionsList');
+        
+        let isDropdownOpen = false;
+        
+        // Toggle dropdown
+        customSelect.addEventListener('click', () => {
+          isDropdownOpen = !isDropdownOpen;
+          optionsList.style.display = isDropdownOpen ? 'block' : 'none';
+          arrow.textContent = isDropdownOpen ? '^' : 'v';
+        });
+        
+        // Handle option selection
+        optionsList.querySelectorAll('li').forEach(option => {
+          option.addEventListener('click', (e) => {
+            const value = e.target.dataset.value;
+            selectedOption.textContent = e.target.textContent;
+            optionsList.style.display = 'none';
+            arrow.textContent = 'v';
+            isDropdownOpen = false;
+            
+            // 👉 You can also handle currency switching logic here
+            console.log('Currency selected:', value);
+          });
+        });
+        
+        // Click outside closes dropdown
+        document.addEventListener('click', (e) => {
+          if (!customSelect.contains(e.target)) {
+            optionsList.style.display = 'none';
+            arrow.textContent = 'v';
+            isDropdownOpen = false;
+          }
+        });
+      </script>
+            
+      <script>   //new here//
+        const modalTriggers = document.querySelectorAll('[data-modal-target]');
+        const modals = document.querySelectorAll('.modal');
+        const closeButtons = document.querySelectorAll('.modal .close');
+        
+        // Open specific modal
+        modalTriggers.forEach(trigger => {
+          trigger.addEventListener('click', () => {
+            const targetId = trigger.getAttribute('data-modal-target');
+            const modal = document.getElementById(targetId);
+            if (modal) {
+              modal.style.display = 'flex';
+              document.body.style.overflow = 'hidden'; // ✅ Prevent background scroll
+            }
+          });
+        });
+        
+        // Close modal when clicking X
+        closeButtons.forEach(btn => {
+          btn.addEventListener('click', () => {
+            const modal = btn.closest('.modal');
+            modal.style.display = 'none';
+            document.body.style.overflow = ''; // ✅ Re-enable background scroll
+          });
+        });
+        
+        // Close when clicking outside modal content
+        modals.forEach(modal => {
+          modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+              modal.style.display = 'none';
+              document.body.style.overflow = ''; // ✅ Re-enable background scroll
+            }
+          });
+        });
+      </script>
+        
+      <script>
+        const readMoreLinks = document.querySelectorAll('.read-more');
+        const overlay = document.getElementById('modalOverlay');
+        const closeBtn = document.getElementById('closeBtn');
+            
+        // Open modal for any .read-more clicked
+        readMoreLinks.forEach(link => {
+          link.addEventListener('click', () => {
+            overlay.style.display = 'flex';
+          });
+        });
+      
+        // Close when clicking outside the popup
+        overlay.addEventListener('click', (e) => {
+          if (e.target === overlay) {
+            overlay.style.display = 'none';
+          }
+        });
+            
+        // Close when clicking the X
+        closeBtn.addEventListener('click', () => {
+          overlay.style.display = 'none';
+        });
+      </script>
+      
+      <script>
+        document.addEventListener('DOMContentLoaded', () => {
+          const addToCartBtn = document.getElementById('addToCartBtn');
+          const pfAmount = document.getElementById('pfAmount');
+          const pfItemName = document.getElementById('pfItemName');
+          
+          if (addToCartBtn && pfAmount && pfItemName) {
+            // Get product price & name from Add to Cart button data attributes
+            const price = addToCartBtn.getAttribute('data-price');
+            const name = addToCartBtn.getAttribute('data-name');
+            
+            // Format price to two decimals (e.g., "35.00")
+            const formattedPrice = parseFloat(price).toFixed(2);
+              
+            // Update PayFast form hidden inputs
+            pfAmount.value = formattedPrice;
+            pfItemName.value = name;
+          }
+        });
+      </script>
+        
+      <!-- ✅ Add this at the bottom, before </body> -->
+      <script type="module">
+        import {
+          setCurrency,
+          getCurrency,
+          formatPrice
+        } from './currency.js';
+        
+        document.addEventListener('DOMContentLoaded', async () => {
+          const addToCartBtn = document.getElementById("addToCartBtn");
+          const basePriceGBP = parseFloat(addToCartBtn?.dataset.price || 0);
+          const priceEl = document.getElementById("convertedPrice");
+          const selector = document.getElementById("currencySelector");
+          
+          async function updatePriceDisplay() {
+            priceEl.innerHTML = await formatPrice(basePriceGBP);
+          }
+          
+          selector.value = getCurrency();
+          selector.addEventListener('change', async (e) => {
+            setCurrency(e.target.value);
+            await updatePriceDisplay();
+          });
+          
+          await updatePriceDisplay();
+        });
+      </script>
+        
+      <script type="module">
+        import { formatPrice, getCurrency, setCurrency } from './currency.js';
+        
+        document.addEventListener('DOMContentLoaded', async () => {
+          const priceEls = document.querySelectorAll('.converted-price');
+            
+          for (let el of priceEls) {
+            const gbp = parseFloat(el.dataset.gbp);
+            el.innerText = await formatPrice(gbp);
+          }
+        });
+      </script>
 
 
     <script type="module" src="cart-utils.js"></script>
@@ -312,40 +502,4 @@
     <script type="module" src="search.js"></script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
