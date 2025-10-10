@@ -252,16 +252,36 @@
             
         </div>
     </section>
-
-    <footer class="section-p1">
-        <div class="col install">
-            <p>Secured Payment Gateways</p>
-            <img src="images/payments.png" alt="">
+        
+      <footer class="footer-flex">
+        <!-- LEFT SIDE: Currency Selector -->
+        <div class="footer-left">
+          <div class="custom-select-wrapper">
+            <label for="currencySelector" class="currency-label">Currency</label>
+            <div class="custom-select" id="customSelect">
+              <div class="selected-option" id="selectedOption">GBP (£)</div>
+              <span class="arrow" id="dropdownArrow">v</span>
+              <ul class="options" id="optionsList">
+                <li data-value="GBP">GBP (£)</li>
+                <li data-value="USD">USD ($)</li>
+                <li data-value="EUR">EUR (€)</li>
+              </ul>
+            </div>
+          </div>
         </div>
-        <div class="copyright">
-            <p>© 2025, DeadstockBlvd</p>
+        
+        <!-- RIGHT SIDE: Copy & Links -->
+        <div class="footer-right">
+          <p class="footer-copy">© 2025 DEADSTOCKBLVD</p>
+          <div class="footer-links">
+            <a href="#" class="policy-link" data-modal-target="modal-terms">T&Cs</a>
+            <a href="#" class="policy-link" data-modal-target="modal-policy">Privacy Policy</a>
+            <a href="#" class="policy-link" data-modal-target="modal-service">Terms of Service</a>
+            <a href="#" class="policy-link" data-modal-target="modal-refund">Refund Policy</a>
+            <a href="/contact.html" class="policy-link">Contact Information</a>
+          </div>
         </div>
-    </footer>
+      </footer>
 
     <!-- Mobile Slide-in Cart Drawer -->
     <div id="mobileCartDrawer">
@@ -502,4 +522,5 @@
     <script type="module" src="search.js"></script>
 </body>
 </html>
+
 
