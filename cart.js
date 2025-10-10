@@ -19,43 +19,47 @@ function updateDrawerCheckoutState() {
 }
 
 window.addEventListener("load", () => {
-  const empty = document.getElementById("emptyCart");
-  const section = document.getElementById("cartSection");
-  const cartWrapper = document.getElementById("cart-items-wrapper");
-  const subEl = document.getElementById("CartSubtotal");
-  const totalEl = document.getElementById("Total");
-  const checkoutBtn = document.getElementById("checkoutBtn");
-  const proceedBtn = document.getElementById("proceedBtn");
-
-  const hasDesktopCart = cartWrapper && subEl && totalEl;
-
   const cartIcon = document.getElementById("cartIcon");
   const mobileDrawer = document.getElementById("mobileCartDrawer");
   const closeCartDrawer = document.getElementById("closeCartDrawer");
   const drawerCheckoutBtn = document.getElementById("drawerCheckoutBtn");
+  const cartBackdrop = document.getElementById("cartBackdrop"); // 🆕
 
+  const proceedBtn = document.getElementById("proceedBtn");
   proceedBtn?.addEventListener("click", () => {
     window.location.href = "shop.html";
   });
 
+  // 🟢 Open drawer
   if (cartIcon && mobileDrawer) {
     cartIcon.addEventListener("click", (e) => {
       e.preventDefault();
-      renderMobileDrawer(); // Live update drawer
+      renderMobileDrawer();
       mobileDrawer.classList.add("open");
+      if (cartBackdrop) cartBackdrop.style.display = "block"; // Show overlay
     });
   }
 
+  // 🔴 Close drawer (X button)
   closeCartDrawer?.addEventListener("click", () => {
     mobileDrawer.classList.remove("open");
+    if (cartBackdrop) cartBackdrop.style.display = "none";
   });
 
+  // 🟠 Close drawer by clicking outside
+  cartBackdrop?.addEventListener("click", () => {
+    mobileDrawer.classList.remove("open");
+    cartBackdrop.style.display = "none";
+  });
+
+  // Checkout button
   drawerCheckoutBtn?.addEventListener("click", () => {
     const cart = getCart();
     if (cart.length === 0) return;
     window.location.href = "checkout.html";
   });
 
+  // Quantity & removal handlers
   document.addEventListener("click", (e) => {
     const target = e.target;
     const id = parseInt(target.dataset.id);
@@ -74,7 +78,6 @@ window.addEventListener("load", () => {
           target.classList.add("loading");
           messageDiv.textContent = "Only 1 item was added due to availability.";
           messageDiv.style.display = "block";
-
           setTimeout(() => {
             target.classList.remove("loading");
             messageDiv.style.display = "none";
@@ -90,19 +93,19 @@ window.addEventListener("load", () => {
 
       saveCart(cart);
       render();
-      renderMobileDrawer(); // Live update drawer too
+      renderMobileDrawer();
     }
 
     if (target.classList.contains("remove-item")) {
       cart.splice(itemIndex, 1);
       saveCart(cart);
       render();
-      renderMobileDrawer(); // Live update drawer too
+      renderMobileDrawer();
     }
   });
 
   render();
-  renderMobileDrawer(); // Ensure mobile drawer always reflects correct prices
+  renderMobileDrawer();
 });
 
 export async function renderMobileDrawer() {
@@ -208,7 +211,7 @@ export async function renderMobileDrawer() {
 
       saveCart(cart);
       updateCartCountInDOM();
-      renderMobileDrawer(); // Always refresh drawer
+      renderMobileDrawer();
     });
   });
 
