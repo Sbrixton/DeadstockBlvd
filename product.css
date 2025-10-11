@@ -660,6 +660,51 @@ main.product-page {
   color: #000;
 }
 
+@media (min-width: 641px) and (max-width: 768px) {
+  .slider {
+    width: 100%;
+    overflow: visible;
+    position: relative;
+  }
+
+  .main-img-wrapper {
+    width: 100%;
+    height: auto;
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .main-img {
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
+  }
+
+  .nav-arrow {
+    display: block !important;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 28px;
+    padding: 10px 14px;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 10;
+  }
+
+  #prevSlide {
+    left: 8px;
+  }
+
+  #nextSlide {
+    right: 8px;
+  }
+}
+
+
 /* ========== MOBILE NAVBAR + SEARCH + RECOMMENDATION FIXES ========== */
 @media (max-width: 768px) {
   html, body {
