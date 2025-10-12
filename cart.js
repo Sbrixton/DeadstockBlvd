@@ -23,43 +23,38 @@ window.addEventListener("load", () => {
   const mobileDrawer = document.getElementById("mobileCartDrawer");
   const closeCartDrawer = document.getElementById("closeCartDrawer");
   const drawerCheckoutBtn = document.getElementById("drawerCheckoutBtn");
-  const cartBackdrop = document.getElementById("cartBackdrop"); // 🆕
+  const cartBackdrop = document.getElementById("cartBackdrop");
 
   const proceedBtn = document.getElementById("proceedBtn");
   proceedBtn?.addEventListener("click", () => {
     window.location.href = "shop.html";
   });
 
-  // 🟢 Open drawer
   if (cartIcon && mobileDrawer) {
     cartIcon.addEventListener("click", (e) => {
       e.preventDefault();
       renderMobileDrawer();
       mobileDrawer.classList.add("open");
-      if (cartBackdrop) cartBackdrop.style.display = "block"; // Show overlay
+      if (cartBackdrop) cartBackdrop.style.display = "block";
     });
   }
 
-  // 🔴 Close drawer (X button)
   closeCartDrawer?.addEventListener("click", () => {
     mobileDrawer.classList.remove("open");
     if (cartBackdrop) cartBackdrop.style.display = "none";
   });
 
-  // 🟠 Close drawer by clicking outside
   cartBackdrop?.addEventListener("click", () => {
     mobileDrawer.classList.remove("open");
     cartBackdrop.style.display = "none";
   });
 
-  // Checkout button
   drawerCheckoutBtn?.addEventListener("click", () => {
     const cart = getCart();
     if (cart.length === 0) return;
     window.location.href = "checkout.html";
   });
 
-  // Quantity & removal handlers
   document.addEventListener("click", (e) => {
     const target = e.target;
     const id = parseInt(target.dataset.id);
@@ -92,19 +87,16 @@ window.addEventListener("load", () => {
       }
 
       saveCart(cart);
-      render();
       renderMobileDrawer();
     }
 
     if (target.classList.contains("remove-item")) {
       cart.splice(itemIndex, 1);
       saveCart(cart);
-      render();
       renderMobileDrawer();
     }
   });
 
-  render();
   renderMobileDrawer();
 });
 
@@ -144,11 +136,15 @@ export async function renderMobileDrawer() {
     const itemDiv = document.createElement("div");
     itemDiv.className = "cart-item";
 
+    // 🆕 Show size under price (optional chaining for safety)
+    const sizeDisplay = item.size ? `<p class="cart-size">Size: ${item.size}</p>` : "";
+
     itemDiv.innerHTML = `
       <img src="${item.image}" alt="${item.name}" class="cart-img" />
       <div class="cart-details">
         <p class="cart-name">${item.name}</p>
         <p class="cart-price">Price: 0.00</p>
+        ${sizeDisplay}
         <div class="quantity-controls">
           <button class="qty-btn minus" data-id="${item.id}">−</button>
           <span class="qty-num">${item.quantity}</span>
