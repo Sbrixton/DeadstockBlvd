@@ -509,9 +509,8 @@ main.product-page {
   max-width: 600px;
   margin: 5rem auto;
   text-align: center;
-  padding: 2rem;
+  padding: 32px;
   background: white;
-  border-radius: 12px;
   box-shadow: 0 5px 25px rgba(0, 0, 0, 0.05);
 }
 
@@ -1107,8 +1106,8 @@ main.product-page {
   }
   
   .success-wrapper {
-    margin: 2rem 1rem;
-    padding: 1.5rem;
+    height: 700px;
+    padding: 100px;
     text-align: center;
   }
 
