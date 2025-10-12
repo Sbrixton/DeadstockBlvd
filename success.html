@@ -19,20 +19,13 @@
         <a href="index.html" class="logo">
           <img src="DEADSTOCK (3).png" alt="DeadstockBlvd Logo" height="50" />
         </a>
-        
-        <div class="nav-wrapper" id="navWrapper">
-          <nav id="navbar">
-            <i id="close" class="fas fa-times"></i>
-          </nav>
-        </div>
-        <i id="bar" class="fas fa-bars"></i>
       </div>
       
       <div class="nav-right">
-        <div id="cartIcon" class="cart-wrapper" role="button" tabindex="0">
-          <img src="CartIcon.png" alt="Cart" class="cart-icon" style="height: 30px" />
+        <button id="cartIcon" class="cart-wrapper icon-button">
+          <img src="CartIcon.png" alt="Cart" class="cart-icon" />
           <span id="cart-count">0</span>
-        </div>
+        </button>
       </div>
     </header>
     
@@ -125,26 +118,6 @@
         }
       });
     </script>
-    
-    <style>
-      /* === Full height layout to push footer down === */
-      html, body {
-        height: 100%;
-        margin: 0;
-        padding: 0;
-      }
-      
-      .page-wrapper {
-        display: flex;
-        flex-direction: column;
-        min-height: 100vh; /* full viewport height */
-      }
-      
-      main.success-wrapper {
-        flex: 1; /* grows to fill space */
-      }
-      
-    </style>
     
     <script type="module" src="search.js"></script>
     <script type="module" src="product.js"></script>
