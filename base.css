@@ -46,6 +46,24 @@ body {
   display: block;
 }
 
+@media (max-width: 480px) {
+  .logo-img {
+    height: 40px;
+  }
+}
+
+@media (max-width: 360px) {
+  .logo-img {
+    height: 35px;
+  }
+}
+
+/* ========== LOGO ========== */
+.logo-img {
+  height: 50px;
+  display: block;
+}
+
 #navbar {
   display: flex;
   gap: 30px;
