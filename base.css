@@ -57,6 +57,29 @@ body {
   font-weight: 500;
 }
 
+/* ========== ICONS & BUTTONS ========== */
+
+.search-icon,
+.cart-icon,
+.btn-icon {
+  height: 30px;
+}
+
+.icon-button {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+@media (max-width: 480px) {
+  .search-icon,
+  .cart-icon,
+  .btn-icon {
+    height: 24px;
+  }
+}
+
 #navbar a:hover,
 #navbar a.active {
   color: #afafaf;
