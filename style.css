@@ -567,6 +567,14 @@ p {
     color: #222; /* Dark color for visibility on white navbar */
   }
   
+  /* Custom Hamburger PNG Styling */
+  #bar.hamburger-icon {
+    display: none; /* hidden by default, shown on mobile below */
+    height: 28px;
+    width: 28px;
+    cursor: pointer;
+  }
+  
   /* Search and cart on right */
   .nav-right {
     display: flex;
@@ -1074,16 +1082,17 @@ nav a.active::after {
     flex-wrap: nowrap;
   }
   
-  /* Show hamburger */
-  #bar {
+  #bar.hamburger-icon {
+    display: block;
     position: absolute;
     left: 15px;
-    display: block; /* ← This was missing */
     top: 50%;
     transform: translateY(-50%);
-    color: #222;
-    font-size: 24px;
-    cursor: pointer;
+  }
+
+  /* Hide font-awesome fallback if still present */
+  .fas.fa-bars {
+    display: none !important;
   }
   
   .nav-left {
@@ -1288,3 +1297,4 @@ nav a.active::after {
     font-weight: bold;
   }
 }
+
