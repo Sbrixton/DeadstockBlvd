@@ -479,16 +479,26 @@ main.product-page {
   text-align: center;
 }
 
-/* Remove Button */
-#mobileCartItems .remove-item-mobile {
-  position: absolute;
-  top: 8px;
-  right: 0;
-  background: none;
+.remove-item-mobile {
+  background: transparent;
   border: none;
-  font-size: 18px;
-  color: #c00;
+  padding: 0;
   cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.remove-item-mobile .bin-icon {
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+  filter: invert(0.4); /* optional */
+  transition: transform 0.2s ease;
+}
+
+.remove-item-mobile:hover .bin-icon {
+  transform: scale(1.15);
+  filter: invert(0); /* optional */
 }
 
 /* Footer */
