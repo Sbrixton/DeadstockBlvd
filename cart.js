@@ -8,8 +8,7 @@ import {
   formatPrice
 } from "./currency.js";
 
-// Preload currency formatting
-formatPrice(1);
+formatPrice(1); // preload formatting
 
 function updateDrawerCheckoutState() {
   const cart = getCart();
@@ -24,8 +23,8 @@ window.addEventListener("load", () => {
   const closeCartDrawer = document.getElementById("closeCartDrawer");
   const drawerCheckoutBtn = document.getElementById("drawerCheckoutBtn");
   const cartBackdrop = document.getElementById("cartBackdrop");
-
   const proceedBtn = document.getElementById("proceedBtn");
+
   proceedBtn?.addEventListener("click", () => {
     window.location.href = "shop.html";
   });
@@ -46,7 +45,7 @@ window.addEventListener("load", () => {
 
   cartBackdrop?.addEventListener("click", () => {
     mobileDrawer.classList.remove("open");
-    cartBackdrop.style.display = "none";
+    if (cartBackdrop) cartBackdrop.style.display = "none";
   });
 
   drawerCheckoutBtn?.addEventListener("click", () => {
@@ -64,33 +63,35 @@ window.addEventListener("load", () => {
     const itemIndex = cart.findIndex(i => i.id === id);
     if (itemIndex === -1) return;
 
-    if (target.classList.contains("qty-btn")) {
-      const itemDiv = target.closest(".cart-item");
-      const messageDiv = itemDiv.querySelector(".limit-message");
+    const itemDiv = target.closest(".cart-item");
+    const messageDiv = itemDiv?.parentElement?.querySelector(".limit-message");
 
+    if (target.classList.contains("qty-btn")) {
       if (target.classList.contains("plus")) {
+        // If only 1 allowed, show message
         if (cart[itemIndex].quantity >= 1) {
           target.classList.add("loading");
-          messageDiv.textContent = "Only 1 item was added due to availability.";
-          messageDiv.style.display = "block";
+          if (messageDiv) {
+            messageDiv.textContent = "Only 1 item was added due to availability.";
+            messageDiv.style.display = "block";
+          }
           setTimeout(() => {
             target.classList.remove("loading");
-            messageDiv.style.display = "none";
+            if (messageDiv) messageDiv.style.display = "none";
           }, 2000);
           return;
         }
         cart[itemIndex].quantity += 1;
-      } else if (target.classList.contains("minus")) {
+      } else {
         cart[itemIndex].quantity = Math.max(1, cart[itemIndex].quantity - 1);
-        messageDiv.style.display = "none";
+        if (messageDiv) messageDiv.style.display = "none";
         target.classList.remove("loading");
       }
-
       saveCart(cart);
       renderMobileDrawer();
     }
 
-    if (target.classList.contains("remove-item")) {
+    if (target.classList.contains("remove-item-mobile")) {
       cart.splice(itemIndex, 1);
       saveCart(cart);
       renderMobileDrawer();
@@ -136,7 +137,7 @@ export async function renderMobileDrawer() {
     const itemDiv = document.createElement("div");
     itemDiv.className = "cart-item";
 
-    // 🆕 Show size under price (optional chaining for safety)
+    // Show size if exists
     const sizeDisplay = item.size ? `<p class="cart-size">Size: ${item.size}</p>` : "";
 
     itemDiv.innerHTML = `
@@ -168,8 +169,10 @@ export async function renderMobileDrawer() {
 
     mobileCartItems.appendChild(wrapper);
 
+    // Format price properly
     formatPrice(item.price).then(formatted => {
-      itemDiv.querySelector(".cart-price").textContent = `Price: ${formatted}`;
+      const priceEl = itemDiv.querySelector(".cart-price");
+      if (priceEl) priceEl.textContent = `Price: ${formatted}`;
     });
   }
 
@@ -177,31 +180,34 @@ export async function renderMobileDrawer() {
     drawerSubtotal.textContent = formatted;
   });
 
+  // Setup quantity and removal buttons
   mobileCartItems.querySelectorAll('.qty-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       const id = parseInt(btn.dataset.id);
       let cart = getCart();
-      const itemIndex = cart.findIndex(i => i.id === id);
-      if (itemIndex === -1) return;
+      const idx = cart.findIndex(i => i.id === id);
+      if (idx === -1) return;
 
       const itemDiv = btn.closest(".cart-item");
-      const messageDiv = itemDiv.parentElement.querySelector(".limit-message");
+      const messageDiv = itemDiv?.parentElement?.querySelector(".limit-message");
 
       if (btn.classList.contains('plus')) {
-        if (cart[itemIndex].quantity >= 1) {
+        if (cart[idx].quantity >= 1) {
           btn.classList.add("loading");
-          messageDiv.textContent = "Only 1 item was added due to availability.";
-          messageDiv.style.display = "block";
+          if (messageDiv) {
+            messageDiv.textContent = "Only 1 item was added due to availability.";
+            messageDiv.style.display = "block";
+          }
           setTimeout(() => {
             btn.classList.remove("loading");
-            messageDiv.style.display = "none";
+            if (messageDiv) messageDiv.style.display = "none";
           }, 2000);
           return;
         }
-        cart[itemIndex].quantity++;
-      } else if (btn.classList.contains('minus')) {
-        cart[itemIndex].quantity = Math.max(1, cart[itemIndex].quantity - 1);
-        messageDiv.style.display = "none";
+        cart[idx].quantity++;
+      } else {
+        cart[idx].quantity = Math.max(1, cart[idx].quantity - 1);
+        if (messageDiv) messageDiv.style.display = "none";
         btn.classList.remove("loading");
       }
 
@@ -224,4 +230,5 @@ export async function renderMobileDrawer() {
   updateCartCountInDOM();
   updateDrawerCheckoutState();
 }
+
 
