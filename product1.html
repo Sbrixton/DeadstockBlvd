@@ -629,27 +629,17 @@
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const addToCartBtn = document.getElementById('addToCartBtn');
-      const pfAmount = document.getElementById('pfAmount');
-      const pfItemName = document.getElementById('pfItemName');
 
-      if (addToCartBtn && pfAmount && pfItemName) {
-        const price = addToCartBtn.getAttribute('data-price');
-        const name = addToCartBtn.getAttribute('data-name');
+      if (addToCartBtn) {
+        const product = {
+          id: parseInt(addToCartBtn.getAttribute('data-id')),
+          name: addToCartBtn.getAttribute('data-name'),
+          price: parseFloat(addToCartBtn.getAttribute('data-price')),
+          image: addToCartBtn.getAttribute('data-image'),
+          size: addToCartBtn.getAttribute('data-size') || 'N/A'
+        };
 
-        const formattedPrice = parseFloat(price).toFixed(2);
-        pfAmount.value = formattedPrice;
-        pfItemName.value = name;
-
-        // ✅ Add to cart with size
         addToCartBtn.addEventListener('click', () => {
-          const product = {
-            id: parseInt(addToCartBtn.getAttribute('data-id')),
-            name: name,
-            price: parseFloat(price),
-            image: addToCartBtn.getAttribute('data-image'),
-            size: addToCartBtn.getAttribute('data-size') || 'N/A' // fallback if size is missing
-          };
-
           addToCart(product);
         });
       }
