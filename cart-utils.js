@@ -1,3 +1,4 @@
+// cart-utils.js
 export function getCart() {
   return JSON.parse(localStorage.getItem("cart") || "[]");
 }
@@ -18,12 +19,6 @@ export function updateCartCountInDOM() {
   }
 }
 
-// Optional toast function (disabled for better UX)
-export function showToast(message) {
-  // alert(message); // Disabled
-}
-
-// ✅ Updated to track product by both ID and SIZE
 export function addToCart(product) {
   const cart = getCart();
   const existing = cart.find(item => item.id === product.id && item.size === product.size);
@@ -38,4 +33,5 @@ export function addToCart(product) {
   saveCart(cart);
   updateCartCountInDOM();
 }
+
 
