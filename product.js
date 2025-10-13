@@ -1,3 +1,4 @@
+// product.js
 import {
   getCart,
   saveCart,
@@ -18,10 +19,13 @@ document.addEventListener("DOMContentLoaded", () => {
       price: parseFloat(addToCartBtn.dataset.price),
       quantity: 1,
       image: addToCartBtn.dataset.image,
-      size: addToCartBtn.dataset.size || "N/A"  // ✅ Add this line
+      size: addToCartBtn.dataset.size || "N/A" // ✅ Include size from data attribute
     };
 
-    const index = cart.findIndex((item) => item.id === product.id);
+    const index = cart.findIndex(
+      (item) => item.id === product.id && item.size === product.size // ✅ check both ID & size
+    );
+
     if (index !== -1) {
       cart[index].quantity += 1;
     } else {
@@ -50,7 +54,6 @@ document.addEventListener("DOMContentLoaded", () => {
   if (mainImage && thumbnails.length > 0) {
     let currentIndex = 0;
 
-    // ===== Create non-clickable dots =====
     let dots = [];
     if (dotContainer) {
       dots = thumbnails.map((_, i) => {
@@ -113,7 +116,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     function handleSwipe() {
-      const threshold = 40; // Minimum px to count as a swipe
+      const threshold = 40;
       const swipeDistance = touchEndX - touchStartX;
 
       if (swipeDistance > threshold) {
@@ -135,7 +138,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (!pfAmountInput || !pfCurrencyInput) return;
 
-    const basePriceGBP = parseFloat(pfAmountInput.dataset.basePrice); // Get GBP value from data attribute
+    const basePriceGBP = parseFloat(pfAmountInput.dataset.basePrice);
 
     try {
       const amountZAR = await convertFromGBP(basePriceGBP, "ZAR");
