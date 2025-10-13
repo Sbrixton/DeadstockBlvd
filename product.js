@@ -18,6 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
       price: parseFloat(addToCartBtn.dataset.price),
       quantity: 1,
       image: addToCartBtn.dataset.image,
+      size: addToCartBtn.dataset.size || "N/A"  // ✅ Add this line
     };
 
     const index = cart.findIndex((item) => item.id === product.id);
