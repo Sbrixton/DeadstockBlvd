@@ -434,6 +434,25 @@ main.product-page {
   color: #444;
   margin-bottom: 8px;
 }
+/* ===== Cart Size: Mobile & Desktop Unified Styling ===== */
+.cart-size {
+  font-size: 13px;
+  color: #666;
+  margin-top: -4px;
+  margin-bottom: 8px;
+  line-height: 1.4;
+}
+
+/* Mobile-specific tweaks if needed */
+@media (max-width: 768px) {
+  #mobileCartItems .cart-size {
+    font-size: 13px;
+    color: #777;
+    margin-top: -4px;
+    margin-bottom: 6px;
+  }
+}
+
 #mobileCartItems .quantity-controls {
   display: flex;
   align-items: center;
@@ -891,7 +910,14 @@ main.product-page {
     font-size: 1.2rem;
     border-bottom: 1px solid #ddd;
   }
-  
+
+  #mobileCartItems .cart-size {
+    font-size: 13px;
+    color: #777;
+    margin-top: -4px;
+    margin-bottom: 6px;
+  }
+
   #closeCartDrawer {
     background: none;
     border: none;
