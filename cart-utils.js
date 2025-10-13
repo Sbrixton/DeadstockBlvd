@@ -18,14 +18,15 @@ export function updateCartCountInDOM() {
   }
 }
 
-// Removed showToast alert to avoid multiple clicks adding duplicates
+// Optional toast function (disabled for better UX)
 export function showToast(message) {
-  // alert(message); // Disabled for UX improvement
+  // alert(message); // Disabled
 }
 
+// ✅ Updated to track product by both ID and SIZE
 export function addToCart(product) {
   const cart = getCart();
-  const existing = cart.find(item => item.id === product.id);
+  const existing = cart.find(item => item.id === product.id && item.size === product.size);
 
   if (existing) {
     existing.quantity += 1;
@@ -36,8 +37,5 @@ export function addToCart(product) {
 
   saveCart(cart);
   updateCartCountInDOM();
-  // Removed showToast call
-  // showToast(`${product.name} added to cart!`);
 }
-
 
