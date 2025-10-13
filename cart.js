@@ -158,7 +158,7 @@ export async function renderMobileDrawer() {
         </div>
       </div>
       <button class="remove-item-mobile" data-id="${item.id}">
-        <img src="Trash1.png" alt="Remove" class="bin-icon" />
+        <img src="Trash2.png" alt="Remove" class="bin-icon" />
       </button>
     `;
 
