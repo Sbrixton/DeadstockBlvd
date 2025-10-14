@@ -351,3 +351,23 @@ html, body {
     box-sizing: border-box;
   }
 }
+
+@media (max-width: 480px) {
+  .checkout-agreement {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    font-size: 13px;
+    padding: 8px 10px;
+    line-height: 1.4;
+  }
+
+  .checkout-agreement input[type="checkbox"] {
+    transform: scale(1.1);
+  }
+
+  .checkout-agreement a {
+    font-size: 13px;
+  }
+}
+
