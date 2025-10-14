@@ -61,6 +61,12 @@ p {
   margin: 40px 0;
 }
 
+.btn-icon {
+  width: 30px;
+  height: 30px;
+}
+
+
 #searchBarContainer {
   position: fixed;
   top: 70px;
@@ -1349,6 +1355,7 @@ nav a.active::after {
   }
 
 }
+
 
 
 
