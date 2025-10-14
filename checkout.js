@@ -1,10 +1,11 @@
 import { getCurrency, formatPrice, convertFromGBP } from "./currency.js";
+import { updateCartCountInDOM } from "./cart-utils.js"; // ✅ Import from shared utility
 
 document.addEventListener("DOMContentLoaded", async () => {
   console.log("[checkout.js] Page loaded");
 
   const cart = JSON.parse(localStorage.getItem("cart") || "[]");
-  updateCartCountInDOM();
+  updateCartCountInDOM(); // ✅ Uses the imported function
 
   const subtotalElement = document.getElementById("checkoutSubtotal");
   const topSubtotal = document.getElementById("orderSummarySubtotal");
@@ -141,16 +142,4 @@ async function renderCheckoutProducts(cart) {
   console.log("[checkout.js] Rendered checkout products:", cart);
 }
 
-// Update cart icon counter
-function updateCartCountInDOM() {
-  const cart = JSON.parse(localStorage.getItem("cart") || "[]");
-  const cartCount = document.getElementById("cart-count");
-  const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
-
-  if (cartCount) {
-    cartCount.textContent = totalItems;
-  } else {
-    console.warn("[checkout.js] #cart-count element not found.");
-  }
-}
 
