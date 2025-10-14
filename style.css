@@ -620,6 +620,11 @@ p {
   }
 }
 
+.btn-icon {
+  width: 30px;
+  height: 30px;
+}
+
 /* 3 products per row: 700px to 1000px */
 @media (max-width: 1000px) and (min-width: 700px) {
   .pro-container {
@@ -1344,6 +1349,7 @@ nav a.active::after {
   }
 
 }
+
 
 
 
