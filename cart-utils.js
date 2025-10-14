@@ -1,4 +1,5 @@
 // cart-utils.js
+
 export function getCart() {
   return JSON.parse(localStorage.getItem("cart") || "[]");
 }
@@ -14,6 +15,7 @@ export function updateCartCountInDOM() {
 
   if (cartCount) {
     cartCount.textContent = totalItems;
+    cartCount.style.display = totalItems > 0 ? 'inline-block' : 'none';
   } else {
     console.warn("[cart-utils] #cart-count element not found");
   }
@@ -33,5 +35,6 @@ export function addToCart(product) {
   saveCart(cart);
   updateCartCountInDOM();
 }
+
 
 
