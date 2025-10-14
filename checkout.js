@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     console.warn("[checkout.js] Error converting subtotal to ZAR:", err);
   }
 
-  // Terms & Conditions Checkbox + Overlay
+  // ✅ Terms & Conditions Checkbox + Overlay
   const checkbox = document.getElementById("termsCheckbox");
   const overlay = document.getElementById("pageOverlay");
   const modal = document.getElementById("termsModal");
@@ -45,7 +45,13 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   if (checkbox && overlay) {
     checkbox.addEventListener("change", () => {
-      overlay.style.display = checkbox.checked ? "none" : "block";
+      if (checkbox.checked) {
+        overlay.style.display = "none";
+        document.querySelector('.checkout-agreement').style.display = 'none';
+      } else {
+        overlay.style.display = "block";
+        document.querySelector('.checkout-agreement').style.display = 'inline-flex';
+      }
     });
   }
 
@@ -76,7 +82,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
   }
 
-  // Mobile Order Summary Toggle
+  // ✅ Mobile Order Summary Toggle
   const toggleText = document.getElementById("orderSummaryToggleText");
   const toggleArrow = document.getElementById("orderSummaryArrow");
   const summarySection = document.getElementById("checkoutRightSection");
@@ -147,3 +153,4 @@ function updateCartCountInDOM() {
     console.warn("[checkout.js] #cart-count element not found.");
   }
 }
+
