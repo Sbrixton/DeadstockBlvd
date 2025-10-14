@@ -62,13 +62,9 @@ p {
 }
 
 .btn-icon {
-  diplay: inline-block;
+  display: inline-block;
   width: 30px;
   height: 30px;
-  background-image: url('CartIcon.png');
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
 }
 
 #searchBarContainer {
@@ -1359,9 +1355,4 @@ nav a.active::after {
   }
 
 }
-
-
-
-
-
 
