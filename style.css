@@ -62,10 +62,14 @@ p {
 }
 
 .btn-icon {
+  diplay: inline-block;
   width: 30px;
   height: 30px;
+  background-image: url('CartIcon.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
 }
-
 
 #searchBarContainer {
   position: fixed;
@@ -624,11 +628,6 @@ p {
   body.sticky-footer main {
     flex-grow: 1;
   }
-}
-
-.btn-icon {
-  width: 30px;
-  height: 30px;
 }
 
 /* 3 products per row: 700px to 1000px */
@@ -1283,6 +1282,11 @@ nav a.active::after {
     height: 28px;
   }
   
+  .btn-icon {
+    width: 24px;
+    height: 24px;
+  }
+  
   .shop-grid .pro {
     padding: 4px;
     background: #fff;
@@ -1355,6 +1359,7 @@ nav a.active::after {
   }
 
 }
+
 
 
 
