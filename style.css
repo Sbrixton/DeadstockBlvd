@@ -1388,5 +1388,92 @@ nav a.active::after {
 
 }
 
+@media (max-width: 369px) and (min-width: 200px) {
+  /* Typography */
+  h1, h2 {
+    font-size: 20px;
+  }
+
+  .pro-container {
+    padding: 10px;
+    gap: 12px;
+    display: grid;
+    grid-template-columns: 1fr; /* 1 product per row */
+  }
+
+  .pro-container .product-img {
+    height: 180px;
+  }
+
+  .pro-container .des h5,
+  .pro-container .des h4 {
+    font-size: 12px;
+  }
+
+  .pro-container .btn-icon,
+  .btn-icon {
+    width: 18px;
+    height: 18px;
+  }
+
+  /* Navbar adjustments */
+  .navbar {
+    padding: 20px 10px;
+    flex-direction: column;
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .nav-right {
+    gap: 10px;
+    right: 10px;
+  }
+
+  .logo {
+    width: 90px;
+  }
+
+  #header {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px 16px;
+  }
+
+  #bar.hamburger-icon {
+    height: 24px;
+  }
+
+  #close {
+    font-size: 26px;
+  }
+
+  /* Shop cards / grid */
+  .shop-grid .product-img {
+    height: 180px;
+  }
+
+  .shop-grid .des h5 {
+    font-size: 12px;
+  }
+
+  .shop-grid .des h4 {
+    font-size: 13px;
+    font-weight: bold;
+  }
+
+  .shop-grid .pro,
+  .pro-container .pro {
+    padding: 4px;
+    background: #fff;
+    border-radius: 2px;
+    box-sizing: border-box;
+  }
+
+  /* Fix overflow and scale */
+  body {
+    overflow-x: hidden;
+  }
+}
+
 
 
