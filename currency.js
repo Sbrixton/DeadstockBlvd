@@ -1,6 +1,6 @@
 // currency.js
 
-const API_KEY = 'c483f69d404b3072a225d9bb';
+const API_KEY = '32dfb5b53cae68984e1edfe0';
 const BASE_CURRENCY = 'GBP';
 
 const SYMBOLS = {
