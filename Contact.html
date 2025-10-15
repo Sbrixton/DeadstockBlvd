@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Contact</title>
   <link rel="stylesheet" href="base.css">
+  <link rel="stylesheet" href="product.css">
   <link rel="stylesheet" href="style.css"> 
   <script type="module" src="cart-utils.js"></script>
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"/>
@@ -17,7 +18,7 @@
     <header class="navbar">
       <div class="nav-left">
         <a href="index.html" class="logo">
-          <img src="DEADSTOCK (3).png" alt="DeadstockBlvd Logo" height="50" />
+          <img src="DEADSTOCK (3).png" alt="DeadstockBlvd Logo" class="logo-img" />
         </a>
         <div class="nav-wrapper" id="navWrapper">
           <nav id="navbar">
@@ -27,16 +28,16 @@
             <a href="Contact.html" class="active">Contact</a>
           </nav>
         </div>
-        <i id="bar" class="fas fa-bars"></i>
+        <img id="bar" src="Hamburger.png" alt="Menu" class="hamburger-icon" />
       </div>
       <div class="nav-right">
-        <button id="searchIcon">
-          <img src="SearchIcon.png" alt="Search" class="search-icon" style="height: 30px" />
+        <button id="searchIcon" class="icon-button">
+          <img src="SearchIcon.png" alt="Search" class="search-icon" />
         </button>
-        <div id="cartIcon" class="cart-wrapper" role="button" tabindex="0">
-          <img src="CartIcon.png" alt="Cart" class="cart-icon" style="height: 30px" />
+        <button id="cartIcon" class="cart-wrapper icon-button">
+          <img src="CartIcon.png" alt="Cart" class="cart-icon" />
           <span id="cart-count">0</span>
-        </div>
+        </button>
       </div>
     </header>
 
@@ -113,16 +114,89 @@
       
     </main>
     
-    <!-- ========== FOOTER ========== -->
-    <footer class="section-p1">
-      <div class="col install">
-        <p>Secured Payment Gateways</p>
-        <img src="Downloads/payments.PNG" alt="Payment Methods">
+    <footer class="footer-flex">
+      <!-- LEFT SIDE: Currency Selector -->
+      <div class="footer-left">
+        <div class="custom-select-wrapper">
+          <label for="currencySelector" class="currency-label">Currency</label>
+          <div class="custom-select" id="customSelect">
+            <div class="selected-option" id="selectedOption">GBP (£)</div>
+            <span class="arrow" id="dropdownArrow">v</span>
+            <ul class="options" id="optionsList">
+              <li data-value="GBP">GBP (£)</li>
+              <li data-value="USD">USD ($)</li>
+              <li data-value="EUR">EUR (€)</li>
+            </ul>
+          </div>
+        </div>
       </div>
-      <div class="copyright">
-        <p>© 2025, DeadstockBlvd</p>
+      
+      <!-- RIGHT SIDE: Copy & Links -->
+      <div class="footer-right">
+        <p class="footer-copy">© 2025 DEADSTOCKBLVD</p>
+        <div class="footer-links">
+          <a href="#" class="policy-link" data-modal-target="modal-terms">T&Cs</a>
+          <a href="#" class="policy-link" data-modal-target="modal-policy">Privacy Policy</a>
+          <a href="#" class="policy-link" data-modal-target="modal-service">Terms of Service</a>
+          <a href="#" class="policy-link" data-modal-target="modal-refund">Refund Policy</a>
+          <a href="/contact.html" class="policy-link">Contact Information</a>
+        </div>
       </div>
     </footer>
+    
+    <!-- ✅ Policy Modal -->
+    <div id="modal-policy" class="modal" role="dialog" aria-modal="true" aria-labelledby="policy-title">
+      <div class="modal-content">
+        <span class="close" role="button" aria-label="Close Modal">&times;</span>
+        <h3 id="policy-title">Terms & Conditions</h3>
+        <p>Your policy content goes here.</p>
+      </div>
+    </div>
+    
+    <!-- ✅ Refund Policy Modal -->
+    <div id="modal-refund" class="modal" role="dialog" aria-modal="true" aria-labelledby="refund-title">
+      <div class="modal-content">
+        <span class="close" role="button" aria-label="Close Modal">&times;</span>
+        <h3 id="refund-title">Refund Policy</h3>
+        <p>No refunds. All sales are final.</p>
+      </div>
+    </div>
+    
+    <!-- ✅ Terms & Conditions Modal -->
+    <div id="modal-terms" class="modal" role="dialog" aria-modal="true" aria-labelledby="terms-title">
+      <div class="modal-content">
+        <span class="close" role="button" aria-label="Close Modal">&times;</span>
+        <h3 id="terms-title">Terms & Conditions</h3>
+        <p>By using this site, you agree to...</p>
+      </div>
+    </div>
+    
+    <!-- ✅ Terms of Service Modal -->
+    <div id="modal-service" class="modal" role="dialog" aria-modal="true" aria-labelledby="service-title">
+      <div class="modal-content">
+        <span class="close" role="button" aria-label="Close Modal">&times;</span>
+        <h3 id="service-title">Terms of Service</h3>
+        <p>Your Terms of Service content goes here.</p>
+      </div>
+    </div>
+      
+      <!-- Mobile Slide-in Cart Drawer -->
+    <div id="mobileCartDrawer">
+        <div id="mobileCartHeader">
+            <h3>Your Cart</h3>
+            <button id="closeCartDrawer">&times;</button>
+        </div>
+        <div id="mobileCartItems"></div>
+        <div id="mobileCartFooter">
+            <div class="footer-totals">
+                <p>Subtotal: <span id="drawerCartSubtotal">0.00</span></p>
+            </div>
+            <button id="drawerCheckoutBtn" class="checkout-bar">Checkout</button>
+        </div>
+    </div>
+    
+    <!-- 🔴 New: Backdrop for closing drawer on outside click -->
+    <div id="cartBackdrop" class="cart-backdrop"></div>
     
     <!-- Mobile Slide-in Cart Drawer -->
     <div id="mobileCartDrawer">
