@@ -323,15 +323,6 @@ main.product-page {
   color: #afafaf;
 }
 
-/* Make sure nav-wrapper is visible on desktop */
-.nav-wrapper {
-  display: flex;
-  align-items: center;
-  gap: 30px;
-  flex: 1;
-  justify-content: flex-start;
-}
-
 /* Show hamburger and close icons only on mobile */
 #bar,
 #close {
