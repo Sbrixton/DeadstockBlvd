@@ -1061,12 +1061,91 @@ nav a.active::after {
 
 /* ========== RESPONSIVE DESIGN ========== */
 @media (max-width: 768px) {
-  #header {
+  .section-p1 {
     padding: 20px;
   }
   
-  .section-p1 {
-    padding: 20px;
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    padding: 20px 16px;
+    background: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  }
+
+  .nav-left {
+    display: flex;
+    align-items: center;
+    flex: 1;
+  }
+
+  #bar.hamburger-icon {
+    display: block;
+    height: 28px;
+    margin-right: 16px;
+  }
+
+  .logo {
+    margin: 0 auto;
+    position: relative;
+    transform: none;
+    left: auto;
+  }
+
+  .logo-img {
+    height: 32px;
+    display: block;
+  }
+
+  .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-shrink: 0;
+  }
+
+  .nav-wrapper {
+    position: fixed;
+    top: 0;
+    left: -60%;
+    width: 60%;
+    height: 100vh;
+    background: rgba(255, 255, 255, 0.95);
+    z-index: 998;
+    transition: left 0.3s ease;
+    box-shadow: 4px 0 10px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .nav-wrapper.active {
+    left: 0;
+  }
+
+  #navbar {
+    display: flex;
+    flex-direction: column;
+    padding: 80px 20px 30px;
+    gap: 20px;
+  }
+
+  #navbar a {
+    color: #222;
+    text-decoration: none;
+    font-weight: 600;
+  }
+
+  #close {
+    display: block;
+    font-size: 26px;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    color: #222;
+    z-index: 1001;
+    cursor: pointer;
   }
   
   .shop-card {
@@ -1105,120 +1184,6 @@ nav a.active::after {
     font-size: 14px;
     font-weight: bold;
     margin: 0;
-  }
-  
-  .navbar {
-    padding: 40px 0px;
-    flex-wrap: nowrap;
-  }
-  
-  #bar.hamburger-icon {
-    display: block;
-    position: absolute;
-    left: 15px;
-    height: 38px;
-    top: 50%;
-    transform: translateY(-50%);
-  }
-
-    /* Show hamburger and close icons only on mobile */
-  #bar,
-  #close {
-    display: none;
-    color: #222; /* Dark color for visibility on white navbar */
-  }
-
-  /* Hide font-awesome fallback if still present */
-  .fas.fa-bars {
-    display: none !important;
-  }
-  
-  .nav-left {
-    flex: 0 0 auto;
-  }
-  
-  .logo {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-  }
-  
-  .logo-img {
-    height: 32px;
-  }
-  
-  .nav-right {
-    flex: 0 0 auto;
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    position: absolute;
-    right: 20px;
-    top: 50%;
-    transform: translateY(-50%);
-  }
-  
-  /* Icons made dark for visibility */
-  .nav-right i,
-  .nav-right button,
-  #bar {
-    color: #222; /* ✅ dark for white background */
-  }
-  
-  .nav-right button {
-    background: none;
-    border: none;
-    padding: 0;
-    outline: none;
-    cursor: pointer;
-  }
-  
-  /* ============ SLIDE-IN NAV ============ */
-  .nav-wrapper {
-    position: fixed;
-    top: 0;
-    left: -60%;
-    width: 60%;
-    height: 100vh;
-    background: rgba(255, 255, 255, 0.95);
-    z-index: 998;
-    transition: left 0.3s ease;
-    box-shadow: 4px 0 10px rgba(0, 0, 0, 0.05);
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .nav-wrapper.active {
-    left: 0;
-  }
-  
-  #navbar {
-    display: flex;
-    flex-direction: column;
-    padding: 80px 30px 30px 20px; /* ✅ Slight padding-left from edge */
-    gap: 25px;
-  }
-  
-  #navbar a {
-    color: #222; /* dark links for contrast */
-    text-decoration: none;
-    font-weight: 600;
-    transition: color 0.3s ease;
-  }
-  
-  #navbar a:hover {
-    color: #46bd89; /* Or whatever accent color you're using */
-  }
-  
-  #close {
-    display: block;
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    font-size: 30px;
-    color: #222;
-    cursor: pointer;
-    z-index: 1001;
   }
   
   .thrift-btn {
@@ -1577,6 +1542,7 @@ nav a.active::after {
     overflow-x: hidden;
   }
 }
+
 
 
 
