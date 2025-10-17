@@ -1,3 +1,13 @@
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
 /* ========== GENERAL LAYOUT ========== */
 main.product-page {
   padding: 40px 30px;
@@ -1512,4 +1522,34 @@ main.product-page {
     display: block;
   }
 }
+
+@media (max-width: 349px) {
+  .product-container {
+    padding: 0 10px;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .main-img-wrapper {
+    height: 280px;
+    max-width: 100%;
+  }
+
+  .thumb {
+    width: 40px;
+    height: 50px;
+  }
+
+  .add-to-cart,
+  .payfast-btn {
+    width: 100%;
+    font-size: 14px;
+    padding: 12px;
+  }
+
+  .product-info h1 {
+    font-size: 1.5rem;
+  }
+}
+
 
