@@ -1416,53 +1416,57 @@ nav a.active::after {
   h1, h2 {
     font-size: 20px;
   }
-
+  
   .pro-container {
     padding: 10px;
     gap: 12px;
     display: grid;
     grid-template-columns: 1fr; /* 1 product per row */
   }
-
+  
   .pro-container .product-img {
     height: 180px;
   }
-
+  
   .pro-container .des h5,
   .pro-container .des h4 {
     font-size: 12px;
   }
-
+  
   .pro-container .btn-icon,
   .btn-icon {
     width: 18px;
     height: 18px;
   }
-
+  
   .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: nowrap;
     padding: 20px 10px;
-    flex-direction: column;
-    align-items: flex-start;
-    flex-wrap: wrap;
     width: 100%;
     position: relative;
     background: rgba(255, 255, 255, 0.95);
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
   }
-
+  
   .nav-left {
-    flex: 0 0 auto;
     display: flex;
     align-items: center;
+    flex: 1;
   }
-
+  
   .logo {
-    width: 100px;
     position: absolute;
     left: 50%;
-    transform: translateX(-50%);
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 100px;
+    z-index: 10;
   }
-
+  
   .nav-right {
     display: flex;
     align-items: center;
@@ -1471,8 +1475,9 @@ nav a.active::after {
     right: 10px;
     top: 50%;
     transform: translateY(-50%);
+    z-index: 10;
   }
-
+  
   #bar.hamburger-icon {
     display: block !important;
     position: absolute;
@@ -1480,8 +1485,10 @@ nav a.active::after {
     top: 50%;
     transform: translateY(-50%);
     height: 24px;
+    z-index: 15;
+    cursor: pointer;
   }
-
+  
   #close {
     display: block;
     font-size: 26px;
@@ -1492,7 +1499,7 @@ nav a.active::after {
     z-index: 1001;
     cursor: pointer;
   }
-
+  
   .nav-wrapper {
     position: fixed;
     top: 0;
@@ -1506,48 +1513,48 @@ nav a.active::after {
     display: flex;
     flex-direction: column;
   }
-
+  
   .nav-wrapper.active {
     left: 0;
   }
-
+  
   #navbar {
     display: flex;
     flex-direction: column;
     padding: 80px 20px 30px;
     gap: 20px;
   }
-
+  
   #navbar a {
     color: #222;
     text-decoration: none;
     font-weight: 600;
   }
-
+  
   #navbar a:hover {
     color: #46bd89;
   }
-
+  
   .btn-icon {
     width: 20px;
     height: 20px;
   }
-
+  
   .nav-icons {
     margin-top: 10px;
   }
-
+  
   #header {
     padding: 10px 16px;
     flex-direction: column;
     align-items: flex-start;
   }
-
+  
   /* Shop cards / grid */
   .shop-grid .product-img {
     height: 180px;
   }
-
+  
   .shop-grid .des h5 {
     font-size: 12px;
   }
@@ -1570,6 +1577,7 @@ nav a.active::after {
     overflow-x: hidden;
   }
 }
+
 
 
 
