@@ -23,58 +23,11 @@ body {
   font-weight: 400; /* light-medium weight */
 }
 
-/* ========== NAVBAR ========== */
-.navbar {
-  position: sticky;
-  top: 0;
-  z-index: 999;
-  background: rgba(255, 255, 255, 0.95);
-  padding: 25px 30px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-}
-
-.nav-left {
-  display: flex;
-  align-items: center;
-  gap: 40px;
-}
-
-.logo {
-  display: block;
-}
-
-@media (max-width: 480px) {
-  .logo-img {
-    height: 40px;
-  }
-}
-
 @media (max-width: 360px) {
   .logo-img {
     height: 35px;
   }
 }
-
-/* ========== LOGO ========== */
-.logo-img {
-  height: 50px;
-  display: block;
-}
-
-#navbar {
-  display: flex;
-  gap: 30px;
-}
-
-#navbar a {
-  color: #111;
-  text-decoration: none;
-  font-weight: 500;
-}
-
 /* ========== ICONS & BUTTONS ========== */
 
 .search-icon,
