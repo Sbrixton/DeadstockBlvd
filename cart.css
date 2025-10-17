@@ -39,21 +39,6 @@ h1 {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
-.nav-left {
-  display: flex;
-  align-items: center;
-  gap: 40px;
-}
-/* Right icons (cart, search) */
-.nav-right {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-left: auto;    /* Pushes icons to far right of navbar */
-  z-index: 1;
-  position: relative;    /* Remove the need for absolute positioning */
-}
-
 .nav-right i,
 .nav-right button {
   font-size: 20px;
@@ -107,19 +92,6 @@ h1 {
   height: auto;
   background: none;
   box-shadow: none;
-}
-
-/* Hide hamburger and mobile close icon on desktop */
-#bar,
-#close {
-  display: none;
-}
-
-.logo {
-  display: block;
-  order: 0;
-  transform: none;
-  position: static;
 }
 
 button,
