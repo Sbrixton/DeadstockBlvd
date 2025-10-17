@@ -1271,3 +1271,245 @@ main.product-page {
     display: block;
   }
 }
+
+
+/* ========== GENERAL LAYOUT ========== */
+main.product-page {
+  padding: 40px 30px;
+}
+
+.product-container {
+  display: flex;
+  gap: 40px;
+  max-width: 1300px;
+  margin: 0 auto;
+  flex-wrap: wrap;
+}
+
+/* ========== GALLERY ========== */
+.product-gallery {
+  flex: 1;
+  max-width: 650px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.slider {
+  position: relative;
+  width: 100%;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.main-img-wrapper {
+  width: 100%;
+  height: 400px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  overflow: hidden;
+}
+
+.main-img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+  max-height: 100%;
+  max-width: 100%;
+  object-fit: contain;
+}
+
+.nav-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 30px;
+  background: rgba(255, 255, 255, 0.8);
+  padding: 10px 14px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  z-index: 5;
+}
+
+#prevSlide {
+  left: 10px;
+}
+
+#nextSlide {
+  right: 10px;
+}
+
+.nav-arrow:hover {
+  background: #ddd;
+}
+
+.thumbnails {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  justify-content: center;
+  padding-top: 6px;
+  overflow-x: hidden;
+}
+
+.thumb {
+  width: 70px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 6px;
+  cursor: pointer;
+  filter: blur(1px) grayscale(40%);
+  opacity: 0.5;
+  transition: 0.4s ease;
+}
+
+.thumb.active,
+.thumb:hover {
+  filter: none;
+  opacity: 1;
+  transform: scale(1.05) rotate(1deg);
+}
+
+.thumbnails::-webkit-scrollbar {
+  display: none;
+}
+
+/* ========== DESCRIPTION AREA ========== */
+.product-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+  min-width: 300px;
+  padding-right: 0px;
+}
+
+.product-info h1 {
+  font-size: 2.1rem;
+}
+
+.description {
+  color: #555;
+  line-height: 1.6;
+  font-weight: 502;
+}
+
+.price {
+  font-size: 15.4px;
+  font-weight: 800;
+  color: #555;
+}
+
+.add-to-cart {
+  padding: 14px 20px;
+  background: #111;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 700;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.add-to-cart:hover {
+  background: #333;
+}
+
+.payfast-btn {
+  background-color: #ccc;
+  color: #f9f9f9;
+  border: none;
+  padding: 14px 20px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  margin-top: 15px;
+  border-radius: 6px;
+  width: 100%;
+  transition: background-color 0.3s ease;
+}
+
+.payfast-btn:hover {
+  background-color: #333;
+}
+
+/* === RESPONSIVE DESIGN & MEDIA QUERIES === */
+
+/* 4 per row (desktop) */
+@media (min-width: 1025px) {
+  .recommendations-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    padding-bottom: 40px;
+  }
+
+  .recommendations-grid > .pro {
+    display: none;
+  }
+
+  .recommendations-grid > .pro:nth-child(-n+4) {
+    display: block;
+  }
+}
+
+/* 3 per row (tablet) */
+@media (max-width: 1024px) and (min-width: 600px) {
+  .recommendations-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    padding-bottom: 40px;
+  }
+
+  .recommendations-grid > .pro {
+    display: none;
+  }
+
+  .recommendations-grid > .pro:nth-child(-n+3) {
+    display: block;
+  }
+}
+
+/* 2 per row (mobile) */
+@media (max-width: 599px) and (min-width: 300px) {
+  .recommendations-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    padding-bottom: 40px;
+  }
+
+  .recommendations-grid > .pro {
+    display: none;
+  }
+
+  .recommendations-grid > .pro:nth-child(-n+2) {
+    display: block;
+  }
+}
+
+/* 1 per row (tiny screens) */
+@media (max-width: 299px) {
+  .recommendations-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding-bottom: 40px;
+  }
+
+  .recommendations-grid > .pro {
+    display: none;
+  }
+
+  .recommendations-grid > .pro:nth-child(1) {
+    display: block;
+  }
+}
+
