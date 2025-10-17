@@ -68,6 +68,12 @@ p {
   border-radius: 0 !important;
 }
 
+.logo-img {
+  height: 40px;
+  max-height: 60px;
+  width: auto;
+}
+
 #searchBarContainer {
   position: fixed;
   top: 70px;
@@ -568,7 +574,16 @@ p {
     display: block;
     order: 0;
   }
+  
+  .logo {
+    display: flex;
+    align-items: center;
+  }
 
+  .logo-img {
+    height: 50px;
+  }
+  
   /* Show nav links inline for desktop */
   #navbar {
     display: flex;
@@ -1128,6 +1143,10 @@ nav a.active::after {
     transform: translateX(-50%);
   }
   
+  .logo-img {
+    height: 32px;
+  }
+  
   .nav-right {
     flex: 0 0 auto;
     display: flex;
@@ -1296,6 +1315,17 @@ nav a.active::after {
     flex-direction: column;
     align-items: flex-start;
     padding: 10px 20px;
+  }
+  
+  .logo-img {
+    height: 32px;
+  }
+  
+  .logo {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10; /* Keep it above nav items */
   }
   
   .nav-icons {
@@ -1547,6 +1577,7 @@ nav a.active::after {
     overflow-x: hidden;
   }
 }
+
 
 
 
