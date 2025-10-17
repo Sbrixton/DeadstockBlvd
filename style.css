@@ -1461,7 +1461,7 @@ nav a.active::after {
     align-items: center;
     flex-direction: row;
     flex-wrap: nowrap;
-    padding: 20px 10px;
+    padding: 30px 10px;
     width: 100%;
     position: relative;
     background: rgba(255, 255, 255, 0.95);
@@ -1593,4 +1593,5 @@ nav a.active::after {
     overflow-x: hidden;
   }
 }
+
 
