@@ -1441,12 +1441,13 @@ nav a.active::after {
   
   #cart-count {
     position: absolute;
-    top: -7px;
+    top: -3px;
     right: -10px;
     background-color: crimson;
     color: white;
     font-size: 10px;
     font-weight: bold;
+    height: 12px;
     padding: 2px 6px;
     border-radius: 50%;
     line-height: 1;
@@ -1592,14 +1593,4 @@ nav a.active::after {
     overflow-x: hidden;
   }
 }
-
-
-
-
-
-
-
-
-
-
 
