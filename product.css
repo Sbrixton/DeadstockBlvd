@@ -1553,3 +1553,91 @@ main.product-page {
 }
 
 
+/* ===============================
+   MEDIA QUERY: Tiny Devices (200px–350px)
+   =============================== */
+@media screen and (max-width: 350px) {
+  .product-page,
+  .product-container,
+  .product-gallery,
+  .slider,
+  .main-img-wrapper,
+  .product-info,
+  .recommendation-wrapper {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box;
+    padding: 0 10px;
+    margin: 0 auto;
+    overflow-x: hidden;
+  }
+
+  .main-img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    display: block;
+  }
+
+  .nav-arrow {
+    font-size: 20px;
+    padding: 5px;
+  }
+
+  .thumbnails {
+    display: none;
+  }
+
+  .mobile-dots {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+  }
+
+  .product-info h4,
+  .product-info h5,
+  .price,
+  .description,
+  .add-to-cart,
+  .payfast-btn {
+    font-size: 14px !important;
+    line-height: 1.3;
+    word-break: break-word;
+  }
+
+  .add-to-cart,
+  .payfast-btn {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+  }
+
+  .recommendations-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .pro {
+    width: 100%;
+  }
+
+  .product-img {
+    width: 100%;
+    height: auto;
+  }
+
+  .product-img img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+  }
+
+  /* Prevent horizontal scroll */
+  body, html {
+    overflow-x: hidden !important;
+  }
+}
+
+
+
