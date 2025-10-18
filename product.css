@@ -1526,8 +1526,13 @@ main.product-page {
 /* ===============================
    MEDIA QUERY: Tiny Devices (200px–350px)
    =============================== */
-@media screen and (max-width: 350px) {
-  .product-page,
+@media screen and (max-width: 350px) and (min-width: 200px) {
+  /* Make sure box-sizing is border-box to handle padding nicely */
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+
+  main.product-page,
   .product-container,
   .product-gallery,
   .slider,
@@ -1542,11 +1547,11 @@ main.product-page {
     overflow-x: hidden;
   }
 
-  /* Added to center and stack product page content */
+  /* Stack the product container vertically */
   .product-container {
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    flex-direction: column; /* stack gallery and info */
+    align-items: center;    /* center contents horizontally */
     justify-content: flex-start;
     padding: 10px;
     box-sizing: border-box;
@@ -1554,6 +1559,7 @@ main.product-page {
     margin: 0 auto;
   }
 
+  /* Product gallery and info take full width */
   .product-gallery,
   .product-info {
     width: 100%;
@@ -1561,15 +1567,18 @@ main.product-page {
     box-sizing: border-box;
   }
 
+  /* Add margin between stacked sections */
   .product-info {
     margin-top: 20px;
   }
 
+  /* Main image wrapper adjusts for width */
   .main-img-wrapper {
     width: 100%;
     max-width: 350px;
   }
 
+  /* Make main image fully responsive and contained */
   .main-img {
     width: 100%;
     height: auto;
@@ -1577,21 +1586,25 @@ main.product-page {
     display: block;
   }
 
+  /* Adjust nav arrows for smaller size */
   .nav-arrow {
     font-size: 20px;
     padding: 5px;
   }
 
+  /* Hide thumbnails on tiny screens to save space */
   .thumbnails {
     display: none;
   }
 
+  /* Show dots for mobile slider navigation */
   .mobile-dots {
     display: flex;
     justify-content: center;
     margin-top: 10px;
   }
 
+  /* Smaller font sizes and better text wrapping */
   .product-info h4,
   .product-info h5,
   .price,
@@ -1600,9 +1613,11 @@ main.product-page {
   .payfast-btn {
     font-size: 14px !important;
     line-height: 1.3;
-    word-break: break-word;
+    word-break: break-word; /* Prevent text overflow */
+    overflow-wrap: break-word;
   }
 
+  /* Make buttons full width with smaller padding */
   .add-to-cart,
   .payfast-btn {
     width: 100%;
@@ -1610,16 +1625,19 @@ main.product-page {
     font-size: 14px;
   }
 
+  /* Recommendations grid stacks vertically */
   .recommendations-grid {
     display: flex;
     flex-direction: column;
     gap: 15px;
   }
 
+  /* Recommendation products take full width */
   .pro {
     width: 100%;
   }
 
+  /* Product images adapt to container */
   .product-img {
     width: 100%;
     height: auto;
@@ -1631,10 +1649,9 @@ main.product-page {
     object-fit: contain;
   }
 
-  /* Prevent horizontal scroll */
+  /* Prevent horizontal scrolling */
   body,
   html {
     overflow-x: hidden !important;
   }
 }
-
