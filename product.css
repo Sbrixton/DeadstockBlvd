@@ -1654,4 +1654,52 @@ main.product-page {
   html {
     overflow-x: hidden !important;
   }
+  
+  /* Responsive search container */
+  .search-bar,
+  .search-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 100%;
+    padding: 0 10px;
+    box-sizing: border-box;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  /* Input field scales to available width */
+  .search-bar input,
+  .search-wrapper input[type="text"] {
+    flex: 1 1 60%;
+    min-width: 0;
+    font-size: 14px;
+    padding: 8px 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  /* Search button stays proportional */
+  .search-bar button,
+  .search-wrapper button {
+    flex: 1 1 30%;
+    padding: 8px 12px;
+    font-size: 14px;
+    border: none;
+    background-color: #000;
+    color: #fff;
+    border-radius: 4px;
+    cursor: pointer;
+    box-sizing: border-box;
+    width: 100%;
+  }
+
+  .search-bar button:hover,
+  .search-wrapper button:hover {
+    background-color: #333;
+  }
 }
