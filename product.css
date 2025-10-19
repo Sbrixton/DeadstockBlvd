@@ -1655,51 +1655,70 @@ main.product-page {
     overflow-x: hidden !important;
   }
   
-  /* Responsive search container */
-  .search-bar,
-  .search-wrapper {
+  #searchBarContainer {
+    width: 90%;
+    max-width: 90%;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 12px;
+    border-radius: 8px;
+  }
+
+  .search-input-wrapper {
+    width: 100%;
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: center;
-    width: 100%;
-    max-width: 100%;
-    padding: 0 10px;
-    box-sizing: border-box;
+    gap: 6px;
     flex-wrap: wrap;
+  }
+
+  #searchInput {
+    flex: 1 1 100%;
+    font-size: 14px;
+    padding: 8px 12px;
+    border-radius: 4px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  #clearSearch {
+    font-size: 20px;
+    top: 8px;
+    right: 8px;
+  }
+
+  #searchScrollableArea {
+    max-height: 150px;
+    overflow-y: auto;
+    gap: 10px;
+  }
+
+  .search-item {
+    padding: 8px 10px;
+    font-size: 13px;
     gap: 8px;
   }
 
-  /* Input field scales to available width */
-  .search-bar input,
-  .search-wrapper input[type="text"] {
-    flex: 1 1 60%;
-    min-width: 0;
-    font-size: 14px;
-    padding: 8px 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    width: 100%;
-    box-sizing: border-box;
+  .search-item img {
+    width: 40px;
+    height: 40px;
   }
 
-  /* Search button stays proportional */
-  .search-bar button,
-  .search-wrapper button {
-    flex: 1 1 30%;
+  .search-info h4 {
+    font-size: 13px;
+  }
+
+  .search-info p {
+    font-size: 12px;
+  }
+
+  .search-suggestions li {
+    font-size: 13px;
     padding: 8px 12px;
-    font-size: 14px;
-    border: none;
-    background-color: #000;
-    color: #fff;
-    border-radius: 4px;
-    cursor: pointer;
-    box-sizing: border-box;
-    width: 100%;
   }
 
-  .search-bar button:hover,
-  .search-wrapper button:hover {
-    background-color: #333;
+  #noResultsMessage {
+    font-size: 13px;
   }
 }
