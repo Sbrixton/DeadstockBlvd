@@ -1418,14 +1418,16 @@ nav a.active::after {
   }
   
   .pro-container {
-    padding: 10px;
-    gap: 12px;
+    padding: 0px;
+    gap: 1px;
     display: grid;
-    grid-template-columns: 1fr; /* 1 product per row */
+    grid-template-columns: repeat(2, 1fr);
   }
   
   .pro-container .product-img {
-    height: 180px;
+    height: 120px;
+    width: 110px;
+    
   }
   
   .pro-container .des h5,
@@ -1660,6 +1662,7 @@ nav a.active::after {
     font-size: 13px;
   }
 }
+
 
 
 
