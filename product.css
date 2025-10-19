@@ -900,7 +900,7 @@ main.product-page {
     position: fixed;
     top: 0;
     right: -100%; /* Start off-screen on the right */
-    width: 70%; /* You can tweak this width */
+    width: 410px; /* You can tweak this width */
     height: 100vh;
     background: #fff;
     z-index: 999;
