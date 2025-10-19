@@ -1597,3 +1597,71 @@ nav a.active::after {
 
 
 
+/* ===============================
+   UNIVERSAL FIX for #searchBarContainer on 200px–350px screens
+   =============================== */
+@media screen and (max-width: 350px) and (min-width: 200px) {
+  #searchBarContainer {
+    width: 90% !important;
+    max-width: 90% !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    padding: 12px !important;
+    border-radius: 8px !important;
+  }
+
+  .search-input-wrapper {
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  #searchInput {
+    flex: 1 1 100%;
+    font-size: 14px;
+    padding: 8px 12px;
+  }
+
+  #clearSearch {
+    font-size: 20px;
+    top: 8px;
+    right: 8px;
+  }
+
+  #searchScrollableArea {
+    max-height: 150px;
+    gap: 10px;
+  }
+
+  .search-item {
+    padding: 8px 10px;
+    font-size: 13px;
+    gap: 8px;
+  }
+
+  .search-item img {
+    width: 40px;
+    height: 40px;
+  }
+
+  .search-info h4 {
+    font-size: 13px;
+  }
+
+  .search-info p {
+    font-size: 12px;
+  }
+
+  .search-suggestions li {
+    font-size: 13px;
+    padding: 8px 12px;
+  }
+
+  #noResultsMessage {
+    font-size: 13px;
+  }
+}
+
+
+
+
+
