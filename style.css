@@ -1417,6 +1417,10 @@ nav a.active::after {
   h1, h2 {
     font-size: 20px;
   }
+
+  #hero button {
+    padding: 12px 60px;
+  }
   
   .pro-container {
     padding: 0px;
@@ -1663,6 +1667,7 @@ nav a.active::after {
     font-size: 13px;
   }
 }
+
 
 
 
