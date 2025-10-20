@@ -1631,6 +1631,12 @@ nav a.active::after {
   #searchOverlay.visible {
     display: block;
   }
+  
+  body.search-open {
+    overflow: hidden;
+    touch-action: none;
+    height: 100vh;
+  }
 
   #searchBarContainer {
     width: 90% !important;
@@ -1739,4 +1745,5 @@ nav a.active::after {
     margin-top: 8px;
   }
 }
+
 
