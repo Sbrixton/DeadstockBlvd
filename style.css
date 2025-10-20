@@ -1078,7 +1078,7 @@ nav a.active::after {
     justify-content: space-between;
     align-items: center;
     position: relative;
-    padding: 20px 16px;
+    padding: 30px 16px;
     background: rgba(255, 255, 255, 0.95);
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
   }
@@ -1739,3 +1739,4 @@ nav a.active::after {
     margin-top: 8px;
   }
 }
+
