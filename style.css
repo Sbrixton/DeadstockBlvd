@@ -372,9 +372,10 @@ body.search-open {
   #searchBarContainer {
     position: fixed;
     top: 80px;
-    left: 0;
+    left: 50%;
+    transform: translateX(-50%);
     width: 100%;
-    transform: none;
+    max-width: 700px; /* You can override this */
     background: white;
     z-index: 1000;
     padding: 10px 20px 20px;
@@ -382,6 +383,8 @@ body.search-open {
     display: none;
     flex-direction: column;
     gap: 12px;
+    box-sizing: border-box;
+    border-radius: 10px;
   }
 
   #searchBarContainer.active {
@@ -391,7 +394,7 @@ body.search-open {
   .search-input-wrapper {
     position: relative;
     width: 100%;
-    max-width: 700px;
+    max-width: 100%;
     margin: 0 auto;
     z-index: 999;
   }
@@ -444,7 +447,7 @@ body.search-open {
 
   #searchScrollableArea {
     width: 100%;
-    max-width: 700px;
+    max-width: 100%;
     margin: 0 auto;
     max-height: 400px;
     overflow-y: auto;
@@ -1619,17 +1622,27 @@ nav a.active::after {
     transform: translateX(-50%) !important;
     padding: 12px !important;
     border-radius: 8px !important;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    box-sizing: border-box;
   }
 
   .search-input-wrapper {
+    width: 100%;
+    display: flex;
     flex-wrap: wrap;
     gap: 6px;
+    align-items: center;
   }
 
   #searchInput {
     flex: 1 1 100%;
     font-size: 14px;
     padding: 8px 12px;
+    border-radius: 4px;
+    width: 100%;
+    box-sizing: border-box;
   }
 
   #clearSearch {
@@ -1640,6 +1653,7 @@ nav a.active::after {
 
   #searchScrollableArea {
     max-height: 150px;
+    overflow-y: auto;
     gap: 10px;
   }
 
@@ -1647,37 +1661,61 @@ nav a.active::after {
     padding: 8px 10px;
     font-size: 13px;
     gap: 8px;
+    display: flex;
+    align-items: center;
+    border-radius: 6px;
+    border: 1px solid #ddd;
+    background: #f9f9f9;
   }
 
   .search-item img {
     width: 40px;
     height: 40px;
+    object-fit: cover;
+    border-radius: 4px;
   }
 
   .search-info h4 {
     font-size: 13px;
+    margin: 0;
+    color: #111;
   }
 
   .search-info p {
     font-size: 12px;
+    color: #666;
+    margin: 2px 0 0;
+  }
+
+  .search-suggestions {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background: #fff;
+    width: 100%;
   }
 
   .search-suggestions li {
     font-size: 13px;
     padding: 8px 12px;
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+  }
+
+  .search-suggestions li:hover {
+    background-color: #f1f1f1;
+  }
+
+  .search-suggestions li:last-child {
+    border-bottom: none;
   }
 
   #noResultsMessage {
     font-size: 13px;
+    color: #555;
+    margin-top: 8px;
   }
 }
-
-
-
-
-
-
-
-
-
 
