@@ -220,7 +220,11 @@ p {
   cursor: not-allowed;
 }
 
-
+body.search-open {
+  overflow: hidden;
+  touch-action: none;
+  height: 100vh;
+}
 
 /* ========== ANIMATIONS ========== */
 @keyframes spin {
@@ -1667,6 +1671,7 @@ nav a.active::after {
     font-size: 13px;
   }
 }
+
 
 
 
