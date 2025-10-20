@@ -1616,6 +1616,22 @@ nav a.active::after {
    UNIVERSAL FIX for #searchBarContainer on 200px–350px screens
    =============================== */
 @media screen and (max-width: 415px) and (min-width: 200px) {
+  /* Overlay that covers entire screen for outside-tap close */
+  #searchOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 900;
+    display: none;
+  }
+
+  #searchOverlay.visible {
+    display: block;
+  }
+
   #searchBarContainer {
     width: 90% !important;
     max-width: 90% !important;
@@ -1627,6 +1643,10 @@ nav a.active::after {
     flex-direction: column;
     gap: 12px;
     box-sizing: border-box;
+    z-index: 1000;
+    position: fixed;
+    top: 70px;
+    background: rgba(255, 255, 255, 0.98);
   }
 
   .search-input-wrapper {
@@ -1719,6 +1739,3 @@ nav a.active::after {
     margin-top: 8px;
   }
 }
-
-
-
