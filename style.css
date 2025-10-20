@@ -237,12 +237,13 @@ body.search-open {
   to   { opacity: 1; transform: translateY(0); }
 }
 
-@media (min-width: 481px) and (max-width: 1000px) {
+@media (min-width: 416px) and (max-width: 881px) {
   #searchBarContainer {
-    width: 600px;
+    width: 90%;
+    max-width: 90%;
     left: 50%;
     transform: translateX(-50%);
-    top: 70px;
+    top: unset;
   }
 
   #searchBarContainer.active {
@@ -368,14 +369,14 @@ body.search-open {
   }
 }
 
-@media (min-width: 1001px) {
+@media (min-width: 882px) {
   #searchBarContainer {
     position: fixed;
     top: 80px;
     left: 50%;
     transform: translateX(-50%);
-    width: 100%;
-    max-width: 700px; /* You can override this */
+    width: 90%;
+    max-width: 100%; /* You can override this */
     background: white;
     z-index: 1000;
     padding: 10px 20px 20px;
@@ -1718,4 +1719,5 @@ nav a.active::after {
     margin-top: 8px;
   }
 }
+
 
