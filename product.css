@@ -821,19 +821,19 @@ main.product-page {
     transition: opacity 0.3s ease, transform 0.3s ease;
     box-sizing: border-box;
   }
-  
+
   #searchOverlay.active {
     display: flex;
     opacity: 1;
     transform: translateX(-50%) scale(1);
   }
-  
+
   .search-box {
     width: 100%;
     max-width: 100%;
     box-sizing: border-box;
   }
-  
+
   #searchInput {
     font-size: 15px;
     padding: 10px 20px;
@@ -843,7 +843,7 @@ main.product-page {
     border-radius: 4px;
     margin-bottom: 20px;
   }
-  
+
   .search-item {
     width: 100%;
     display: flex;
@@ -855,30 +855,30 @@ main.product-page {
     transition: 0.2s ease;
     box-sizing: border-box;
   }
-  
+
   .search-item:hover {
     background: #f1f1f1;
   }
-  
+
   .search-item img {
     width: 48px;
     height: 48px;
     object-fit: cover;
     border-radius: 4px;
   }
-  
+
   .search-info h4 {
     font-size: 14px;
     margin: 0;
     color: #111;
   }
-  
+
   .search-info p {
     font-size: 12.5px;
     color: #555;
     margin: 4px 0 0;
   }
-  
+
   #closeSearch {
     position: absolute;
     top: 20px;
@@ -890,7 +890,7 @@ main.product-page {
     cursor: pointer;
     z-index: 1001;
   }
-  
+
   #closeSearch:hover {
     color: #000;
   }
@@ -1703,22 +1703,39 @@ main.product-page {
   .search-item img {
     width: 40px;
     height: 40px;
+    object-fit: cover;
+    border-radius: 4px;
   }
 
   .search-info h4 {
     font-size: 13px;
+    margin: 0;
+    color: #111;
   }
 
   .search-info p {
     font-size: 12px;
+    margin: 3px 0 0;
+    color: #666;
   }
 
   .search-suggestions li {
     font-size: 13px;
     padding: 8px 12px;
+    border-bottom: 1px solid #eee;
+  }
+
+  .search-suggestions li:last-child {
+    border-bottom: none;
+  }
+
+  .search-suggestions li:hover {
+    background-color: #f1f1f1;
   }
 
   #noResultsMessage {
     font-size: 13px;
+    color: #555;
+    margin-top: 10px;
   }
 }
