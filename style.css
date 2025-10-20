@@ -1631,12 +1631,6 @@ nav a.active::after {
   #searchOverlay.visible {
     display: block;
   }
-  
-  body.search-open {
-    overflow: hidden;
-    touch-action: none;
-    height: 100vh;
-  }
 
   #searchBarContainer {
     width: 90% !important;
@@ -1653,6 +1647,13 @@ nav a.active::after {
     position: fixed;
     top: 70px;
     background: rgba(255, 255, 255, 0.98);
+  }
+
+  /* 🔐 Move this inside the media query */
+  body.search-open {
+    overflow: hidden;
+    touch-action: none;
+    height: 100vh;
   }
 
   .search-input-wrapper {
@@ -1745,5 +1746,6 @@ nav a.active::after {
     margin-top: 8px;
   }
 }
+
 
 
