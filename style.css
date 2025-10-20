@@ -268,9 +268,9 @@ body.search-open {
   #clearSearch {
     position: absolute;
     right: 12px;
-    top: 50%;
+    top: 20px;
     transform: translateY(-50%);
-    font-size: 20px;
+    font-size: 30px;
     background: none;
     border: none;
     color: #777;
@@ -414,7 +414,7 @@ body.search-open {
     right: 12px;
     top: 50%;
     transform: translateY(-50%);
-    font-size: 20px;
+    font-size: 30px;
     background: none;
     border: none;
     color: #777;
@@ -1647,8 +1647,8 @@ nav a.active::after {
   }
 
   #clearSearch {
-    font-size: 20px;
-    top: 8px;
+    font-size: 30px;
+    top: 20px;
     right: 8px;
   }
 
@@ -1719,5 +1719,6 @@ nav a.active::after {
     margin-top: 8px;
   }
 }
+
 
 
