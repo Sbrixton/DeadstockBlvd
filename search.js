@@ -16,12 +16,14 @@ document.addEventListener("DOMContentLoaded", () => {
   function showSearch() {
     searchBarContainer.classList.add("active");
     searchOverlay.classList.add("visible");
+    document.body.classList.add("search-open"); // 🚫 Disable background scroll
     searchInput.focus();
   }
 
   function hideSearch() {
     searchBarContainer.classList.remove("active", "typing");
     searchOverlay.classList.remove("visible");
+    document.body.classList.remove("search-open"); // ✅ Re-enable scroll
     searchInput.value = "";
     searchResults.innerHTML = "";
     searchSuggestions.innerHTML = "";
@@ -139,6 +141,5 @@ document.addEventListener("DOMContentLoaded", () => {
     hideSearch();
   });
 });
-
 
 
