@@ -27,7 +27,7 @@
           <a href="Contact.html">Contact</a>
         </nav>
       </div>
-      <i id="bar" class="fas fa-bars"></i>
+      <img id="bar" src="Hamburger.png" alt="Menu" class="hamburger-icon" />
     </div>
 
     <div class="nav-right">
@@ -57,7 +57,7 @@
         <button id="clearSearch" aria-label="Clear Search">&times;</button>
       </div>
         
-        <!-- ✅ Shared scroll wrapper for both -->
+      <!-- ✅ Shared scroll wrapper for both -->
         <div id="searchScrollableArea">
             <ul id="searchSuggestions" class="search-suggestions"></ul>
             
@@ -67,8 +67,11 @@
             </div>
         </div>
     </div>
-
-  <main class="product-page">
+    
+    <!-- ✅ Search overlay now OUTSIDE the container -->
+    <div id="searchOverlay"></div>
+    
+    <main class="product-page">
     <div class="product-container">
       
       <div class="product-gallery">
