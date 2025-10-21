@@ -414,8 +414,8 @@ main.product-page {
   position: relative;
 }
 #mobileCartItems .cart-img {
-  width: 80px;
-  height: 80px;
+  width: 100px;
+  height: 110px;
   object-fit: cover;
   border-radius: 6px;
   flex-shrink: 0;
@@ -1022,8 +1022,8 @@ main.product-page {
   }
   
   #mobileCartItems .cart-img {
-    width: 80px;
-    height: 80px;
+    width: 100px;
+    height: 110px;
     object-fit: cover;
     border-radius: 6px;
     flex-shrink: 0;
