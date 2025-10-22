@@ -1783,6 +1783,7 @@ main.product-page {
     width: 100% !important;
     max-width: 100% !important;
     box-sizing: border-box;
+    background: none;
     padding: 0 10px;
     margin: 0 auto;
     overflow-x: hidden;
