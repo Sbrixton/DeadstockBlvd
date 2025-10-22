@@ -383,7 +383,7 @@
         <br></br>
         A breach or violation of any of the Terms will result in an immediate termination of your Services.
         <br></br>
-        SECTION 2 - NATURE OF PRODUCTS
+        <h4>SECTION 2 - NATURE OF PRODUCTS</h4>
         <br></br>
         [Your Site Name] provides users with access to curated product links, 
         exclusive or early access links, affiliate links, or other digital information relating to third-party products. 
@@ -394,105 +394,107 @@
         pricing accuracy, or purchase success on third-party platforms.
         
         <h4>SECTION 3 - BILLING AND ACCESS</h4>
-        
+        <br>
         You agree to provide accurate, current, and complete information for all purchases made via our site.
-        
+        <br>
         We reserve the right to limit, refuse or cancel access if we suspect you have provided false information, 
         violated our terms, or engaged in misuse of the Service.
-        
+        <br>
         Some services may be subscription-based or one-time purchases. All sales are final unless otherwise stated.
+        <br></br>
         
-        
-        SECTION 4 - MODIFICATIONS TO THE SERVICE
-        
+        <h4>SECTION 4 - MODIFICATIONS TO THE SERVICE</h4>
+        <br>
         We reserve the right to modify or discontinue the Service (or any part of it) at any time without notice.
-        
+        <br>
         We are not liable to you or any third-party for any modification, price change, suspension, or discontinuance of the Service.
-        
-        
-        SECTION 5 - THIRD-PARTY PRODUCTS & LINKS
-        
+        <br>
+        <br>
+        <h4>SECTION 5 - THIRD-PARTY PRODUCTS & LINKS</h4>
+        <br>
         Our platform is built on external product links and references to third-party websites. 
         We do not control, manage, or guarantee the accuracy, availability, or safety of those external platforms or products.
-        
+        <br>
         Any purchase, dispute, return, or warranty issue regarding a product linked from our site must be handled directly with
         the third-party seller. We are not responsible for the outcome of your interaction with external websites.
+        <br></br>
         
-        
-        SECTION 6 - ACCURACY, COMPLETENESS, AND ERRORS
-        
+        <h4>SECTION 6 - ACCURACY, COMPLETENESS, AND ERRORS</h4>
+        <br>
         While we aim to keep information up-to-date and accurate, the site may occasionally contain errors, 
         outdated info, or inaccuracies — particularly with product descriptions, pricing, availability, or link functionality.
-        
+        <br>
         We reserve the right to correct any errors or cancel access if necessary, without notice.
+        <br></br>
         
-        
-        SECTION 7 - PROHIBITED USES
-        
+        <h4>SECTION 7 - PROHIBITED USES</h4>
+        <br>
         You are prohibited from using the site or its content:
-        
+        <br>
         For unlawful purposes
-        
+        <br>
         To violate any laws or regulations
-        
+        <br>
         To exploit or mislead users
-        
+        <br>
         To scrape or mine data
-        
+        <br>
         To interfere with or bypass the functionality or security of the site
-        
+        <br>
         To reproduce, sell, or redistribute access to links or digital products without consent
-        
+        <br>
         We reserve the right to terminate your access for any misuse of the Service.
+        <br></br>
         
-        
-        SECTION 8 - DISCLAIMER OF WARRANTIES; LIMITATION OF LIABILITY
-        
+        <h4>SECTION 8 - DISCLAIMER OF WARRANTIES; LIMITATION OF LIABILITY</h4>
+        <br>
         We do not guarantee that use of the Service will be uninterrupted or error-free. 
         The service is provided “as is” and “as available” without any warranties, express or implied.
-        
+        <br>
         We make no guarantees about:
-        
+        <br>
         The reliability or accuracy of product links
-        
+        <br>
         Third-party product availability
-        
+        <br>
         Purchase success from external retailers
-        
+        <br>
         Any specific results from using the Service
-        
+        <br></br>
         In no case shall [Your Site Name] be liable for any direct, indirect, 
         incidental or consequential damages arising from your use of the Service or reliance on the content provided.
+        <br></br>
         
-        
-        SECTION 9 - INDEMNIFICATION
-        
+        <h4>SECTION 9 - INDEMNIFICATION</h4>
+        <br>
         You agree to indemnify and hold harmless [Your Site Name] and its owners, partners, 
         affiliates, and employees from any claims, liabilities, or damages arising from your use of the Service, 
         your breach of the Terms, or your violation of any rights or laws.
+        <br></br>
         
-        
-        SECTION 10 - TERMINATION
-        
+        <h4>SECTION 10 - TERMINATION</h4>
+        <br>
         These Terms remain in effect unless and until terminated by either party. 
         You may terminate by discontinuing use of the Service. We may terminate access at any time for any breach,
         suspected misuse, or at our sole discretion.
+        <br></br>
         
-        
-        SECTION 11 - GOVERNING LAW
-        
+        <h4>SECTION 11 - GOVERNING LAW</h4>
+        <br>
         These Terms and any disputes related to them shall be governed by and construed in accordance with
         the laws of the United Kingdom.
+        <br></br>
         
-        
-        SECTION 12 - ENTIRE AGREEMENT
+        <h4>SECTION 12 - ENTIRE AGREEMENT</h4>
+        <br>
         These Terms constitute the entire agreement between you and [Your Site Name], 
         superseding any prior agreements. Any ambiguities shall not be construed against the drafting party.
+        <br></br>
         
-        
-        SECTION 13 - CONTACT INFORMATION
+        <h4>SECTION 13 - CONTACT INFORMATION</h4>
+        <br>
         For questions or concerns regarding these Terms of Service, please contact us at:
-        
+        <br>
         
         [Your Site Name]
         Email: [your@email.com]
@@ -512,6 +514,31 @@
           preloader.style.display = "none";
         }, 500); // fade out transition
       }, 300); // only wait 300ms after load
+    });
+  </script>
+
+  <script>
+    const readMoreLinks = document.querySelectorAll('.read-more');
+    const overlay = document.getElementById('modalOverlay');
+    const closeBtn = document.getElementById('closeBtn');
+    
+    // Open modal for any .read-more clicked
+    readMoreLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        overlay.style.display = 'flex';
+      });
+    });
+  
+    // Close when clicking outside the popup
+    overlay.addEventListener('click', (e) => {
+      if (e.target === overlay) {
+        overlay.style.display = 'none';
+      }
+    });
+    
+    // Close when clicking the X
+    closeBtn.addEventListener('click', () => {
+      overlay.style.display = 'none';
     });
   </script>
   
