@@ -396,7 +396,7 @@ main.product-page {
 #closeCartDrawer {
   background: none;
   border: none;
-  font-size: 1.5rem;
+  font-size: 40px;
   cursor: pointer;
 }
 
@@ -937,7 +937,7 @@ main.product-page {
   #closeCartDrawer {
     background: none;
     border: none;
-    font-size: 1.5rem;
+    font-size: 40px;
     cursor: pointer;
   }
   
@@ -1338,7 +1338,7 @@ main.product-page {
   }
 
   #closeCartDrawer {
-    font-size: 1.3rem;
+    font-size: 36px;
   }
 
   #mobileCartItems {
