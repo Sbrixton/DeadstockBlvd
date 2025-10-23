@@ -310,11 +310,11 @@ main.product-page {
 /* Cart Count */
 #cart-count {
   position: absolute;
-  top: -7px;
-  right: -10px;
+  top: -5px;
+  right: -5px;
   background-color: crimson;
   color: white;
-  font-size: 11px;
+  font-size: 10px;
   font-weight: bold;
   padding: 2px 6px;
   border-radius: 50%;
