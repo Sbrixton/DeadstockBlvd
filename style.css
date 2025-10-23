@@ -646,11 +646,11 @@ body.search-open {
   
   #cart-count {
     position: absolute;
-    top: -8px;
-    right: -10px;
+    top: -4px;
+    right: -7px;
     background: crimson;
     color: white;
-    font-size: 12px;
+    font-size: 10px;
     font-weight: bold;
     padding: 2px 6px;
     border-radius: 50%;
@@ -1754,6 +1754,7 @@ nav a.active::after {
     margin-top: 8px;
   }
 }
+
 
 
 
