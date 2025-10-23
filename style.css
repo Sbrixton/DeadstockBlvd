@@ -1439,7 +1439,7 @@ nav a.active::after {
   
   .pro-container .product-img {
     height: 120px;
-    width: 110px;
+    width: 125px;
     
   }
   
@@ -1584,7 +1584,7 @@ nav a.active::after {
   
   /* Shop cards / grid */
   .shop-grid .product-img {
-    height: 180px;
+    height: 140px;
   }
   
   .shop-grid .des h5 {
@@ -1754,6 +1754,7 @@ nav a.active::after {
     margin-top: 8px;
   }
 }
+
 
 
 
