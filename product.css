@@ -1869,9 +1869,7 @@ main.product-page {
 
   /* Recommendations grid stacks vertically */
   .recommendations-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
+    gap: 5px;
   }
 
   /* Recommendation products take full width */
