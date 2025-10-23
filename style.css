@@ -1553,8 +1553,8 @@ nav a.active::after {
   #navbar {
     display: flex;
     flex-direction: column;
-    padding: 80px 20px 30px;
-    gap: 20px;
+    padding: 80px 67px 80px;
+    gap: 50px;
   }
   
   #navbar a {
@@ -1754,6 +1754,7 @@ nav a.active::after {
     margin-top: 8px;
   }
 }
+
 
 
 
