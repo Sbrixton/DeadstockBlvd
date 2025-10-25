@@ -1395,26 +1395,28 @@
   
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      
-      // Select both main and recommended add-to-cart buttons
+      // Find all Add to Cart buttons (main + recommendations)
       const allButtons = document.querySelectorAll('#addToCartBtn, .add-to-cart-btn');
       
       allButtons.forEach(button => {
         button.addEventListener('click', () => {
-          // Get product details from button data attributes
           const product = {
             id: parseInt(button.dataset.id),
             name: button.dataset.name,
             price: parseFloat(button.dataset.price),
             image: button.dataset.image,
-            size: button.dataset.size || 'N/A'
+            size: button.dataset.size || 'N/A',
+            quantity: 1 // default quantity
           };
           
-          // Send to your existing cart logic
-          addToCart(product);
+          // Ensure addToCart() is globally available
+          if (typeof addToCart === 'function') {
+            addToCart(product);
+          } else {
+            console.error('⚠️ addToCart function not found. Make sure cart-utils.js is loaded.');
+          }
         });
       });
-    
     });
   </script>
 
