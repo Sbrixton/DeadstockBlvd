@@ -8,11 +8,10 @@ import {
 import { convertFromGBP } from "./currency.js"; // ✅ Import currency conversion
 
 document.addEventListener("DOMContentLoaded", () => {
+  // ✅ Handle ALL Add to Cart buttons (main + recommendations)
+  const allButtons = document.querySelectorAll("#addToCartBtn, .add-to-cart-btn");
 
-  // ✅ Handle ALL Add to Cart buttons (main + recommended)
-  const allAddButtons = document.querySelectorAll('#addToCartBtn, .add-to-cart-btn');
-
-  allAddButtons.forEach(button => {
+  allButtons.forEach(button => {
     button.addEventListener("click", async () => {
       const cart = getCart();
 
@@ -25,26 +24,28 @@ document.addEventListener("DOMContentLoaded", () => {
         quantity: 1
       };
 
-      // ✅ Prevent duplicate same product-size combos
-      const index = cart.findIndex(
+      // ✅ Prevent duplicate add (same ID + size)
+      const existing = cart.find(
         item => item.id === product.id && item.size === product.size
       );
 
-      if (index === -1) {
-        cart.push(product);
-      } else {
-        console.warn(`⚠️ ${product.name} (${product.size}) already in cart.`);
+      if (existing) {
+        console.log("⚠️ Product already in cart, skipping duplicate:", product);
+        return;
       }
 
+      cart.push(product);
       saveCart(cart);
       updateCartCountInDOM();
 
-      // ✅ Re-render drawer if open
+      // ✅ Re-render drawer if it’s open
       const drawer = document.getElementById("mobileCartDrawer");
       if (drawer?.classList.contains("open")) {
         const module = await import("./cart.js");
         module.renderMobileDrawer();
       }
+
+      console.log("🛒 Added to cart:", product);
     });
   });
 
@@ -59,8 +60,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (mainImage && thumbnails.length > 0) {
     let currentIndex = 0;
-
     let dots = [];
+
     if (dotContainer) {
       dots = thumbnails.map((_, i) => {
         const dot = document.createElement("div");
@@ -79,11 +80,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function updateMainImage(index) {
       mainImage.src = thumbnails[index].src;
-
       thumbnails.forEach((thumb, i) => {
         thumb.classList.toggle("active", i === index);
       });
-
       updateDots(index);
       currentIndex = index;
     }
@@ -155,5 +154,4 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   })();
 });
-
 
