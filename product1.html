@@ -1393,7 +1393,10 @@
     });
   </script>
   
-  <script>
+  <!-- ✅ use type="module" so ES module exports/imports work -->
+  <script type="module">
+    import { addToCart } from './cart-utils.js';
+    
     document.addEventListener('DOMContentLoaded', () => {
       // Find all Add to Cart buttons (main + recommendations)
       const allButtons = document.querySelectorAll('#addToCartBtn, .add-to-cart-btn');
@@ -1405,16 +1408,12 @@
             name: button.dataset.name,
             price: parseFloat(button.dataset.price),
             image: button.dataset.image,
-            size: button.dataset.size || 'N/A',
-            quantity: 1 // default quantity
+            size: button.dataset.size?.trim() || 'N/A', // ✅ capture size safely
+            quantity: 1
           };
           
-          // Ensure addToCart() is globally available
-          if (typeof addToCart === 'function') {
-            addToCart(product);
-          } else {
-            console.error('⚠️ addToCart function not found. Make sure cart-utils.js is loaded.');
-          }
+          console.log('🛒 Adding to cart:', product);
+          addToCart(product);
         });
       });
     });
