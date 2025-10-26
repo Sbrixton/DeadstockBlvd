@@ -96,6 +96,7 @@
                     data-name="Nike SB Dunk Orange Grateful Dead"
                     data-price="86"
                     data-image="Nike SB Dunk <br>Orange Grateful Dead (1).png"
+                    data-size="10"
                     data-id="1">
                     <img src="CartIcon.png" alt="Add to cart" class="btn-icon" />
                 </button>
@@ -450,25 +451,31 @@
         });
       </script>
       
-      <script>
-        document.addEventListener('DOMContentLoaded', () => {
-          const addToCartBtn = document.getElementById('addToCartBtn');
-        
-          if (addToCartBtn) {
-            const product = {
-              id: parseInt(addToCartBtn.getAttribute('data-id')),
-              name: addToCartBtn.getAttribute('data-name'),
-              price: parseFloat(addToCartBtn.getAttribute('data-price')),
-              image: addToCartBtn.getAttribute('data-image'),
-              size: addToCartBtn.getAttribute('data-size') || 'N/A'
-            };
-        
-            addToCartBtn.addEventListener('click', () => {
-              addToCart(product);
+<!-- ✅ use type="module" so ES module exports/imports work -->
+        <script type="module">
+          import { addToCart } from './cart-utils.js';
+            
+          document.addEventListener('DOMContentLoaded', () => {
+            // Find all Add to Cart buttons (main + recommendations)
+            const allButtons = document.querySelectorAll('#addToCartBtn, .add-to-cart-btn');
+                
+            allButtons.forEach(button => {
+              button.addEventListener('click', () => {
+                const product = {
+                  id: parseInt(button.dataset.id),
+                  name: button.dataset.name,
+                  price: parseFloat(button.dataset.price),
+                  image: button.dataset.image,
+                  size: button.dataset.size?.trim() || 'N/A', // ✅ capture size safely
+                  quantity: 1
+                };
+                
+                console.log('🛒 Adding to cart:', product);
+                addToCart(product);
+              });
             });
-          }
-        });
-      </script>
+          });
+        </script>
         
       <!-- ✅ Add this at the bottom, before </body> -->
       <script type="module">
@@ -519,6 +526,7 @@
     <script type="module" src="search.js"></script>
 </body>
 </html>
+
 
 
 
