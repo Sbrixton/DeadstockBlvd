@@ -3,7 +3,7 @@ const products = [
   { id: 1, 
    name: "Nike SB Dunk Orange Grateful Dead", 
    price: 86.00, 
-   size: "10",
+   size: 10,
    image: "Nike SB Dunk Orange Grateful Dead (1).png", 
    page: "product1.html" },
   { id: 2, 
