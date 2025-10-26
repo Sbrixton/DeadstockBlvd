@@ -8,38 +8,44 @@ import {
 import { convertFromGBP } from "./currency.js"; // ✅ Import currency conversion
 
 document.addEventListener("DOMContentLoaded", () => {
-  const addToCartBtn = document.getElementById("addToCartBtn");
 
-  addToCartBtn?.addEventListener("click", async () => {
-    const cart = getCart();
+  // ✅ Handle ALL Add to Cart buttons (main + recommended)
+  const allAddButtons = document.querySelectorAll('#addToCartBtn, .add-to-cart-btn');
 
-    const product = {
-      id: parseInt(addToCartBtn.dataset.id),
-      name: addToCartBtn.dataset.name,
-      price: parseFloat(addToCartBtn.dataset.price),
-      quantity: 1,
-      image: addToCartBtn.dataset.image,
-      size: addToCartBtn.dataset.size || "N/A" // ✅ Include size from data attribute
-    };
+  allAddButtons.forEach(button => {
+    button.addEventListener("click", async () => {
+      const cart = getCart();
 
-    const index = cart.findIndex(
-      (item) => item.id === product.id && item.size === product.size // ✅ check both ID & size
-    );
+      const product = {
+        id: parseInt(button.dataset.id),
+        name: button.dataset.name,
+        price: parseFloat(button.dataset.price),
+        image: button.dataset.image,
+        size: button.dataset.size?.trim() || "N/A",
+        quantity: 1
+      };
 
-    if (index !== -1) {
-      cart[index].quantity += 1;
-    } else {
-      cart.push(product);
-    }
+      // ✅ Prevent duplicate same product-size combos
+      const index = cart.findIndex(
+        item => item.id === product.id && item.size === product.size
+      );
 
-    saveCart(cart);
-    updateCartCountInDOM();
+      if (index === -1) {
+        cart.push(product);
+      } else {
+        console.warn(`⚠️ ${product.name} (${product.size}) already in cart.`);
+      }
 
-    const drawer = document.getElementById("mobileCartDrawer");
-    if (drawer?.classList.contains("open")) {
-      const module = await import("./cart.js");
-      module.renderMobileDrawer();
-    }
+      saveCart(cart);
+      updateCartCountInDOM();
+
+      // ✅ Re-render drawer if open
+      const drawer = document.getElementById("mobileCartDrawer");
+      if (drawer?.classList.contains("open")) {
+        const module = await import("./cart.js");
+        module.renderMobileDrawer();
+      }
+    });
   });
 
   updateCartCountInDOM();
@@ -149,4 +155,5 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   })();
 });
+
 
