@@ -224,8 +224,7 @@ p {
   pointer-events: none !important;        /* avoid interfering with clicks */
 }
 
-/* Optional: show immediately if needed */
-.global-limit-message.show {
+.global-limit-message.visible {
   opacity: 1;
 }
 
@@ -1776,6 +1775,7 @@ nav a.active::after {
     margin-top: 8px;
   }
 }
+
 
 
 
