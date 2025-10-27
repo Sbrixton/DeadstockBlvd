@@ -203,8 +203,14 @@ p {
   margin-top: 6px;
   margin-left: 70px; /* Adjust for alignment under product info */
   padding-left: 2px;
-  display: block;
+  display: none;
   animation: fadeIn 0.3s ease-in-out;
+  opacity: 0;
+}
+
+.limit-message.visible {
+  display: block;
+  opacity: 1;
 }
 
 /* ------------------------- GLOBAL LIMIT MESSAGE ------------------------- */
@@ -1770,6 +1776,7 @@ nav a.active::after {
     margin-top: 8px;
   }
 }
+
 
 
 
