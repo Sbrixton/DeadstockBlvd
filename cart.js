@@ -207,4 +207,89 @@ export async function renderMobileDrawer() {
   updateDrawerCheckoutState();
 }
 
+/* -------------------------------------------------------------------------- */
+/*                            ADD TO CART HANDLERS                            */
+/* -------------------------------------------------------------------------- */
+
+// ✅ Helper for product page message (above button)
+function showMessageAboveButton(button, text) {
+  let msg = button.parentElement.querySelector(".limit-message");
+  if (!msg) {
+    msg = document.createElement("div");
+    msg.className = "limit-message";
+    msg.style.cssText = `
+      color: #ff4444;
+      font-size: 0.9rem;
+      text-align: center;
+      margin-bottom: 6px;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    `;
+    button.parentElement.insertBefore(msg, button);
+  }
+
+  msg.textContent = text;
+  msg.style.opacity = "1";
+
+  setTimeout(() => {
+    msg.style.opacity = "0";
+  }, 2000);
+}
+
+// ✅ Product Page Add-to-Cart
+const productBtn = document.getElementById("addToCartBtn");
+if (productBtn) {
+  productBtn.addEventListener("click", () => {
+    const id = parseInt(productBtn.dataset.id);
+    if (!id) return;
+
+    const cart = getCart();
+    const alreadyInCart = cart.find(item => item.id === id);
+
+    if (alreadyInCart) {
+      showMessageAboveButton(productBtn, "Only 1 product was added due to availability.");
+      return;
+    }
+
+    const newItem = {
+      id,
+      name: productBtn.dataset.name,
+      price: parseFloat(productBtn.dataset.price),
+      size: productBtn.dataset.size,
+      image: productBtn.dataset.image,
+      quantity: 1
+    };
+
+    cart.push(newItem);
+    saveCart(cart);
+    updateCartCountInDOM();
+  });
+}
+
+// ✅ Shop & Recommendation Add-to-Cart
+const addToCartBtns = document.querySelectorAll(".add-to-cart-btn");
+addToCartBtns.forEach(btn => {
+  btn.addEventListener("click", () => {
+    const id = parseInt(btn.dataset.id);
+    if (!id) return;
+
+    const cart = getCart();
+    const alreadyInCart = cart.find(item => item.id === id);
+
+    if (alreadyInCart) return; // silently ignore
+
+    const newItem = {
+      id,
+      name: btn.dataset.name,
+      price: parseFloat(btn.dataset.price),
+      size: btn.dataset.size,
+      image: btn.dataset.image,
+      quantity: 1
+    };
+
+    cart.push(newItem);
+    saveCart(cart);
+    updateCartCountInDOM();
+  });
+});
 
