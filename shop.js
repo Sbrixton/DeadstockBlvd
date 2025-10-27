@@ -1,3 +1,4 @@
+// shop.js
 import { addToCart, updateCartCountInDOM } from './cart-utils.js';
 import { renderMobileDrawer } from './cart.js';
 import { formatPrice } from './currency.js';
@@ -14,12 +15,16 @@ document.addEventListener("DOMContentLoaded", () => {
         name: button.dataset.name,
         price: parseFloat(button.dataset.price),
         image: button.dataset.image,
+        size: button.dataset.size?.trim() || "N/A", // ✅ capture and normalize size
+        quantity: 1
       };
+
+      console.log("🛒 Adding from shop page:", product);
 
       addToCart(product);
 
-      // ✅ Always re-render mobile drawer after adding
-      if (typeof window.renderMobileDrawer === 'function') {
+      // ✅ Re-render mobile drawer after adding
+      if (typeof window.renderMobileDrawer === "function") {
         window.renderMobileDrawer();
       }
     });
