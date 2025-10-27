@@ -15,6 +15,7 @@ function updateDrawerCheckoutState() {
   drawerCheckoutBtn.disabled = cart.length === 0;
 }
 
+// ------------------------ MOBILE DRAWER & CART ICON ------------------------
 window.addEventListener("load", () => {
   const cartIcon = document.getElementById("cartIcon");
   const mobileDrawer = document.getElementById("mobileCartDrawer");
@@ -52,7 +53,7 @@ window.addEventListener("load", () => {
     window.location.href = "checkout.html";
   });
 
-  // ✅ Quantity button logic inside mobile drawer
+  // ------------------------ MOBILE QUANTITY BUTTONS ------------------------
   document.addEventListener("click", (e) => {
     const target = e.target.closest("[data-id]");
     if (!target) return;
@@ -71,7 +72,7 @@ window.addEventListener("load", () => {
       const item = cart[itemIndex];
 
       if (target.classList.contains("plus")) {
-        // ✅ Prevent quantity from exceeding 1
+        // Prevent quantity exceeding 1
         if (item.quantity >= 1) {
           target.classList.add("loading");
 
@@ -94,7 +95,6 @@ window.addEventListener("load", () => {
 
         item.quantity += 1;
       } else {
-        // Decrease quantity but not below 1
         item.quantity = Math.max(1, item.quantity - 1);
         if (messageDiv) {
           messageDiv.style.display = "none";
@@ -117,16 +117,12 @@ window.addEventListener("load", () => {
   renderMobileDrawer();
 });
 
-/* -------------------------------------------------------------------------- */
-/*                            ADD TO CART HANDLERS                            */
-/* -------------------------------------------------------------------------- */
-
-// ✅ Helper to show message ABOVE button (product page)
-function showMessageAboveButton(button, text) {
-  let msg = button.parentElement.querySelector(".limit-message");
+// ------------------------ GLOBAL LIMIT MESSAGE HELPER ------------------------
+function showGlobalLimitMessage(button, text) {
+  let msg = button.parentElement.querySelector(".global-limit-message");
   if (!msg) {
     msg = document.createElement("div");
-    msg.className = "limit-message";
+    msg.className = "global-limit-message";
     msg.style.cssText = `
       color: #ff4444;
       font-size: 0.9rem;
@@ -135,22 +131,20 @@ function showMessageAboveButton(button, text) {
       opacity: 0;
       transition: opacity 0.3s ease;
     `;
-    // Insert message ABOVE button
     button.parentElement.insertBefore(msg, button);
   }
 
   msg.textContent = text;
   msg.style.opacity = "1";
 
-  // Fade out after 2 seconds
   setTimeout(() => {
     msg.style.opacity = "0";
   }, 2000);
 }
 
-// ✅ Global Add-to-Cart Logic
+// ------------------------ ADD TO CART HANDLERS ------------------------
 window.addEventListener("load", () => {
-  // --- Product Page Button ---
+  // --- Product Page ---
   const productBtn = document.getElementById("addToCartBtn");
   if (productBtn) {
     productBtn.addEventListener("click", () => {
@@ -161,7 +155,7 @@ window.addEventListener("load", () => {
       const alreadyInCart = cart.find(item => item.id === id);
 
       if (alreadyInCart) {
-        showMessageAboveButton(productBtn, "Only 1 product was added due to availability.");
+        showGlobalLimitMessage(productBtn, "Only 1 product was added due to availability.");
         return;
       }
 
@@ -180,7 +174,7 @@ window.addEventListener("load", () => {
     });
   }
 
-  // --- Shop + Recommendation Buttons (Shared Logic) ---
+  // --- Shop & Recommendation Buttons ---
   document.addEventListener("click", (e) => {
     const btn = e.target.closest(".add-to-cart-btn");
     if (!btn) return;
@@ -191,7 +185,10 @@ window.addEventListener("load", () => {
     const cart = getCart();
     const alreadyInCart = cart.find(item => item.id === id);
 
-    if (alreadyInCart) return; // silently ignore duplicates
+    if (alreadyInCart) {
+      showGlobalLimitMessage(btn, "Only 1 product was added due to availability.");
+      return;
+    }
 
     const newItem = {
       id,
@@ -208,10 +205,7 @@ window.addEventListener("load", () => {
   });
 });
 
-/* -------------------------------------------------------------------------- */
-/*                            RENDER MOBILE DRAWER                            */
-/* -------------------------------------------------------------------------- */
-
+// ------------------------ MOBILE DRAWER RENDER ------------------------
 export async function renderMobileDrawer() {
   const cart = getCart();
   const mobileCartItems = document.getElementById("mobileCartItems");
@@ -298,4 +292,3 @@ export async function renderMobileDrawer() {
   updateCartCountInDOM();
   updateDrawerCheckoutState();
 }
-
