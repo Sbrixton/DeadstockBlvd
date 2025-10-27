@@ -66,7 +66,7 @@ window.addEventListener("load", () => {
     if (itemIndex === -1) return;
 
     const itemDiv = target.closest(".cart-item");
-    const messageDiv = itemDiv?.parentElement?.querySelector(".limit-message");
+    const messageDiv = itemDiv?.parentElement?.querySelector(".global-limit-message");
 
     if (target.classList.contains("qty-btn")) {
       const item = cart[itemIndex];
@@ -78,16 +78,12 @@ window.addEventListener("load", () => {
 
           if (messageDiv) {
             messageDiv.textContent = "Only 1 product was added due to availability.";
-            messageDiv.style.display = "block";
-            messageDiv.style.opacity = "1";
+            messageDiv.classList.add("show");
           }
 
           setTimeout(() => {
             target.classList.remove("loading");
-            if (messageDiv) {
-              messageDiv.style.opacity = "0";
-              setTimeout(() => (messageDiv.style.display = "none"), 500);
-            }
+            if (messageDiv) messageDiv.classList.remove("show");
           }, 2000);
 
           return;
@@ -96,10 +92,7 @@ window.addEventListener("load", () => {
         item.quantity += 1;
       } else {
         item.quantity = Math.max(1, item.quantity - 1);
-        if (messageDiv) {
-          messageDiv.style.display = "none";
-          messageDiv.style.opacity = "0";
-        }
+        if (messageDiv) messageDiv.classList.remove("show");
       }
 
       saveCart(cart);
@@ -123,22 +116,14 @@ function showGlobalLimitMessage(button, text) {
   if (!msg) {
     msg = document.createElement("div");
     msg.className = "global-limit-message";
-    msg.style.cssText = `
-      color: #ff4444;
-      font-size: 0.9rem;
-      text-align: center;
-      margin-bottom: 6px;
-      opacity: 0;
-      transition: opacity 0.3s ease;
-    `;
     button.parentElement.insertBefore(msg, button);
   }
 
   msg.textContent = text;
-  msg.style.opacity = "1";
+  msg.classList.add("show");
 
   setTimeout(() => {
-    msg.style.opacity = "0";
+    msg.classList.remove("show");
   }, 2000);
 }
 
@@ -268,13 +253,9 @@ export async function renderMobileDrawer() {
 
     wrapper.appendChild(itemDiv);
 
+    // Use the same global-limit-message for consistency
     const messageDiv = document.createElement("div");
-    messageDiv.className = "limit-message";
-    messageDiv.style.display = "none";
-    messageDiv.style.color = "#ff4444";
-    messageDiv.style.fontSize = "0.85rem";
-    messageDiv.style.marginTop = "6px";
-    messageDiv.style.transition = "opacity 0.3s ease";
+    messageDiv.className = "global-limit-message";
     wrapper.appendChild(messageDiv);
 
     mobileCartItems.appendChild(wrapper);
@@ -292,3 +273,4 @@ export async function renderMobileDrawer() {
   updateCartCountInDOM();
   updateDrawerCheckoutState();
 }
+
