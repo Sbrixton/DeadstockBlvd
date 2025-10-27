@@ -214,31 +214,32 @@ p {
 }
 
 /* ------------------------- GLOBAL LIMIT MESSAGE ------------------------- */
+/* Position context for floating message */
+.add-to-cart-wrapper {
+  position: relative;
+  display: inline-block; /* keeps width tight to button */
+}
+
+/* ------------------------- GLOBAL LIMIT MESSAGE ------------------------- */
 .global-limit-message {
-  position: absolute;                    /* float on top */
-  left: 50%;                             /* center horizontally */
-  bottom: 100%;                          /* position directly above button */
-  transform: translateX(-50%) translateY(-6px); /* fine-tune vertical spacing */
+  position: absolute;
+  left: 50%;
+  bottom: 100%; /* directly above the button */
+  transform: translateX(-50%) translateY(-6px);
   color: #3196de;
   font-size: 0.9rem;
   text-align: center;
   line-height: 1.3;
   opacity: 0;
   transition: opacity 0.3s ease, transform 0.3s ease;
-  pointer-events: none;                  /* prevent click interference */
-  white-space: nowrap;                   /* keep text on one line */
+  pointer-events: none;
+  white-space: nowrap;
   z-index: 10;
 }
 
 .global-limit-message.visible {
   opacity: 1;
-  transform: translateX(-50%) translateY(-10px); /* small upward fade motion */
-}
-
-/* Make sure button container provides positioning context */
-.add-to-cart {
-  position: relative;
-  z-index: 1;
+  transform: translateX(-50%) translateY(-10px); /* slight upward fade motion */
 }
 
 /* Basic cart item wrapper layout */
@@ -1788,6 +1789,7 @@ nav a.active::after {
     margin-top: 8px;
   }
 }
+
 
 
 
