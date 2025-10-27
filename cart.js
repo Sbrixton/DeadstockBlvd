@@ -4,9 +4,7 @@ import {
   updateCartCountInDOM
 } from "./cart-utils.js";
 
-import {
-  formatPrice
-} from "./currency.js";
+import { formatPrice } from "./currency.js";
 
 formatPrice(1); // preload formatting
 
@@ -54,6 +52,7 @@ window.addEventListener("load", () => {
     window.location.href = "checkout.html";
   });
 
+  // ✅ Quantity button logic
   document.addEventListener("click", (e) => {
     const target = e.target.closest("[data-id]");
     if (!target) return;
@@ -68,30 +67,49 @@ window.addEventListener("load", () => {
     const itemDiv = target.closest(".cart-item");
     const messageDiv = itemDiv?.parentElement?.querySelector(".limit-message");
 
+    // Handle quantity buttons
     if (target.classList.contains("qty-btn")) {
+      const item = cart[itemIndex];
+
       if (target.classList.contains("plus")) {
-        if (cart[itemIndex].quantity >= 1) {
+        // ✅ Prevent quantity from exceeding 1
+        if (item.quantity >= 1) {
           target.classList.add("loading");
+
           if (messageDiv) {
-            messageDiv.textContent = "Only 1 item was added due to availability.";
+            messageDiv.textContent = "Only 1 product was added due to availability.";
             messageDiv.style.display = "block";
+            messageDiv.style.opacity = "1";
           }
+
+          // Small spinner animation before hiding again
           setTimeout(() => {
             target.classList.remove("loading");
-            if (messageDiv) messageDiv.style.display = "none";
+            if (messageDiv) {
+              messageDiv.style.opacity = "0";
+              setTimeout(() => (messageDiv.style.display = "none"), 500);
+            }
           }, 2000);
-          return;
+
+          return; // stop right here — don’t increment
         }
-        cart[itemIndex].quantity += 1;
+
+        item.quantity += 1;
       } else {
-        cart[itemIndex].quantity = Math.max(1, cart[itemIndex].quantity - 1);
-        if (messageDiv) messageDiv.style.display = "none";
-        target.classList.remove("loading");
+        // Decrease quantity but not below 1
+        item.quantity = Math.max(1, item.quantity - 1);
+        if (messageDiv) {
+          messageDiv.style.display = "none";
+          messageDiv.style.opacity = "0";
+        }
       }
+
       saveCart(cart);
       renderMobileDrawer();
+      return;
     }
 
+    // Handle remove button
     if (target.classList.contains("remove-item-mobile")) {
       cart.splice(itemIndex, 1);
       saveCart(cart);
@@ -167,6 +185,10 @@ export async function renderMobileDrawer() {
     const messageDiv = document.createElement("div");
     messageDiv.className = "limit-message";
     messageDiv.style.display = "none";
+    messageDiv.style.color = "#ff4444";
+    messageDiv.style.fontSize = "0.85rem";
+    messageDiv.style.marginTop = "6px";
+    messageDiv.style.transition = "opacity 0.3s ease";
     wrapper.appendChild(messageDiv);
 
     mobileCartItems.appendChild(wrapper);
