@@ -451,31 +451,6 @@
         });
       </script>
       
-<!-- ✅ use type="module" so ES module exports/imports work -->
-        <script type="module">
-          import { addToCart } from './cart-utils.js';
-            
-          document.addEventListener('DOMContentLoaded', () => {
-            // Find all Add to Cart buttons (main + recommendations)
-            const allButtons = document.querySelectorAll('#addToCartBtn, .add-to-cart-btn');
-                
-            allButtons.forEach(button => {
-              button.addEventListener('click', () => {
-                const product = {
-                  id: parseInt(button.dataset.id),
-                  name: button.dataset.name,
-                  price: parseFloat(button.dataset.price),
-                  image: button.dataset.image,
-                  size: button.dataset.size?.trim() || 'N/A', // ✅ capture size safely
-                  quantity: 1
-                };
-                
-                console.log('🛒 Adding to cart:', product);
-                addToCart(product);
-              });
-            });
-          });
-        </script>
         
       <!-- ✅ Add this at the bottom, before </body> -->
       <script type="module">
@@ -527,4 +502,5 @@
     <script type="module" src="search.js"></script>
 </body>
 </html>
+
 
