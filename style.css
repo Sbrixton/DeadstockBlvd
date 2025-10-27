@@ -215,17 +215,26 @@ p {
 
 /* ------------------------- GLOBAL LIMIT MESSAGE ------------------------- */
 .global-limit-message {
-  color: #3196de !important;             /* warning/red color */
-  font-size: 0.9rem !important;           /* slightly smaller text */
-  text-align: center !important;          /* center above the button */
-  margin-bottom: 6px !important;          /* spacing from button */
-  opacity: 0 !important;                  /* start hidden */
-  transition: opacity 0.3s ease !important; /* smooth fade in/out */
-  pointer-events: none !important;        /* avoid interfering with clicks */
+  display: block;                        /* ensure it occupies its own line */
+  color: #3196de;                        /* your chosen blue */
+  font-size: 0.9rem;
+  text-align: center;
+  margin-top: 8px;                       /* space above button */
+  margin-bottom: 8px;                    /* space from button below */
+  line-height: 1.3;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;                  /* prevent blocking clicks */
 }
 
 .global-limit-message.visible {
   opacity: 1;
+}
+
+/* Optional: ensure parent doesn't clip the message */
+.add-to-cart {
+  position: relative;
+  z-index: 1;
 }
 
 /* Basic cart item wrapper layout */
@@ -1775,6 +1784,7 @@ nav a.active::after {
     margin-top: 8px;
   }
 }
+
 
 
 
