@@ -8,6 +8,10 @@ import { formatPrice } from "./currency.js";
 
 formatPrice(1); // preload formatting
 
+/* -------------------------------------------------------------------------- */
+/*                        CART DRAWER + ICON CONTROLS                         */
+/* -------------------------------------------------------------------------- */
+
 function updateDrawerCheckoutState() {
   const cart = getCart();
   const drawerCheckoutBtn = document.getElementById("drawerCheckoutBtn");
@@ -15,7 +19,6 @@ function updateDrawerCheckoutState() {
   drawerCheckoutBtn.disabled = cart.length === 0;
 }
 
-// ------------------------ MOBILE DRAWER & CART ICON ------------------------
 window.addEventListener("load", () => {
   const cartIcon = document.getElementById("cartIcon");
   const mobileDrawer = document.getElementById("mobileCartDrawer");
@@ -53,7 +56,7 @@ window.addEventListener("load", () => {
     window.location.href = "checkout.html";
   });
 
-  // ------------------------ MOBILE QUANTITY BUTTONS ------------------------
+  /* -------------------------- MOBILE DRAWER LOGIC -------------------------- */
   document.addEventListener("click", (e) => {
     const target = e.target.closest("[data-id]");
     if (!target) return;
@@ -66,33 +69,40 @@ window.addEventListener("load", () => {
     if (itemIndex === -1) return;
 
     const itemDiv = target.closest(".cart-item");
-    const messageDiv = itemDiv?.parentElement?.querySelector(".global-limit-message");
+    const messageDiv = itemDiv?.parentElement?.querySelector(".limit-message");
 
     if (target.classList.contains("qty-btn")) {
       const item = cart[itemIndex];
 
       if (target.classList.contains("plus")) {
-        // Prevent quantity exceeding 1
+        // Prevent exceeding 1
         if (item.quantity >= 1) {
           target.classList.add("loading");
 
           if (messageDiv) {
             messageDiv.textContent = "Only 1 product was added due to availability.";
-            messageDiv.classList.add("show");
+            messageDiv.style.display = "block";
+            messageDiv.style.opacity = "1";
           }
 
           setTimeout(() => {
             target.classList.remove("loading");
-            if (messageDiv) messageDiv.classList.remove("show");
+            if (messageDiv) {
+              messageDiv.style.opacity = "0";
+              setTimeout(() => (messageDiv.style.display = "none"), 500);
+            }
           }, 2000);
-
           return;
         }
 
         item.quantity += 1;
       } else {
+        // Decrease qty (not below 1)
         item.quantity = Math.max(1, item.quantity - 1);
-        if (messageDiv) messageDiv.classList.remove("show");
+        if (messageDiv) {
+          messageDiv.style.display = "none";
+          messageDiv.style.opacity = "0";
+        }
       }
 
       saveCart(cart);
@@ -110,26 +120,41 @@ window.addEventListener("load", () => {
   renderMobileDrawer();
 });
 
-// ------------------------ GLOBAL LIMIT MESSAGE HELPER ------------------------
+/* -------------------------------------------------------------------------- */
+/*                        PRODUCT PAGE MESSAGE HANDLER                        */
+/* -------------------------------------------------------------------------- */
+
+// Shows the small red fade-out message above Add to Cart
 function showGlobalLimitMessage(button, text) {
   let msg = button.parentElement.querySelector(".global-limit-message");
   if (!msg) {
     msg = document.createElement("div");
     msg.className = "global-limit-message";
+    msg.style.cssText = `
+      color: #ff4444;
+      font-size: 0.9rem;
+      text-align: center;
+      margin-bottom: 6px;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    `;
     button.parentElement.insertBefore(msg, button);
   }
 
   msg.textContent = text;
-  msg.classList.add("show");
+  msg.style.opacity = "1";
 
   setTimeout(() => {
-    msg.classList.remove("show");
+    msg.style.opacity = "0";
   }, 2000);
 }
 
-// ------------------------ ADD TO CART HANDLERS ------------------------
+/* -------------------------------------------------------------------------- */
+/*                         ADD TO CART HANDLERS (GLOBAL)                      */
+/* -------------------------------------------------------------------------- */
+
 window.addEventListener("load", () => {
-  // --- Product Page ---
+  // --- Product Page Button ---
   const productBtn = document.getElementById("addToCartBtn");
   if (productBtn) {
     productBtn.addEventListener("click", () => {
@@ -159,7 +184,7 @@ window.addEventListener("load", () => {
     });
   }
 
-  // --- Shop & Recommendation Buttons ---
+  // --- Shop & Recommendation Buttons (NO MESSAGE) ---
   document.addEventListener("click", (e) => {
     const btn = e.target.closest(".add-to-cart-btn");
     if (!btn) return;
@@ -170,10 +195,7 @@ window.addEventListener("load", () => {
     const cart = getCart();
     const alreadyInCart = cart.find(item => item.id === id);
 
-    if (alreadyInCart) {
-      showGlobalLimitMessage(btn, "Only 1 product was added due to availability.");
-      return;
-    }
+    if (alreadyInCart) return; // silently ignore duplicates
 
     const newItem = {
       id,
@@ -190,7 +212,10 @@ window.addEventListener("load", () => {
   });
 });
 
-// ------------------------ MOBILE DRAWER RENDER ------------------------
+/* -------------------------------------------------------------------------- */
+/*                        RENDER MOBILE CART DRAWER                           */
+/* -------------------------------------------------------------------------- */
+
 export async function renderMobileDrawer() {
   const cart = getCart();
   const mobileCartItems = document.getElementById("mobileCartItems");
@@ -253,9 +278,13 @@ export async function renderMobileDrawer() {
 
     wrapper.appendChild(itemDiv);
 
-    // Use the same global-limit-message for consistency
     const messageDiv = document.createElement("div");
-    messageDiv.className = "global-limit-message";
+    messageDiv.className = "limit-message";
+    messageDiv.style.display = "none";
+    messageDiv.style.color = "#ff4444";
+    messageDiv.style.fontSize = "0.85rem";
+    messageDiv.style.marginTop = "6px";
+    messageDiv.style.transition = "opacity 0.3s ease";
     wrapper.appendChild(messageDiv);
 
     mobileCartItems.appendChild(wrapper);
