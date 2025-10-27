@@ -52,7 +52,7 @@ window.addEventListener("load", () => {
     window.location.href = "checkout.html";
   });
 
-  // ✅ Quantity button logic
+  // ✅ Quantity button logic inside mobile drawer
   document.addEventListener("click", (e) => {
     const target = e.target.closest("[data-id]");
     if (!target) return;
@@ -67,7 +67,6 @@ window.addEventListener("load", () => {
     const itemDiv = target.closest(".cart-item");
     const messageDiv = itemDiv?.parentElement?.querySelector(".limit-message");
 
-    // Handle quantity buttons
     if (target.classList.contains("qty-btn")) {
       const item = cart[itemIndex];
 
@@ -82,7 +81,6 @@ window.addEventListener("load", () => {
             messageDiv.style.opacity = "1";
           }
 
-          // Small spinner animation before hiding again
           setTimeout(() => {
             target.classList.remove("loading");
             if (messageDiv) {
@@ -91,7 +89,7 @@ window.addEventListener("load", () => {
             }
           }, 2000);
 
-          return; // stop right here — don’t increment
+          return;
         }
 
         item.quantity += 1;
@@ -109,7 +107,6 @@ window.addEventListener("load", () => {
       return;
     }
 
-    // Handle remove button
     if (target.classList.contains("remove-item-mobile")) {
       cart.splice(itemIndex, 1);
       saveCart(cart);
@@ -119,6 +116,101 @@ window.addEventListener("load", () => {
 
   renderMobileDrawer();
 });
+
+/* -------------------------------------------------------------------------- */
+/*                            ADD TO CART HANDLERS                            */
+/* -------------------------------------------------------------------------- */
+
+// ✅ Helper to show message ABOVE button (product page)
+function showMessageAboveButton(button, text) {
+  let msg = button.parentElement.querySelector(".limit-message");
+  if (!msg) {
+    msg = document.createElement("div");
+    msg.className = "limit-message";
+    msg.style.cssText = `
+      color: #ff4444;
+      font-size: 0.9rem;
+      text-align: center;
+      margin-bottom: 6px;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    `;
+    // Insert message ABOVE button
+    button.parentElement.insertBefore(msg, button);
+  }
+
+  msg.textContent = text;
+  msg.style.opacity = "1";
+
+  // Fade out after 2 seconds
+  setTimeout(() => {
+    msg.style.opacity = "0";
+  }, 2000);
+}
+
+// ✅ Global Add-to-Cart Logic
+window.addEventListener("load", () => {
+  // --- Product Page Button ---
+  const productBtn = document.getElementById("addToCartBtn");
+  if (productBtn) {
+    productBtn.addEventListener("click", () => {
+      const id = parseInt(productBtn.dataset.id);
+      if (!id) return;
+
+      const cart = getCart();
+      const alreadyInCart = cart.find(item => item.id === id);
+
+      if (alreadyInCart) {
+        showMessageAboveButton(productBtn, "Only 1 product was added due to availability.");
+        return;
+      }
+
+      const newItem = {
+        id,
+        name: productBtn.dataset.name,
+        price: parseFloat(productBtn.dataset.price),
+        size: productBtn.dataset.size,
+        image: productBtn.dataset.image,
+        quantity: 1
+      };
+
+      cart.push(newItem);
+      saveCart(cart);
+      updateCartCountInDOM();
+    });
+  }
+
+  // --- Shop + Recommendation Buttons (Shared Logic) ---
+  document.addEventListener("click", (e) => {
+    const btn = e.target.closest(".add-to-cart-btn");
+    if (!btn) return;
+
+    const id = parseInt(btn.dataset.id);
+    if (!id) return;
+
+    const cart = getCart();
+    const alreadyInCart = cart.find(item => item.id === id);
+
+    if (alreadyInCart) return; // silently ignore duplicates
+
+    const newItem = {
+      id,
+      name: btn.dataset.name,
+      price: parseFloat(btn.dataset.price),
+      size: btn.dataset.size,
+      image: btn.dataset.image,
+      quantity: 1
+    };
+
+    cart.push(newItem);
+    saveCart(cart);
+    updateCartCountInDOM();
+  });
+});
+
+/* -------------------------------------------------------------------------- */
+/*                            RENDER MOBILE DRAWER                            */
+/* -------------------------------------------------------------------------- */
 
 export async function renderMobileDrawer() {
   const cart = getCart();
@@ -206,90 +298,4 @@ export async function renderMobileDrawer() {
   updateCartCountInDOM();
   updateDrawerCheckoutState();
 }
-
-/* -------------------------------------------------------------------------- */
-/*                            ADD TO CART HANDLERS                            */
-/* -------------------------------------------------------------------------- */
-
-// ✅ Helper for product page message (above button)
-function showMessageAboveButton(button, text) {
-  let msg = button.parentElement.querySelector(".limit-message");
-  if (!msg) {
-    msg = document.createElement("div");
-    msg.className = "limit-message";
-    msg.style.cssText = `
-      color: #ff4444;
-      font-size: 0.9rem;
-      text-align: center;
-      margin-bottom: 6px;
-      opacity: 0;
-      transition: opacity 0.3s ease;
-    `;
-    button.parentElement.insertBefore(msg, button);
-  }
-
-  msg.textContent = text;
-  msg.style.opacity = "1";
-
-  setTimeout(() => {
-    msg.style.opacity = "0";
-  }, 2000);
-}
-
-// ✅ Product Page Add-to-Cart
-const productBtn = document.getElementById("addToCartBtn");
-if (productBtn) {
-  productBtn.addEventListener("click", () => {
-    const id = parseInt(productBtn.dataset.id);
-    if (!id) return;
-
-    const cart = getCart();
-    const alreadyInCart = cart.find(item => item.id === id);
-
-    if (alreadyInCart) {
-      showMessageAboveButton(productBtn, "Only 1 product was added due to availability.");
-      return;
-    }
-
-    const newItem = {
-      id,
-      name: productBtn.dataset.name,
-      price: parseFloat(productBtn.dataset.price),
-      size: productBtn.dataset.size,
-      image: productBtn.dataset.image,
-      quantity: 1
-    };
-
-    cart.push(newItem);
-    saveCart(cart);
-    updateCartCountInDOM();
-  });
-}
-
-// ✅ Shop & Recommendation Add-to-Cart
-const addToCartBtns = document.querySelectorAll(".add-to-cart-btn");
-addToCartBtns.forEach(btn => {
-  btn.addEventListener("click", () => {
-    const id = parseInt(btn.dataset.id);
-    if (!id) return;
-
-    const cart = getCart();
-    const alreadyInCart = cart.find(item => item.id === id);
-
-    if (alreadyInCart) return; // silently ignore
-
-    const newItem = {
-      id,
-      name: btn.dataset.name,
-      price: parseFloat(btn.dataset.price),
-      size: btn.dataset.size,
-      image: btn.dataset.image,
-      quantity: 1
-    };
-
-    cart.push(newItem);
-    saveCart(cart);
-    updateCartCountInDOM();
-  });
-});
 
