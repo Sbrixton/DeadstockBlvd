@@ -209,13 +209,13 @@ p {
 
 /* ------------------------- GLOBAL LIMIT MESSAGE ------------------------- */
 .global-limit-message {
-  color: #3196de;             /* warning/red color */
-  font-size: 0.9rem;           /* slightly smaller text */
-  text-align: center;          /* center above the button */
-  margin-bottom: 6px;          /* spacing from button */
-  opacity: 0;                  /* start hidden */
-  transition: opacity 0.3s ease; /* smooth fade in/out */
-  pointer-events: none;        /* avoid interfering with clicks */
+  color: #3196de !important;             /* warning/red color */
+  font-size: 0.9rem !important;           /* slightly smaller text */
+  text-align: center !important;          /* center above the button */
+  margin-bottom: 6px !important;          /* spacing from button */
+  opacity: 0 !important;                  /* start hidden */
+  transition: opacity 0.3s ease !important; /* smooth fade in/out */
+  pointer-events: none !important;        /* avoid interfering with clicks */
 }
 
 /* Optional: show immediately if needed */
@@ -1770,6 +1770,7 @@ nav a.active::after {
     margin-top: 8px;
   }
 }
+
 
 
 
