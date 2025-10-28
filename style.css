@@ -217,8 +217,8 @@ p {
 /* Wrapper ensures absolute positioning doesn’t affect layout */
 .add-to-cart-wrapper {
   position: relative;
-  display: inline-block; /* keeps wrapper size same as button */
-  vertical-align: middle;
+  display: block; /* allow button to stay full width */
+  width: 100%;    /* matches natural layout */
 }
 
 /* The floating message itself */
@@ -1805,6 +1805,7 @@ nav a.active::after {
     margin-top: 8px;
   }
 }
+
 
 
 
