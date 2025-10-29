@@ -1,47 +1,45 @@
-// script.js
-import { updateCartCountInDOM, addToCart } from './cart-utils.js';
-
 document.addEventListener("DOMContentLoaded", () => {
   const bar = document.getElementById("bar");
   const close = document.getElementById("close");
   const navWrapper = document.querySelector(".nav-wrapper");
 
   // ===== Navbar toggle =====
-  bar?.addEventListener("click", () => navWrapper.classList.add("active"));
-  close?.addEventListener("click", () => navWrapper.classList.remove("active"));
+  bar?.addEventListener("click", (e) => {
+    e.stopPropagation(); // prevent bubbling
+    navWrapper.classList.add("active");
 
-  window.addEventListener("resize", () => {
-    if (window.innerWidth > 768) navWrapper.classList.remove("active");
+    // Add temporary backdrop listener for closing when clicking outside
+    document.body.addEventListener("click", handleOutsideClick);
   });
 
-  // ===== Add-to-Cart Buttons =====
-  // ✅ Only attach these listeners on non-product pages
-  const isProductPage = window.location.pathname.includes("product");
-  if (!isProductPage) {
-    const addToCartButtons = document.querySelectorAll(".add-to-cart-btn");
+  close?.addEventListener("click", () => {
+    navWrapper.classList.remove("active");
+    document.body.removeEventListener("click", handleOutsideClick);
+  });
 
-    addToCartButtons.forEach((button) => {
-      button.addEventListener("click", (e) => {
-        e.preventDefault();
-        e.stopPropagation();
+  // ✅ Close when clicking outside
+  function handleOutsideClick(e) {
+    const clickedInsideNav = e.target.closest(".nav-wrapper");
+    const clickedBar = e.target.closest("#bar");
 
-        const id = parseInt(button.dataset.id);
-        const name = button.dataset.name;
-        const price = parseFloat(button.dataset.price);
-        const image = button.dataset.image;
-        const size = button.dataset.size?.trim() || "N/A";
-
-        const product = { id, name, price, image, size, quantity: 1 };
-
-        console.log("🛒 Added from script.js:", product);
-        addToCart(product);
-      });
-    });
-  } else {
-    console.log("🛑 script.js: Skipped Add-to-Cart setup on product page");
+    // If user clicked outside both nav and hamburger icon
+    if (!clickedInsideNav && !clickedBar) {
+      navWrapper.classList.remove("active");
+      document.body.removeEventListener("click", handleOutsideClick);
+    }
   }
 
-  // ===== Cart Count =====
+  window.addEventListener("resize", () => {
+    if (window.innerWidth > 768) {
+      navWrapper.classList.remove("active");
+      document.body.removeEventListener("click", handleOutsideClick);
+    }
+  });
+
+  // ===== Cart count setup (keep yours here) =====
   updateCartCountInDOM();
 });
+
+
+
 
