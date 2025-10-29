@@ -1201,16 +1201,21 @@ nav a.active::after {
     text-decoration: none;
     font-weight: 600;
   }
-
-  #close {
+  
+  .close-icon {
     display: block;
-    font-size: 26px;
     position: absolute;
     top: 20px;
     right: 20px;
-    color: #222;
-    z-index: 1001;
+    height: 28px;
+    width: 28px;
     cursor: pointer;
+    z-index: 1001;
+    transition: opacity 0.2s ease;
+  }
+  
+  .close-icon:hover {
+    opacity: 0.7;
   }
   
   .shop-card {
@@ -1572,15 +1577,20 @@ nav a.active::after {
     cursor: pointer;
   }
   
-  #close {
+  .close-icon {
     display: block;
-    font-size: 26px;
     position: absolute;
     top: 20px;
     right: 20px;
-    color: #222;
-    z-index: 1001;
+    height: 28px;
+    width: 28px;
     cursor: pointer;
+    z-index: 1001;
+    transition: opacity 0.2s ease;
+  }
+  
+  .close-icon:hover {
+    opacity: 0.7;
   }
   
   .nav-wrapper {
@@ -1805,26 +1815,5 @@ nav a.active::after {
     margin-top: 8px;
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
