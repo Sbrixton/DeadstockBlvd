@@ -1157,7 +1157,7 @@ nav a.active::after {
   }
 
   .logo-img {
-    height: 32px;
+    height: 42px;
     display: block;
   }
   
@@ -1348,7 +1348,7 @@ nav a.active::after {
   }
   
   .logo-img {
-    height: 32px;
+    height: 42px;
   }
   
   .logo {
@@ -1543,7 +1543,7 @@ nav a.active::after {
   
   .logo {
     position: absolute;
-    left: 50%;
+    left: 20%;
     top: 50%;
     transform: translate(-50%, -50%);
     width: 100px;
@@ -1805,6 +1805,7 @@ nav a.active::after {
     margin-top: 8px;
   }
 }
+
 
 
 
