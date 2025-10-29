@@ -181,13 +181,11 @@ html, body {
 /* ========== Terms Agreement ========== */
 .checkout-agreement {
   margin-top: 20px;
-  font-size: 14px;
+  font-size: 13px;
   color: #333;
   line-height: 1.6;
-  display: inline-flex;
   align-items: center;
   gap: 6px;
-
   /* Show above overlay */
   position: relative;
   z-index: 2001;
@@ -357,11 +355,11 @@ html, body {
     flex-direction: column;
     align-items: flex-start;
     gap: 4px;
-    font-size: 13px;
+    font-size: 11px;
     padding: 8px 10px;
     line-height: 1.4;
   }
-
+  
   .checkout-agreement input[type="checkbox"] {
     transform: scale(1.1);
   }
