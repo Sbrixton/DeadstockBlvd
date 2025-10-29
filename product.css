@@ -1745,6 +1745,8 @@ main.product-page {
   .recommendations-grid > .pro:nth-child(-n+2) {
     display: block;
   }
+
+  
 }
 
 /* 1 per row (tiny screens) */
@@ -1894,5 +1896,10 @@ main.product-page {
   body,
   html {
     overflow-x: hidden !important;
+  }
+
+  .return-home {
+    font-size: 13px;
+    padding: 14px 16px !important;
   }
 }
