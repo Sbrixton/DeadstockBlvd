@@ -592,6 +592,47 @@ main.product-page {
   background-color: #0056b3;
 }
 
+.cancel-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 80vh;
+  text-align: center;
+  color: #fff;
+  font-family: 'Arial', sans-serif;
+}
+
+.cancel-circle {
+  background-color: #e02424; /* red */
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+  box-shadow: 0 0 20px rgba(224, 36, 36, 0.5);
+}
+
+.cancel-icon {
+  color: #fff;
+  font-size: 4rem;
+  font-weight: 900;
+  line-height: 0;
+}
+
+.cancel-title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.cancel-message {
+  font-size: 1rem;
+  color: #ccc;
+  margin-bottom: 1.5rem;
+}
 
 /* === Footer Structure === */
 .footer-flex {
